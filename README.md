@@ -22,7 +22,8 @@ Roadmap for 2017
 
 How to use
 -----
-1\. Replace contents of your existing "PHPWebAdmin" with these (or simply rename old to "PHPWebAdmin_old" and extract these to same location)
+1\. In this initial release I haven't removed any original files, just added folder "/modern" and modified all .php files in root
+2\. Replace contents of your existing "PHPWebAdmin" with these (or simply rename old to "PHPWebAdmin_old" and extract these to same location, then edit config-dist.php accordingly and rename to config.php)
 
 Changelog
 -----
@@ -50,12 +51,12 @@ If you want to help me with this project, simply fork it and let me know ;)
 
 Donate
 -----
-Don't worry, hMailServer webadmin redesign project will stay free - but I do need your support in order to continue to develop it! Thank you :)
+Don't worry, hMailServer PHPWebAdmin redesign project will stay free - but I do need your support in order to continue to develop it! Thank you :)
 
 [![PayPal donate button](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/MatijaMatecic/)
 
 Copyright?
 -----
-Author: Matija Matečić (http://www.coax.hr, http://hr.linkedin.com/in/matijamatecic)
+Author: [Matija Matečić](http://www.matecic.com)
 
 Released under [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/) (use it freely in personal/commercial project but don't resell, provided "as-is")
