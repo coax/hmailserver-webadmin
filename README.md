@@ -22,11 +22,26 @@ Roadmap for 2017
 
 How to use
 -----
-1\. In this initial release I haven't removed any original files, just added folder "/modern" and modified all .php files in root
-2\. Replace contents of your existing "PHPWebAdmin" with these (or simply rename old to "PHPWebAdmin_old" and extract these to same location, then edit config-dist.php accordingly and rename to config.php)
+1\. Place "WebAdmin" folder next to your "PHPWebAdmin" installation and make changes to config-dist.php accordingly, then rename to config.php
+
+2\. Link to "WebAdmin" folder from your IIS settings
+
+3\. Access web admin interface from browser
 
 Changelog
 -----
+Version 0.9.1 beta (28.12.2016)
+- [new] Renamed folder from "PHPWebAdmin" to "WebAdmin" (to avoid confusion)
+- [new] Replaced Administrator in top menu with $username
+- [new] Added counters for Rules and DNS blacklists in menu
+- [new] Domain accounts, rules, distribution lists
+- [new] Renamed folder from "PHPWebAdmin" to "WebAdmin"
+- [new] PrintSaveButton function can accept custom captions to display text different than default "Save" (eg. PrintSaveButton("Run");)
+- [tweak] Better navigation tree layout
+- [tweak] Created jQuery version of testVirusScanner() function in hm_smtp_antivirus.php
+- [fix] Legit messages are now calculated from Total - Virus - Spam
+- [other] In IIS 6 you'll need to manually add ".svg" mime-type as "image/svg+xml"
+
 Version 0.9 beta (28.12.2016)
 - Initial release
 
