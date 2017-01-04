@@ -65,7 +65,7 @@ if (hmailGetAdminLevel() == 2) {
 ?>
         <li class="cd-label">Main</li>
         <li class="status <?php if ($page=='hm_status') echo 'active' ?>"><a href="index.php?page=status">Dashboard</a></li>
-        <li class="has-children domains <?php if (strpos('hm_domains,hm_domain,hm_accounts,hm_account,hm_aliases,hm_aliase,hm_distributionlists,hm_distributionlist', $page) !== false) echo 'active' ?>">
+        <li class="has-children domains <?php if (strpos('hm_domains,hm_domain,hm_accounts,hm_account,hm_aliases,hm_aliase,hm_distributionlists,hm_distributionlist,hm_domain_aliasname', $page) !== false) echo 'active' ?>">
           <a href="index.php?page=domains">Domains<span class="count"><?php echo $TotalDomains ?></span></a>
           <ul>
 <?php
@@ -78,7 +78,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
 ?>
           </ul>
         </li>
-        <li class="rules <?php if ($page=='hm_rules') echo 'active' ?>">
+        <li class="rules <?php if (strpos('hm_rules,hm_rule', $page) !== false) echo 'active' ?>">
           <a href="index.php?page=rules">Rules<span class="count"><?php echo $TotalRules ?></span></a>
         </li>
       </ul>
@@ -135,6 +135,9 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
             <li><a href="index.php?page=diagnostics">Diagnostics</a></li>
           </ul>
         </li>
+        <li class="help">
+          <a href="https://www.hmailserver.com/documentation/latest/?page=overview" target="_blank">Documentation</a>
+        </li>
       </ul>
       <ul>
         <li class="cd-label">Quick links</li>
@@ -143,6 +146,9 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
         </li>
         <li class="ip-ranges <?php if ($page=='hm_securityranges') echo 'active' ?>">
           <a href="index.php?page=securityranges">IP Ranges<span class="count"><?php echo $TotalIpRanges ?></span></a>
+        </li>
+        <li class="logs <?php if ($page=='hm_logviewer') echo 'active' ?>">
+          <a href="index.php?page=logviewer">Log viewer</a>
         </li>
       </ul>
       <ul>

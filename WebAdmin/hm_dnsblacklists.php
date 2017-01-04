@@ -3,12 +3,11 @@ if (!defined('IN_WEBADMIN'))
 	exit();
 
 if (hmailGetAdminLevel() != ADMIN_SERVER)
-	hmailHackingAttemp(); // Users are not allowed to show this page.
+	hmailHackingAttemp();
 
-$obSettings  = $obBaseApp->Settings();
+$obSettings = $obBaseApp->Settings();
 $dnsBlacklists = $obSettings->AntiSpam->DNSBlackLists;
 $Count = $dnsBlacklists->Count();
-$str_delete = $obLanguage->String("Remove");
 ?>
     <div class="box large">
       <h2><?php EchoTranslation("DNS blacklists") ?> <span>(<?php echo $Count ?>)</span></h2>
@@ -16,9 +15,9 @@ $str_delete = $obLanguage->String("Remove");
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:75%;">Name</th>
-              <th style="width:10%;">Score</th>
-              <th style="width:10%;">Enabled</th>
+              <th style="width:65%;"><?php EchoTranslation("Name")?></th>
+              <th style="width:15%;"><?php EchoTranslation("Score")?></th>
+              <th style="width:15%;"><?php EchoTranslation("Enabled")?></th>
               <th style="width:5%;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>

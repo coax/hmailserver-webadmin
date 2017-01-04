@@ -1,23 +1,22 @@
 <?php
 if (!defined('IN_WEBADMIN'))
-   exit();
+	exit();
 
-$domainid	= hmailGetVar("domainid",0);
-$accountid	= hmailGetVar("accountid",0);
-$action	   = hmailGetVar("action","");
+$domainid = hmailGetVar("domainid",0);
+$accountid = hmailGetVar("accountid",0);
+$action = hmailGetVar("action","");
 
-$error_message	   = hmailGetVar("error_message","");
+$error_message = hmailGetVar("error_message","");
 
 if (hmailGetAdminLevel() == 0 && ($accountid != hmailGetAccountID() || $action != "edit" || $domainid != hmailGetDomainID()))
-   hmailHackingAttemp();
+	hmailHackingAttemp();
 
 if (hmailGetAdminLevel() == 1 && $domainid != hmailGetDomainID())
 	hmailHackingAttemp(); // Domain admin but not for this domain.
 
-$obDomain	= $obBaseApp->Domains->ItemByDBID($domainid);
+$obDomain = $obBaseApp->Domains->ItemByDBID($domainid);
 
-$admin_rights = (hmailGetAdminLevel()  === ADMIN_SERVER ||
-				     hmailGetAdminLevel()  === ADMIN_DOMAIN);
+$admin_rights = (hmailGetAdminLevel()  === ADMIN_SERVER || hmailGetAdminLevel()  === ADMIN_DOMAIN);
 
 $accountactive = 1;
 $accountmaxsize = 0;
@@ -39,51 +38,50 @@ $forwardenabled = 0;
 $forwardaddress = "";
 $forwardkeeporiginal = 0;
 
-$adenabled       = 0;
-$addomain        = "";
-$adusername      = "";
+$adenabled = 0;
+$addomain = "";
+$adusername = "";
 
 $SignatureEnabled = 0;
 $SignatureHTML = "";
 $SignaturePlainText = "";
 
-if ($action == "edit")
-{
-   $obAccount = $obDomain->Accounts->ItemByDBID($accountid);
+if ($action == "edit") {
+	$obAccount = $obDomain->Accounts->ItemByDBID($accountid);
 
-   $accountmaxsize = $obAccount->MaxSize;
-   $accountaddress = $obAccount->Address;
-   $accountactive  = $obAccount->Active;
-   $accountsize    = $obAccount->Size();
-   $accountlastlogontime = $obAccount->LastLogonTime();
-   $accountadminlevel = $obAccount->AdminLevel();
+	$accountmaxsize = $obAccount->MaxSize;
+	$accountaddress = $obAccount->Address;
+	$accountactive = $obAccount->Active;
+	$accountsize = $obAccount->Size();
+	$accountlastlogontime = $obAccount->LastLogonTime();
+	$accountadminlevel = $obAccount->AdminLevel();
 
-   $accountaddress = substr($accountaddress, 0, strpos($accountaddress, "@"));
+	$accountaddress = substr($accountaddress, 0, strpos($accountaddress, "@"));
 
-   $PersonFirstName = $obAccount->PersonFirstName;
-   $PersonLastName = $obAccount->PersonLastName;
+	$PersonFirstName = $obAccount->PersonFirstName;
+	$PersonLastName = $obAccount->PersonLastName;
 
-   $vacationmessageon = $obAccount->VacationMessageIsOn;
-   $vacationsubject = $obAccount->VacationSubject;
-   $vacationmessage = $obAccount->VacationMessage;
+	$vacationmessageon = $obAccount->VacationMessageIsOn;
+	$vacationsubject = $obAccount->VacationSubject;
+	$vacationmessage = $obAccount->VacationMessage;
 
-   $vacationmessageexpires     = $obAccount->VacationMessageExpires;
-   $vacationmessageexpiresdate = $obAccount->VacationMessageExpiresDate;
-   $vacationmessageexpiresdate = substr($vacationmessageexpiresdate, 0, 10);
-
+	$vacationmessageexpires = $obAccount->VacationMessageExpires;
+	$vacationmessageexpiresdate = $obAccount->VacationMessageExpiresDate;
+	$vacationmessageexpiresdate = substr($vacationmessageexpiresdate, 0, 10);
 
 
-   $forwardenabled = $obAccount->ForwardEnabled;
-   $forwardaddress = $obAccount->ForwardAddress;
-   $forwardkeeporiginal = $obAccount->ForwardKeepOriginal;
 
-   $adenabled       = $obAccount->IsAD;
-   $addomain        = $obAccount->ADDomain;
-   $adusername      = $obAccount->ADUsername;
+	$forwardenabled = $obAccount->ForwardEnabled;
+	$forwardaddress = $obAccount->ForwardAddress;
+	$forwardkeeporiginal = $obAccount->ForwardKeepOriginal;
 
-   $SignatureEnabled   = $obAccount->SignatureEnabled;
-   $SignatureHTML 	   = $obAccount->SignatureHTML;
-   $SignaturePlainText = $obAccount->SignaturePlainText;
+	$adenabled = $obAccount->IsAD;
+	$addomain = $obAccount->ADDomain;
+	$adusername = $obAccount->ADUsername;
+
+	$SignatureEnabled = $obAccount->SignatureEnabled;
+	$SignatureHTML = $obAccount->SignatureHTML;
+	$SignaturePlainText = $obAccount->SignaturePlainText;
 }
 
 $SignatureEnabledChecked = hmailCheckedIf1($SignatureEnabled);
@@ -92,12 +90,11 @@ $accountactivechecked = hmailCheckedIf1($accountactive);
 
 $domainname = $obDomain->Name;
 
-$str_user   = $obLanguage->String("User");
+$str_user = $obLanguage->String("User");
 $str_domain = $obLanguage->String("Domain");
 $str_server = $obLanguage->String("Server");
-
 ?>
-    <div class="box">
+    <div class="box medium">
       <h2><?php EchoTranslation("Account") ?></h2>
       <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
 <?php
@@ -131,7 +128,7 @@ if (strlen($error_message) > 0) {
 	$accountmaxsize = PreprocessOutput($accountmaxsize);
 
 	if ($admin_rights)
-		echo '<input type="text" name="accountmaxsize" value="' . $accountmaxsize . '" checktype="number" size="5" checkallownull="false" checkmessage="' . $str_mailboxsize . '" class="req number medium">';
+		echo '<input type="text" name="accountmaxsize" value="' . $accountmaxsize . '" checktype="number" size="5" checkallownull="false" checkmessage="' . $str_mailboxsize . '" class="req number small">';
 	else
 		echo $accountmaxsize;
 
@@ -205,11 +202,14 @@ if ($accountid == 0) {
 } else {
 ?>
           <table>
-            <tr>
-              <th style="width:70%;"><?php EchoTranslation("Name");?></th>
-              <th style="width:20%;"><?php EchoTranslation("Enabled");?></th>
-              <th style="width:10%;">&nbsp;</th>
-            </tr>
+            <thead>
+              <tr>
+                <th style="width:70%;"><?php EchoTranslation("Name");?></th>
+                <th style="width:20%;"><?php EchoTranslation("Enabled");?></th>
+                <th style="width:10%;">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
 <?php
 	$rules = $obAccount->Rules();
 	$Count = $rules->Count();
@@ -226,14 +226,15 @@ if ($accountid == 0) {
 
 		$rulename = PreprocessOutput($rulename);
 
-		echo '            <tr>
-              <td><a href="?page=rule&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '">' . $rulename . '</a></td>
-              <td><a href="#">' . $enabled . '</a></td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $aliasname . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
-            </tr>' . PHP_EOL;
+		echo '              <tr>
+                <td><a href="?page=rule&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '">' . $rulename . '</a></td>
+                <td><a href="#">' . $enabled . '</a></td>
+                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $aliasname . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
+              </tr>' . PHP_EOL;
 
 	}
 ?>
+            </tbody>
           </table>
           <div class="buttons center"><a href="?page=rule&domainid=$domainid&accountid=$accountid&action=add" class="button">Add new rule</a></div>
 <?php

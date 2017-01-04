@@ -3,15 +3,18 @@ if (!defined('IN_WEBADMIN'))
 	exit();
 
 if (hmailGetAdminLevel() != ADMIN_SERVER)
-	hmailHackingAttemp(); // Users are not allowed to show this page.
+	hmailHackingAttemp();
 ?>
     <div class="box large">
       <h2><?php EchoTranslation("Server messages") ?></h2>
       <div style="margin:0 18px 18px;">
-        <table>
-          <tr>
-            <th style="width:100%;">Message type</th>
-          </tr>
+        <table class="tablesort">
+          <thead>
+            <tr>
+              <th style="width:100%;"><?php EchoTranslation("Message type")?></th>
+            </tr>
+          </thead>
+          <tbody>
 <?php
 $obSettings = $obBaseApp->Settings();
 $obServerMessages = $obSettings->ServerMessages();
@@ -23,11 +26,12 @@ for ($i = 0; $i < $Count; $i++) {
 	$messageid = $obServerMessage->ID;
 	$messagename = PreprocessOutput($messagename);
 
-	echo '          <tr>
-            <td><a href="?page=servermessage&messageid=' . $messageid . '">' . $messagename . '</a></td>
-          </tr>' . PHP_EOL;
+	echo '            <tr>
+              <td><a href="?page=servermessage&messageid=' . $messageid . '">' . $messagename . '</a></td>
+            </tr>' . PHP_EOL;
 }
 ?>
+          </tbody>
         </table>
       </div>
     </div>

@@ -42,7 +42,7 @@ $domainname = $obDomain->Name;
 $listactivechecked = hmailCheckedIf1($listactive);
 $listrequiresmtpauthchecked = hmailCheckedIf1($listrequiresmtpauth);
 ?>
-    <div class="box">
+    <div class="box medium">
       <h2><?php EchoTranslation("Distribution list") ?></h2>
       <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
 <?php

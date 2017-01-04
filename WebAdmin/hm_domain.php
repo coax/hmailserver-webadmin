@@ -125,19 +125,21 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 			echo $obLanguage->String("Yes");
 		else
 			echo $obLanguage->String("No");
-	}
+		}
 
-	if (isset($obDomain) && hmailGetAdminLevel() == ADMIN_SERVER) {
-
-		$str_delete = $obLanguage->String("Remove");
+		if (isset($obDomain) && hmailGetAdminLevel() == ADMIN_SERVER) {
+			$str_delete = $obLanguage->String("Remove");
 ?>
           <h3><a href="#"><?php EchoTranslation("Names") ?></a></h3>
           <div class="hidden">
             <table>
-              <tr>
-                <th style="width:95%;"><?php EchoTranslation("Name") ?></th>
-                <th style="width:5%;">&nbsp;</th>
-              </tr>
+              <thead>
+                <tr>
+                  <th style="width:95%;"><?php EchoTranslation("Name") ?></th>
+                  <th style="width:5%;">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
 <?php
 		$obDomainAliases = $obDomain->DomainAliases;
 
@@ -146,18 +148,19 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 			$aliasid = $obDomainAlias->ID;
 			$name = $obDomainAlias->AliasName;
 
-			echo '              <tr>
-                <td><a href="#">' . PreprocessOutput($name) . '</a></td>
-                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . PreprocessOutput($name) . '</b>:\',\'Yes\',\'?page=background_domain_name_save&action=delete&domainid=' . $domainid . '&aliasid=' . $aliasid . '\');" class="delete">Delete</a></td>
-              </tr>' . PHP_EOL;
+			echo '                <tr>
+                  <td><a href="#">' . PreprocessOutput($name) . '</a></td>
+                  <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . PreprocessOutput($name) . '</b>:\',\'Yes\',\'?page=background_domain_name_save&action=delete&domainid=' . $domainid . '&aliasid=' . $aliasid . '\');" class="delete">Delete</a></td>
+                </tr>' . PHP_EOL;
 		}
 ?>
+              </tbody>
             </table>
             <div class="buttons center"><a href="?page=domain_aliasname&action=add&domainid=<?php echo $DomainID ?>" class="button"><?php EchoTranslation("Add") ?></a></div>
+          </div>
 <?php
 	}
 ?>
-          </div>
           <h3><a href="#"><?php EchoTranslation("Signature") ?></a></h3>
           <div class="hidden">
 <?php

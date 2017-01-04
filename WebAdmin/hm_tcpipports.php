@@ -8,20 +8,21 @@ if (hmailGetAdminLevel() != 2)
 $obSettings = $obBaseApp->Settings();
 $obTCPIPPorts = $obSettings->TCPIPPorts;
 $action = hmailGetVar("action","");
+$Count = $obTCPIPPorts->Count();
 ?>
     <div class="box large">
-      <h2><?php EchoTranslation("TCP/IP ports") ?></h2>
+      <h2><?php EchoTranslation("TCP/IP ports") ?> <span>(<?php echo $Count ?>)</span></h2>
       <div style="margin:0 18px 18px;">
-        <table>
-          <tr>
-            <th style="width:50%;"><?php EchoTranslation("Protocol")?></th>
-            <th style="width:45%;"><?php EchoTranslation("TCP/IP port")?></th>
-            <th style="width:5%;">&nbsp;</th>
-          </tr>
+        <table class="tablesort">
+          <thead>
+            <tr>
+              <th style="width:50%;"><?php EchoTranslation("Protocol")?></th>
+              <th style="width:45%;"><?php EchoTranslation("TCP/IP port")?></th>
+              <th style="width:5%;" class="no-sort">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
 <?php
-$Count = $obTCPIPPorts->Count();
-$str_delete = $obLanguage->String("Remove");
-
 for ($i = 0; $i < $Count; $i++) {
 	$obTCPIPPort = $obTCPIPPorts->Item($i);
 
@@ -42,13 +43,14 @@ for ($i = 0; $i < $Count; $i++) {
 		break;
 	}
 
-	echo '          <tr>
-            <td><a href="?page=tcpipport&action=edit&portid=' . $portid . '">' . $protocol_name . '</a></td>
-            <td><a href="?page=tcpipport&action=edit&portid=' . $portid . '">' . $portnumber . '</a></td>
-            <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $protocol_name . '</b>:\',\'Yes\',\'?page=background_tcpipport_save&action=delete&portid=' . $portid . '\');" class="delete">Delete</a></td>
-          </tr>' . PHP_EOL;
+	echo '            <tr>
+              <td><a href="?page=tcpipport&action=edit&portid=' . $portid . '">' . $protocol_name . '</a></td>
+              <td><a href="?page=tcpipport&action=edit&portid=' . $portid . '">' . $portnumber . '</a></td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $protocol_name . '</b>:\',\'Yes\',\'?page=background_tcpipport_save&action=delete&portid=' . $portid . '\');" class="delete">Delete</a></td>
+            </tr>' . PHP_EOL;
 }
 ?>
+          </tbody>
         </table>
         <div class="buttons center"><a href="?page=tcpipport&action=add" class="button">Add port</a></div>
       </div>

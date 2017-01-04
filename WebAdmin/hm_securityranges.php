@@ -3,12 +3,11 @@ if (!defined('IN_WEBADMIN'))
 	exit();
 
 if (hmailGetAdminLevel() != ADMIN_SERVER)
-	hmailHackingAttemp(); // Users are not allowed to show this page.
+	hmailHackingAttemp();
 
 $obSettings = $obBaseApp->Settings();
 $obSecurityRanges = $obSettings->SecurityRanges();
 $Count = $obSecurityRanges->Count();
-$str_delete = $obLanguage->String("Remove");
 ?>
     <div class="box large">
       <h2><?php EchoTranslation("IP Ranges") ?> <span>(<?php echo $Count ?>)</span></h2>
@@ -16,9 +15,9 @@ $str_delete = $obLanguage->String("Remove");
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:65%;">Name</th>
-              <th style="width:10%;">Priority</th>
-              <th style="width:20%;">Expires (min)</th>
+              <th style="width:65%;"><?php EchoTranslation("Name")?></th>
+              <th style="width:10%;"><?php EchoTranslation("Priority")?></th>
+              <th style="width:20%;"><?php EchoTranslation("Expires (min)")?></th>
               <th style="width:5%;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
@@ -31,10 +30,10 @@ for ($i = 0; $i < $Count; $i++) {
 
 	$securityrangename = PreprocessOutput($securityrangename);
 	$securityrangepriority = $obSecurityRange->Priority; //added
-	$ExpiresTime = $obSecurityRange->ExpiresTime; //added
+	$ExpiresTime = $obSecurityRange->Expires ? ceil((strtotime($obSecurityRange->ExpiresTime)-time())/60):'Never expires'; //added
 
 	echo '            <tr>
-              <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '">' . $securityrangename . '</a></td>
+              <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . (strpos($securityrangename,'Auto-ban:')!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
               <td>' . $securityrangepriority . '</td>
               <td>' . $ExpiresTime . '</td>
               <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $securityrangename . '</b>:\',\'Yes\',\'?page=background_securityrange_save&action=delete&securityrangeid=' . $securityrangeid . '\');" class="delete">Delete</a></td>

@@ -104,11 +104,14 @@ $avactiondeletattachmentschecked = hmailCheckedIf1($avaction == 1);
 	PrintCheckboxRow("EnableAttachmentBlocking", "Block attachments with the following extensions:", $EnableAttachmentBlocking);
 ?>
         <table>
-          <tr>
-            <th style="width:30%;"><?php EchoTranslation("Name")?></th>
-            <th style="width:60%;"><?php EchoTranslation("Description")?></th>
-            <th style="width:10%;">&nbsp;</th>
-          </tr>
+          <thead>
+            <tr>
+              <th style="width:30%;"><?php EchoTranslation("Name")?></th>
+              <th style="width:60%;"><?php EchoTranslation("Description")?></th>
+              <th style="width:10%;">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
 <?php
 $blockedAttachments = $obAntivirus->BlockedAttachments;
 
@@ -117,15 +120,15 @@ for ($i = 0; $i < $blockedAttachments->Count; $i++) {
 	$id = $blockedAttachment->ID;
 	$wildcard = $blockedAttachment->Wildcard;
 	$description= $blockedAttachment->Description;
-?>
-          <tr>
-            <td><a href="?page=blocked_attachment&action=edit&id=<?php echo $id?>"><?php echo PreprocessOutput($wildcard);?></a></td>
-            <td><?php echo PreprocessOutput($description);?></td>
-            <td><?php echo "<a href=\"?page=background_blocked_attachment_save&action=delete&id=$id\" class=\"delete\">$str_delete</a>";?></td>
-          </tr>
-<?php
+
+	echo '            <tr>
+              <td><a href="?page=blocked_attachment&action=edit&id=' . $id . '">' . PreprocessOutput($wildcard) . '</a></td>
+              <td>' . PreprocessOutput($description) . '</td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . PreprocessOutput($wildcard) . '</b>:\',\'Yes\',\'?page=background_blocked_attachment_save&action=delete&id=' . $id . '\');" class="delete">Delete</a></td>
+            </tr>' . PHP_EOL;
 }
 ?>
+          </tbody>
         </table>
         <div class="buttons center"><a href="?page=blocked_attachment&action=add" class="button">Add new extension</a></div>
         </div>

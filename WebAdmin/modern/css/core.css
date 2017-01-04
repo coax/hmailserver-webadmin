@@ -19,6 +19,9 @@ input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-s
 #facebox .content p {font-size:10pt; margin:1em 0; line-height:12pt;}
 input.error, textarea.error {border:1px solid #f25555 !important;}
 b {font-weight:700;}
+.red {color:#f25555;}
+.yellow {color:#ffce54;}
+.green {color:#a0d468;}
 
 /* grafs */
 .grafs-text, .grafs-tips, .grafs-tooltip, .grafs-summary, .grafs-legend, .grafs-grid-title {font-family:"Nunito Sans", sans-serif;}
@@ -112,8 +115,8 @@ table {width:100%; text-align:left; font-size:13px;}
 table th {color:#acacac; cursor:pointer; line-height:40px;}
 table td {position:relative;}
 table td a {display:block; padding:10px 0;}
-table tr:nth-child(even) {background:#f9fafa;}
-table tr:hover:not(:nth-child(1)) {background:#f2f2f2;}
+table tbody tr:nth-child(even) {background:#f9fafa;}
+table tbody tr:hover {background:#f2f2f2;}
 table th:nth-child(1), table td:nth-child(1) {text-indent:10px;}
 table.queue th:nth-child(1), table.queue th:nth-child(6), table.queue td:nth-child(1), table.queue td:nth-child(6) {width:8%;}
 table.queue th:nth-child(2), table.queue th:nth-child(5), table.queue td:nth-child(2), table.queue td:nth-child(5) {width:17%;}
@@ -228,6 +231,8 @@ ul.menu ul li a {display:block; color:#fff; padding:10px 5px 10px 50px; text-dec
 .cd-side-nav > ul > li.utilities > a::before {background-position:-64px 0;}
 .cd-side-nav > ul > li.dns-blacklists > a::before {background-position:-80px 0;}
 .cd-side-nav > ul > li.ip-ranges > a::before {background-position:-96px 0;}
+.cd-side-nav > ul > li.logs > a::before {background-position:-160px 0;}
+.cd-side-nav > ul > li.help > a::before {background-position:-176px 0;}
 .cd-side-nav .count {position:absolute; top:50%; bottom:auto; -webkit-transform:translateY(-50%); -moz-transform:translateY(-50%); -ms-transform:translateY(-50%); -o-transform:translateY(-50%); transform:translateY(-50%); right:calc(5% + 16px + 0.4em); padding:0.2em 0.4em; background-color:#ff7e66; border-radius:.25em; color:#ffffff; font-weight:bold; font-size:1.2rem; text-align:center;}
 /*
 .action-btn a {display:block; margin:0 5%; padding:1em 0; background-color:#1784c7; border-radius:.25em; border:none; box-shadow:0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); text-align:center; color:#ffffff; font-weight:bold;}

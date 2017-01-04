@@ -3,25 +3,26 @@ if (!defined('IN_WEBADMIN'))
 	exit();
 
 if (hmailGetAdminLevel() != ADMIN_SERVER)
-	hmailHackingAttemp(); // Users are not allowed to show this page.
+	hmailHackingAttemp();
 
-?>
-    <div class="box large">
-      <h2><?php EchoTranslation("SURBL servers") ?></h2>
-      <div style="margin:0 18px 18px;">
-        <table>
-          <tr>
-            <th style="width:75%;">Name</th>
-            <th style="width:10%;">Score</th>
-            <th style="width:10%;">Enabled</th>
-            <th style="width:5%;">&nbsp;</th>
-          </tr>
-<?php
 $obSettings = $obBaseApp->Settings();
 $dnsBlacklists = $obSettings->AntiSpam->SURBLServers;
 $Count = $dnsBlacklists->Count();
-$str_delete = $obLanguage->String("Remove");
-
+?>
+    <div class="box large">
+      <h2><?php EchoTranslation("SURBL servers") ?> <span>(<?php echo $Count ?>)</span></h2>
+      <div style="margin:0 18px 18px;">
+        <table class="tablesort">
+          <thead>
+            <tr>
+              <th style="width:65%;"><?php EchoTranslation("Name") ?></th>
+              <th style="width:15%;"><?php EchoTranslation("Score") ?></th>
+              <th style="width:15%;"><?php EchoTranslation("Enabled") ?></th>
+              <th style="width:5%;" class="no-sort">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+<?php
 for ($i = 0; $i < $Count; $i++) {
 	$dnsBlackList = $dnsBlacklists->Item($i);
 	$id = $dnsBlackList->ID;
@@ -31,14 +32,15 @@ for ($i = 0; $i < $Count; $i++) {
 	$Score = $dnsBlackList->Score; //added
 	if (strlen($name)==0) $name = "(unnamed)";
 
-	echo '          <tr>
-            <td><a href="?page=surblserver&action=edit&id=' . $id . '">' . $name . '</a></td>
-            <td>' . $Score . '</td>
-            <td>' . $enabled . '</td>
-            <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $name . '</b>:\',\'Yes\',\'?page=background_surblserver_save&action=delete&id=' . $id . '\');" class="delete">Delete</a></td>
-          </tr>' . PHP_EOL;
+	echo '            <tr>
+              <td><a href="?page=surblserver&action=edit&id=' . $id . '">' . $name . '</a></td>
+              <td>' . $Score . '</td>
+              <td>' . $enabled . '</td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $name . '</b>:\',\'Yes\',\'?page=background_surblserver_save&action=delete&id=' . $id . '\');" class="delete">Delete</a></td>
+            </tr>' . PHP_EOL;
 }
 ?>
+          </tbody>
         </table>
       </div>
       <div class="buttons center"><a href="?page=surblserver&action=add" class="button">Add new SURBL</a></div>
