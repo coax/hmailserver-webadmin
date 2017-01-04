@@ -17,7 +17,7 @@ Features
 
 Roadmap for 2017
 -----
-- log parser
+- better log parser
 - buy community license for [Imperavi Grafs](https://imperavi.com/grafs/) (hence the donation link below)
 
 How to use
@@ -30,6 +30,17 @@ How to use
 
 Changelog
 -----
+Version 0.9.2 beta (04.01.2017)
+- [fix] all tables are now sorting
+- [fix] increase autoban field size from 4 to 5
+- [new] all tables now show total count
+- [new] domains/accounts show usage size and color coded
+- [new] autoban color coded and show time left in minutes
+- [new] offline log parser
+- [new] menu link to documentation
+- [new] added favicon
+- [tweak] if using newer version of hMailServer just modify include_versioncheck.php
+
 Version 0.9.1 beta (28.12.2016)
 - [new] Renamed folder from "PHPWebAdmin" to "WebAdmin" (to avoid confusion)
 - [new] Replaced Administrator in top menu with $username
