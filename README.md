@@ -30,6 +30,12 @@ How to use
 
 Changelog
 -----
+Version 0.9.3 beta (04.01.2017)
+- [fix] SSL certificates typo
+- [fix] number validation
+- [fix] removed PHP 7 incompatibility error
+- [tweak] validation for IP address input field
+
 Version 0.9.2 beta (04.01.2017)
 - [fix] all tables are now sorting
 - [fix] increase autoban field size from 4 to 5
@@ -66,6 +72,7 @@ Version 0.9 beta (28.12.2016)
 - [Chartist](https://gionkunz.github.io/chartist-js/Chartist)
 - [CodyHouse Responsive Sidebar Navigation](https://codyhouse.co/gem/responsive-sidebar-navigation/)
 - [Open Iconic](https://useiconic.com/open/)
+- [hMailServer log viewer](https://github.com/hazarkarabay/hmailserver-logviewer)
 
 Questions and contributions
 -----
