@@ -28,7 +28,7 @@ for ($i = 0; $i < $Count; $i++) {
 	$name = PreprocessOutput($name);
 
 	echo '            <tr>
-              <td><a href=\"?page=sslcertificate&action=edit&id=' . $id . '">' . $name . '</a></td>
+              <td><a href="?page=sslcertificate&action=edit&id=' . $id . '">' . $name . '</a></td>
              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $name . '</b>:\',\'Yes\',\'?page=background_sslcertificate_save&action=delete&id=' . $id . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }

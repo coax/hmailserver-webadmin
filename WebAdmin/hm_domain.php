@@ -189,7 +189,7 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 	$domainmaxsize = PreprocessOutput($domainmaxsize);
 
 	if ($admin_rights)
-		echo "<input type=\"text\" name=\"domainmaxsize\" value=\"$domainmaxsize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_maxsizemb\" class=\"small\">";
+		echo "<input type=\"text\" name=\"domainmaxsize\" value=\"$domainmaxsize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_maxsizemb\" class=\"req small number\">";
 	else
 		echo $domainmaxsize;
 
@@ -202,7 +202,7 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 	$domainmaxmessagesize = PreprocessOutput($domainmaxmessagesize);
 
 	if ($admin_rights)
-		echo "<input type=\"text\" name=\"domainmaxmessagesize\" value=\"$domainmaxmessagesize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"small\">";
+		echo "<input type=\"text\" name=\"domainmaxmessagesize\" value=\"$domainmaxmessagesize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
 	else
 		echo $domainmaxsize;
 ?>
@@ -212,7 +212,7 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 	$MaxAccountSize = PreprocessOutput($MaxAccountSize);
 
 	if ($admin_rights)
-		echo "<input type=\"text\" name=\"MaxAccountSize\" value=\"$MaxAccountSize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"small\">";
+		echo "<input type=\"text\" name=\"MaxAccountSize\" value=\"$MaxAccountSize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
 	else
 		echo $MaxAccountSize;
 ?>
@@ -227,7 +227,7 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 	$MaxNumberOfAccounts = PreprocessOutput($MaxNumberOfAccounts);
 
 	if ($admin_rights)
-		echo "<input type=\"text\" name=\"MaxNumberOfAccounts\" value=\"$MaxNumberOfAccounts\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"small\">";
+		echo "<input type=\"text\" name=\"MaxNumberOfAccounts\" value=\"$MaxNumberOfAccounts\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
 	else
 		echo $MaxNumberOfAccounts;
 ?>
@@ -242,7 +242,7 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 	$MaxNumberOfAliases = PreprocessOutput($MaxNumberOfAliases);
 
 	if ($admin_rights)
-		echo "<input type=\"text\" name=\"MaxNumberOfAliases\" value=\"$MaxNumberOfAliases\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"small\">";
+		echo "<input type=\"text\" name=\"MaxNumberOfAliases\" value=\"$MaxNumberOfAliases\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
 	else
 		echo $MaxNumberOfAliases;
 ?>
@@ -257,7 +257,7 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 	$MaxNumberOfDistributionLists = PreprocessOutput($MaxNumberOfDistributionLists);
 
 	if ($admin_rights)
-		echo "<input type=\"text\" name=\"MaxNumberOfDistributionLists\" value=\"$MaxNumberOfDistributionLists\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"small\">";
+		echo "<input type=\"text\" name=\"MaxNumberOfDistributionLists\" value=\"$MaxNumberOfDistributionLists\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
 	else
 		echo $MaxNumberOfDistributionLists;
 ?>

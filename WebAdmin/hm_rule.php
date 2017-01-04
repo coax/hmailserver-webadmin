@@ -56,12 +56,15 @@ if ($ruleid == 0) {
         <h3><a href="#"><?php EchoTranslation("Criteria") ?></a></h3>
         <div class="hidden">
           <table>
-            <tr>
-              <th style="width:30%;"><?php EchoTranslation("Field")?></th>
-              <th style="width:30%;"><?php EchoTranslation("Comparison")?></th>
-              <th style="width:30%;"><?php EchoTranslation("Value")?></th>
-              <th style="width:10%;">&nbsp;</th>
-            </tr>
+            <thead>
+              <tr>
+                <th style="width:30%;"><?php EchoTranslation("Field")?></th>
+                <th style="width:30%;"><?php EchoTranslation("Comparison")?></th>
+                <th style="width:30%;"><?php EchoTranslation("Value")?></th>
+                <th style="width:10%;">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
 <?php
 	$Criterias = $rule->Criterias;
 	$count = $Criterias->Count;
@@ -77,24 +80,29 @@ if ($ruleid == 0) {
 		$matchType = GetMatchTypeString($criteria->MatchType);
 		$matchValue = $criteria->MatchValue;
 ?>
-            <tr>
-              <td><a href="?page=rule_criteria&action=edit&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&criteriaid=<?php echo $criteriaid ?>"><?php echo $fieldName ?></a></td>
-              <td><?php echo PreprocessOutput($matchType)?></td>
-              <td><?php echo PreprocessOutput($matchValue)?></td>
-              <td><a href="#" onclick="return Confirm('Confirm delete <b><?php echo $fieldName ?></b>:','Yes','?page=background_rule_save&savetype=criteria&action=delete&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&criteriaid=<?php echo $criteriaid ?>');" class="delete">Delete</a></td>
-            </tr>
+              <tr>
+                <td><a href="?page=rule_criteria&action=edit&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&criteriaid=<?php echo $criteriaid ?>"><?php echo $fieldName ?></a></td>
+                <td><?php echo PreprocessOutput($matchType)?></td>
+                <td><?php echo PreprocessOutput($matchValue)?></td>
+                <td><a href="#" onclick="return Confirm('Confirm delete <b><?php echo $fieldName ?></b>:','Yes','?page=background_rule_save&savetype=criteria&action=delete&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&criteriaid=<?php echo $criteriaid ?>');" class="delete">Delete</a></td>
+              </tr>
 <?php
 	}
 ?>
+            </tbody>
           </table>
           <div class="buttons center"><a href="?page=rule_criteria&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button">Add new criteria</a></div>
         </div>
         <h3><a href="#"><?php EchoTranslation("Actions")?></a></h3>
         <div class="hidden">
           <table>
-            <tr>
-              <th style="width:90%;"><?php EchoTranslation("Action")?></th>
-              <th style="width:10%;">&nbsp;</th>
+            <thead>
+              <tr>
+                <th style="width:90%;"><?php EchoTranslation("Action")?></th>
+                <th style="width:10%;">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
 <?php
 	$Actions = $rule->Actions;
 	$count = $Actions->Count;
@@ -105,13 +113,14 @@ if ($ruleid == 0) {
 		$actionid = $action->ID;
 		$actionName = GetRuleActionString($action->Type);
 ?>
-            <tr>
-              <td><?php echo "<a href=\"?page=rule_action&action=edit&domainid=$domainid&accountid=$accountid&ruleid=$ruleid&actionid=$actionid\">$actionName</a>";?></td>
-              <td><a href="#" onclick="return Confirm('Confirm delete <b><?php echo $actionName ?></b>:','Yes','?page=background_rule_save&savetype=action&action=delete&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&actionid=<?php echo $actionid ?>');" class="delete">Delete</a></td>
-            </tr>
+              <tr>
+                <td><?php echo "<a href=\"?page=rule_action&action=edit&domainid=$domainid&accountid=$accountid&ruleid=$ruleid&actionid=$actionid\">$actionName</a>";?></td>
+                <td><a href="#" onclick="return Confirm('Confirm delete <b><?php echo $actionName ?></b>:','Yes','?page=background_rule_save&savetype=action&action=delete&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&actionid=<?php echo $actionid ?>');" class="delete">Delete</a></td>
+              </tr>
 <?php
 	}
 ?>
+            </tbody>
           </table>
           <div class="buttons center"><a href="?page=rule_action&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button">Add new action</a></div>
         </div>

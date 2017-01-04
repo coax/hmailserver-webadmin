@@ -32,7 +32,6 @@ for ($i = 1; $i <= $DomainCount; $i++) {
 	$domainname_escaped = GetStringForJavaScript($domainname);
 
 	//calculate domain size
-	if ($domainmaxsize == 0) $domainmaxsize = -1;
 	$DomainSize = 0;
 	$obAccounts = $obDomain->Accounts();
 	$Count = $obAccounts->Count();
@@ -40,20 +39,16 @@ for ($i = 1; $i <= $DomainCount; $i++) {
 		$obAccount = $obAccounts->Item($j);
 		$DomainSize += $obAccount->Size();
 	}
-	$Percentage = Round((($domainmaxsize - $DomainSize) / ($domainmaxsize)) * 100);
-	if ($Percentage<=10):
-		$Percentage = "red";
-	elseif ($Percentage<=30):
-		$Percentage = "yellow";
-	else:
-		$Percentage = "green";
-	endif;
-
-	if ($domainmaxsize == -1) $domainmaxsize = "Unlimited";
+	$Color = "green";
+	if($domainmaxsize != 0){
+		$Percentage = Round((($domainmaxsize - $DomainSize) / ($domainmaxsize)) * 100);
+		if ($Percentage<=10) $Color = "red";
+		elseif ($Percentage<=30) $Color = "yellow";
+	}else $domainmaxsize = "Unlimited";
 
 	echo '            <tr>
               <td><a href="?page=domain&action=edit&domainid=' . $domainid . '">' . $domainname . '</a></td>
-              <td class=' . $Percentage . '>' . number_format($DomainSize, 2, ".", "") . '</td>
+              <td class=' . $Color . '>' . number_format($DomainSize, 2, ".", "") . '</td>
               <td>' . $domainmaxsize . '</td>
               <td>' . $domainactive . '</td>
               <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $domainname . '</b>:\',\'Yes\',\'?page=background_domain_save&action=delete&domainid=' . $domainid . '\');" class="delete">Delete</a></td>

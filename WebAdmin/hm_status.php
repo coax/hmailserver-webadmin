@@ -32,18 +32,21 @@
       <h2>Delivery queue</h2>
       <div style="margin:0 18px;">
         <table class="queue" style="width:99%;">
-          <tr>
-            <th>ID</th>
-            <th>Created</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Next try</th>
-            <th>Retries</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Created</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Next try</th>
+              <th>Retries</th>
+            </tr>
+          </thead>
         </table>
       </div>
       <div style="margin:0 18px 18px; max-height:400px; overflow-y:scroll;">
         <table class="queue" id="queue">
+          <tbody>
 <?php
 $undeliveredMessages = $obStatus->UndeliveredMessages;
 
@@ -51,27 +54,27 @@ $QueueCount = 0;
 if (strlen($undeliveredMessages) > 0) {
 	$list = explode("\r\n", $undeliveredMessages);
 	$QueueCount = count($list);
-	$as_soon_as_possible = $obLanguage->String("As soon as possible");
 
 	foreach ($list as $line) {
 		$columns = explode("\t", $line);
 
-		if (count($columns) > 4) {
-			if ($columns[4] == "1901-01-01 00:00:00")
-			$columns[4] = $as_soon_as_possible;
+		if (count($columns)>4) {
+			if ($columns[4] == "1901-01-01 00:00:00") $columns[4] = "ASAP";
+			else $columns[4] = date_format(date_create($columns[4]), 'd.m.Y H:i:s');
 
-			echo '          <tr>
-            <td><a href="' . $columns[5] . '" rel="facebox">' . $columns[0] . '</a></td>
-            <td>' . $columns[1] . '</td>
-            <td>' . PreprocessOutput($columns[2]) . '</td>
-            <td>' . PreprocessOutput($columns[3]) . '</td>
-            <td>' . $columns[4] . '</td>
-            <td>' . $columns[6] . '</td>
-          </tr>' . PHP_EOL;
+			echo '            <tr>
+              <td><a href="' . $columns[5] . '" rel="facebox">' . $columns[0] . '</a></td>
+              <td>' . date_format(date_create($columns[1]), 'd.m.Y H:i:s') . '</td>
+              <td>' . PreprocessOutput($columns[2]) . '</td>
+              <td>' . PreprocessOutput($columns[3]) . '</td>
+              <td>' . $columns[4] . '</td>
+              <td>' . $columns[6] . '</td>
+            </tr>' . PHP_EOL;
 		}
 	}
 }
 ?>
+          </tbody>
         </table>
       </div>
       <p class="info"><span><?php echo $QueueCount ?></span><br />messages in queue</p>

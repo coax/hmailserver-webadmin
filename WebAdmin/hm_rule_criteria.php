@@ -38,8 +38,9 @@ if ($action == "edit") {
       <h2><?php EchoTranslation("Criteria") ?></h2>
       <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
         <table>
-          <tr>
-            <td style="width:55%; padding-right:10%;">
+          <tbody>
+            <tr>
+              <td style="width:55%; padding-right:10%;">
 <?php
 	PrintHidden("page", "background_rule_save");
 	PrintHidden("savetype", "criteria");
@@ -49,8 +50,8 @@ if ($action == "edit") {
 	PrintHidden("ruleid", $ruleid);
 	PrintHidden("criteriaid", $criteriaid);
 ?>
-              <p><input type="radio" name="UsePredefined" value="1" id="1" <?php if ($UsePredefined == 1) echo "checked"?>><label for="1"><?php EchoTranslation("Predefined field")?></label></p>
-              <select name="PredefinedField">
+                <p><input type="radio" name="UsePredefined" value="1" id="1" <?php if ($UsePredefined == 1) echo "checked"?>><label for="1"><?php EchoTranslation("Predefined field")?></label></p>
+                <select name="PredefinedField">
 <?php
 	$eFTFromSelected = $PredefinedField == eFTFrom ? "selected" : "";
 	$eFTToSelected = $PredefinedField == eFTTo ? "selected" : "";
@@ -61,28 +62,30 @@ if ($action == "edit") {
 	$eFTRecipientList = $PredefinedField == eFTRecipientList ? "selected" : "";
 	$eFTDeliveryAttempts = $PredefinedField == eFTDeliveryAttempts ? "selected" : "";
 
-	echo '                <option value=' . eFTFrom . ' $eFTFromSelected>' . GetPredefinedFieldString(eFTFrom) . '</option>
-                <option value= ' . eFTTo . ' $eFTToSelected>' . GetPredefinedFieldString(eFTTo) . '</option>
-                <option value= ' . eFTCC . ' $eFTCCSelected>' . GetPredefinedFieldString(eFTCC) . '</option>
-                <option value= ' . eFTSubject . ' $eFTSubjectSelected>' . GetPredefinedFieldString(eFTSubject) . '</option>
-                <option value= ' . eFTBody . ' $eFTBodySelected>' . GetPredefinedFieldString(eFTBody) . '</option>
-                <option value= ' . eFTMessageSize . ' $eFTMessageSizeSelected>' . GetPredefinedFieldString(eFTMessageSize) . '</option>
-                <option value= ' . eFTRecipientList . ' $eFTRecipientList>' . GetPredefinedFieldString(eFTRecipientList) . '</option>
-                <option value= ' . eFTDeliveryAttempts . ' $eFTDeliveryAttempts>' . GetPredefinedFieldString(eFTDeliveryAttempts) . '</option>' . PHP_EOL;
+	echo '                  <option value=' . eFTFrom . ' $eFTFromSelected>' . GetPredefinedFieldString(eFTFrom) . '</option>
+                  <option value= ' . eFTTo . ' $eFTToSelected>' . GetPredefinedFieldString(eFTTo) . '</option>
+                  <option value= ' . eFTCC . ' $eFTCCSelected>' . GetPredefinedFieldString(eFTCC) . '</option>
+                  <option value= ' . eFTSubject . ' $eFTSubjectSelected>' . GetPredefinedFieldString(eFTSubject) . '</option>
+                  <option value= ' . eFTBody . ' $eFTBodySelected>' . GetPredefinedFieldString(eFTBody) . '</option>
+                  <option value= ' . eFTMessageSize . ' $eFTMessageSizeSelected>' . GetPredefinedFieldString(eFTMessageSize) . '</option>
+                  <option value= ' . eFTRecipientList . ' $eFTRecipientList>' . GetPredefinedFieldString(eFTRecipientList) . '</option>
+                  <option value= ' . eFTDeliveryAttempts . ' $eFTDeliveryAttempts>' . GetPredefinedFieldString(eFTDeliveryAttempts) . '</option>' . PHP_EOL;
 ?>
-              </select>
-            </td>
-            <td>
-              <p><input type="radio" name="UsePredefined" value="0" id="2" <?php if ($UsePredefined == 0) echo "checked"?>><label for="2"><?php EchoTranslation("Custom header field")?></label></p>
-              <input type="text" name="HeaderField" value="<?php echo PreprocessOutput($HeaderField);?>">
-            </td>
-          </tr>
+                </select>
+              </td>
+              <td>
+                <p><input type="radio" name="UsePredefined" value="0" id="2" <?php if ($UsePredefined == 0) echo "checked"?>><label for="2"><?php EchoTranslation("Custom header field")?></label></p>
+                <input type="text" name="HeaderField" value="<?php echo PreprocessOutput($HeaderField);?>">
+              </td>
+            </tr>
+          </tbody>
         </table>
         <table>
-          <tr>
-            <td style="width:55%; padding-right:10%;">
-              <p><?php EchoTranslation("Search type")?></p>
-              <select name="MatchType">
+          <tbody>
+            <tr>
+              <td style="width:55%; padding-right:10%;">
+                <p><?php EchoTranslation("Search type")?></p>
+                <select name="MatchType">
 <?php
 	$eMTEqualsSelected = $MatchType == eMTEquals ? "selected" : "";
 	$eMTContainsSelected = $MatchType == eMTContains ? "selected" : "";
@@ -93,22 +96,23 @@ if ($action == "edit") {
 	$eMTNotEqualsSelected = $MatchType == eMTNotEquals ? "selected" : "";
 	$eMTWildcardSelected = $MatchType == eMTWildcard ? "selected" : "";
 
-	echo '                <option value= ' . eMTEquals . ' $eMTEqualsSelected>' . GetMatchTypeString(eMTEquals) . '</option>
-                <option value= ' . eMTContains . ' $eMTContainsSelected>' . GetMatchTypeString(eMTContains) . '</option>
-                <option value= ' . eMTLessThan . ' $eMTLessThanSelected>' . GetMatchTypeString(eMTLessThan) . '</option>
-                <option value= ' . eMTGreaterThan . ' $eMTGreaterThanSelected>' . GetMatchTypeString(eMTGreaterThan) . '</option>
-                <option value= ' . eMTRegExMatch . ' $eMTRegExMatchSelected>' . GetMatchTypeString(eMTRegExMatch) . '</option>
-                <option value= ' . eMTNotContains . ' $eMTNotContainsSelected>' . GetMatchTypeString(eMTNotContains) . '</option>
-                <option value= ' . eMTNotEquals . ' $eMTNotEqualsSelected>' . GetMatchTypeString(eMTNotEquals) . '</option>
-                <option value= ' . eMTWildcard . ' $eMTWildcardSelected>' . GetMatchTypeString(eMTWildcard) . '</option>' . PHP_EOL;
+	echo '                  <option value= ' . eMTEquals . ' $eMTEqualsSelected>' . GetMatchTypeString(eMTEquals) . '</option>
+                  <option value= ' . eMTContains . ' $eMTContainsSelected>' . GetMatchTypeString(eMTContains) . '</option>
+                  <option value= ' . eMTLessThan . ' $eMTLessThanSelected>' . GetMatchTypeString(eMTLessThan) . '</option>
+                  <option value= ' . eMTGreaterThan . ' $eMTGreaterThanSelected>' . GetMatchTypeString(eMTGreaterThan) . '</option>
+                  <option value= ' . eMTRegExMatch . ' $eMTRegExMatchSelected>' . GetMatchTypeString(eMTRegExMatch) . '</option>
+                  <option value= ' . eMTNotContains . ' $eMTNotContainsSelected>' . GetMatchTypeString(eMTNotContains) . '</option>
+                  <option value= ' . eMTNotEquals . ' $eMTNotEqualsSelected>' . GetMatchTypeString(eMTNotEquals) . '</option>
+                  <option value= ' . eMTWildcard . ' $eMTWildcardSelected>' . GetMatchTypeString(eMTWildcard) . '</option>' . PHP_EOL;
 ?>
-              </select>
-            </td>
-            <td>
-              <p><?php EchoTranslation("Value")?></p>
-              <input type="text" name="MatchValue" value="<?php echo PreprocessOutput($MatchValue);?>">
-            </td>
-          </tr>
+                </select>
+              </td>
+              <td>
+                <p><?php EchoTranslation("Value")?></p>
+                <input type="text" name="MatchValue" value="<?php echo PreprocessOutput($MatchValue);?>">
+              </td>
+            </tr>
+          </tbody>
         </table>
 <?php
 

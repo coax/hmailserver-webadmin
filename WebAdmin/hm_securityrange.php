@@ -87,9 +87,9 @@ $IsForwardingRelayChecked = hmailCheckedIf1($IsForwardingRelay);
 	PrintHidden("securityrangeid", $securityrangeid);
 
 	PrintPropertyEditRow("securityrangename", "Name", $securityrangename);
-	PrintPropertyEditRow("securityrangepriority", "Priority", $securityrangepriority);
-	PrintPropertyEditRow("securityrangelowerip", "Lower IP", $securityrangelowerip);
-	PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip);
+	PrintPropertyEditRow("securityrangepriority", "Priority", $securityrangepriority, 5, "number", "small");
+	PrintPropertyEditRow("securityrangelowerip", "Lower IP", $securityrangelowerip, 30, "ip");
+	PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip, 30, "ip");
 
 	PrintCheckboxRow("Expires", "Expires", $Expires);
 	PrintPropertyEditRow("ExpiresTime", "Use YYYY-MM-DD HH:MM:SS", $ExpiresTime);

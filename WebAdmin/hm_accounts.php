@@ -44,19 +44,16 @@ for ($i = 0; $i < $Count; $i++) {
 	//added
 	$AccountEnabled = $obAccount->Active ? $obLanguage->String("Yes") : $obLanguage->String("No");
 	$AccountSize = $obAccount->Size();
-	$Percentage = Round((($accountmaxsize - $AccountSize) / ($accountmaxsize)) * 100);
-	if ($Percentage<=10):
-		$Percentage = "red";
-	elseif ($Percentage<=30):
-		$Percentage = "yellow";
-	else:
-		$Percentage = "green";
-	endif;
-	if ($accountmaxsize == -1) $accountmaxsize = "Unlimited";
+	$Color = "green";
+	if($accountmaxsize != 0){
+		$Percentage = Round((($accountmaxsize - $AccountSize) / ($accountmaxsize)) * 100);
+		if ($Percentage<=10) $Color = "red";
+		elseif ($Percentage<=30) $Color = "yellow";
+	}else $accountmaxsize = "Unlimited";
 
 	echo '            <tr>
               <td><a href="?page=account&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '">' . $accountaddress . '</a></td>
-              <td class=' . $Percentage . '>' . number_format($AccountSize, 2, ".", "") . '</td>
+              <td class=' . $Color . '>' . number_format($AccountSize, 2, ".", "") . '</td>
               <td>' . $accountmaxsize . '</td>
               <td>' . $AccountEnabled . '</td>
               <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $accountaddress . '</b>:\',\'Yes\',\'?page=background_account_save&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '\');" class="delete">Delete</a></td>
