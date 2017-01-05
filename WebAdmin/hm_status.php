@@ -1,3 +1,23 @@
+<?php
+define("STSMTP", 1);
+define("STPOP3", 3);
+define("STIMAP", 5);
+
+$obStatus = $obBaseApp->Status();
+$statusstarttime = $obStatus->StartTime();
+/*$ProcessedMessages = $obStatus->ProcessedMessages();
+$VirusMessages = $obStatus->RemovedViruses();
+$SpamMessages = $obStatus->RemovedSpamMessages();*/
+$UndeliveredMessages = $obStatus->UndeliveredMessages();
+
+$statusprocessedmessages = $obStatus->ProcessedMessages();
+$statusmessageswithvirus = $obStatus->RemovedViruses();
+$statusmessageswithspam = $obStatus->RemovedSpamMessages();
+
+$sessions_smtp = $obStatus->SessionCount(STSMTP);
+$sessions_pop3 = $obStatus->SessionCount(STPOP3);
+$sessions_imap = $obStatus->SessionCount(STIMAP);
+?>
     <div class="box">
       <h2>Server</h2>
       <p class="info"><span class="green"><?php echo $state ?></span><br />status</p>
