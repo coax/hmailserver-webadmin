@@ -163,9 +163,10 @@ $serverstate = $obBaseApp->ServerState();
 $action = hmailGetVar("action","");
 
 $statusstarttime = $obStatus->StartTime();
-$statusprocessedmessages = $obStatus->ProcessedMessages();
-$statusmessageswithvirus = $obStatus->RemovedViruses();
-$statusmessageswithspam = $obStatus->RemovedSpamMessages();
+$ProcessedMessages = $obStatus->ProcessedMessages();
+$VirusMessages = $obStatus->RemovedViruses();
+$SpamMessages = $obStatus->RemovedSpamMessages();
+$UndeliveredMessages = $obStatus->UndeliveredMessages();
 
 $sessions_smtp = $obStatus->SessionCount(STSMTP);
 $sessions_pop3 = $obStatus->SessionCount(STPOP3);
@@ -250,6 +251,7 @@ function GetStringForDomain($obDomain, $parentid) {
 	echo '                <li><a href="?page=accounts&domainid=' . $obDomain->ID . '">Accounts<span class="count">' . $TotalAccounts . '</a></li>' . PHP_EOL;
 
 	/* hidden */
+/*
 	for ($j = 0; $j < $TotalAccounts; $j++) {
 		$obAccount = $Accounts->Item($j);
 
@@ -268,7 +270,7 @@ function GetStringForDomain($obDomain, $parentid) {
 			$dtree .= "d.add(" . $dtitem++ . ",$di,'" . GetStringForJavaScript("External accounts") . "','index.php?page=account_externalaccounts&accountid=" . $accountid . "&domainid=" . $obDomain->ID. "');\r\n";
 		}
 	}
-
+*/
 	$Aliases = $obDomain->Aliases();
 	$TotalAliases = $Aliases->Count();
 	$aliases_root = $dtitem++;
@@ -276,6 +278,7 @@ function GetStringForDomain($obDomain, $parentid) {
 	echo '                <li><a href="?page=aliases&domainid=' . $obDomain->ID . '">Aliases<span class="count">' . $TotalAliases . '</a></li>' . PHP_EOL;
 
 	/* hidden */
+/*
 	for ($j = 0; $j < $TotalAliases; $j++) {
 		$obAlias = $Aliases->Item($j);
 
@@ -286,13 +289,14 @@ function GetStringForDomain($obDomain, $parentid) {
 		$di = $dtitem++;
 		$dtree .= "d.add($di,$aliases_root,'" . $aliasname . "','index.php?page=alias&action=edit&aliasid=" . $obAlias->ID . "&domainid=" . $obDomain->ID  . "','','','" . "images/arrow_switch.png','" . "images/arrow_switch.png');\r\n";
 	}
-
+*/
 	$DistributionLists = $obDomain->DistributionLists();
 	$TotalDistributionLists = $DistributionLists->Count();
 
 	echo '                <li><a href="?page=distributionlists&domainid=' . $obDomain->ID . '">Distribution lists<span class="count">' . $TotalDistributionLists . '</a></li>' . PHP_EOL;
 
 	/* hidden */
+/*
 	for ($j = 0; $j < $TotalDistributionLists; $j++) {
 		$obDistributionList = $DistributionLists->Item($j);
 		$di = $dtitem++;
@@ -303,7 +307,7 @@ function GetStringForDomain($obDomain, $parentid) {
 		$dtree .= "d.add($di,$dlist_root,'" . $address .  "','index.php?page=distributionlist&action=edit&distributionlistid=" . $obDistributionList->ID . "&domainid=" . $obDomain->ID . "','','','" . "images/arrow_out.png','" . "images/arrow_out.png');\r\n";
 		$dtree .= "d.add(" . $dtitem++ .",$di,'" . GetStringForJavaScript("Members") . " (" . $obDistributionList->Recipients->Count() . ")','index.php?page=distributionlist_recipients&distributionlistid=" . $obDistributionList->ID . "&domainid=" . $obDomain->ID. "');\r\n";
 	}
-
+*/
 	echo '              </ul>
             </li>' . PHP_EOL;
 }
