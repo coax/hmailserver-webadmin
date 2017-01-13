@@ -31,8 +31,56 @@
          $rule = $obBaseApp->Rules->ItemByDBID($ruleid);
       else
          $rule = $obBaseApp->Domains->ItemByDBID($domainid)->Accounts->ItemByDBID($accountid)->Rules->ItemByDBID($ruleid);
-   }  
- 
+   }
+
+  if ($action == "move")
+   {
+      if ($savetype == "ruleup")
+         $rule->MoveUp();
+      else if ($savetype == "ruledown")
+         $rule->MoveDown();
+      else if ($savetype == "actionup")
+	   $rule->Actions->ItemByDBID($actionid)->MoveUp();
+      else if ($savetype == "actiondown")
+         $rule->Actions->ItemByDBID($actionid)->MoveDown();
+		 
+      if ($savetype == "actionup" || $savetype == "actiondown")
+         header("Location: $rule_link");
+      else
+      {
+         if ($domainid == 0)
+            header("Location: index.php?page=rules");
+         else
+            header("Location: index.php?page=account&action=edit&accountid=$accountid&domainid=$domainid");
+      }
+         
+      die;
+   }
+
+   if ($action == "move")
+   {
+   
+      if ($savetype == "ruleup")
+         $rule->MoveUp();
+      else if ($savetype == "ruledown")
+         $rule->MoveDown();
+      else if ($savetype == "actionup")
+         $rule->Actions->ItemByDBID($actionid)->MoveUp();
+      else if ($savetype == "actiondown")
+         $rule->Actions->ItemByDBID($actionid)->MoveDown();
+      
+      if ($savetype == "actionup" || $savetype == "actiondown")
+         header("Location: $rule_link");
+      else
+      {
+         if ($domainid == 0)
+            header("Location: index.php?page=rules");
+         else
+            header("Location: index.php?page=account&action=edit&accountid=$accountid&domainid=$domainid");
+      }
+         
+      die;
+   }
 
    if ($action == "delete")
    {
