@@ -154,23 +154,8 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
       <ul>
         <li class="cd-label">Action</li>
 <?php
-define("STSMTP", 1);
-define("STPOP3", 3);
-define("STIMAP", 5);
-
-$obStatus = $obBaseApp->Status();
 $serverstate = $obBaseApp->ServerState();
 $action = hmailGetVar("action","");
-
-$statusstarttime = $obStatus->StartTime();
-$ProcessedMessages = $obStatus->ProcessedMessages();
-$VirusMessages = $obStatus->RemovedViruses();
-$SpamMessages = $obStatus->RemovedSpamMessages();
-$UndeliveredMessages = $obStatus->UndeliveredMessages();
-
-$sessions_smtp = $obStatus->SessionCount(STSMTP);
-$sessions_pop3 = $obStatus->SessionCount(STPOP3);
-$sessions_imap = $obStatus->SessionCount(STIMAP);
 
 if ($action == "control") {
 	$controlaction = hmailGetVar("controlaction","");
@@ -178,24 +163,6 @@ if ($action == "control") {
 		$obBaseApp->Start();
 	else if ($controlaction == "0")
 		$obBaseApp->Stop();
-}
-
-switch($serverstate) {
-	case 1:
-		$state = $obLanguage->String("Stopped");
-		break;
-	case 2:
-		$state = $obLanguage->String("Starting");
-		break;
-	case 3:
-		$state = $obLanguage->String("Running");
-		break;
-	case 4:
-		$state = $obLanguage->String("Stopping");
-		break;
-	default:
-		$state = "Unknown";
-		break;
 }
 
 switch($serverstate) {
