@@ -204,8 +204,9 @@ if ($accountid == 0) {
           <table>
             <thead>
               <tr>
-                <th style="width:70%;"><?php EchoTranslation("Name");?></th>
+                <th style="width:55%;"><?php EchoTranslation("Name");?></th>
                 <th style="width:20%;"><?php EchoTranslation("Enabled");?></th>
+		<th style="width:15%;">Move rule</th>
                 <th style="width:10%;">&nbsp;</th>
               </tr>
             </thead>
@@ -229,7 +230,11 @@ if ($accountid == 0) {
 		echo '              <tr>
                 <td><a href="?page=rule&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '">' . $rulename . '</a></td>
                 <td><a href="#">' . $enabled . '</a></td>
-                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $aliasname . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
+		<td>';
+		if($i>0)echo '<a href="?page=background_rule_save&action=move&savetype=ruleup&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '">Up</a>';
+		if($i<$Count-1)echo '<a href="?page=background_rule_save&action=move&savetype=ruledown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '">Down</a>';
+                echo '</td>
+		<td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $aliasname . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
               </tr>' . PHP_EOL;
 
 	}
