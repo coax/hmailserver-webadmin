@@ -98,7 +98,8 @@ if ($ruleid == 0) {
           <table>
             <thead>
               <tr>
-                <th style="width:90%;"><?php EchoTranslation("Action")?></th>
+                <th style="width:70%;"><?php EchoTranslation("Action")?></th>
+		<th style="width:20%;">Move action</th>
                 <th style="width:10%;">&nbsp;</th>
               </tr>
             </thead>
@@ -115,6 +116,10 @@ if ($ruleid == 0) {
 ?>
               <tr>
                 <td><?php echo "<a href=\"?page=rule_action&action=edit&domainid=$domainid&accountid=$accountid&ruleid=$ruleid&actionid=$actionid\">$actionName</a>";?></td>
+		<td>
+		<?php if($i>0)echo "<a href=\"?page=background_rule_save&action=move&savetype=actionup&domainid=$domainid&accountid=$accountid&ruleid=$ruleid&actionid=$actionid\">Up</a>";
+		if($i < $count-1)echo "<a href=\"?page=background_rule_save&action=move&savetype=actiondown&domainid=$domainid&accountid=$accountid&ruleid=$ruleid&actionid=$actionid\">Down</a>";?>	
+		</td>
                 <td><a href="#" onclick="return Confirm('Confirm delete <b><?php echo $actionName ?></b>:','Yes','?page=background_rule_save&savetype=action&action=delete&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&actionid=<?php echo $actionid ?>');" class="delete">Delete</a></td>
               </tr>
 <?php
