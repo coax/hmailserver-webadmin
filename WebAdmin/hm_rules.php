@@ -13,11 +13,12 @@ $str_no = $obLanguage->String("No");
     <div class="box large">
       <h2><?php EchoTranslation("Rules") ?> <span>(<?php echo $Count ?>)</span></h2>
       <div style="margin:0 18px 18px;">
-        <table class="tablesort">
+        <table>
           <thead>
             <tr>
-              <th style="width:80%;"><?php EchoTranslation("Name") ?></th>
+              <th style="width:65%;"><?php EchoTranslation("Name") ?></th>
               <th style="width:15%;"><?php EchoTranslation("Enabled") ?></th>
+	      <th style="width:15%;">Move rule</th>
               <th style="width:5%;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
@@ -33,8 +34,12 @@ for ($i = 0; $i < $Count; $i++) {
 	echo '            <tr>
               <td><a href="?page=rule&action=edit&domainid=0&accountid=0&ruleid=' . $ruleid . '">' . $rulename . '</a></td>
               <td>' . $enabled . '</td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $rulename . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&action=delete&domainid=0&accountid=0&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
-            </tr>' . PHP_EOL;
+	      <td>';
+	      if($i>0)echo '<a href="?page=background_rule_save&action=move&savetype=ruleup&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '">Up</a>';
+	      if($i<$Count-1)echo '<a href="?page=background_rule_save&action=move&savetype=ruledown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '">Down</a>';
+              echo '</td>
+	      <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $rulename . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&action=delete&domainid=0&accountid=0&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
+              </tr>' . PHP_EOL;
 }
 ?>
           </tbody>
