@@ -19,7 +19,7 @@ $obFetchAccounts = $obAccount->FetchAccounts();
 $action = hmailGetVar("action","");
 ?>
     <div class="box large">
-      <h2><?php EchoTranslation("External accounts") ?>></h2>
+      <h2><?php EchoTranslation("External accounts") ?></h2>
       <div style="margin:0 18px 18px;">
         <table>
           <tr>
@@ -50,6 +50,6 @@ for ($i = 0; $i < $Count; $i++) {
 }
 ?>
         </table>
-        <div class="buttons center"><a href="?page=account_externalaccount&action=add&domainid=<?php echo $domainid?>&accountid=<?php echo $accountid?>" class="button">Add new account</a></div>
+        <div class="buttons center"><a href="?page=account_externalaccount&action=add&domainid=<?php echo $domainid?>&accountid=<?php echo $accountid?>" class="button"><?php EchoTranslation("Add new external account") ?></a></div>
       </div>
     </div>

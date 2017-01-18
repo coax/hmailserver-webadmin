@@ -16,8 +16,8 @@ if (hmailGetAdminLevel() == 1 && $domainid != hmailGetDomainID())
       <div style="margin:0 18px 18px;">
         <table>
           <tr>
-            <th style="width:95%;">Name</th>
-            <th style="width:5%;">&nbsp;</th>
+            <th><?php EchoTranslation("Name") ?></th>
+            <th style="width:32px;">&nbsp;</th>
           </tr>
 <?php
 $obDomain = $obBaseApp->Domains->ItemByDBID($domainid);
@@ -43,6 +43,6 @@ for ($i = 0; $i < $Count; $i++) {
 }
 ?>
         </table>
-        <div class="buttons center"><a href="?page=securityrange&action=add" class="button">Add new recipient</a></div>
+        <div class="buttons center"><a href="?page=securityrange&action=add" class="button"><?php EchoTranslation("Add new recipient") ?></a></div>
       </div>
     </div>

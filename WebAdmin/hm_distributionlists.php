@@ -21,9 +21,9 @@ $obDistributionLists = $obDomain->DistributionLists;
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:80%;"><?php EchoTranslation("Name")?></th>
+              <th><?php EchoTranslation("Name")?></th>
               <th style="width:15%;"><?php EchoTranslation("Enabled")?></th>
-              <th style="width:5%;" class="no-sort">&nbsp;</th>
+              <th style="width:32px;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -47,6 +47,6 @@ for ($i = 0; $i < $Count; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=distributionlist&action=add&domainid=<?php echo $domainid?>" class="button">Add new list</a></div>
+        <div class="buttons center"><a href="?page=distributionlist&action=add&domainid=<?php echo $domainid?>" class="button"><?php EchoTranslation("Add new list") ?></a></div>
       </div>
     </div>

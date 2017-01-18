@@ -9,7 +9,7 @@ $ruleid = hmailGetVar("ruleid", 0);
 $criteriaid = hmailGetVar("criteriaid", 0);
 
 if (!GetHasRuleAccess($domainid, $accountid))
-	hmailHackingAttemp(); // The user is not server administrator
+	hmailHackingAttemp();
 
 include "include/rule_strings.php";
 

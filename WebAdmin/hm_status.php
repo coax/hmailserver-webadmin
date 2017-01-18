@@ -1,45 +1,63 @@
+<?php
+define("STSMTP", 1);
+define("STPOP3", 3);
+define("STIMAP", 5);
+
+$obStatus = $obBaseApp->Status();
+$ServerUptime = $obStatus->StartTime();
+$ServerVersion = $obBaseApp->Version;
+
+$MessagesProcessed = $obStatus->ProcessedMessages();
+$MessagesVirus = $obStatus->RemovedViruses();
+$MessagesSpam = $obStatus->RemovedSpamMessages();
+$MessagesUndelivered = $obStatus->UndeliveredMessages();
+
+$SessionsSmtp = $obStatus->SessionCount(STSMTP);
+$SessionsPop3 = $obStatus->SessionCount(STPOP3);
+$SessionsImap = $obStatus->SessionCount(STIMAP);
+?>
     <div class="box">
-      <h2>Server</h2>
-      <p class="info"><span class="green"><?php echo $state ?></span><br />status</p>
+      <h2><?php EchoTranslation("Server") ?></h2>
+      <div id="activity" style="margin:15px auto; width:100%; height:180px;"></div>
       <div class="grey">
-        <p><span><time class="timeago" datetime="<?php echo $statusstarttime ?>"><?php echo $statusstarttime ?></time></span><br />server uptime</p>
-        <p><span><?php echo $obBaseApp->Version ?></span><br />version</p>
-        <p><a href="https://www.hmailserver.com/download" target="_blank">Check for updates</a></p>
+        <div><span><span><?php echo $state ?></span></span><br /><?php EchoTranslation("status") ?></div>
+        <div><span><time class="timeago" datetime="<?php echo $ServerUptime ?>"><?php echo $ServerUptime ?></time></span><br /><?php EchoTranslation("server uptime") ?></div>
+        <div><span><?php echo $ServerVersion ?></span><br /><?php EchoTranslation("version") ?></div>
       </div>
     </div>
 
     <div class="box">
-      <h2>Processed messages</h2>
+      <h2><?php EchoTranslation("Processed messages") ?></h2>
       <div id="processed" style="margin:30px auto; width:150px; height:150px;"></div>
       <div class="grey">
-        <div><span id="legit"><?php echo ($statusprocessedmessages-$statusmessageswithvirus-$statusmessageswithspam) ?></span><br />Legit</div>
-        <div><span id="virus"><?php echo $statusmessageswithvirus ?></span><br />Virus</div>
-        <div><span id="spam"><?php echo $statusmessageswithspam ?></span><br />Spam</div>
+        <div><span id="legit"><?php echo $MessagesProcessed ?></span><br /><?php EchoTranslation("Processed") ?></div>
+        <div><span id="virus"><?php echo $MessagesVirus ?></span><br /><?php EchoTranslation("Virus") ?></div>
+        <div><span id="spam"><?php echo $MessagesSpam ?></span><br /><?php EchoTranslation("Spam") ?></div>
       </div>
     </div>
 
     <div class="box">
-      <h2>Open sessions</h2>
+      <h2><?php EchoTranslation("Open sessions") ?></h2>
       <div id="sessions" style="margin:30px auto; width:150px; height:150px;"></div>
       <div class="grey">
-        <div><span id="smtp"><?php echo $sessions_smtp ?></span><br />SMTP</div>
-        <div><span id="pop3"><?php echo $sessions_pop3 ?></span><br />POP3</div>
-        <div><span id="imap"><?php echo $sessions_imap ?></span><br />IMAP</div>
+        <div><span id="smtp"><?php echo $SessionsSmtp ?></span><br />SMTP</div>
+        <div><span id="pop3"><?php echo $SessionsPop3 ?></span><br />POP3</div>
+        <div><span id="imap"><?php echo $SessionsImap ?></span><br />IMAP</div>
       </div>
     </div>
 
     <div class="box large">
-      <h2>Delivery queue</h2>
+      <h2><?php EchoTranslation("Delivery queue") ?></h2>
       <div style="margin:0 18px;">
         <table class="queue" style="width:99%;">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Created</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Next try</th>
-              <th>Retries</th>
+              <th><?php EchoTranslation("Created") ?></th>
+              <th><?php EchoTranslation("From") ?></th>
+              <th><?php EchoTranslation("To") ?></th>
+              <th><?php EchoTranslation("Next try") ?></th>
+              <th><?php EchoTranslation("Retries") ?></th>
             </tr>
           </thead>
         </table>
@@ -48,11 +66,9 @@
         <table class="queue" id="queue">
           <tbody>
 <?php
-$undeliveredMessages = $obStatus->UndeliveredMessages;
-
 $QueueCount = 0;
-if (strlen($undeliveredMessages) > 0) {
-	$list = explode("\r\n", $undeliveredMessages);
+if (strlen($MessagesUndelivered) > 0) {
+	$list = explode("\r\n", $MessagesUndelivered);
 	$QueueCount = count($list);
 
 	foreach ($list as $line) {
@@ -77,5 +93,5 @@ if (strlen($undeliveredMessages) > 0) {
           </tbody>
         </table>
       </div>
-      <p class="info"><span><?php echo $QueueCount ?></span><br />messages in queue</p>
+      <p class="info"><span><?php echo $QueueCount ?></span><br /><?php EchoTranslation("messages in queue") ?></p>
     </div>

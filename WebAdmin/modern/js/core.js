@@ -19,8 +19,29 @@ jQuery(document).ready(function(){
 	//grafs refresh
 	if($('#processed, #sessions').length){
 		// Chartist
+		var activity_array = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		var activity = new Chartist.Line('#activity', {
+				series: [activity_array]
+			}, {
+				fullWidth: true,
+				axisX: {
+					offset: 0,
+					showLabel: false,
+					showGrid: false,
+				},
+				axisY: {
+					offset: 0,
+					showLabel: false,
+					showGrid: false,
+				},
+				showLine: true,
+				showPoint: false,
+				showArea: true,
+			});
+
+
 		var processed = new Chartist.Pie('#processed', {
-				labels : ['Legit', 'Virus', 'Spam'],
+				labels : ['Processed', 'Virus', 'Spam'],
 				series: [0, 0, 0]
 			}, {
 				donut: true,
@@ -105,6 +126,18 @@ jQuery(document).ready(function(){
 				$('#smtp').text(Number(json[0].toFixed(0)).toLocaleString());
 				$('#pop3').text(Number(json[1].toFixed(0)).toLocaleString());
 				$('#imap').text(Number(json[2].toFixed(0)).toLocaleString());
+			});
+
+			$.ajax({
+				url: "modern/json.php?q=4",
+				success: function(data) {
+					activity_array.push(parseInt(data));
+					activity_array.splice(1, 1);
+					var data = {
+						series: [activity_array],
+					};
+					activity.update(data);
+				}
 			});
 
 		// Imperavi Grafs
@@ -290,7 +323,7 @@ function ConfirmDelete(name, url) {
 }
 //confirm delete
 function Confirm(question, answer, action) {
-	$.facebox('<div style="margin:18px; text-align:center;"><p>' + question + '</p><input type="button" value="' + answer + '" id="yes" /> &nbsp; <input type="button" value="No" onclick="$.facebox.close();" /></div>');
+	$.facebox('<div style="margin:36px 18px; text-align:center;"><p>' + question + '</p><input type="button" value="' + answer + '" id="yes" /> &nbsp; <input type="button" value="No" onclick="$.facebox.close();" /></div>');
 	$('body').unbind('keypress').keypress(function(e) {
 		if (e.which==13) {
 			$('#yes').click();

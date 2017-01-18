@@ -15,10 +15,10 @@ $Count = $obSecurityRanges->Count();
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:65%;"><?php EchoTranslation("Name")?></th>
-              <th style="width:10%;"><?php EchoTranslation("Priority")?></th>
-              <th style="width:20%;"><?php EchoTranslation("Expires (min)")?></th>
-              <th style="width:5%;" class="no-sort">&nbsp;</th>
+              <th><?php EchoTranslation("Name")?></th>
+              <th style="width:10%;"><?php EchoTranslation("Priority") ?></th>
+              <th style="width:20%;"><?php EchoTranslation("Expires (min)") ?></th>
+              <th style="width:32px;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -42,6 +42,6 @@ for ($i = 0; $i < $Count; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=securityrange&action=add" class="button">Add new range</a></div>
+        <div class="buttons center"><a href="?page=securityrange&action=add" class="button"><?php EchoTranslation("Add new range") ?></a></div>
       </div>
     </div>

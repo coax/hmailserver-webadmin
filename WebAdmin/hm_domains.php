@@ -13,11 +13,11 @@ $DomainCount = $obBaseApp->Domains->Count();
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:50%;"><?php EchoTranslation("Domain name") ?></th>
+              <th><?php EchoTranslation("Domain name") ?></th>
               <th style="width:15%;"><?php EchoTranslation("Size (MB)") ?></th>
               <th style="width:15%;"><?php EchoTranslation("Max. size (MB)") ?></th>
-              <th style="width:15%;"><?php EchoTranslation("Enabled") ?></th>
-              <th style="width:5%;" class="no-sort">&nbsp;</th>
+              <th style="width:10%;"><?php EchoTranslation("Enabled") ?></th>
+              <th style="width:32px;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -57,6 +57,6 @@ for ($i = 1; $i <= $DomainCount; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=domain&action=add" class="button">Add new domain</a></div>
+        <div class="buttons center"><a href="?page=domain&action=add" class="button"><?php EchoTranslation("Add new domain") ?></a></div>
       </div>
     </div>

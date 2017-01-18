@@ -20,6 +20,12 @@ Roadmap for 2017
 - better log parser
 - buy community license for [Imperavi Grafs](https://imperavi.com/grafs/) (hence the donation link below)
 
+Donate
+-----
+Don't worry, hMailServer PHPWebAdmin redesign project will stay free - but I do need your support in order to continue to develop it! Thank you :)
+
+[![PayPal donate button](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/MatijaMatecic/)
+
 How to use
 -----
 1\. Place "WebAdmin" folder next to your "PHPWebAdmin" installation and make changes to config-dist.php accordingly, then rename to config.php
@@ -30,6 +36,16 @@ How to use
 
 Changelog
 -----
+Version 0.9.4 beta (18.01.2017)
+- [fix] error in hm_status.php
+- [fix] server start/stop button
+- [tweak] CSS/HTML optimizations
+- [tweak] all words are now translatable (EchoTranslation)
+- [new] new chart on dashboard (shows sessions activity line graph in time)
+- [new] move rules up/down with arrows
+- [new] redesign of single account (non-admin) interface
+- [new] documentation link (on each page) points directly to online documentation reference
+
 Version 0.9.3 beta (04.01.2017)
 - [fix] SSL certificates typo
 - [fix] number validation
@@ -81,12 +97,6 @@ Feel free to ask any question or report bug via GitHub Issues. I'll try to answe
 There's an official thread on [hMailServer forums](https://www.hmailserver.com/forum/viewtopic.php?f=10&t=30713).
 
 If you want to help me with this project, simply fork it and let me know ;)
-
-Donate
------
-Don't worry, hMailServer PHPWebAdmin redesign project will stay free - but I do need your support in order to continue to develop it! Thank you :)
-
-[![PayPal donate button](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/MatijaMatecic/)
 
 Copyright?
 -----

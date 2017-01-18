@@ -15,10 +15,10 @@ $Count = $dnsBlacklists->Count();
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:65%;"><?php EchoTranslation("Name") ?></th>
+              <th><?php EchoTranslation("Name") ?></th>
               <th style="width:15%;"><?php EchoTranslation("Score") ?></th>
               <th style="width:15%;"><?php EchoTranslation("Enabled") ?></th>
-              <th style="width:5%;" class="no-sort">&nbsp;</th>
+              <th style="width:32px;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -43,5 +43,5 @@ for ($i = 0; $i < $Count; $i++) {
           </tbody>
         </table>
       </div>
-      <div class="buttons center"><a href="?page=surblserver&action=add" class="button">Add new SURBL</a></div>
+      <div class="buttons center"><a href="?page=surblserver&action=add" class="button"><?php EchoTranslation("Add new SURBL") ?></a></div>
     </div>

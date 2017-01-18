@@ -15,8 +15,8 @@ $Count = $obIncomingRelays->Count();
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:95%;"><?php EchoTranslation("Name")?></th>
-              <th style="width:5%;" class="no-sort">&nbsp;</th>
+              <th><?php EchoTranslation("Name")?></th>
+              <th style="width:32px;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -35,6 +35,6 @@ for ($i = 0; $i < $Count; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=incomingrelay&action=add" class="button">New relay</a></div>
+        <div class="buttons center"><a href="?page=incomingrelay&action=add" class="button"><?php EchoTranslation("Add new relay") ?></a></div>
       </div>
     </div>

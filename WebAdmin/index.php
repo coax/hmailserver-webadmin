@@ -41,6 +41,9 @@ if ($isbackground) {
 	die;
 }
 
+//dynamic documentation link
+$DocumentationLink = 'https://www.hmailserver.com/documentation/latest/?page=reference_' . hmailGetVar("page");
+
 $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:''; //moved from include_treemenu.php
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -101,7 +104,7 @@ if (hmail_isloggedin()) {
 include "include_treemenu.php";
 ?>
       </ul>
-      <a href="impressum.php" rel="facebox" class="impressum">WebAdmin 0.9.3 [beta]</a>
+      <a href="impressum.php" rel="facebox" class="impressum">WebAdmin 0.9.4 [beta]</a>
     </nav>
 
     <div class="content-wrapper">

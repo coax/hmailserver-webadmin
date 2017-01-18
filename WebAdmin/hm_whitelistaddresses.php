@@ -14,11 +14,11 @@ $Count = $obWhiteListAddresses->Count();
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:25%;"><?php EchoTranslation("Description")?></th>
+              <th><?php EchoTranslation("Description")?></th>
               <th style="width:25%;"><?php EchoTranslation("Lower IP")?></th>
               <th style="width:25%;"><?php EchoTranslation("Upper IP")?></th>
               <th style="width:20%;"><?php EchoTranslation("E-mail address")?></th>
-              <th style="width:5%;" class="no-sort">&nbsp;</th>
+              <th style="width:32px;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -44,6 +44,6 @@ for ($i = 0; $i < $Count; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=whitelistaddress&action=add" class="button">New new whitelist</a></div>
+        <div class="buttons center"><a href="?page=whitelistaddress&action=add" class="button"><?php EchoTranslation("Add new whitelist") ?></a></div>
       </div>
     </div>

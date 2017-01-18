@@ -12,27 +12,27 @@ $obStatus = $obBaseApp->Status();
 
 switch ($_GET['q']){
 	case 1:
-		$statusprocessedmessages = $obStatus->ProcessedMessages();
-		$statusmessageswithvirus = $obStatus->RemovedViruses();
-		$statusmessageswithspam = $obStatus->RemovedSpamMessages();
+		$ProcessedMessages = $obStatus->ProcessedMessages();
+		$VirusMessages = $obStatus->RemovedViruses();
+		$SpamMessages = $obStatus->RemovedSpamMessages();
+
 		header('Content-Type: application/json');
-		echo '[' . ($statusprocessedmessages-$statusmessageswithvirus-$statusmessageswithspam) . ', ' . $statusmessageswithvirus . ', ' . $statusmessageswithspam . ']';
+		echo '[' . $ProcessedMessages . ', ' . $VirusMessages . ', ' . $SpamMessages . ']';
 		break;
 
 	case 2:
-		$sessions_smtp = $obStatus->SessionCount(STSMTP);
-		$sessions_pop3 = $obStatus->SessionCount(STPOP3);
-		$sessions_imap = $obStatus->SessionCount(STIMAP);
+		$SessionsSmtp = $obStatus->SessionCount(STSMTP);
+		$SessionsPop3 = $obStatus->SessionCount(STPOP3);
+		$SessionsImap = $obStatus->SessionCount(STIMAP);
 		header('Content-Type: application/json');
-		echo '[' . $sessions_smtp . ', ' . $sessions_pop3 . ', ' . $sessions_imap . ']';
+		echo '[' . $SessionsSmtp . ', ' . $SessionsPop3 . ', ' . $SessionsImap . ']';
 		break;
 
 	case 3:
-		$undeliveredMessages = $obStatus->UndeliveredMessages;
-
+		$UndeliveredMessages = $obStatus->UndeliveredMessages();
 		$QueueCount = 0;
-		if (strlen($undeliveredMessages) > 0) {
-			$list = explode("\r\n", $undeliveredMessages);
+		if (strlen($UndeliveredMessages) > 0) {
+			$list = explode("\r\n", $UndeliveredMessages);
 			$QueueCount = count($list);
 			$as_soon_as_possible = $obLanguage->String("As soon as possible");
 
@@ -56,6 +56,9 @@ switch ($_GET['q']){
 		}
 		break;
 	case 4:
-	//reserved for future
+		$SessionsSmtp = $obStatus->SessionCount(STSMTP);
+		$SessionsPop3 = $obStatus->SessionCount(STPOP3);
+		$SessionsImap = $obStatus->SessionCount(STIMAP);
+		echo $SessionsSmtp + $SessionsPop3 + $SessionsImap;
 }
 ?>

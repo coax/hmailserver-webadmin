@@ -7,9 +7,8 @@ $domainid = hmailGetVar("domainid", 0);
 $accountid = hmailGetVar("accountid", 0);
 $ruleid = hmailGetVar("ruleid", 0);
 
-// check permissions
 if (!GetHasRuleAccess($domainid, $accountid))
-	hmailHackingAttemp(); // The user has no rule editing permissions.
+	hmailHackingAttemp();
 
 include "include/rule_strings.php";
 
@@ -58,10 +57,10 @@ if ($ruleid == 0) {
           <table>
             <thead>
               <tr>
-                <th style="width:30%;"><?php EchoTranslation("Field")?></th>
-                <th style="width:30%;"><?php EchoTranslation("Comparison")?></th>
-                <th style="width:30%;"><?php EchoTranslation("Value")?></th>
-                <th style="width:10%;">&nbsp;</th>
+                <th><?php EchoTranslation("Field") ?></th>
+                <th style="width:30%;"><?php EchoTranslation("Comparison") ?></th>
+                <th style="width:30%;"><?php EchoTranslation("Value") ?></th>
+                <th style="width:32px;">&nbsp;</th>
               </tr>
             </thead>
             <tbody>
@@ -79,27 +78,27 @@ if ($ruleid == 0) {
 
 		$matchType = GetMatchTypeString($criteria->MatchType);
 		$matchValue = $criteria->MatchValue;
-?>
-              <tr>
-                <td><a href="?page=rule_criteria&action=edit&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&criteriaid=<?php echo $criteriaid ?>"><?php echo $fieldName ?></a></td>
-                <td><?php echo PreprocessOutput($matchType)?></td>
-                <td><?php echo PreprocessOutput($matchValue)?></td>
-                <td><a href="#" onclick="return Confirm('Confirm delete <b><?php echo $fieldName ?></b>:','Yes','?page=background_rule_save&savetype=criteria&action=delete&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&criteriaid=<?php echo $criteriaid ?>');" class="delete">Delete</a></td>
-              </tr>
-<?php
+
+		echo '              <tr>
+                <td><a href="?page=rule_criteria&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&criteriaid=' . $criteriaid . '">' . $fieldName . '</a></td>
+                <td>' . PreprocessOutput($matchType) . '</td>
+                <td>' . PreprocessOutput($matchValue) . '</td>
+                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $fieldName . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=criteria&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&criteriaid=' . $criteriaid . '\');" class="delete">Delete</a></td>
+              </tr>' . PHP_EOL;
 	}
 ?>
             </tbody>
           </table>
-          <div class="buttons center"><a href="?page=rule_criteria&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button">Add new criteria</a></div>
+          <div class="buttons center"><a href="?page=rule_criteria&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button"><?php EchoTranslation("Add new criteria") ?></a></div>
         </div>
-        <h3><a href="#"><?php EchoTranslation("Actions")?></a></h3>
+        <h3><a href="#"><?php EchoTranslation("Actions") ?></a></h3>
         <div class="hidden">
           <table>
             <thead>
               <tr>
-                <th style="width:90%;"><?php EchoTranslation("Action")?></th>
-                <th style="width:10%;">&nbsp;</th>
+                <th><?php EchoTranslation("Action") ?></th>
+                <th style="width:10%;"><?php EchoTranslation("Move") ?></th>
+                <th style="width:32px;">&nbsp;</th>
               </tr>
             </thead>
             <tbody>
@@ -112,17 +111,23 @@ if ($ruleid == 0) {
 
 		$actionid = $action->ID;
 		$actionName = GetRuleActionString($action->Type);
-?>
-              <tr>
-                <td><?php echo "<a href=\"?page=rule_action&action=edit&domainid=$domainid&accountid=$accountid&ruleid=$ruleid&actionid=$actionid\">$actionName</a>";?></td>
-                <td><a href="#" onclick="return Confirm('Confirm delete <b><?php echo $actionName ?></b>:','Yes','?page=background_rule_save&savetype=action&action=delete&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>&actionid=<?php echo $actionid ?>');" class="delete">Delete</a></td>
-              </tr>
-<?php
+
+		$move = '';
+		if ($i > 0)
+			$move = $move . '<a href="?page=background_rule_save&action=move&savetype=actionup&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow up">Up</a>';
+		if ($i < $count-1)
+			$move = $move . '<a href="?page=background_rule_save&action=move&savetype=actiondown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow down">Down</a>';
+
+		echo '              <tr>
+                <td><a href="?page=rule_action&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '\">' . $actionName . '</a></td>
+                <td>' . $move . '</td>
+                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $actionName . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=action&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '\');" class="delete">Delete</a></td>
+              </tr>' . PHP_EOL;
 	}
 ?>
             </tbody>
           </table>
-          <div class="buttons center"><a href="?page=rule_action&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button">Add new action</a></div>
+          <div class="buttons center"><a href="?page=rule_action&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button"><?php EchoTranslation("Add new action") ?></a></div>
         </div>
 <?php
 }

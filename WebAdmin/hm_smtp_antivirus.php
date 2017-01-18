@@ -106,9 +106,9 @@ $avactiondeletattachmentschecked = hmailCheckedIf1($avaction == 1);
         <table>
           <thead>
             <tr>
-              <th style="width:30%;"><?php EchoTranslation("Name")?></th>
+              <th><?php EchoTranslation("Name")?></th>
               <th style="width:60%;"><?php EchoTranslation("Description")?></th>
-              <th style="width:10%;">&nbsp;</th>
+              <th style="width:32px;">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -130,7 +130,7 @@ for ($i = 0; $i < $blockedAttachments->Count; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=blocked_attachment&action=add" class="button">Add new extension</a></div>
+        <div class="buttons center"><a href="?page=blocked_attachment&action=add" class="button"><?php EchoTranslation("Add new extension") ?></a></div>
         </div>
 <?php
 	PrintSaveButton();

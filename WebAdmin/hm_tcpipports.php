@@ -16,9 +16,9 @@ $Count = $obTCPIPPorts->Count();
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:50%;"><?php EchoTranslation("Protocol")?></th>
+              <th><?php EchoTranslation("Protocol")?></th>
               <th style="width:45%;"><?php EchoTranslation("TCP/IP port")?></th>
-              <th style="width:5%;" class="no-sort">&nbsp;</th>
+              <th style="width:32px;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -52,6 +52,6 @@ for ($i = 0; $i < $Count; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=tcpipport&action=add" class="button">Add port</a></div>
+        <div class="buttons center"><a href="?page=tcpipport&action=add" class="button"><?php EchoTranslation("Add new port") ?></a></div>
       </div>
     </div>

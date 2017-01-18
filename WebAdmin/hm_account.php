@@ -120,7 +120,7 @@ if (strlen($error_message) > 0) {
 		echo $accountaddress;
 ?>@<?php echo $domainname?>
         <p><?php EchoTranslation("Password")?></p>
-        <input type="password" name="accountpassword" value="">
+        <input type="password" name="accountpassword" value="" class="medium">
         <p><?php EchoTranslation("Maximum size (MB)")?></p>
 <?php
 	$str_mailboxsize = $obLanguage->String("Maximum size (MB)");
@@ -146,9 +146,9 @@ if (strlen($error_message) > 0) {
 		PrintCheckboxRow("accountactive", "Enabled", $accountactive);
 	else {
 		if ($accountactive == 1)
-			echo 'Enabled';
+			echo '<p>Enabled</p>';
 		else
-			echo 'Disabled';
+			echo '<p>Disabled</p>';
 	}
 ?>
         <h3><a href="#"><?php EchoTranslation("Auto-reply")?></a></h3>
@@ -188,10 +188,11 @@ if (hmailGetAdminLevel() != ADMIN_USER) {
 	PrintCheckboxRow("adenabled", "Enabled", $adenabled);
 	PrintPropertyEditRow("addomain", "Domain", $addomain);
 	PrintPropertyEditRow("adusername", "User name", $adusername);
-}
 ?>
         </div>
 <?php
+}
+
 if (GetHasRuleAccess($domainid, $accountid)) {
 ?>
         <h3><a href="#"><?php EchoTranslation("Rules")?></a></h3>
@@ -204,9 +205,10 @@ if ($accountid == 0) {
           <table>
             <thead>
               <tr>
-                <th style="width:70%;"><?php EchoTranslation("Name");?></th>
-                <th style="width:20%;"><?php EchoTranslation("Enabled");?></th>
-                <th style="width:10%;">&nbsp;</th>
+                <th><?php EchoTranslation("Name") ?></th>
+                <th style="width:20%;"><?php EchoTranslation("Enabled") ?></th>
+                <th style="width:10%;"><?php EchoTranslation("Move") ?></th>
+                <th style="width:32px;">&nbsp;</th>
               </tr>
             </thead>
             <tbody>
@@ -226,17 +228,24 @@ if ($accountid == 0) {
 
 		$rulename = PreprocessOutput($rulename);
 
+		$move = '';
+		if ($i > 0)
+			$move = $move . '<a href="?page=background_rule_save&action=move&savetype=ruleup&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '" class="arrow up">Up</a>';
+		if ($i < $Count-1)
+			$move = $move . '<a href="?page=background_rule_save&action=move&savetype=ruledown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '" class="arrow down">Down</a>';
+
 		echo '              <tr>
                 <td><a href="?page=rule&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '">' . $rulename . '</a></td>
                 <td><a href="#">' . $enabled . '</a></td>
-                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $aliasname . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
+                <td>' . $move . '</td>
+                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $rulename . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
               </tr>' . PHP_EOL;
 
 	}
 ?>
             </tbody>
           </table>
-          <div class="buttons center"><a href="?page=rule&domainid=$domainid&accountid=$accountid&action=add" class="button">Add new rule</a></div>
+          <div class="buttons center"><a href="?page=rule&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&action=add" class="button"><?php EchoTranslation("Add new rule") ?></a></div>
 <?php
 }
 ?>

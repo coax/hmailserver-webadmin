@@ -31,7 +31,6 @@ $backupdomainschecked = hmailCheckedIf1($backupdomains);
 $backupmessageschecked = hmailCheckedIf1($backupmessages);
 $backupcompresschecked = hmailCheckedIf1($backupcompress);
 ?>
-
     <div class="box">
       <h2><?php EchoTranslation("Backup") ?></h2>
       <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
@@ -60,6 +59,6 @@ $backupcompresschecked = hmailCheckedIf1($backupcompress);
 	PrintHidden("page", "backup");
 	PrintHidden("action", "startbackup");
 ?>
-        <p><input type="submit" value="Start backup"></p>
+        <p><input type="submit" value="<?php EchoTranslation("Start backup") ?>"></p>
       </form>
     </div>

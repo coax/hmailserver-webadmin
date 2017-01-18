@@ -21,11 +21,11 @@ $currentaccountid = hmailGetAccountID();
         <table class="tablesort">
           <thead>
             <tr>
-              <th style="width:50%;"><?php EchoTranslation("Address") ?></th>
+              <th><?php EchoTranslation("Address") ?></th>
               <th style="width:15%;"><?php EchoTranslation("Size (MB)") ?></th>
               <th style="width:15%;"><?php EchoTranslation("Max. size (MB)") ?></th>
-              <th style="width:15%;"><?php EchoTranslation("Enabled") ?></th>
-              <th style="width:5%;" class="no-sort">&nbsp;</th>
+              <th style="width:10%;"><?php EchoTranslation("Enabled") ?></th>
+              <th style="width:32px;" class="no-sort">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +62,6 @@ for ($i = 0; $i < $Count; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=account&action=add&domainid=<?php echo $domainid?>" class="button">Add new account</a></div>
+        <div class="buttons center"><a href="?page=account&action=add&domainid=<?php echo $domainid?>" class="button"><?php EchoTranslation("Add new account") ?></a></div>
       </div>
     </div>

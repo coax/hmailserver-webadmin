@@ -1,15 +1,11 @@
 <?php
 if (!defined('IN_WEBADMIN'))
 	exit();
-
-/* FIXME */
-$dtitem = 0;
-$dtree = "d.add(" . $dtitem++ .",-1,'" . GetStringForJavaScript("Welcome") . "','index.php','','','','');\r\n";
-
-
-/* FIXME */
+?>
+        <li class="cd-label"><?php EchoTranslation("Main") ?></li>
+<?php
+//user
 if (hmailGetAdminLevel() == 0) {
-	// User
 	$domainname = hmailGetUserDomainName($username);
 
 	$obDomain = $obBaseApp->Domains->ItemByName($domainname);
@@ -21,26 +17,27 @@ if (hmailGetAdminLevel() == 0) {
 	$accountaddress = str_replace("'", "\'", $accountaddress);
 	$accountaddress = PreprocessOutput($accountaddress);
 
-	$url = htmlentities("index.php?page=account&action=edit&accountid=" . $obAccount->ID . "&domainid=" . $obDomain->ID);
-	$di = $dtitem++;
-
-	$dtree .= "d.add($di,0,'" . $accountaddress . "','$url','','','" . "images/user.png','" . "images/user.png');\r\n";
-	$dtree .= "d.add(" . $dtitem++ . ",$di,'" . GetStringForJavaScript("External accounts") . "','index.php?page=account_externalaccounts&accountid=" . $obAccount->ID . "&domainid=" . $obDomain->ID. "');\r\n";
+	$url = htmlentities("?page=account&action=edit&accountid=" . $obAccount->ID . "&domainid=" . $obDomain->ID);
+?>
+        <li class="has-children user <?php if (strpos('hm_account,hm_account_externalaccounts', $page) !== false) echo 'active' ?>">
+          <a href="<?php echo $url ?>"><?php echo $accountaddress ?></a>
+          <ul>
+            <li><a href="?page=account_externalaccounts&accountid=<?php echo $obAccount->ID ?>&domainid=<?php echo $obDomain->ID ?>"><?php EchoTranslation("External accounts") ?></a></li>
+          </ul>
+        </li>
+        <li class="webmail"><a href="http://webmail.<?php echo $domainname ?>"><?php EchoTranslation("Webmail") ?></a></li>
+<?php
 }
 
-/* FIXME */
+//domain
 if (hmailGetAdminLevel() == 1) {
-	// Domain
-	//$dtree .= "d.add(" . $dtitem++ .",0,'" . GetStringForJavaScript("Domains") . "','','','','" . "images/server.png','" . "images/server.png');\r\n";
-
 	$domainname = hmailGetUserDomainName($username);
 	$obDomain = $obBaseApp->Domains->ItemByName($domainname);
-	$domain_root = $dtitem++;
 
 	GetStringForDomain($obDomain,1);
 }
 
-/* tree menu for Administrator */
+//admin
 if (hmailGetAdminLevel() == 2) {
 	$obSettings = $obBaseApp->Settings();
 
@@ -63,15 +60,13 @@ if (hmailGetAdminLevel() == 2) {
 	$Relays = $obSettings->IncomingRelays();
 	$TotalRelays = $Relays->Count();
 ?>
-        <li class="cd-label">Main</li>
-        <li class="status <?php if ($page=='hm_status') echo 'active' ?>"><a href="index.php?page=status">Dashboard</a></li>
+        <li class="status <?php if ($page=='hm_status') echo 'active' ?>"><a href="?page=status"><?php EchoTranslation("Dashboard") ?></a></li>
         <li class="has-children domains <?php if (strpos('hm_domains,hm_domain,hm_accounts,hm_account,hm_aliases,hm_aliase,hm_distributionlists,hm_distributionlist,hm_domain_aliasname', $page) !== false) echo 'active' ?>">
-          <a href="index.php?page=domains">Domains<span class="count"><?php echo $TotalDomains ?></span></a>
+          <a href="?page=domains"><?php EchoTranslation("Domains") ?><span class="count"><?php echo $TotalDomains ?></span></a>
           <ul>
 <?php
 for ($i = 1; $i <= $TotalDomains; $i++) {
 	$obDomain = $obBaseApp->Domains[$i-1];
-	$domain_root = $dtitem++;
 
 	GetStringForDomain($obDomain,2);
 }
@@ -79,100 +74,85 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
           </ul>
         </li>
         <li class="rules <?php if (strpos('hm_rules,hm_rule', $page) !== false) echo 'active' ?>">
-          <a href="index.php?page=rules">Rules<span class="count"><?php echo $TotalRules ?></span></a>
+          <a href="?page=rules"><?php EchoTranslation("Rules") ?><span class="count"><?php echo $TotalRules ?></span></a>
         </li>
       </ul>
       <ul>
-        <li class="cd-label">Configuration</li>
+        <li class="cd-label"><?php EchoTranslation("Configuration") ?></li>
         <li class="has-children settings">
-          <a href="#">Settings</a>
+          <a href="#"><?php EchoTranslation("Settings") ?></a>
           <ul>
             <li class="has-children">
-              <a href="#">Protocols</a>
+              <a href="#"><?php EchoTranslation("Protocols") ?></a>
               <ul>
                 <li class="has-children">
-                  <a href="index.php?page=smtp">SMTP</a>
+                  <a href="?page=smtp"><?php EchoTranslation("SMTP") ?></a>
                   <ul>
-                    <li><a href="?page=routes">Routes<span class="count"><?php echo $TotalRoutes ?></span></a></li>
+                    <li><a href="?page=routes"><?php EchoTranslation("Routes") ?><span class="count"><?php echo $TotalRoutes ?></span></a></li>
                   </ul>
                 </li>
-                <li><a href="index.php?page=pop3">POP3</a></li>
-                <li><a href="index.php?page=imap">IMAP</a></li>
+                <li><a href="?page=pop3"><?php EchoTranslation("POP3") ?></a></li>
+                <li><a href="?page=imap"><?php EchoTranslation("IMAP") ?></a></li>
               </ul>
             </li>
             <li class="has-children">
-              <a href="index.php?page=smtp_antispam">Anti-spam</a>
+              <a href="?page=smtp_antispam"><?php EchoTranslation("Anti-spam") ?></a>
               <ul>
-                <li><a href="index.php?page=dnsblacklists">DNS blacklists<span class="count"><?php echo $TotalBlacklists ?></span></a></li>
-                <li><a href="index.php?page=surblservers">SURBL servers</a></li>
-                <li><a href="index.php?page=greylisting">Greylisting</a></li>
-                <li><a href="index.php?page=whitelistaddresses">White listing</a></li>
+                <li><a href="?page=dnsblacklists"><?php EchoTranslation("DNS blacklists") ?><span class="count"><?php echo $TotalBlacklists ?></span></a></li>
+                <li><a href="?page=surblservers"><?php EchoTranslation("SURBL servers") ?></a></li>
+                <li><a href="?page=greylisting"><?php EchoTranslation("Greylisting") ?></a></li>
+                <li><a href="?page=whitelistaddresses"><?php EchoTranslation("White listing") ?></a></li>
               </ul>
             </li>
-            <li><a href="index.php?page=smtp_antivirus">Anti-virus</a></li>
-            <li><a href="index.php?page=logging">Logging</a></li>
+            <li><a href="?page=smtp_antivirus"><?php EchoTranslation("Anti-virus") ?></a></li>
+            <li><a href="?page=logging"><?php EchoTranslation("Logging") ?></a></li>
             <li class="has-children">
-              <a href="#">Advanced</a>
+              <a href="#"><?php EchoTranslation("Advanced") ?></a>
               <ul>
-                <li><a href="index.php?page=sslcertificates">SSL certificates</a></li>
-                <li><a href="index.php?page=autoban">Auto ban</a></li>
-                <li><a href="index.php?page=securityranges">IP Ranges<span class="count"><?php echo $TotalIpRanges ?></span></a></li>
-                <li><a href="index.php?page=incomingrelays">Incoming relays<span class="count"><?php echo $TotalRelays ?></span></a></li>
-                <li><a href="index.php?page=mirror">Mirror</a></li>
-                <li><a href="index.php?page=performance">Performance</a></li>
-                <li><a href="index.php?page=servermessages">Server messages</a></li>
-                <li><a href="index.php?page=ssltls">SSL/TLS</a></li>
-                <li><a href="index.php?page=scripts">Scripts</a></li>
-                <li><a href="index.php?page=tcpipports">TCP/IP ports</a></li>
+                <li><a href="?page=sslcertificates"><?php EchoTranslation("SSL certificates") ?></a></li>
+                <li><a href="?page=autoban"><?php EchoTranslation("Auto ban") ?></a></li>
+                <li><a href="?page=securityranges"><?php EchoTranslation("IP Ranges") ?><span class="count"><?php echo $TotalIpRanges ?></span></a></li>
+                <li><a href="?page=incomingrelays"><?php EchoTranslation("Incoming relays") ?><span class="count"><?php echo $TotalRelays ?></span></a></li>
+                <li><a href="?page=mirror"><?php EchoTranslation("Mirror") ?></a></li>
+                <li><a href="?page=performance"><?php EchoTranslation("Performance") ?></a></li>
+                <li><a href="?page=servermessages"><?php EchoTranslation("Server messages") ?></a></li>
+                <li><a href="?page=ssltls"><?php EchoTranslation("SSL/TLS") ?></a></li>
+                <li><a href="?page=scripts"><?php EchoTranslation("Scripts") ?></a></li>
+                <li><a href="?page=tcpipports"><?php EchoTranslation("TCP/IP ports") ?></a></li>
               </ul>
             </li>
           </ul>
         </li>
         <li class="has-children utilities">
-          <a href="#">Utilities</a>
+          <a href="#"><?php EchoTranslation("Utilities") ?></a>
           <ul>
-            <li><a href="index.php?page=backup">Backup</a></li>
-            <li><a href="index.php?page=diagnostics">Diagnostics</a></li>
+            <li><a href="?page=backup"><?php EchoTranslation("Backup") ?></a></li>
+            <li><a href="?page=diagnostics"><?php EchoTranslation("Diagnostics") ?></a></li>
           </ul>
         </li>
         <li class="help">
-          <a href="https://www.hmailserver.com/documentation/latest/?page=overview" target="_blank">Documentation</a>
+          <a href="<?php echo $DocumentationLink ?>" target="_blank"><?php EchoTranslation("Documentation") ?></a>
         </li>
       </ul>
       <ul>
-        <li class="cd-label">Quick links</li>
+        <li class="cd-label"><?php EchoTranslation("Quick links") ?></li>
         <li class="dns-blacklists <?php if ($page=='hm_dnsblacklists') echo 'active' ?>">
-          <a href="index.php?page=dnsblacklists">DNS blacklists<span class="count"><?php echo $TotalBlacklists ?></span></a>
+          <a href="?page=dnsblacklists"><?php EchoTranslation("DNS blacklists") ?><span class="count"><?php echo $TotalBlacklists ?></span></a>
         </li>
         <li class="ip-ranges <?php if ($page=='hm_securityranges') echo 'active' ?>">
-          <a href="index.php?page=securityranges">IP Ranges<span class="count"><?php echo $TotalIpRanges ?></span></a>
+          <a href="?page=securityranges"><?php EchoTranslation("IP Ranges") ?><span class="count"><?php echo $TotalIpRanges ?></span></a>
         </li>
         <li class="logs <?php if ($page=='hm_logviewer') echo 'active' ?>">
-          <a href="index.php?page=logviewer">Log viewer</a>
+          <a href="?page=logviewer"><?php EchoTranslation("Log viewer") ?></a>
         </li>
       </ul>
       <ul>
-        <li class="cd-label">Action</li>
+        <li class="cd-label"><?php EchoTranslation("Action") ?></li>
 <?php
-define("STSMTP", 1);
-define("STPOP3", 3);
-define("STIMAP", 5);
+$ServerState = $obBaseApp->ServerState();
+$Action = hmailGetVar("action","");
 
-$obStatus = $obBaseApp->Status();
-$serverstate = $obBaseApp->ServerState();
-$action = hmailGetVar("action","");
-
-$statusstarttime = $obStatus->StartTime();
-$ProcessedMessages = $obStatus->ProcessedMessages();
-$VirusMessages = $obStatus->RemovedViruses();
-$SpamMessages = $obStatus->RemovedSpamMessages();
-$UndeliveredMessages = $obStatus->UndeliveredMessages();
-
-$sessions_smtp = $obStatus->SessionCount(STSMTP);
-$sessions_pop3 = $obStatus->SessionCount(STPOP3);
-$sessions_imap = $obStatus->SessionCount(STIMAP);
-
-if ($action == "control") {
+if ($Action == "control") {
 	$controlaction = hmailGetVar("controlaction","");
 	if ($controlaction == "1")
 		$obBaseApp->Start();
@@ -180,7 +160,7 @@ if ($action == "control") {
 		$obBaseApp->Stop();
 }
 
-switch($serverstate) {
+switch($ServerState) {
 	case 1:
 		$state = $obLanguage->String("Stopped");
 		break;
@@ -198,7 +178,7 @@ switch($serverstate) {
 		break;
 }
 
-switch($serverstate) {
+switch($ServerState) {
 	case 1:
 	case 4:
 		$controlaction = 1;
@@ -214,7 +194,7 @@ switch($serverstate) {
 		break;
 }
 ?>
-        <li class="action-btn"><form action="index.php" method="post" onSubmit="return formCheck(this);"><input type="submit" value="<?php echo $controlbutton?> server" /></form></li>
+        <li class="action-btn"><form action="index.php" method="post"><input type="hidden" name="page" value="status"><input type="hidden" name="action" value="control"><input type="submit" value="<?php echo $controlbutton ?> server" /></form></li>
 <?php
 }
 
@@ -248,67 +228,17 @@ function GetStringForDomain($obDomain, $parentid) {
 	$TotalAccounts = $Accounts->Count();
 	$accounts_root = $dtitem++;
 
-	echo '                <li><a href="?page=accounts&domainid=' . $obDomain->ID . '">Accounts<span class="count">' . $TotalAccounts . '</a></li>' . PHP_EOL;
-
-	/* hidden */
-/*
-	for ($j = 0; $j < $TotalAccounts; $j++) {
-		$obAccount = $Accounts->Item($j);
-
-		$accountaddress = $obAccount->Address;
-		$accountaddress = PreprocessOutput($accountaddress);
-		$accountaddress = str_replace("'", "\'", $accountaddress);
-
-		$accountid = $obAccount->ID;
-
-		$di = $dtitem++;
-		$url = htmlentities("index.php?page=account&action=edit&accountid=" . $accountid . "&domainid=" . $obDomain->ID);
-		$dtree .= "d.add($di,$accounts_root,'" . $accountaddress . "','$url','','','" . "images/user.png','" . "images/user.png');\r\n";
-
-		// Only show sub-nodes for the currently selected account.
-		if ($current_accountid == $accountid) {
-			$dtree .= "d.add(" . $dtitem++ . ",$di,'" . GetStringForJavaScript("External accounts") . "','index.php?page=account_externalaccounts&accountid=" . $accountid . "&domainid=" . $obDomain->ID. "');\r\n";
-		}
-	}
-*/
 	$Aliases = $obDomain->Aliases();
 	$TotalAliases = $Aliases->Count();
 	$aliases_root = $dtitem++;
 
-	echo '                <li><a href="?page=aliases&domainid=' . $obDomain->ID . '">Aliases<span class="count">' . $TotalAliases . '</a></li>' . PHP_EOL;
-
-	/* hidden */
-/*
-	for ($j = 0; $j < $TotalAliases; $j++) {
-		$obAlias = $Aliases->Item($j);
-
-		$aliasname = $obAlias->Name;
-		$aliasname = PreprocessOutput($aliasname);
-		$aliasname = str_replace("'", "\'", $aliasname);
-
-		$di = $dtitem++;
-		$dtree .= "d.add($di,$aliases_root,'" . $aliasname . "','index.php?page=alias&action=edit&aliasid=" . $obAlias->ID . "&domainid=" . $obDomain->ID  . "','','','" . "images/arrow_switch.png','" . "images/arrow_switch.png');\r\n";
-	}
-*/
 	$DistributionLists = $obDomain->DistributionLists();
 	$TotalDistributionLists = $DistributionLists->Count();
 
-	echo '                <li><a href="?page=distributionlists&domainid=' . $obDomain->ID . '">Distribution lists<span class="count">' . $TotalDistributionLists . '</a></li>' . PHP_EOL;
-
-	/* hidden */
-/*
-	for ($j = 0; $j < $TotalDistributionLists; $j++) {
-		$obDistributionList = $DistributionLists->Item($j);
-		$di = $dtitem++;
-
-		$address = PreprocessOutput($obDistributionList->Address);
-		$address = str_replace("'", "\'", $address);
-
-		$dtree .= "d.add($di,$dlist_root,'" . $address .  "','index.php?page=distributionlist&action=edit&distributionlistid=" . $obDistributionList->ID . "&domainid=" . $obDomain->ID . "','','','" . "images/arrow_out.png','" . "images/arrow_out.png');\r\n";
-		$dtree .= "d.add(" . $dtitem++ .",$di,'" . GetStringForJavaScript("Members") . " (" . $obDistributionList->Recipients->Count() . ")','index.php?page=distributionlist_recipients&distributionlistid=" . $obDistributionList->ID . "&domainid=" . $obDomain->ID. "');\r\n";
-	}
-*/
-	echo '              </ul>
+	echo '                <li><a href="?page=accounts&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Accounts") . '<span class="count">' . $TotalAccounts . '</a></li>
+                <li><a href="?page=aliases&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Aliases") . '<span class="count">' . $TotalAliases . '</a></li>
+                <li><a href="?page=distributionlists&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Distribution lists") . '<span class="count">' . $TotalDistributionLists . '</a></li>
+              </ul>
             </li>' . PHP_EOL;
 }
 

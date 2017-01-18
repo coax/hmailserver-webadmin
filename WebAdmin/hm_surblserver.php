@@ -22,7 +22,6 @@ if ($action == "edit") {
 	$Score = $dnsBlackList->Score;
 }
 ?>
-
     <div class="box">
       <h2><?php EchoTranslation("DNS blacklist") ?></h2>
       <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">

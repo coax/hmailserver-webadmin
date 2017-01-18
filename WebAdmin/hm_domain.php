@@ -135,8 +135,8 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
             <table>
               <thead>
                 <tr>
-                  <th style="width:95%;"><?php EchoTranslation("Name") ?></th>
-                  <th style="width:5%;">&nbsp;</th>
+                  <th><?php EchoTranslation("Name") ?></th>
+                  <th style="width:32px;">&nbsp;</th>
                 </tr>
               </thead>
               <tbody>

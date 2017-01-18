@@ -9,10 +9,13 @@ if (hmailGetAdminLevel() != 2)
       <h2><?php EchoTranslation("Routes") ?></h2>
       <div style="margin:0 18px 18px;">
         <table>
-          <tr>
-            <th style="width:95%;">Name</th>
-            <th style="width:5%;">&nbsp;</th>
-          </tr>
+          <thead>
+            <tr>
+              <th><?php EchoTranslation("Name") ?></th>
+              <th style="width:32px;">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
 <?php
 $obRoutes = $obSettings->Routes();
 
@@ -27,13 +30,14 @@ for ($i = 0; $i < $Count; $i++) {
 
 	$routename = PreprocessOutput($routename);
 
-   	echo '          <tr>
-            <td><a href="?page=route&action=edit&routeid=' . $routeid . '">' . $routename . '</a></td>
-            <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $relayname . '</b>:\',\'Yes\',\'?page=background_route_save&action=delete&routeid=' . $routeid . '\');" class="delete">Delete</a></td>
-          </tr>' . PHP_EOL;
+   	echo '            <tr>
+              <td><a href="?page=route&action=edit&routeid=' . $routeid . '">' . $routename . '</a></td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $relayname . '</b>:\',\'Yes\',\'?page=background_route_save&action=delete&routeid=' . $routeid . '\');" class="delete">Delete</a></td>
+            </tr>' . PHP_EOL;
 }
 ?>
+          </tbody>
         </table>
-        <div class="buttons center"><a href="?page=route&action=add" class="button">Add new route</a></div>
+        <div class="buttons center"><a href="?page=route&action=add" class="button"><?php EchoTranslation("Add new route") ?></a></div>
       </div>
     </div>
