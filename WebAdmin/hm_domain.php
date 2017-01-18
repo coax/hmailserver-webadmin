@@ -121,6 +121,7 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 	if ($admin_rights)
 		PrintCheckboxRow("domainactive", "Enabled", $domainactive);
 	else {
+		echo '<p>Active:</p>';
 		if ($domainactive == 1)
 			echo $obLanguage->String("Yes");
 		else
