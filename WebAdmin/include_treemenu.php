@@ -182,19 +182,28 @@ switch($ServerState) {
 	case 1:
 	case 4:
 		$controlaction = 1;
-		$controlbutton = $obLanguage->String("Start");
+		$controlbutton = $obLanguage->String("Resume");
 		break;
 	case 2:
 	case 3:
 		$controlaction = 0;
-		$controlbutton = $obLanguage->String("Stop");
+		$controlbutton = $obLanguage->String("Pause");
 		break;
 	default:
 		$state = "Unknown";
 		break;
 }
 ?>
-        <li class="action-btn"><form action="index.php" method="post"><input type="hidden" name="page" value="status"><input type="hidden" name="action" value="control"><input type="submit" value="<?php echo $controlbutton ?> server" /></form></li>
+        <li class="action-btn">
+          <form action="index.php" method="post">
+<?php
+PrintHidden("page", "status");
+PrintHidden("action", "control");
+PrintHidden("controlaction", $controlaction);
+?>
+            <input type="submit" value="<?php echo $controlbutton ?> server" />
+          </form>
+        </li>
 <?php
 }
 
