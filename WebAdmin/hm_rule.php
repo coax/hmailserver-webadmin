@@ -119,7 +119,7 @@ if ($ruleid == 0) {
 			$move = $move . '<a href="?page=background_rule_save&action=move&savetype=actiondown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow down">Down</a>';
 
 		echo '              <tr>
-                <td><a href="?page=rule_action&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '\">' . $actionName . '</a></td>
+                <td><a href="?page=rule_action&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '">' . $actionName . '</a></td>
                 <td>' . $move . '</td>
                 <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $actionName . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=action&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '\');" class="delete">Delete</a></td>
               </tr>' . PHP_EOL;
