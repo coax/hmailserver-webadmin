@@ -36,6 +36,18 @@ How to use
 
 Changelog
 -----
+Version 0.9.5 beta (20.01.2017)
+- [fix] server start/stop button
+- [fix] minor typos in pages
+- [fix] invisible checkboxes
+- [fix] some mobile submenus unresponsive to click
+- [tweak] XHTML to HTML5 declaration
+- [tweak] more things translated
+- [new] removed all old JS and CSS
+- [new] count TCP/IP ports in menu
+- [new] define webmail link in config.php
+- [new] external accounts inside account
+
 Version 0.9.4 beta (18.01.2017)
 - [fix] error in hm_status.php
 - [fix] server start/stop button

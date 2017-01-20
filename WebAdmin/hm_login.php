@@ -11,13 +11,13 @@ PrintHidden("page", "background_login");
 $error = hmailGetVar("error");
 
 if ($error == "1") {
-	echo '<div class="warning">Incorrect username or password.</div>';
+	echo '<div class="warning">' . $obLanguage->String("Incorrect username or password.") . '</div>';
 }
 ?>
-      <p><?php EchoTranslation("Username") ?></p>
-      <input type="text" name="username" size="25" maxlength="256" class="req" />
+      <p><?php EchoTranslation("User name") ?></p>
+      <input type="text" name="username" size="25" maxlength="256" class="req">
       <p><?php EchoTranslation("Password") ?></p>
-      <input type="password" name="password" size="25" maxlength="256" class="req" />
-      <p><input type="submit" value="<?php EchoTranslation("Sign in") ?>" /></p>
+      <input type="password" name="password" size="25" maxlength="256" class="req">
+      <p><input type="submit" value="<?php EchoTranslation("Sign in") ?>"></p>
     </form>
   </div>

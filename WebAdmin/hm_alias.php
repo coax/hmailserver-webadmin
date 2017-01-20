@@ -48,9 +48,9 @@ if (strlen($error_message) > 0) {
 	PrintHidden("aliasid", $aliasid);
 ?>
         <p><?php EchoTranslation("Redirect from") ?></p>
-        <input type="text" name="aliasname" value="<?php echo PreprocessOutput($aliasname)?>" checkallownull="false" checkmessage="<?php EchoTranslation("Redirect from")?>" class="req medium">@<?php echo $domainname ?>
+        <input type="text" name="aliasname" value="<?php echo PreprocessOutput($aliasname)?>" maxlength="100" checkallownull="false" checkmessage="<?php EchoTranslation("Redirect from")?>" class="req medium">@<?php echo $domainname ?>
 <?php
-	PrintPropertyEditRow("aliasvalue", "To", $aliasvalue);
+	PrintPropertyEditRow("aliasvalue", "To", $aliasvalue, 100);
 	PrintCheckboxRow("aliasactive", "Enabled", $aliasactive);
 
 	PrintSaveButton();

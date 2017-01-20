@@ -7,6 +7,6 @@ if (!defined('IN_WEBADMIN'))
 ?>
 <div class="warning">
   Operation failed<br />
-  Description: <?php echo $errstr?><br />
+  Description: <?php echo $errstr?><br>
   Script: <?php echo $errfile?>
 </div>

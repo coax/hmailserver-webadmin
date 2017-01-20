@@ -93,7 +93,7 @@
 			preload.push(new Image());
 			preload.slice(-1).src = $(this).css('background-image').replace(/url\((.+)\)/, '$1');
 		});
-		$('#facebox .close').click($.facebox.close).append('<img src="' + $.facebox.settings.closeImage + '" />');
+		$('#facebox .close').click($.facebox.close).append('<img src="' + $.facebox.settings.closeImage + '">');
 	}
 	function makeCompatible() {
 		var $s = $.facebox.settings;
@@ -120,7 +120,7 @@
 	function fillFaceboxFromImage(href, klass) {
 		var image = new Image();
 		image.onload = function() {
-			$.facebox.reveal('<div class="image"><img src="' + image.src + '" /></div>', klass);
+			$.facebox.reveal('<div class="image"><img src="' + image.src + '"></div>', klass);
 		};
 		image.src = href;
 	}

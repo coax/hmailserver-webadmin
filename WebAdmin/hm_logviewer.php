@@ -204,7 +204,7 @@ function IPLookup() {
 				// Cache control
 				if (cache.data[ip]) {
 					var flag = options.flagPath + cache.data[ip]['country_code'].toLowerCase() + '.png';
-					elem.prepend('<img src="' + flag + '" title="' + cache.data[ip]['country_name'] + ' ' + cache.data[ip]['region_name'] + '" />');
+					elem.prepend('<img src="' + flag + '" title="' + cache.data[ip]['country_name'] + ' ' + cache.data[ip]['region_name'] + '">');
 					elem.addClass('processed');
 				} else {
 					$.get("http://freegeoip.net/json/" + ip)
@@ -212,7 +212,7 @@ function IPLookup() {
 							console.log(data);
 							cache.data[ip] = data;
 							var flag = options.flagPath + cache.data[ip]['country_code'].toLowerCase() + '.png';
-							elem.prepend('<img src="' + flag + '" title="' + cache.data[ip]['country_name'] + ' ' + cache.data[ip]['region_name'] + '" />');
+							elem.prepend('<img src="' + flag + '" title="' + cache.data[ip]['country_name'] + ' ' + cache.data[ip]['region_name'] + '">');
 							elem.addClass('processed');
 						}, "json");
 				}
@@ -314,7 +314,7 @@ function dump(arr, level) {
       <h2>hMailServer Log Parser</h2>
       <div style="margin:0 18px 18px;">
         <p>Select your log file.</p>
-        <div style="margin-top:9px;"><input type="file" name="file" id="logfile" /></div>
+        <div style="margin-top:9px;"><input type="file" name="file" id="logfile"></div>
       </div>
     </div>
 

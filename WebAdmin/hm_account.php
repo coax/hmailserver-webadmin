@@ -130,10 +130,10 @@ if (strlen($error_message) > 0) {
 	if ($admin_rights)
 		echo '<input type="text" name="accountmaxsize" value="' . $accountmaxsize . '" checktype="number" size="5" checkallownull="false" checkmessage="' . $str_mailboxsize . '" class="req number small">';
 	else
-		echo $accountmaxsize;
+		echo '<b>' . $accountmaxsize . '</b>' . PHP_EOL;
 
-               PrintPropertyRow("Size (MB)", Round($accountsize,3));
-               PrintPropertyRow("Last logon time", $accountlastlogontime);
+	PrintPropertyRow("Size (MB)", Round($accountsize,3));
+	PrintPropertyRow("Last logon time", $accountlastlogontime);
 ?>
         <p><?php EchoTranslation("Administration level")?></p>
         <select name="accountadminlevel" <?php if ($admin_rights == 0) echo " disabled ";?> class="medium">
@@ -259,6 +259,44 @@ if ($accountid == 0) {
 	PrintPropertyEditRow("PersonFirstName", "First name", $PersonFirstName);
 	PrintPropertyEditRow("PersonLastName", "Last name", $PersonLastName);
 ?>
+        </div>
+        <h3><a href="#"><?php EchoTranslation("External accounts") ?></a></h3>
+        <div class="hidden">
+          <table>
+            <thead>
+              <tr>
+                <th><?php EchoTranslation("Name")?></th>
+                <th style="width:40%;"><?php EchoTranslation("Server address")?></th>
+                <th style="width:32px;">&nbsp;</th>
+                <th style="width:32px;">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+<?php
+$obFetchAccounts = $obAccount->FetchAccounts();
+$Count = $obFetchAccounts->Count();
+
+$str_delete = $obLanguage->String("Remove");
+$str_downloadnow = $obLanguage->String("Download now");
+
+for ($i = 0; $i < $Count; $i++) {
+	$obFetchAccount = $obFetchAccounts->Item($i);
+
+	$FAID = $obFetchAccount->ID;
+	$Name = $obFetchAccount->Name;
+	$ServerAddress = $obFetchAccount->ServerAddress;
+
+	echo '              <tr>
+                <td><a href="?page=account_externalaccount&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '">' . $Name . '</a></td>
+                <td><a href="?page=account_externalaccount&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '">' . $ServerAddress . '</a></td>
+                <td><a href="?page=background_account_externalaccount_save&action=downloadnow&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '" class="download">' . $str_downloadnow . '</a></td>
+                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $Name . '</b>:\',\'Yes\',\'?page=background_account_externalaccount_save&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '\');" class="delete">' . $str_delete . '</a></td>
+              </tr>' . PHP_EOL;
+}
+?>
+            </tbody>
+          </table>
+          <div class="buttons center"><a href="?page=account_externalaccount&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>" class="button"><?php EchoTranslation("Add new external account") ?></a></div>
         </div>
 <?php
 	PrintSaveButton();

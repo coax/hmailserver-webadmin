@@ -3,7 +3,7 @@ if (!defined('IN_WEBADMIN'))
 	exit();
 
 if (hmailGetAdminLevel() != ADMIN_SERVER)
-	hmailHackingAttemp(); // Only server can change these settings.
+	hmailHackingAttemp();
 
 $domainid = hmailGetVar("domainid",0);
 $action = hmailGetVar("action","");
@@ -16,7 +16,7 @@ $action = hmailGetVar("action","");
 	PrintHidden("action", $action);
 	PrintHidden("domainid", $domainid);
 
-	PrintPropertyEditRow("aliasname", "Domain name", "", 10, "req");
+	PrintPropertyEditRow("aliasname", "Domain name", "", 100, "req");
 
 	PrintSaveButton();
 ?>

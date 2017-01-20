@@ -18,6 +18,10 @@ if (hmailGetAdminLevel() == 0) {
 	$accountaddress = PreprocessOutput($accountaddress);
 
 	$url = htmlentities("?page=account&action=edit&accountid=" . $obAccount->ID . "&domainid=" . $obDomain->ID);
+
+	//webmail parser
+	if(isset($hmail_config['webmail']))
+		$Webmail = str_replace("[domain]", $domainname, $hmail_config['webmail']);
 ?>
         <li class="has-children user <?php if (strpos('hm_account,hm_account_externalaccounts', $page) !== false) echo 'active' ?>">
           <a href="<?php echo $url ?>"><?php echo $accountaddress ?></a>
@@ -25,7 +29,7 @@ if (hmailGetAdminLevel() == 0) {
             <li><a href="?page=account_externalaccounts&accountid=<?php echo $obAccount->ID ?>&domainid=<?php echo $obDomain->ID ?>"><?php EchoTranslation("External accounts") ?></a></li>
           </ul>
         </li>
-        <li class="webmail"><a href="http://webmail.<?php echo $domainname ?>"><?php EchoTranslation("Webmail") ?></a></li>
+        <?php if(isset($Webmail)) { ?><li class="webmail"><a href="<?php echo $Webmail ?>"><?php EchoTranslation("Webmail") ?></a></li><?php } ?>
 <?php
 }
 
@@ -59,6 +63,9 @@ if (hmailGetAdminLevel() == 2) {
 
 	$Relays = $obSettings->IncomingRelays();
 	$TotalRelays = $Relays->Count();
+
+	$Ports = $obSettings->TCPIPPorts();
+	$TotalPorts = $Ports->Count();
 ?>
         <li class="status <?php if ($page=='hm_status') echo 'active' ?>"><a href="?page=status"><?php EchoTranslation("Dashboard") ?></a></li>
         <li class="has-children domains <?php if (strpos('hm_domains,hm_domain,hm_accounts,hm_account,hm_aliases,hm_aliase,hm_distributionlists,hm_distributionlist,hm_domain_aliasname', $page) !== false) echo 'active' ?>">
@@ -118,7 +125,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
                 <li><a href="?page=servermessages"><?php EchoTranslation("Server messages") ?></a></li>
                 <li><a href="?page=ssltls"><?php EchoTranslation("SSL/TLS") ?></a></li>
                 <li><a href="?page=scripts"><?php EchoTranslation("Scripts") ?></a></li>
-                <li><a href="?page=tcpipports"><?php EchoTranslation("TCP/IP ports") ?></a></li>
+                <li><a href="?page=tcpipports"><?php EchoTranslation("TCP/IP ports") ?><span class="count"><?php echo $TotalPorts ?></span></a></li>
               </ul>
             </li>
           </ul>
@@ -149,7 +156,6 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
       <ul>
         <li class="cd-label"><?php EchoTranslation("Action") ?></li>
 <?php
-$ServerState = $obBaseApp->ServerState();
 $Action = hmailGetVar("action","");
 
 if ($Action == "control") {
@@ -159,6 +165,8 @@ if ($Action == "control") {
 	else if ($controlaction == "0")
 		$obBaseApp->Stop();
 }
+
+$ServerState = $obBaseApp->ServerState();
 
 switch($ServerState) {
 	case 1:
@@ -194,14 +202,14 @@ switch($ServerState) {
 		break;
 }
 ?>
-        <li class="action-btn">
+        <li class="action-btn center">
           <form action="index.php" method="post">
 <?php
 PrintHidden("page", "status");
 PrintHidden("action", "control");
 PrintHidden("controlaction", $controlaction);
 ?>
-            <input type="submit" value="<?php echo $controlbutton ?> server" />
+            <input type="submit" value="<?php echo $controlbutton ?> server">
           </form>
         </li>
 <?php
@@ -222,29 +230,27 @@ function GetStringForDomain($obDomain, $parentid) {
 	$domainid = hmailGetVar("domainid");
 	if ($domainid==$obDomain->ID) $domainname = '<span style="border-bottom:1px solid;" title="' . $domainname . '">' . $domainname . '</span>';
 
-	echo '            <li class="has-children">
-              <a href="?page=domain&action=edit&domainid=' . $obDomain->ID . '">' . $domainname . '</a>
-              <ul>' . PHP_EOL;
-
 	if ($current_domainid != $obDomain->ID && hmailGetAdminLevel() == ADMIN_SERVER) {
 		// If the user is logged on as a system administrator, only show accounts
 		// for the currently selected domain.
-		echo '              </ul>' . PHP_EOL;
+		echo '            <li><a href="?page=domain&action=edit&domainid=' . $obDomain->ID . '">' . $domainname . '</a></li>' . PHP_EOL;
 		return;
-	}
+	} else
+		$Accounts  = $obDomain->Accounts();
+		$TotalAccounts = $Accounts->Count();
+		$accounts_root = $dtitem++;
 
-	$Accounts  = $obDomain->Accounts();
-	$TotalAccounts = $Accounts->Count();
-	$accounts_root = $dtitem++;
+		$Aliases = $obDomain->Aliases();
+		$TotalAliases = $Aliases->Count();
+		$aliases_root = $dtitem++;
 
-	$Aliases = $obDomain->Aliases();
-	$TotalAliases = $Aliases->Count();
-	$aliases_root = $dtitem++;
+		$DistributionLists = $obDomain->DistributionLists();
+		$TotalDistributionLists = $DistributionLists->Count();
 
-	$DistributionLists = $obDomain->DistributionLists();
-	$TotalDistributionLists = $DistributionLists->Count();
-
-	echo '                <li><a href="?page=accounts&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Accounts") . '<span class="count">' . $TotalAccounts . '</a></li>
+		echo '            <li class="has-children">
+              <a href="?page=domain&action=edit&domainid=' . $obDomain->ID . '">' . $domainname . '</a>
+              <ul>
+                <li><a href="?page=accounts&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Accounts") . '<span class="count">' . $TotalAccounts . '</a></li>
                 <li><a href="?page=aliases&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Aliases") . '<span class="count">' . $TotalAliases . '</a></li>
                 <li><a href="?page=distributionlists&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Distribution lists") . '<span class="count">' . $TotalDistributionLists . '</a></li>
               </ul>

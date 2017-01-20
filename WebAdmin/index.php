@@ -46,13 +46,14 @@ $DocumentationLink = 'https://www.hmailserver.com/documentation/latest/?page=ref
 
 $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:''; //moved from include_treemenu.php
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <title>hMailServer: webadmin</title>
   <!--modern-->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -64,8 +65,9 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
   <script type="text/javascript" src="modern/js/menu-aim.js"></script>
   <script type="text/javascript" src="modern/js/tablesort.js"></script>
   <script type="text/javascript" src="modern/js/facebox.js"></script>
-  <script type="text/javascript" src="modern/js/chartist.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.css" rel="stylesheet">
+  <script type="text/javascript" src="modern/js/chartist-tooltip.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700" rel="stylesheet">
   <link href="modern/css/reset.css" rel="stylesheet">
   <link href="modern/css/core.css" rel="stylesheet">
@@ -84,13 +86,13 @@ if (hmail_isloggedin()) {
       </form>
     </div>
 -->
-    <a href="#" class="cd-nav-trigger">Menu<span></span></a>
+    <a href="#" class="cd-nav-trigger"><?php EchoTranslation("Menu") ?><span></span></a>
     <nav class="cd-nav">
       <ul class="cd-top-nav">
         <li class="has-children account">
           <a href="#"><?php echo $username ?></a>
           <ul>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="logout.php"><?php EchoTranslation("Logout") ?></a></li>
           </ul>
         </li>
       </ul>
@@ -104,7 +106,7 @@ if (hmail_isloggedin()) {
 include "include_treemenu.php";
 ?>
       </ul>
-      <a href="impressum.php" rel="facebox" class="impressum">WebAdmin 0.9.4 [beta]</a>
+      <a href="impressum.php" rel="facebox" class="impressum">WebAdmin 0.9.5 [beta]</a>
     </nav>
 
     <div class="content-wrapper">

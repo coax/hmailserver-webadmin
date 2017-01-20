@@ -127,7 +127,7 @@ function  PrintPropertyRow($caption, $value) {
 	global $obLanguage;
 	$caption = $obLanguage->String($caption);
 
-	echo '<p>' . $caption . '</p>' . $value . PHP_EOL;
+	echo '<p>' . $caption . '</p><b>' . $value . '</b>' . PHP_EOL;
 }
 
 function PrintPropertyEditRow($name, $caption, $value, $length = 20, $checktype = null, $class = null) {
@@ -137,7 +137,7 @@ function PrintPropertyEditRow($name, $caption, $value, $length = 20, $checktype 
 	$req = '';
 	if (isset($checktype)) $req = 'req ';
 
-	echo '<p>' . $caption . '</p><input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" checktype="' . $checktype . '" size="' . $length . '" maxlength="' . $length . '" class="' . $req . $class . ' ' . $checktype . '" />' . PHP_EOL;
+	echo '<p>' . $caption . '</p><input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" checktype="' . $checktype . '" size="' . $length . '" maxlength="' . $length . '" class="' . $req . $class . ' ' . $checktype . '">' . PHP_EOL;
 }
 
 function PrintPropertyAreaRow($name, $caption, $value, $rows = 5, $cols = 20, $class = "") {
@@ -153,7 +153,7 @@ function PrintPasswordEntry($name, $caption, $length = 20, $class = "") {
 	global $obLanguage;
 	$caption = $obLanguage->String($caption);
 
-	echo '<p>' . $caption . '</p><input type="password" name="' . $name . '" id="' . $name . '" size="' . $length . '" class="' . $class . '" />' . PHP_EOL;
+	echo '<p>' . $caption . '</p><input type="password" name="' . $name . '" id="' . $name . '" size="' . $length . '" class="' . $class . '">' . PHP_EOL;
 }
 
 function PrintCheckboxRow($name, $caption, $checked) {
@@ -161,7 +161,7 @@ function PrintCheckboxRow($name, $caption, $checked) {
 	$caption = $obLanguage->String($caption);
 	$checked_text = hmailCheckedIf1($checked);
 
-	echo '<p><input type="checkbox" name="' . $name . '" id="' . $name . '" value="1" ' . $checked_text . ' /><label for="' . $name . '">' . $caption . '</label></p>' . PHP_EOL;
+	echo '<p><input type="checkbox" name="' . $name . '" id="' . $name . '" value="1" ' . $checked_text . '><label for="' . $name . '">' . $caption . '</label></p>' . PHP_EOL;
 }
 
 function PrintLargeTableHeader($caption) {
@@ -173,15 +173,18 @@ function PrintLargeTableHeader($caption) {
 </tr>' . PHP_EOL;
 }
 
-function PrintSaveButton($caption = "Save") {
-	echo '<div class="buttons"><input type="submit" value="' . $caption . '" /><a href="javascript:window.history.back();" class="cancel">Cancel</a></div>' . PHP_EOL;
+function PrintSaveButton($caption = "Save", $cancel = "Cancel") {
+	global $obLanguage;
+	$caption = $obLanguage->String($caption);
+	$cancel = $obLanguage->String($cancel);
+	echo '<div class="buttons"><input type="submit" value="' . $caption . '"><a href="javascript:window.history.back();" class="cancel">' . $cancel . '</a></div>' . PHP_EOL;
 }
 
 function PrintHidden($name, $value) {
 	$name = PreprocessOutput($name);
 	$value = PreprocessOutput($value);
 
-	echo '<input type="hidden" name="' . $name . '" value="' . $value . '" />' . PHP_EOL;
+	echo '<input type="hidden" name="' . $name . '" value="' . $value . '">' . PHP_EOL;
 }
 
 function GetConfirmDelete() {

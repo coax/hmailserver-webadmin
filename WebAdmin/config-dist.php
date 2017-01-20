@@ -21,7 +21,7 @@ extension=php_com_dotnet.dll
       $hmail_config['rooturl']			= "http://www.mydomain.com/PHPWebAdmin/";
 */
 
-$hmail_config['rooturl']			= "http://localhost/";
+$hmail_config['rooturl'] = "http://localhost/";
 
 /*
    The user interface language for PHPWebAdmin. Note that this language
@@ -32,7 +32,7 @@ $hmail_config['rooturl']			= "http://localhost/";
       $hmail_config['defaultlanguage']	= "english";
 */
 
-$hmail_config['defaultlanguage']	= "english";
+$hmail_config['defaultlanguage'] = "english";
 
 /*
 
@@ -62,6 +62,18 @@ $hmail_config['defaultlanguage']	= "english";
       2 - Only server administrators should be allowed access.
 */
 
-$hmail_config['rule_editing_level']	= 2;
+$hmail_config['rule_editing_level'] = 2;
 
+/*
+  Added in web interface redesign to show webmail links to logged in users.
+  [domain] is needed if you want the script to dynamically change domains.
+
+  If not set (delete or comment the line), the webmail link will not be shown.
+
+  Example:
+
+    http://webmail.[domain]
+    http://[domain]/webmail
+*/
+$hmail_config['webmail'] = "http://webmail.[domain]";
 ?>

@@ -121,7 +121,7 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 	if ($admin_rights)
 		PrintCheckboxRow("domainactive", "Enabled", $domainactive);
 	else {
-		echo '<p>Active:</p>';
+		echo '<p>' . $obLanguage->String("Active") . ':</p>';
 		if ($domainactive == 1)
 			echo $obLanguage->String("Yes");
 		else
@@ -184,83 +184,34 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
           </div>
           <h3><a href="#"><?php EchoTranslation("Limits") ?></a></h3>
           <div class="hidden">
-            <p><?php EchoTranslation("Maximum size (MB)") ?></p>
+            <p><?php EchoTranslation("Allocated size (MB)") ?></p>
+            <b><?php echo $AllocatedSize ?></b>
 <?php
-	$str_maxsizemb = $obLanguage->String("Maximum size (MB)");
 	$domainmaxsize = PreprocessOutput($domainmaxsize);
-
-	if ($admin_rights)
-		echo "<input type=\"text\" name=\"domainmaxsize\" value=\"$domainmaxsize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_maxsizemb\" class=\"req small number\">";
-	else
-		echo $domainmaxsize;
-
-	echo $obLanguage->String("<p>Allocated size (MB)</p>");
-	echo "<input type=\"text\" name=\"dummy\" value=\"$AllocatedSize\" size=\"8\" readonly disabled class=\"small\">";
-?>
-            <p><?php EchoTranslation("Max message size (KB)")?></p>
-<?php
-	$str_warning = $obLanguage->String("Max message size (KB)");
 	$domainmaxmessagesize = PreprocessOutput($domainmaxmessagesize);
-
-	if ($admin_rights)
-		echo "<input type=\"text\" name=\"domainmaxmessagesize\" value=\"$domainmaxmessagesize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
-	else
-		echo $domainmaxsize;
-?>
-            <p><?php EchoTranslation("Max size of accounts (MB)")?></p>
-<?php
-	$str_warning = $obLanguage->String("Max size of accounts (MB)");
 	$MaxAccountSize = PreprocessOutput($MaxAccountSize);
-
-	if ($admin_rights)
-		echo "<input type=\"text\" name=\"MaxAccountSize\" value=\"$MaxAccountSize\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
-	else
-		echo $MaxAccountSize;
-?>
-            <p><?php EchoTranslation("Max number of accounts")?></p>
-<?php
-	if ($admin_rights)
-		echo "<input type=\"checkbox\" name=\"MaxNumberOfAccountsEnabled\" value=\"1\" $MaxNumberOfAccountsEnabledChecked>";
-	else
-		echo "<input type=\"checkbox\" name=\"MaxNumberOfAccountsEnabled\" value=\"1\" readonly disabled $MaxNumberOfAccountsEnabledChecked>";
-
-	$str_warning = $obLanguage->String("Max number of accounts");
 	$MaxNumberOfAccounts = PreprocessOutput($MaxNumberOfAccounts);
-
-	if ($admin_rights)
-		echo "<input type=\"text\" name=\"MaxNumberOfAccounts\" value=\"$MaxNumberOfAccounts\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
-	else
-		echo $MaxNumberOfAccounts;
-?>
-            <p><?php EchoTranslation("Max number of aliases")?></p>
-<?php
-	if ($admin_rights)
-		echo "<input type=\"checkbox\" name=\"MaxNumberOfAliasesEnabled\" value=\"1\" $MaxNumberOfAliasesEnabledChecked>";
-	else
-		echo "<input type=\"checkbox\" name=\"MaxNumberOfAliasesEnabled\" value=\"1\" readonly disabled $MaxNumberOfAliasesEnabledChecked>";
-
-	$str_warning = $obLanguage->String("Max number of aliases");
 	$MaxNumberOfAliases = PreprocessOutput($MaxNumberOfAliases);
-
-	if ($admin_rights)
-		echo "<input type=\"text\" name=\"MaxNumberOfAliases\" value=\"$MaxNumberOfAliases\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
-	else
-		echo $MaxNumberOfAliases;
-?>
-            <p><?php EchoTranslation("Max number of distribution lists")?></p>
-<?php
-	if ($admin_rights)
-		echo "<input type=\"checkbox\" name=\"MaxNumberOfDistributionListsEnabled\" value=\"1\" $MaxNumberOfDistributionListsEnabledChecked>";
-	else
-		echo "<input type=\"checkbox\" name=\"MaxNumberOfDistributionListsEnabled\" value=\"1\" readonly disabled $MaxNumberOfDistributionListsEnabledChecked>";
-
-	$str_warning = $obLanguage->String("Max number of distribution lists");
 	$MaxNumberOfDistributionLists = PreprocessOutput($MaxNumberOfDistributionLists);
 
-	if ($admin_rights)
-		echo "<input type=\"text\" name=\"MaxNumberOfDistributionLists\" value=\"$MaxNumberOfDistributionLists\" size=\"8\" checkallownull=\"false\" checkmessage=\"$str_warning\" class=\"req small number\">";
-	else
-		echo $MaxNumberOfDistributionLists;
+	if ($admin_rights) {
+		PrintPropertyEditRow("domainmaxsize", "Maximum size (MB)", $domainmaxsize, 8, "number", "small");
+		PrintPropertyEditRow("domainmaxmessagesize", "Max message size (KB)", $domainmaxmessagesize, 8, "number", "small");
+		PrintPropertyEditRow("MaxAccountSize", "Max size of accounts (MB)", $MaxAccountSize, 8, "number", "small");
+		PrintPropertyEditRow("MaxNumberOfAccounts", "Max number of accounts", $MaxNumberOfAccounts, 8, "number", "small");
+		echo '            <div style="display:inline-block; position:relative;"><input type="checkbox" name="MaxNumberOfAccountsEnabled" id="MaxNumberOfAccountsEnabled" value="1" ' . $MaxNumberOfAccountsEnabled . '><label for="MaxNumberOfAccountsEnabled"></label></div>' . PHP_EOL;
+		PrintPropertyEditRow("MaxNumberOfAliases", "Max number of aliases", $MaxNumberOfAliases, 8, "number", "small");
+		echo '            <div style="display:inline-block; position:relative;"><input type="checkbox" name="MaxNumberOfAliasesEnabled" id="MaxNumberOfAliasesEnabled" value="1" ' . $MaxNumberOfAliasesEnabledChecked . '><label for="MaxNumberOfAliasesEnabled"></label></div>' . PHP_EOL;
+		PrintPropertyEditRow("MaxNumberOfDistributionLists", "Max number of distribution lists", $MaxNumberOfDistributionLists, 8, "number", "small");
+		echo '            <div style="display:inline-block; position:relative;"><input type="checkbox" name="MaxNumberOfDistributionListsEnabled" id="MaxNumberOfDistributionListsEnabled" value="1" ' . $MaxNumberOfDistributionListsEnabledChecked . '><label for="MaxNumberOfDistributionListsEnabled"></label></div>' . PHP_EOL;
+	} else {
+		PrintPropertyRow("Maximum size (MB)", Round($domainmaxsize,3));
+		PrintPropertyRow("Max message size (KB)", Round($domainmaxmessagesize,3));
+		PrintPropertyRow("Max size of accounts (MB)", Round($MaxAccountSize,3));
+		PrintPropertyRow("Max number of accounts", Round($MaxNumberOfAccounts,3));
+		PrintPropertyRow("Max number of aliases", Round($MaxNumberOfAliases,3));
+		PrintPropertyRow("Max number of distribution lists", Round($MaxNumberOfDistributionLists,3));
+	}
 ?>
           </div>
           <h3><a href="#"><?php EchoTranslation("DKIM Signing") ?></a></h3>
@@ -291,10 +242,10 @@ $MaxNumberOfDistributionListsEnabledChecked = hmailCheckedIf1($MaxNumberOfDistri
 ?>
             <p><?php EchoTranslation("Character")?></p>
             <select name="domainplusaddressingcharacter" class="small">
-              <option value="+" <?php if ($domainplusaddressingcharacter == "+") echo "selected";?> >+</option>
-              <option value="-" <?php if ($domainplusaddressingcharacter == "-") echo "selected";?> >-</option>
-              <option value="_" <?php if ($domainplusaddressingcharacter == "_") echo "selected";?> >_</option>
-              <option value="%" <?php if ($domainplusaddressingcharacter == "%") echo "selected";?> >%</option>
+              <option value="+" <?php if ($domainplusaddressingcharacter == "+") echo "selected";?>>+</option>
+              <option value="-" <?php if ($domainplusaddressingcharacter == "-") echo "selected";?>>-</option>
+              <option value="_" <?php if ($domainplusaddressingcharacter == "_") echo "selected";?>>_</option>
+              <option value="%" <?php if ($domainplusaddressingcharacter == "%") echo "selected";?>>%</option>
             </select>
           </div>
           <h3><a href="#"><?php EchoTranslation("Greylisting")?></a></h3>
