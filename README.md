@@ -1,4 +1,4 @@
-hMailServer PHPWebAdmin redesign project
+hMailAdmin: an hMailServer PHPWebAdmin redesign project
 ========================
 
 I was delighted when first started using hMailServer on my Windows 2016 server (replaced SmarterMail) but web-interface was punch in the eye so I decided to redesign it. The new layout is fully responsive and free to use/download.
@@ -13,6 +13,7 @@ Features
 - confirmation dialogs in modal
 - form validation
 - table sorting
+- simple log parser
 - works with latest hMailServer (stable) version
 
 Roadmap for 2017
@@ -22,20 +23,28 @@ Roadmap for 2017
 
 Donate
 -----
-Don't worry, hMailServer PHPWebAdmin redesign project will stay free - but I do need your support in order to continue to develop it! Thank you :)
+Don't worry, hMailAdmin will stay free - but I do need your support in order to continue to develop it! Thank you :)
 
 [![PayPal donate button](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/MatijaMatecic/)
 
 How to use
 -----
-1\. Place "WebAdmin" folder next to your "PHPWebAdmin" installation and make changes to config-dist.php accordingly, then rename to config.php
+1\. Place "hMailAdmin" folder next to your "PHPWebAdmin" (which you can delete) folder and make changes to config-dist.php accordingly, then rename to config.php
 
-2\. Link to "WebAdmin" folder from your IIS settings
+2\. Link to "hMailAdmin" folder from your IIS/Apache settings
 
-3\. Access web admin interface from browser
+3\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
 
 Changelog
 -----
+Version 0.9.6 beta (30.01.2017)
+- [new] view queued messages source (click on message ID)
+- [new] merged security improvements from Version 5.6.7 - Build 2407 BETA
+- [tweak] renamed from PHPWebAdmin to hMailAdmin
+- [tweak] javascripts and fonts no longer loaded remotely (due to security restrictions)
+- [fix] live refresh of queued messages on dashboard
+- [fix] typo in hm_tcpipport.php
+
 Version 0.9.5 beta (20.01.2017)
 - [fix] server start/stop button
 - [fix] minor typos in pages
