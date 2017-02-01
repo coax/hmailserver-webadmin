@@ -33,14 +33,21 @@ Don't worry, hMailAdmin will stay free - but I do need your support in order to 
 How to use
 -----
 If you HAVE PHPWebAdmin installed:
+
 1\. Extract "hMailAdmin" folder in the same root as "PHPWebAdmin" folder (which you can delete) and make changes to config-dist.php accordingly, then rename to config.php
+
 2\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
 
 If you DON'T HAVE PHPWebAdmin installed:
+
 1\. Extract "hMailAdmin" folder in the root of any of your websites (or create new website for it) and make changes to config-dist.php accordingly, then rename to config.php
+
 2\. On IIS enable php_com_dotnet.dll in PHP
+
 3\. In php.ini set register_globals=off and display_errors=off
+
 4\. On IIS give the service account access to the hMailServer COM library: https://www.hmailserver.com/documentation/latest/?page=howto_dcom_permissions
+
 5\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
 
 Common issue: https://www.hmailserver.com/documentation/latest/?page=ts_setup_phpwebadmin
