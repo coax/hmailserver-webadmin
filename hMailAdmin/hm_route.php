@@ -60,11 +60,11 @@ PrintPropertyEditRow("routenumberoftries", "Number of retries", $routenumberoftr
 PrintPropertyEditRow("routemminutesbetweentry", "Minutes between every retry", $routemminutesbetweentry, 4, "number", "small");
 PrintCheckboxRow("routerequiresauth", "Server requires authentication", $routerequiresauth);
 
-PrintPropertyEditRow("routeauthusername", "Username", $routeauthusername, 30, "number");
-PrintPropertyEditRow("routeauthpassword", "Password", "", 20, "number");
+PrintPropertyEditRow("routeauthusername", "Username", $routeauthusername, 30, null, "medium");
+PrintPropertyEditRow("routeauthpassword", "Password", "", 20, null, "medium");
 ?>
             <p><?php EchoTranslation("Connection security")?></p>
-            <select name="ConnectionSecurity">
+            <select name="ConnectionSecurity" class="medium">
               <option value="<?php echo CONNECTION_SECURITY_NONE?>" <?php if ($ConnectionSecurity == CONNECTION_SECURITY_NONE) echo "selected";?> ><?php EchoTranslation("None")?></option>
               <option value="<?php echo CONNECTION_SECURITY_STARTTLSOPTIONAL?>" <?php if ($ConnectionSecurity == CONNECTION_SECURITY_STARTTLSOPTIONAL) echo "selected";?> ><?php EchoTranslation("STARTTLS (Optional)")?></option>
               <option value="<?php echo CONNECTION_SECURITY_STARTTLSREQUIRED?>" <?php if ($ConnectionSecurity == CONNECTION_SECURITY_STARTTLSREQUIRED) echo "selected";?> ><?php EchoTranslation("STARTTLS (Required)")?></option>

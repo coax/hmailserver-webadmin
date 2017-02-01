@@ -39,7 +39,7 @@ PrintHiddenCsrfToken();
 PrintHidden("page", "backup");
 PrintHidden("action", "save");
 
-PrintPropertyEditRow("backupdestination", "Destination", $backupdestination);
+PrintPropertyEditRow("backupdestination", "Destination", $backupdestination, 255, "");
 ?>
         <p><?php EchoTranslation("Backup") ?></p>
 <?php

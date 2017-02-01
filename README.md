@@ -10,11 +10,14 @@ Features
 - modern look and feel
 - responsive layout for desktop and mobile browsers
 - dashboard graphs refresh with live data
+- ability to view source of queued messages
 - confirmation dialogs in modal
 - form validation
 - table sorting
 - simple log parser
+- based on original PHPWebAdmin
 - works with latest hMailServer (stable) version
+- continous development
 
 Roadmap for 2017
 -----
@@ -29,15 +32,28 @@ Don't worry, hMailAdmin will stay free - but I do need your support in order to 
 
 How to use
 -----
-1\. Place "hMailAdmin" folder next to your "PHPWebAdmin" (which you can delete) folder and make changes to config-dist.php accordingly, then rename to config.php
+If you HAVE PHPWebAdmin installed:
+1\. Extract "hMailAdmin" folder in the same root as "PHPWebAdmin" folder (which you can delete) and make changes to config-dist.php accordingly, then rename to config.php
+2\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
 
-2\. Link to "hMailAdmin" folder from your IIS/Apache settings
+If you DON'T HAVE PHPWebAdmin installed:
+1\. Extract "hMailAdmin" folder in the root of any of your websites (or create new website for it) and make changes to config-dist.php accordingly, then rename to config.php
+2\. On IIS enable php_com_dotnet.dll in PHP
+3\. In php.ini set register_globals=off and display_errors=off
+4\. On IIS give the service account access to the hMailServer COM library: https://www.hmailserver.com/documentation/latest/?page=howto_dcom_permissions
+5\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
 
-3\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
+Common issue: https://www.hmailserver.com/documentation/latest/?page=ts_setup_phpwebadmin
 
 Changelog
 -----
-Version 0.9.6 beta (30.01.2017)
+Version 0.9.7 beta (2017-02-01)
+- tweak] convert all dates to ISO (YYYY-MM-DD HH:MM:SS) due consistency
+- [tweak] dashboard optimizations in JSON
+- [fix] typo in background_account_save.php
+- [fix] minor fixes in validation fields
+
+Version 0.9.6 beta (2017-01-30)
 - [new] view queued messages source (click on message ID)
 - [new] merged security improvements from Version 5.6.7 - Build 2407 BETA
 - [tweak] renamed from PHPWebAdmin to hMailAdmin
@@ -45,7 +61,7 @@ Version 0.9.6 beta (30.01.2017)
 - [fix] live refresh of queued messages on dashboard
 - [fix] typo in hm_tcpipport.php
 
-Version 0.9.5 beta (20.01.2017)
+Version 0.9.5 beta (2017-01-20)
 - [fix] server start/stop button
 - [fix] minor typos in pages
 - [fix] invisible checkboxes
@@ -57,7 +73,7 @@ Version 0.9.5 beta (20.01.2017)
 - [new] define webmail link in config.php
 - [new] external accounts inside account
 
-Version 0.9.4 beta (18.01.2017)
+Version 0.9.4 beta (2017-01-18)
 - [fix] error in hm_status.php
 - [fix] server start/stop button
 - [tweak] CSS/HTML optimizations
@@ -67,13 +83,13 @@ Version 0.9.4 beta (18.01.2017)
 - [new] redesign of single account (non-admin) interface
 - [new] documentation link (on each page) points directly to online documentation reference
 
-Version 0.9.3 beta (04.01.2017)
+Version 0.9.3 beta (2017-01-04)
 - [fix] SSL certificates typo
 - [fix] number validation
 - [fix] removed PHP 7 incompatibility error
 - [tweak] validation for IP address input field
 
-Version 0.9.2 beta (04.01.2017)
+Version 0.9.2 beta (2017-01-04)
 - [fix] all tables are now sorting
 - [fix] increase autoban field size from 4 to 5
 - [new] all tables now show total count
@@ -84,7 +100,7 @@ Version 0.9.2 beta (04.01.2017)
 - [new] added favicon
 - [tweak] if using newer version of hMailServer just modify include_versioncheck.php
 
-Version 0.9.1 beta (28.12.2016)
+Version 0.9.1 beta (2016-12-28)
 - [new] Renamed folder from "PHPWebAdmin" to "WebAdmin" (to avoid confusion)
 - [new] Replaced Administrator in top menu with $username
 - [new] Added counters for Rules and DNS blacklists in menu
@@ -96,7 +112,7 @@ Version 0.9.1 beta (28.12.2016)
 - [fix] Legit messages are now calculated from Total - Virus - Spam
 - [other] In IIS 6 you'll need to manually add ".svg" mime-type as "image/svg+xml"
 
-Version 0.9 beta (28.12.2016)
+Version 0.9 beta (2016-12-28)
 - Initial release
 
 3rd party components used

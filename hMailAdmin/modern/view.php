@@ -11,7 +11,7 @@ if (hmailGetAdminLevel() != 2)
 $Filename = $_GET['q'];
 
 //revert original characters
-$characters = array("/", "[", "]");
+$characters = array("/", "<", ">");
 $replacements = array("\\", "{", "}");
 $Filename = str_replace($characters, $replacements, $Filename);
 

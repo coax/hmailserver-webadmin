@@ -63,7 +63,7 @@ if ($action == "edit") {
 	$RequireSMTPAuthExternalToExternal = $obSecurityRange->RequireSMTPAuthExternalToExternal;
 
 	$Expires = $obSecurityRange->Expires;
-	$ExpiresTime = $obSecurityRange->ExpiresTime;
+	$ExpiresTime = makeIsoDate($obSecurityRange->ExpiresTime);
 }
 
 //$allowsmtpconnectionschecked = hmailCheckedIf1($allowsmtpconnections);
@@ -77,7 +77,6 @@ if ($action == "edit") {
 
 $IsForwardingRelayChecked = hmailCheckedIf1($IsForwardingRelay);
 ?>
-
     <div class="box medium">
       <h2><?php EchoTranslation("IP range") ?></h2>
       <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
@@ -93,7 +92,7 @@ PrintPropertyEditRow("securityrangelowerip", "Lower IP", $securityrangelowerip, 
 PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip, 30, "ip");
 
 PrintCheckboxRow("Expires", "Expires", $Expires);
-PrintPropertyEditRow("ExpiresTime", "Use YYYY-MM-DD HH:MM:SS", $ExpiresTime);
+PrintPropertyEditRow("ExpiresTime", "Use ISO date format (YYYY-MM-DD HH:MM:SS)", $ExpiresTime);
  ?>
         <h3><a href="#"><?php EchoTranslation("Allow connections")?></a></h3>
         <div class="hidden">

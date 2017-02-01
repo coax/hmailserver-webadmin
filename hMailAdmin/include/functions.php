@@ -273,4 +273,9 @@ function validate_csrf_token_supplied() {
 		die;
 	}
 }
+
+//convert any date to ISO date format
+function makeIsoDate($date) {
+	return date('Y-m-d H:i:s', strtotime($date));
+}
 ?>

@@ -102,78 +102,38 @@ jQuery(document).ready(function(){
 				}
 			}
 		});
-		// Imperavi Grafs
-		//var processed = new Grafs.Donut('#processed', {data: [1, 0, 0]});
-		//var sessions = new Grafs.Donut('#sessions', {data: [1, 0, 0]});
 		Refresh();
 		function Refresh(){
-			$.getJSON("modern/json.php?q=1",
+			$.getJSON('modern/json.php',
 			function(json) {
-				var data = {
-					series: json,
-				};
+				//Processed messages
+				var data = {series: json[0]};
 				processed.update(data);
-				$('#legit').text(Number(json[0].toFixed(0)).toLocaleString());
-				$('#virus').text(Number(json[1].toFixed(0)).toLocaleString());
-				$('#spam').text(Number(json[2].toFixed(0)).toLocaleString());
-			});
-			$.getJSON("modern/json.php?q=2",
-			function(json) {
-				var data = {
-					series: json,
-				};
+				$('#legit').text(Number(json[0][0].toFixed(0)).toLocaleString());
+				$('#virus').text(Number(json[0][1].toFixed(0)).toLocaleString());
+				$('#spam').text(Number(json[0][2].toFixed(0)).toLocaleString());
+				//Open sessions
+				data = {series: json[1]};
 				sessions.update(data);
-				$('#smtp').text(Number(json[0].toFixed(0)).toLocaleString());
-				$('#pop3').text(Number(json[1].toFixed(0)).toLocaleString());
-				$('#imap').text(Number(json[2].toFixed(0)).toLocaleString());
-			});
-
-			$.ajax({
-				url: "modern/json.php?q=4",
-				success: function(data) {
-					activity_array.push(parseInt(data));
-					activity_array.splice(0, 1);
-					var data = {
-						series: [activity_array],
-					};
-					activity.update(data);
+				$('#smtp').text(Number(json[1][0].toFixed(0)).toLocaleString());
+				$('#pop3').text(Number(json[1][1].toFixed(0)).toLocaleString());
+				$('#imap').text(Number(json[1][2].toFixed(0)).toLocaleString());
+				//Delivery queue
+				var queue;
+				if (json[2] !== 0) {
+					$.each(json[2], function(key, data){
+						queue += '<tr><td><a href="#" onclick="$.facebox({ajax:\'modern/view.php?q=' + data[5] + '\'}); return false;">' + data[0] + '</a></td><td>' + data[1] + '</td><td>' + data[2] + '</td><td>' + data[3] + '</td><td>' + data[4] + '</td><td>' + data[6] + '</td></tr>';
+					});
 				}
+				$('#queue').html(queue);
+				//Server
+				activity_array.push(parseInt(json[3]));
+				activity_array.splice(0, 1);
+				data = {series: [activity_array]};
+				activity.update(data);
+				//Queue count
+				$('#count').text(json[4]);
 			});
-
-		// Imperavi Grafs
-		//	$.getJSON("modern/json.php?q=1",
-		//	function(json) {
-		//		var data = {
-		//			labels: ["Legit", "Virus", "Spam"],
-		//			data: json,
-		//			colors: ['#96d759', '#ff8c42', '#ff4053']
-		//		};
-		//		var options = {
-		//			circleWidth: 20,
-		//			tooltip: '<b>[[ label ]]</b><br>[[ value ]] / [[ percentage ]]%',
-		//			summary: '<span class="grafs-summary-desc">Total messages</span> [[ total ]]'
-		//		};
-		//		processed.update(data, options);
-		//		$('#legit').text(Number(json[0].toFixed(0)).toLocaleString());
-		//		$('#virus').text(Number(json[1].toFixed(0)).toLocaleString());
-		//		$('#spam').text(Number(json[2].toFixed(0)).toLocaleString());
-		//	});
-		//	$.getJSON("modern/json.php?q=2",
-		//	function(json) {
-		//		var data = {
-		//			labels: ["SMTP", "POP3", "IMAP"],
-		//			data: json
-		//		};
-		//		var options = {
-		//			circleWidth: 20,
-		//			tooltip: '<b>[[ label ]]</b><br>[[ value ]] / [[ percentage ]]%',
-		//		};
-		//		sessions.update(data, options);
-		//		$('#smtp').text(Number(json[0].toFixed(0)).toLocaleString());
-		//		$('#pop3').text(Number(json[1].toFixed(0)).toLocaleString());
-		//		$('#imap').text(Number(json[2].toFixed(0)).toLocaleString());
-		//	});
-			$("#queue").load("modern/json.php?q=3");
 		}
 		setInterval(Refresh, 5000);
 	};
@@ -311,13 +271,7 @@ jQuery(document).ready(function(){
 		}
 	}
 });
-//confirm delete - OLD
-function ConfirmDelete(name, url) {
-	confirm_delete = "<?php echo GetConfirmDelete();?>"
-	confirm_delete = confirm_delete.replace("%s", name);
-	if (confirm(confirm_delete))
-		document.location = url;
-}
+
 //confirm delete
 function Confirm(question, answer, action) {
 	$.facebox('<div style="margin:36px 18px; text-align:center;"><p>' + question + '</p><input type="button" value="' + answer + '" id="yes"> &nbsp; <input type="button" value="No" onclick="$.facebox.close();"></div>');
@@ -334,10 +288,12 @@ function Confirm(question, answer, action) {
 	);
 	return false;
 }
+
 //replace alert
 function alert(message) {
 	$.facebox('<div style="margin:18px; text-align:center;"><p>' + message + '</p><p><a href="#" onclick="$.facebox.close();" class="button">OK</a></p></div>');
 };
+
 //validation
 $.fn.validation = function() {
 	var form = $(this);
@@ -378,6 +334,7 @@ $.fn.validation = function() {
 		return false;
 	}
 };
+
 //test antivirus/antispam
 function TestScanner(check) {
 	switch (check) {

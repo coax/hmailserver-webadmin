@@ -66,7 +66,7 @@ if ($action == "edit") {
 	$vacationmessage = $obAccount->VacationMessage;
 
 	$vacationmessageexpires = $obAccount->VacationMessageExpires;
-	$vacationmessageexpiresdate = $obAccount->VacationMessageExpiresDate;
+	$vacationmessageexpiresdate = makeIsoDate($obAccount->VacationMessageExpiresDate);
 	$vacationmessageexpiresdate = substr($vacationmessageexpiresdate, 0, 10);
 
 
@@ -161,7 +161,7 @@ PrintPropertyEditRow("vacationsubject", "Subject", $vacationsubject);
 PrintPropertyAreaRow("vacationmessage", "Text", $vacationmessage, 6, 55);
 
 PrintCheckboxRow("vacationmessageexpires", "Automatically expires", $vacationmessageexpires);
-PrintPropertyEditRow("vacationmessageexpiresdate", "(YYYY-MM-DD)", $vacationmessageexpiresdate);
+PrintPropertyEditRow("vacationmessageexpiresdate", "Use ISO date format (YYYY-MM-DD)", $vacationmessageexpiresdate);
 ?>
         </div>
         <h3><a href="#"><?php EchoTranslation("Forwarding")?></a></h3>

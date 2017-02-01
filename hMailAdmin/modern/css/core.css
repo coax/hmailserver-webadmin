@@ -132,7 +132,7 @@ input, select, textarea {font-family:'Nunito Sans', sans-serif;}
 .cd-form input.medium, .cd-form textarea.medium, .cd-form select.medium {width:48%;}
 .cd-form input[type="text"]:focus, .cd-form input[type="password"]:focus, .cd-form input[type="email"]:focus, .cd-form textarea:focus, .cd-form select:focus {border-color:#1784c7; box-shadow:0 0 5px rgba(44, 151, 222, 0.2);}
 .cd-form input[type=radio], .cd-form input[type=checkbox] {left:0; top:50%; -webkit-transform:translateY(-50%); -moz-transform:translateY(-50%); -ms-transform:translateY(-50%); -o-transform:translateY(-50%); transform:translateY(-50%); margin:0; padding:0; opacity:0; z-index:2;}
-.cd-form input[type="radio"] + label, .cd-form input[type="checkbox"] + label {cursor:pointer; font-size:13px; padding-left:8px;}
+.cd-form input[type="radio"] + label, .cd-form input[type="checkbox"] + label {cursor:pointer; font-size:13px; padding:0 8px;}
 .cd-form input[type="radio"] + label::before, .cd-form input[type="radio"] + label::after, .cd-form input[type="checkbox"] + label::before, .cd-form input[type="checkbox"] + label::after {display:block; content:' '; position:absolute; left:0; top:50%; margin-top:-8px; width:16px; height:16px;}
 .cd-form input[type="radio"] + label::before, .cd-form input[type="checkbox"] + label::before {border:1px solid #cfd9db; background:#fff; box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.08);}
 .cd-form input[type="radio"] + label::before, .cd-form input[type="radio"] + label::after {border-radius: 50%;}

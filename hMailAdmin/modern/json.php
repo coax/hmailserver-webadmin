@@ -10,60 +10,44 @@ define("STIMAP", 5);
 
 $obStatus = $obBaseApp->Status();
 
-switch ($_GET['q']){
-	case 1:
-		$ProcessedMessages = $obStatus->ProcessedMessages();
-		$VirusMessages = $obStatus->RemovedViruses();
-		$SpamMessages = $obStatus->RemovedSpamMessages();
+$ProcessedMessages = $obStatus->ProcessedMessages();
+$VirusMessages = $obStatus->RemovedViruses();
+$SpamMessages = $obStatus->RemovedSpamMessages();
+$q1 = '[' . $ProcessedMessages . ', ' . $VirusMessages . ', ' . $SpamMessages . ']';
 
-		header('Content-Type: application/json');
-		echo '[' . $ProcessedMessages . ', ' . $VirusMessages . ', ' . $SpamMessages . ']';
-		break;
+$SessionsSmtp = $obStatus->SessionCount(STSMTP);
+$SessionsPop3 = $obStatus->SessionCount(STPOP3);
+$SessionsImap = $obStatus->SessionCount(STIMAP);
+$q2 = '[' . $SessionsSmtp . ', ' . $SessionsPop3 . ', ' . $SessionsImap . ']';
+$q4 = $SessionsSmtp + $SessionsPop3 + $SessionsImap;
 
-	case 2:
-		$SessionsSmtp = $obStatus->SessionCount(STSMTP);
-		$SessionsPop3 = $obStatus->SessionCount(STPOP3);
-		$SessionsImap = $obStatus->SessionCount(STIMAP);
-		header('Content-Type: application/json');
-		echo '[' . $SessionsSmtp . ', ' . $SessionsPop3 . ', ' . $SessionsImap . ']';
-		break;
+$UndeliveredMessages = $obStatus->UndeliveredMessages();
+$QueueCount = 0;
+if (strlen($UndeliveredMessages) > 0) {
+	$list = explode("\r\n", $UndeliveredMessages);
+	$QueueCount = count($list);
+	$as_soon_as_possible = $obLanguage->String("ASAP");
+	$q3 = '[';
+	foreach ($list as $line) {
+		$columns = explode("\t", $line);
 
-	case 3:
-		$UndeliveredMessages = $obStatus->UndeliveredMessages();
-		$QueueCount = 0;
-		if (strlen($UndeliveredMessages) > 0) {
-			$list = explode("\r\n", $UndeliveredMessages);
-			$QueueCount = count($list);
-			$as_soon_as_possible = $obLanguage->String("As soon as possible");
+		if (count($columns) > 4) {
+			$columns[4] = makeIsoDate($columns[4]);
+			if ($columns[4] == "1970-01-01 01:00:00") $columns[4] = $as_soon_as_possible;
 
-			foreach ($list as $line) {
-				$columns = explode("\t", $line);
+			//escape invalid characters
+			$characters = array("\\", "{", "}");
+			$replacements = array("/", "<", ">");
+			$columns[5] = str_replace($characters, $replacements, $columns[5]);
 
-				if (count($columns) > 4) {
-					if ($columns[4] == "1901-01-01 00:00:00")
-					$columns[4] = $as_soon_as_possible;
-
-					//escape invalid characters
-					$characters = array("\\", "{", "}");
-					$replacements = array("/", "[", "]");
-					$columns[5] = str_replace($characters, $replacements, $columns[5]);
-
-					echo '          <tr>
-            <td><a href="#" onclick="$.facebox({ajax:\'modern/view.php?q=' . $columns[5] . '\'}); return false;">' . $columns[0] . '</a></td>
-            <td>' . $columns[1] . '</td>
-            <td>' . PreprocessOutput($columns[2]) . '</td>
-            <td>' . PreprocessOutput($columns[3]) . '</td>
-            <td>' . $columns[4] . '</td>
-            <td>' . $columns[6] . '</td>
-          </tr>' . PHP_EOL;
-				}
-			}
+  			if ($q3 != '[') $q3 .= ', ';
+			$q3 .= '[' . $columns[0] . ', "' . makeIsoDate($columns[1]) . '", "' . PreprocessOutput($columns[2]) . '", "' . PreprocessOutput($columns[3]) . '", "' . $columns[4] . '", "' . $columns[5] . '", ' . $columns[6] . ']';
 		}
-		break;
-	case 4:
-		$SessionsSmtp = $obStatus->SessionCount(STSMTP);
-		$SessionsPop3 = $obStatus->SessionCount(STPOP3);
-		$SessionsImap = $obStatus->SessionCount(STIMAP);
-		echo $SessionsSmtp + $SessionsPop3 + $SessionsImap;
-}
+	}
+	$q3 .= ']';
+} else $q3 = '0';
+$q5 = $QueueCount;
+
+header('Content-Type: application/json');
+echo '[' . $q1 . ', ' . $q2 . ', ' . $q3 . ', ' . $q4 . ', ' . $q5 . ']';
 ?>

@@ -116,8 +116,8 @@ PrintPropertyEditRow("smtprelayer", "Remote host name", $smtprelayer, 25);
 PrintPropertyEditRow("smtprelayerport", "Remote TCP/IP port", $smtprelayerport, 25, "number", "small");
 PrintPropertyEditRow("HostName", "Local host name", $HostName);
 PrintCheckboxRow("SMTPRelayerRequiresAuthentication", "Server requires authentication", $SMTPRelayerRequiresAuthentication);
-PrintPropertyEditRow("SMTPRelayerUsername", "Username", $SMTPRelayerUsername);
-PrintPasswordEntry("SMTPRelayerPassword", "Password");
+PrintPropertyEditRow("SMTPRelayerUsername", "Username", $SMTPRelayerUsername, 30, null, "medium");
+PrintPasswordEntry("SMTPRelayerPassword", "Password", 20, "medium");
 ?>
           <p><?php EchoTranslation("Connection security")?></p>
           <select name="SMTPRelayerConnectionSecurity" class="medium">

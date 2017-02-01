@@ -75,12 +75,12 @@ if (strlen($MessagesUndelivered) > 0) {
 		$columns = explode("\t", $line);
 
 		if (count($columns)>4) {
-			if ($columns[4] == "1901-01-01 00:00:00") $columns[4] = "ASAP";
-			else $columns[4] = date_format(date_create($columns[4]), 'd.m.Y H:i:s');
+			$columns[4] = makeIsoDate($columns[4]);
+			if ($columns[4] == "1970-01-01 01:00:00") $columns[4] = "ASAP";
 
 			echo '            <tr>
               <td><a href="modern/view.php?q=' . $columns[5] . '" rel="facebox">' . $columns[0] . '</a></td>
-              <td>' . date_format(date_create($columns[1]), 'd.m.Y H:i:s') . '</td>
+              <td>' . makeIsoDate($columns[1]) . '</td>
               <td>' . PreprocessOutput($columns[2]) . '</td>
               <td>' . PreprocessOutput($columns[3]) . '</td>
               <td>' . $columns[4] . '</td>
@@ -94,6 +94,6 @@ if (strlen($MessagesUndelivered) > 0) {
         </table>
       </div>
       <div class="grey">
-        <div style="width:100%;"><span><?php echo $QueueCount ?></span><br><?php EchoTranslation("messages in queue") ?></div>
+        <div style="width:100%;"><span id="count"><?php echo $QueueCount ?></span><br><?php EchoTranslation("messages in queue") ?></div>
       </div>
     </div>

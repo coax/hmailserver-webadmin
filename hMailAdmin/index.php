@@ -117,7 +117,7 @@ if (hmail_isloggedin()) {
 include "include_treemenu.php";
 ?>
       </ul>
-      <a href="modern/impressum.php" rel="facebox" class="impressum">hMailAdmin 0.9.6 [beta]</a>
+      <a href="modern/impressum.php" rel="facebox" class="impressum">hMailAdmin 0.9.7 [beta]</a>
     </nav>
 
     <div class="content-wrapper">
