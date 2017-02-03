@@ -33,7 +33,7 @@ if (strlen($UndeliveredMessages) > 0) {
 
 		if (count($columns) > 4) {
 			$columns[4] = makeIsoDate($columns[4]);
-			if ($columns[4] == "1970-01-01 01:00:00") $columns[4] = $as_soon_as_possible;
+			if ($columns[4] <= "1970-01-01 01:00:00") $columns[4] = $as_soon_as_possible;
 
 			//escape invalid characters
 			$characters = array("\\", "{", "}");
@@ -41,11 +41,11 @@ if (strlen($UndeliveredMessages) > 0) {
 			$columns[5] = str_replace($characters, $replacements, $columns[5]);
 
   			if ($q3 != '[') $q3 .= ', ';
-			$q3 .= '[' . $columns[0] . ', "' . makeIsoDate($columns[1]) . '", "' . PreprocessOutput($columns[2]) . '", "' . PreprocessOutput($columns[3]) . '", "' . $columns[4] . '", "' . $columns[5] . '", ' . $columns[6] . ']';
+			$q3 .= '[' . $columns[0] . ', "' . makeIsoDate($columns[1]) . '", "' . PreprocessOutput($columns[2]) . '", "' . PreprocessOutput($columns[3]) . '", "' . $columns[4] . '", "' . $columns[5] . '", ' . $columns[7] . ']';
 		}
 	}
 	$q3 .= ']';
-} else $q3 = '0';
+} else $q3 = '[]';
 $q5 = $QueueCount;
 
 header('Content-Type: application/json');

@@ -33,9 +33,9 @@ for ($i = 0; $i < $Count; $i++) {
 
 	$move = '';
 	if ($i > 0)
-		$move = $move . '<a href="?page=background_rule_save&action=move&savetype=ruleup&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow up">Up</a>';
+		$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruleup&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow up">Up</a>';
 	if ($i < $Count-1)
-		$move = $move . '<a href="?page=background_rule_save&action=move&savetype=ruledown&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow down">Down</a>';
+		$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruledown&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow down">Down</a>';
 
 	echo '            <tr>
               <td><a href="?page=rule&action=edit&domainid=0&accountid=0&ruleid=' . $ruleid . '">' . $rulename . '</a></td>

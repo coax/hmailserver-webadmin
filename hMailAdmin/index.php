@@ -80,6 +80,8 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
   <script type="text/javascript" src="modern/js/chartist.js"></script>
   <link href="modern/css/chartist.css" rel="stylesheet">
   <script type="text/javascript" src="modern/js/chartist-tooltip.js"></script>
+  <script type="text/javascript" src="modern/js/datepicker.js"></script>
+  <link href="modern/css/datepicker.css" rel="stylesheet">
   <link href="modern/css/reset.css" rel="stylesheet">
   <link href="modern/css/core.css" rel="stylesheet">
 </head>
@@ -117,7 +119,7 @@ if (hmail_isloggedin()) {
 include "include_treemenu.php";
 ?>
       </ul>
-      <a href="modern/impressum.php" rel="facebox" class="impressum">hMailAdmin 0.9.7 [beta]</a>
+      <a href="modern/impressum.php" rel="facebox" class="impressum">hMailAdmin 0.9.8 [beta]</a>
     </nav>
 
     <div class="content-wrapper">

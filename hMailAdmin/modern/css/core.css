@@ -82,7 +82,7 @@ table tbody tr:hover {background:#f2f2f2;}
 table th:nth-child(1) {text-indent:10px;}
 table td a:nth-child(1) {padding-left:10px;}
 table.queue th:nth-child(1), table.queue th:nth-child(6), table.queue td:nth-child(1), table.queue td:nth-child(6) {width:8%;}
-table.queue th:nth-child(2), table.queue th:nth-child(5), table.queue td:nth-child(2), table.queue td:nth-child(5) {width:17%;}
+table.queue th:nth-child(2), table.queue th:nth-child(5), table.queue td:nth-child(2), table.queue td:nth-child(5) {width:17%; overflow:hidden; overflow-x:auto;}
 table.queue th:nth-child(3), table.queue th:nth-child(4), table.queue td:nth-child(3), table.queue td:nth-child(4) {width:25%; overflow:hidden; overflow-x:auto;}
 
 /* chartist */
@@ -222,6 +222,18 @@ input.wait, input:hover.wait {background:url('../../modern/css/wait.gif') 50% no
 .has-children > a::after {position:absolute; content:''; height:16px; width:16px; right:5%; top:50%; bottom:auto; -webkit-transform:translateY(-50%); -moz-transform:translateY(-50%); -ms-transform:translateY(-50%); -o-transform:translateY(-50%); transform:translateY(-50%); background:url('../../modern/css/cd-arrow.svg');}
 .has-children.selected > ul {display:block;}
 .has-children.selected > a::after {-webkit-transform:translateY(-50%) rotate(180deg); -moz-transform:translateY(-50%) rotate(180deg); -ms-transform:translateY(-50%) rotate(180deg); -o-transform:translateY(-50%) rotate(180deg); transform:translateY(-50%) rotate(180deg);}
+
+/* log viewer */
+.cd-form #results {width:100%; max-height:500px; padding:8px; border:1px solid #cfd9db; background-color:#fff; border-radius:3px; box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.08); font-size:12px; color:#3e454c; overflow:auto;}
+.cd-form #results > div {clear:both; min-width:900px; margin-bottom:4px;}
+.cd-form #results > div span {display:inline-block; border-bottom:1px dotted; font-weight:700;}
+.cd-form #results > div ul {padding:8px 0; display:table; width:100%;}
+.cd-form #results > div ul li {display:table-row;}
+.cd-form #results > div ul li:hover {background:#f2f2f2;}
+.cd-form #results > div ul li div {display:table-cell; padding:0 8px; line-height:16px;}
+.cd-form #results > div ul li div:first-child {width:180px;}
+.cd-form #results > div ul li div em {font-style:normal; color:#ff7e66;}
+.cd-form #results > div sup {font-size:9px;}
 
 /* tablet */
 @media only screen and (min-width:768px) {

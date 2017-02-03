@@ -14,14 +14,13 @@ Features
 - confirmation dialogs in modal
 - form validation
 - table sorting
-- simple log parser
+- log parser
 - based on original PHPWebAdmin
 - works with latest hMailServer (stable) version
-- continous development
+- continuous development
 
 Roadmap for 2017
 -----
-- better log parser
 - buy community license for [Imperavi Grafs](https://imperavi.com/grafs/) (hence the donation link below)
 
 Donate
@@ -50,12 +49,18 @@ If you DON'T HAVE PHPWebAdmin installed:
 
 5\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
 
-Common issue: https://www.hmailserver.com/documentation/latest/?page=ts_setup_phpwebadmin
+Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_phpwebadmin
 
 Changelog
 -----
+Version 0.9.8 beta (2017-02-03)
+- [new] powerful log parser (using server-side logs)
+- [new] datepicker for date fields
+- [tweak] IP Ranges expiry date more friendly
+- [fix] greylisting checkbox in hm_domain.php
+
 Version 0.9.7 beta (2017-02-01)
-- tweak] convert all dates to ISO (YYYY-MM-DD HH:MM:SS) due consistency
+- [tweak] convert all dates to ISO (YYYY-MM-DD HH:MM:SS) due consistency
 - [tweak] dashboard optimizations in JSON
 - [fix] typo in background_account_save.php
 - [fix] minor fixes in validation fields

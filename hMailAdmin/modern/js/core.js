@@ -16,6 +16,39 @@ jQuery(document).ready(function(){
 	//bind facebox modal
 	$('a[rel*=facebox]').facebox();
 
+	//show datepicker
+	if($('[data-toggle="datepicker"]').length){
+		$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', autoHide: true});
+	}
+
+	if($('#log-parser').length){
+		$('#log-parser :submit').click(function() {
+			var form = $('#log-parser'),
+			result = $('#results'),
+			params = form.serialize(),
+			button = $(':submit', form);
+			$.ajax({
+				type: 'post',
+				url: './modern/logview.php',
+				data: params,
+				cache: false,
+				timeout: 50000,
+				beforeSend: function() {
+					result.html('Please wait... this might take some time.');
+					button.prop('disabled', true).addClass('wait');
+				},
+				success: function(data) {
+					result.html(data);
+					button.prop('disabled', false).removeClass('wait');
+				}
+			});
+			return false;
+		});
+		$('#log-parser [type=button]').click(function() {
+			$('#results').html('Click on "Parse log" button');
+		});
+	}
+
 	//grafs refresh
 	if($('#processed, #sessions').length){
 		// Chartist
@@ -119,7 +152,7 @@ jQuery(document).ready(function(){
 				$('#pop3').text(Number(json[1][1].toFixed(0)).toLocaleString());
 				$('#imap').text(Number(json[1][2].toFixed(0)).toLocaleString());
 				//Delivery queue
-				var queue;
+				var queue = '';
 				if (json[2] !== 0) {
 					$.each(json[2], function(key, data){
 						queue += '<tr><td><a href="#" onclick="$.facebox({ajax:\'modern/view.php?q=' + data[5] + '\'}); return false;">' + data[0] + '</a></td><td>' + data[1] + '</td><td>' + data[2] + '</td><td>' + data[3] + '</td><td>' + data[4] + '</td><td>' + data[6] + '</td></tr>';

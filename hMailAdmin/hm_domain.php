@@ -254,7 +254,7 @@ PrintCheckboxRow("domainplusaddressingenabled", $obLanguage->String("Enabled"), 
           <h3><a href="#"><?php EchoTranslation("Greylisting")?></a></h3>
           <div class="hidden">
 <?php
-PrintCheckboxRow("domainantispamenablegreylisting", $obLanguage->String("Enabled"), $domainantispamenablegreylistingchecked);
+PrintCheckboxRow("domainantispamenablegreylisting", $obLanguage->String("Enabled"), $domainantispamenablegreylisting);
 ?>
           </div>
 <?php

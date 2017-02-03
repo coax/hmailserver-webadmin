@@ -76,7 +76,7 @@ if (strlen($MessagesUndelivered) > 0) {
 
 		if (count($columns)>4) {
 			$columns[4] = makeIsoDate($columns[4]);
-			if ($columns[4] == "1970-01-01 01:00:00") $columns[4] = "ASAP";
+			if ($columns[4] <= "1970-01-01 01:00:00") $columns[4] = "ASAP";
 
 			echo '            <tr>
               <td><a href="modern/view.php?q=' . $columns[5] . '" rel="facebox">' . $columns[0] . '</a></td>
@@ -84,7 +84,7 @@ if (strlen($MessagesUndelivered) > 0) {
               <td>' . PreprocessOutput($columns[2]) . '</td>
               <td>' . PreprocessOutput($columns[3]) . '</td>
               <td>' . $columns[4] . '</td>
-              <td>' . $columns[6] . '</td>
+              <td>' . $columns[7] . '</td>
             </tr>' . PHP_EOL;
 		}
 	}

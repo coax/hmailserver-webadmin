@@ -115,9 +115,9 @@ if ($ruleid == 0) {
 
 		$move = '';
 		if ($i > 0)
-			$move = $move . '<a href="?page=background_rule_save&action=move&savetype=actionup&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow up">Up</a>';
+			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=actionup&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow up">Up</a>';
 		if ($i < $count-1)
-			$move = $move . '<a href="?page=background_rule_save&action=move&savetype=actiondown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow down">Down</a>';
+			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=actiondown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow down">Down</a>';
 
 		echo '              <tr>
                 <td><a href="?page=rule_action&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '">' . $actionName . '</a></td>
