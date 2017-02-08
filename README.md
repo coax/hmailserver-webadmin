@@ -53,6 +53,10 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
+Version 1.0 (2017-02-08)
+- stable release
+- minor tweaks and improvements
+
 Version 0.9.8 beta (2017-02-03)
 - [new] powerful log parser (using server-side logs)
 - [new] datepicker for date fields
@@ -132,12 +136,12 @@ Version 0.9 beta (2016-12-28)
 - [jQuery](https://jquery.com/)
 - [Modernizr](https://modernizr.com/)
 - [Defunkt Facebox](http://defunkt.io/facebox/Defunkt Facebox)
-- [tablesort](http://github.com/kylefox/jquery-tablesorttablesort)
+- [tablesort](https://github.com/kylefox/jquery-tablesorttablesort)
+- [datepicker](https://github.com/fengyuanchen/datepicker)
 - [timeago](http://timeago.yarp.com/timeago)
 - [Chartist](https://gionkunz.github.io/chartist-js/Chartist)
 - [CodyHouse Responsive Sidebar Navigation](https://codyhouse.co/gem/responsive-sidebar-navigation/)
 - [Open Iconic](https://useiconic.com/open/)
-- [hMailServer log viewer](https://github.com/hazarkarabay/hmailserver-logviewer)
 
 Questions and contributions
 -----

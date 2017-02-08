@@ -33,12 +33,13 @@ jQuery(document).ready(function(){
 				data: params,
 				cache: false,
 				timeout: 50000,
+				dataType: 'json',
 				beforeSend: function() {
 					result.html('Please wait... this might take some time.');
 					button.prop('disabled', true).addClass('wait');
 				},
 				success: function(data) {
-					result.html(data);
+					result.html(parseLog(data));
 					button.prop('disabled', false).removeClass('wait');
 				}
 			});
@@ -60,16 +61,17 @@ jQuery(document).ready(function(){
 				axisX: {
 					offset: 0,
 					showLabel: false,
-					showGrid: false,
+					showGrid: false
 				},
 				axisY: {
 					offset: 0,
 					showLabel: false,
 					showGrid: false,
+					onlyInteger: true
 				},
 				showLine: true,
 				showPoint: false,
-				showArea: true,
+				showArea: true
 			});
 
 
@@ -427,4 +429,38 @@ function CallAjax(url,result) {
 			result.html('<div class="warning">' + data + '</div>');
 		}
 	});
+}
+
+//log parsing magic
+function parseLog(data) {
+	if(typeof data == 'string') return data;
+	var out = '';
+	$.each(data,function(k,v){
+		out += parseLogGroup(v);
+	});
+	return out;
+}
+
+function parseLogGroup(data) {
+	if(data[0][0]=='RAW') return parseLogRaw(data);
+	var out = '<div><span>' + data[0][0];
+	if(data[0][0]=='SMTPD'||data[0][0]=='SMTPC'||data[0][0]=='POP3D'||data[0][0]=='POP3C'||data[0][0]=='IMAPD')
+		out += ' &nbsp;&ndash;&nbsp; ' + data[0][1] + ' &nbsp;&ndash;&nbsp; ' + data[0][2] + ' <sup><a href="https://href.li/?http://ip-api.com/line/' + data[0][2] + '" target="_blank">?</a></sup>';
+	out += '</span><ul>';
+	$.each(data[1],function(k,v){
+		var css = '';
+		if (v[1].indexOf('RECEIVED:') > -1) css = 'recieved';
+		else if (v[1].indexOf('SENT:') > -1) css = 'sent';
+		out += '<li class="' + css + '"><div>' + v[0] + '</div><div>' + v[1] + '</div></li>';
+	});
+	out += '</ul></div>';
+	return out;
+}
+
+function parseLogRaw(data) {
+	var out = '';
+	$.each(data[1],function(k,v){
+		out += v + '<br>';
+	});
+	return out;
 }

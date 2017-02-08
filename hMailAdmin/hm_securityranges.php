@@ -25,7 +25,7 @@ $Count = $obSecurityRanges->Count();
 <?php
 function humanTiming($time) {
 	$time = $time - time();
-	$time = ($time<1) ? 0 : $time;
+	if($time < 1) return 'Expired';
 	$tokens = array (
 		31536000 => 'year',
 		2592000 => 'month',
@@ -36,14 +36,11 @@ function humanTiming($time) {
 		1 => 'second'
 	);
 
-	if ($time == 0)
-		return 'Never';
-	else
-		foreach ($tokens as $unit => $text) {
-			if ($time < $unit) continue;
-			$numberOfUnits = floor($time / $unit);
-			return $numberOfUnits . ' ' . $text . (($numberOfUnits>1) ? 's' : '');
-		}
+	foreach ($tokens as $unit => $text) {
+		if ($time < $unit) continue;
+		$numberOfUnits = floor($time / $unit);
+		return $numberOfUnits . ' ' . $text . (($numberOfUnits>1) ? 's' : '');
+	}
 }
 
 for ($i = 0; $i < $Count; $i++) {
@@ -52,15 +49,13 @@ for ($i = 0; $i < $Count; $i++) {
 	$securityrangeid = $obSecurityRange->ID;
 
 	$securityrangename = PreprocessOutput($securityrangename);
-	$securityrangepriority = $obSecurityRange->Priority; //added
-	//$ExpiresTime = $obSecurityRange->Expires ? ceil((strtotime($obSecurityRange->ExpiresTime)-time())/60):'Never expires'; //added
-	$ExpiresTime = $obSecurityRange->ExpiresTime;
-
+	$securityrangepriority = $obSecurityRange->Priority;
+	$ExpiresTime = $obSecurityRange->Expires ? humanTiming(strtotime(makeIsoDate($obSecurityRange->ExpiresTime))) : 'Never';
 
 	echo '            <tr>
               <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . (strpos($securityrangename,'Auto-ban:')!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
               <td>' . $securityrangepriority . '</td>
-              <td>' . humanTiming(strtotime($ExpiresTime)) . '</td>
+              <td>' . $ExpiresTime . '</td>
               <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $securityrangename . '</b>:\',\'Yes\',\'?page=background_securityrange_save&csrftoken=' . $csrftoken . '&action=delete&securityrangeid=' . $securityrangeid . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }

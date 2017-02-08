@@ -163,7 +163,7 @@ PrintPropertyAreaRow("vacationmessage", "Text", $vacationmessage, 6, 55);
 PrintCheckboxRow("vacationmessageexpires", "Automatically expires", $vacationmessageexpires);
 ?>
           <p><?php EchoTranslation("Expiration date (YYYY-MM-DD)")?></p>
-          <input type="text" name="vacationmessageexpiresdate" value="<?php echo $vacationmessageexpiresdate ?>" maxlength="10" data-toggle="datepicker" class="small">
+          <input type="text" name="vacationmessageexpiresdate" value="<?php echo $vacationmessageexpiresdate ?>" maxlength="10" data-toggle="datepicker" class="medium">
         </div>
         <h3><a href="#"><?php EchoTranslation("Forwarding")?></a></h3>
         <div class="hidden">

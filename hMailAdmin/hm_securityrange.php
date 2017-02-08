@@ -86,7 +86,7 @@ PrintHidden("page", "background_securityrange_save");
 PrintHidden("action", $action);
 PrintHidden("securityrangeid", $securityrangeid);
 
-PrintPropertyEditRow("securityrangename", "Name", $securityrangename);
+PrintPropertyEditRow("securityrangename", "Name", $securityrangename, 255);
 PrintPropertyEditRow("securityrangepriority", "Priority", $securityrangepriority, 5, "number", "small");
 PrintPropertyEditRow("securityrangelowerip", "Lower IP", $securityrangelowerip, 30, "ip");
 PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip, 30, "ip");

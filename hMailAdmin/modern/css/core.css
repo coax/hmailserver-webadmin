@@ -61,6 +61,7 @@ b {font-weight:700;}
 /* boxes */
 .box, .box.medium, .box.large {width:100%;}
 .box {float:left; display:block; position:relative; overflow:hidden; background:#fff; margin:0 3% 3% 0; border-radius:3px;}
+.box:nth-child(3) {margin-right:0;}
 .box .grey {border-top:1px solid #f2f2f2; background:#f9fafa; padding:18px;}
 .box .grey div {display:inline-block; width:32%; text-align:center; color:#acacac; font-size:12px;}
 .box .grey span {font-size:18px; color:#3e454c; line-height:120%;}
@@ -84,6 +85,7 @@ table td a:nth-child(1) {padding-left:10px;}
 table.queue th:nth-child(1), table.queue th:nth-child(6), table.queue td:nth-child(1), table.queue td:nth-child(6) {width:8%;}
 table.queue th:nth-child(2), table.queue th:nth-child(5), table.queue td:nth-child(2), table.queue td:nth-child(5) {width:17%; overflow:hidden; overflow-x:auto;}
 table.queue th:nth-child(3), table.queue th:nth-child(4), table.queue td:nth-child(3), table.queue td:nth-child(4) {width:25%; overflow:hidden; overflow-x:auto;}
+table.queue tbody tr td {font-size:12px;}
 
 /* chartist */
 .ct-series-a .ct-point, .ct-series-a .ct-line, .ct-series-a .ct-bar, .ct-series-a .ct-slice-donut {stroke:#3dbef9;}
@@ -98,6 +100,7 @@ table.queue th:nth-child(3), table.queue th:nth-child(4), table.queue td:nth-chi
 .chartist-tooltip:after {position:absolute; left:50%; bottom:-6px; content:' '; height:0; margin:0 0 0 -6px; border-right:5px solid transparent; border-left:5px solid transparent; border-top:6px solid rgba(255,255,255,.95); line-height:0;}
 .chartist-tooltip.tooltip-show {opacity:1;}
 .ct-area, .ct-line {pointer-events:none;}
+.ct-vertical {font-size:9px;}
 
 /* facebox modal */
 #facebox {position:absolute; top:0; left:0; z-index:100; text-align:left; display:none;}
@@ -234,6 +237,8 @@ input.wait, input:hover.wait {background:url('../../modern/css/wait.gif') 50% no
 .cd-form #results > div ul li div:first-child {width:180px;}
 .cd-form #results > div ul li div em {font-style:normal; color:#ff7e66;}
 .cd-form #results > div sup {font-size:9px;}
+.cd-form #results > div ul li.sent {color:#1784c7;}
+.cd-form #results > div ul li.recieved {color:#87c442;}
 
 /* tablet */
 @media only screen and (min-width:768px) {

@@ -45,7 +45,7 @@ for ($i = 0; $i < $Count; $i++) {
 	$AccountEnabled = $obAccount->Active ? $obLanguage->String("Yes") : $obLanguage->String("No");
 	$AccountSize = $obAccount->Size();
 	$Color = "green";
-	if($accountmaxsize != 0){
+	if($accountmaxsize > 0){
 		$Percentage = Round((($accountmaxsize - $AccountSize) / ($accountmaxsize)) * 100);
 		if ($Percentage<=10) $Color = "red";
 		elseif ($Percentage<=30) $Color = "yellow";
