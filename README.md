@@ -53,6 +53,13 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
+Version 1.1 (2017-03-12)
+- [new] country name and flag in auto-ban info
+- [tweak] navigation UI improvements
+- [tweak] CSS revamp
+- [tweak] selected domain shows all submenus
+- [fix] typos in hm_account_externalaccount.php
+
 Version 1.0 (2017-02-08)
 - stable release
 - minor tweaks and improvements

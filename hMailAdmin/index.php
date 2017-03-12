@@ -73,7 +73,6 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
   <script type="text/javascript" src="modern/js/jquery.js"></script>
   <script type="text/javascript" src="modern/js/modernizr.js"></script>
   <script type="text/javascript" src="modern/js/core.js"></script>
-  <script type="text/javascript" src="modern/js/menu-aim.js"></script>
   <script type="text/javascript" src="modern/js/timeago.js"></script>
   <script type="text/javascript" src="modern/js/tablesort.js"></script>
   <script type="text/javascript" src="modern/js/facebox.js"></script>
@@ -90,18 +89,10 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
 <?php
 if (hmail_isloggedin()) {
 ?>
-  <header class="cd-main-header">
-    <a href="index.php" class="cd-logo"><span>hMailServer</span></a>
-<!-- not needed yet
-    <div class="cd-search is-hidden">
-      <form action="#">
-        <input type="search" placeholder="Search...">
-      </form>
-    </div>
--->
-    <a href="#" class="cd-nav-trigger"><?php EchoTranslation("Menu") ?><span></span></a>
-    <nav class="cd-nav">
-      <ul class="cd-top-nav">
+  <header>
+    <a href="index.php" id="logo"><span>hMailServer</span></a>
+    <nav>
+      <ul id="top">
         <li class="has-children account">
           <a href="#"><?php echo $username ?></a>
           <ul>
@@ -110,19 +101,19 @@ if (hmail_isloggedin()) {
         </li>
       </ul>
     </nav>
+    <a href="#" id="mobile"><?php EchoTranslation("Menu") ?><span></span></a>
   </header>
-  <main class="cd-main-content">
-    <nav class="cd-side-nav">
+  <main>
+    <div id="sidebar">
       <ul>
 <?php
 //build tree menu
 include "include_treemenu.php";
 ?>
       </ul>
-      <a href="modern/impressum.php" rel="facebox" class="impressum">hMailAdmin 1.0</a>
-    </nav>
-
-    <div class="content-wrapper">
+      <a href="modern/impressum.php" rel="facebox" class="impressum">hMailAdmin 1.1</a>
+    </div>
+    <div id="content">
 <?php
 	include './' . $page . '.php';
 ?>
@@ -132,7 +123,6 @@ include "include_treemenu.php";
 	include "hm_login.php";
 }
 ?>
-
   </main>
 </body>
 </html>

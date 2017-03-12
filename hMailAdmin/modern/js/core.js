@@ -182,16 +182,16 @@ jQuery(document).ready(function(){
 	}
 
 	//responsive navigation
-	if($('.cd-side-nav').length){
+	if($('#sidebar').length){
 		//cache DOM elements
-		var mainContent = $('.cd-main-content'), header = $('.cd-main-header'), sidebar = $('.cd-side-nav'), sidebarTrigger = $('.cd-nav-trigger'), topNavigation = $('.cd-top-nav'), searchForm = $('.cd-search'), accountInfo = $('.account');
+		var mainContent = $('main'), header = $('header'), sidebar = $('#sidebar'), hamburger = $('#mobile'), topNavigation = $('#top');
 
-		function checkMQ() {
-			//check if mobile or desktop device
-			return window.getComputedStyle(document.querySelector('.cd-main-content'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
+		//check if mobile
+		function mobileDevice() {
+			return window.getComputedStyle(document.querySelector('main'), '::before').content.replace(/'/g, "").replace(/"/g, "");
 		}
 
-		//on resize, move search and top nav position according to window width
+		//move top navigation
 		var resizing = false;
 		moveNavigation();
 		$(window).on('resize', function(){
@@ -202,109 +202,71 @@ jQuery(document).ready(function(){
 		});
 
 		function moveNavigation(){
-			var mq = checkMQ();
-			if ( mq == 'mobile' && topNavigation.parents('.cd-side-nav').length == 0 ) {
+			var m = mobileDevice();
+			if (m == 'mobile' && topNavigation.parents('#sidebar').length == 0) {
 				detachElements();
 				topNavigation.appendTo(sidebar);
-				searchForm.removeClass('is-hidden').prependTo(sidebar);
-			} else if ( ( mq == 'tablet' || mq == 'desktop') &&  topNavigation.parents('.cd-side-nav').length > 0 ) {
+			} else if ((m == 'tablet' || m == 'desktop') && topNavigation.parents('#sidebar').length > 0) {
 				detachElements();
-				searchForm.insertAfter(header.find('.cd-logo'));
-				topNavigation.appendTo(header.find('.cd-nav'));
+				topNavigation.appendTo(header.find('nav'));
 			}
-			checkSelected(mq);
+			checkSelected(m);
 			resizing = false;
 		}
 
-		//on window scrolling - fix sidebar nav
-		var scrolling = false;
-		checkScrollbarPosition();
-		$(window).on('scroll', function(){
-			if(!scrolling ) {
-				(!window.requestAnimationFrame) ? setTimeout(checkScrollbarPosition, 300) : window.requestAnimationFrame(checkScrollbarPosition);
-				scrolling = true;
-			}
+		function detachElements() {
+			topNavigation.detach();
+		}
+
+		//remove added classes on desktop
+		function checkSelected(m) {
+			if(m == 'desktop') $('.has-children.selected').removeClass('selected');
+		}
+
+		//mobile menu
+		hamburger.on('click', function(e){
+			e.preventDefault();
+			$([sidebar, hamburger]).toggleClass('is-visible');
 		});
 
-		//mobile only - open sidebar when user clicks the hamburger menu
-		sidebarTrigger.on('click', function(event){
-			event.preventDefault();
-			$([sidebar, sidebarTrigger]).toggleClass('nav-is-visible');
-		});
+		//tablet menu
+		$('.has-children > a').on('click', function(e){
+			var m = mobileDevice(), selectedItem = $(this);
 
-		//click on item and show submenu
-		$('.has-children > a').on('click', function(event){
-			var mq = checkMQ(),
-				selectedItem = $(this);
-			if (mq=='mobile' || mq=='tablet') {
-				event.preventDefault();
+			if ((m=='desktop') && (selectedItem.parent().parent().attr('id')!=='top')) {
+				//nothing
+			} else {
+				e.preventDefault();
+
 				if (selectedItem.parent('li').hasClass('selected')) {
 					selectedItem.parent('li').removeClass('selected');
 				} else {
 					sidebar.find('.has-children.selected').removeClass('selected');
-					accountInfo.removeClass('selected');
 					selectedItem.parents('li').addClass('selected');
 				}
 			}
 		});
 
-		//click on account and show submenu - desktop version only
-		accountInfo.children('a').on('click', function(event){
-			var mq = checkMQ(),
-				selectedItem = $(this);
-			if(mq == 'desktop') {
-				event.preventDefault();
-				accountInfo.toggleClass('selected');
-				sidebar.find('.has-children.selected').removeClass('selected');
+		//scroll fixed position
+		var windowHeight = $(window).height();
+		var sidebarHeight = $('#sidebar').height() + 55;
+		var contentHeight = $('#content').height() + 55;
+		$(window).scroll(function() {
+			var scrollTop = $(this).scrollTop();
+			if ((scrollTop + windowHeight > sidebarHeight) && (contentHeight > sidebarHeight)) {
+				$('#sidebar').addClass('is-fixed');
+			} else {
+				$('#sidebar').removeClass('is-fixed');
 			}
 		});
-
-		$(document).on('click', function(event){
-			if( !$(event.target).is('.has-children a') ) {
-				sidebar.find('.has-children.selected').removeClass('selected');
-				accountInfo.removeClass('selected');
-			}
-		});
-
-		//on desktop - differentiate between a user trying to hover over a dropdown item vs trying to navigate into a submenu's contents
-		sidebar.children('ul').menuAim({
-			activate: function(row) {
-				$(row).addClass('hover');
-			},
-			deactivate: function(row) {
-				$(row).removeClass('hover');
-			},
-			exitMenu: function() {
-				sidebar.find('.hover').removeClass('hover');
-				return true;
-			},
-			submenuSelector: '.has-children',
-		});
-
-		function detachElements() {
-			topNavigation.detach();
-			searchForm.detach();
-		}
-
-		function checkSelected(mq) {
-			//on desktop, remove selected class from items selected on mobile/tablet version
-			if( mq == 'desktop' ) $('.has-children.selected').removeClass('selected');
-		}
-
-		function checkScrollbarPosition() {
-			var mq = checkMQ();
-
-			if( mq != 'mobile' ) {
-				var sidebarHeight = sidebar.outerHeight(),
-					windowHeight = $(window).height(),
-					mainContentHeight = mainContent.outerHeight(),
-					scrollTop = $(window).scrollTop();
-
-				( ( scrollTop + windowHeight > sidebarHeight ) && ( mainContentHeight - sidebarHeight != 0 ) ) ? sidebar.addClass('is-fixed').css('bottom', 0) : sidebar.removeClass('is-fixed').attr('style', '');
-			}
-			scrolling = false;
-		}
 	}
+
+	//abandoned idea, onclick loads domain
+	//$('.domain').on('click', function(){
+	//	var domain = $(this).attr('rel');
+	//	$(this).parent().addClass('has-children');
+	//	$('<ul>').load('./modern/domain.php?domainid=' + domain).insertAfter($(this));
+	//});
 });
 
 //confirm delete

@@ -2,7 +2,7 @@
 if (!defined('IN_WEBADMIN'))
 	exit();
 ?>
-        <li class="cd-label"><?php EchoTranslation("Main") ?></li>
+        <li class="label"><?php EchoTranslation("Main") ?></li>
 <?php
 //user
 if (hmailGetAdminLevel() == 0) {
@@ -38,7 +38,7 @@ if (hmailGetAdminLevel() == 1) {
 	$domainname = hmailGetUserDomainName($username);
 	$obDomain = $obBaseApp->Domains->ItemByName($domainname);
 
-	GetStringForDomain($obDomain,1);
+	GetStringForDomain($obDomain);
 }
 
 //admin
@@ -75,7 +75,7 @@ if (hmailGetAdminLevel() == 2) {
 for ($i = 1; $i <= $TotalDomains; $i++) {
 	$obDomain = $obBaseApp->Domains[$i-1];
 
-	GetStringForDomain($obDomain,2);
+	GetStringForDomain($obDomain);
 }
 ?>
           </ul>
@@ -83,17 +83,15 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
         <li class="rules <?php if (strpos('hm_rules,hm_rule', $page) !== false) echo 'active' ?>">
           <a href="?page=rules"><?php EchoTranslation("Rules") ?><span class="count"><?php echo $TotalRules ?></span></a>
         </li>
-      </ul>
-      <ul>
-        <li class="cd-label"><?php EchoTranslation("Configuration") ?></li>
+        <li class="label"><?php EchoTranslation("Configuration") ?></li>
         <li class="has-children settings">
           <a href="#"><?php EchoTranslation("Settings") ?></a>
           <ul>
             <li class="has-children">
-              <a href="#"><?php EchoTranslation("Protocols") ?></a>
+              <a href="#" class="more"><?php EchoTranslation("Protocols") ?></a>
               <ul>
                 <li class="has-children">
-                  <a href="?page=smtp"><?php EchoTranslation("SMTP") ?></a>
+                  <a href="?page=smtp" class="more"><?php EchoTranslation("SMTP") ?></a>
                   <ul>
                     <li><a href="?page=routes"><?php EchoTranslation("Routes") ?><span class="count"><?php echo $TotalRoutes ?></span></a></li>
                   </ul>
@@ -103,7 +101,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
               </ul>
             </li>
             <li class="has-children">
-              <a href="?page=smtp_antispam"><?php EchoTranslation("Anti-spam") ?></a>
+              <a href="?page=smtp_antispam" class="more"><?php EchoTranslation("Anti-spam") ?></a>
               <ul>
                 <li><a href="?page=dnsblacklists"><?php EchoTranslation("DNS blacklists") ?><span class="count"><?php echo $TotalBlacklists ?></span></a></li>
                 <li><a href="?page=surblservers"><?php EchoTranslation("SURBL servers") ?></a></li>
@@ -114,7 +112,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
             <li><a href="?page=smtp_antivirus"><?php EchoTranslation("Anti-virus") ?></a></li>
             <li><a href="?page=logging"><?php EchoTranslation("Logging") ?></a></li>
             <li class="has-children">
-              <a href="#"><?php EchoTranslation("Advanced") ?></a>
+              <a href="#" class="more"><?php EchoTranslation("Advanced") ?></a>
               <ul>
                 <li><a href="?page=sslcertificates"><?php EchoTranslation("SSL certificates") ?></a></li>
                 <li><a href="?page=autoban"><?php EchoTranslation("Auto ban") ?></a></li>
@@ -140,9 +138,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
         <li class="help">
           <a href="<?php echo $DocumentationLink ?>" target="_blank"><?php EchoTranslation("Documentation") ?></a>
         </li>
-      </ul>
-      <ul>
-        <li class="cd-label"><?php EchoTranslation("Quick links") ?></li>
+        <li class="label"><?php EchoTranslation("Quick links") ?></li>
         <li class="dns-blacklists <?php if ($page=='hm_dnsblacklists') echo 'active' ?>">
           <a href="?page=dnsblacklists"><?php EchoTranslation("DNS blacklists") ?><span class="count"><?php echo $TotalBlacklists ?></span></a>
         </li>
@@ -152,9 +148,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
         <li class="logs <?php if ($page=='hm_logviewer') echo 'active' ?>">
           <a href="?page=logviewer"><?php EchoTranslation("Log viewer") ?></a>
         </li>
-      </ul>
-      <ul>
-        <li class="cd-label"><?php EchoTranslation("Action") ?></li>
+        <li class="label"><?php EchoTranslation("Action") ?></li>
 <?php
 $Action = hmailGetVar("action","");
 
@@ -216,48 +210,85 @@ PrintHidden("controlaction", $controlaction);
 <?php
 }
 
-function GetStringForDomain($obDomain, $parentid) {
-	global $dtree, $dtitem, $domain_root;
+function GetStringForDomain($Domain) {
+	$DomainId = $Domain->ID;
 
 	$current_domainid = hmailGetVar("domainid",0);
-	$current_accountid = hmailGetVar("accountid",0);
+	//$current_accountid = hmailGetVar("accountid",0);
 
-	$domainname = $obDomain->Name;
-	$domainname = PreprocessOutput($domainname);
-	$domainname = str_replace("'", "\'", $domainname);
+	$DomainName = $Domain->Name;
+	$DomainName = PreprocessOutput($DomainName);
+	$DomainName = str_replace("'", "\'", $DomainName);
 
-	//define $page variable again
-	$page = hmailGetVar("page");
-	$domainid = hmailGetVar("domainid");
-	if ($domainid==$obDomain->ID) $domainname = '<span style="border-bottom:1px solid;" title="' . $domainname . '">' . $domainname . '</span>';
+	if (hmailGetVar("domainid")==$DomainId) $DomainName = '<span class="active">' . $DomainName . '</span>';
 
-	if ($current_domainid != $obDomain->ID && hmailGetAdminLevel() == ADMIN_SERVER) {
+	if ($current_domainid != $DomainId && hmailGetAdminLevel() == ADMIN_SERVER) {
 		// If the user is logged on as a system administrator, only show accounts
 		// for the currently selected domain.
-		echo '            <li><a href="?page=domain&action=edit&domainid=' . $obDomain->ID . '">' . $domainname . '</a></li>' . PHP_EOL;
+		echo '            <li><a href="?page=domain&action=edit&domainid=' . $DomainId . '">' . $DomainName . '</a></li>' . PHP_EOL;
 		return;
 	} else
-		$Accounts  = $obDomain->Accounts();
+		$Accounts = $Domain->Accounts();
 		$TotalAccounts = $Accounts->Count();
-		$accounts_root = $dtitem++;
 
-		$Aliases = $obDomain->Aliases();
+		$Aliases = $Domain->Aliases();
 		$TotalAliases = $Aliases->Count();
-		$aliases_root = $dtitem++;
 
-		$DistributionLists = $obDomain->DistributionLists();
+		$DistributionLists = $Domain->DistributionLists();
 		$TotalDistributionLists = $DistributionLists->Count();
 
 		echo '            <li class="has-children">
-              <a href="?page=domain&action=edit&domainid=' . $obDomain->ID . '">' . $domainname . '</a>
+              <a href="?page=domain&action=edit&domainid=' . $DomainId . '">' . $DomainName . '</a>
               <ul>
-                <li><a href="?page=accounts&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Accounts") . '<span class="count">' . $TotalAccounts . '</a></li>
-                <li><a href="?page=aliases&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Aliases") . '<span class="count">' . $TotalAliases . '</a></li>
-                <li><a href="?page=distributionlists&domainid=' . $obDomain->ID . '">' . GetStringForJavaScript("Distribution lists") . '<span class="count">' . $TotalDistributionLists . '</a></li>
+                <li class="has-children"><a href="?page=accounts&domainid=' . $DomainId . '">' . GetStringForJavaScript("Accounts") . '<span class="count">' . $TotalAccounts . '</a>
+                  <ul>' . PHP_EOL;
+
+		for ($j = 0; $j < $TotalAccounts; $j++) {
+			$Account = $Accounts->Item($j);
+			$AccountId = $Account->ID;
+			$EmailAddress = $Account->Address;
+			$EmailAddress = PreprocessOutput($EmailAddress);
+			$EmailAddress = str_replace("'", "\'", $EmailAddress);
+
+			echo '                    <li><a href="?page=account&action=edit&accountid=' . $AccountId . '&domainid=' . $DomainId . '">' . $EmailAddress . '</a></li>' . PHP_EOL;
+		}
+
+		echo '                  </ul>
+                </li>
+                <li class="has-children"><a href="?page=aliases&domainid=' . $DomainId . '">' . GetStringForJavaScript("Aliases") . '<span class="count">' . $TotalAliases . '</a>
+                  <ul>' . PHP_EOL;
+
+		for ($j = 0; $j < $TotalAliases; $j++) {
+			$Alias = $Aliases->Item($j);
+			$AliasId = $Alias->ID;
+			$AliasName = $Alias->Name;
+			$AliasName = PreprocessOutput($AliasName);
+			$AliasName = str_replace("'", "\'", $AliasName);
+
+			echo '                    <li><a href="?page=alias&action=edit&aliasid=' . $AliasId . '&domainid=' . $DomainId . '">' . $AliasName . '</a></li>' . PHP_EOL;
+		}
+
+		echo '                  </ul>
+                </li>
+                <li class="has-children"><a href="?page=distributionlists&domainid=' . $DomainId . '">' . GetStringForJavaScript("Distribution lists") . '<span class="count">' . $TotalDistributionLists . '</a>
+                  <ul>' . PHP_EOL;
+
+		for ($j = 0; $j < $TotalDistributionLists; $j++) {
+			$DistributionList = $DistributionLists->Item($j);
+			$DistributionListId = $DistributionList->ID;
+			$Address = $DistributionList->Address;
+			$Address = PreprocessOutput($Address);
+			$Address = str_replace("'", "\'", $Address);
+
+			echo '                    <li><a href="?page=distributionlist&action=edit&distributionlistid=' . $DistributionListId . '&domainid=' . $DomainId . '">' . $Address . '</a></li>' . PHP_EOL;
+		}
+
+		echo '                  </ul>
+                </li>
               </ul>
             </li>' . PHP_EOL;
 }
 
-unset($obDomain);
-unset($obAccount);
+unset($Domain);
+unset($Accounts);
 ?>

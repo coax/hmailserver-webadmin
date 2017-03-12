@@ -51,6 +51,8 @@ for ($i = 0; $i < $Count; $i++) {
 	$securityrangename = PreprocessOutput($securityrangename);
 	$securityrangepriority = $obSecurityRange->Priority;
 	$ExpiresTime = $obSecurityRange->Expires ? humanTiming(strtotime(makeIsoDate($obSecurityRange->ExpiresTime))) : 'Never';
+	$LowerIp = $obSecurityRange->LowerIP;
+
 
 	echo '            <tr>
               <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . (strpos($securityrangename,'Auto-ban:')!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>

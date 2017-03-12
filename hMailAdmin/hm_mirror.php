@@ -14,7 +14,7 @@ if($action == "save")
 ?>
     <div class="box">
       <h2><?php EchoTranslation("Mirror") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
         <div class="warning">A copy of all e-mails sent on this server, including both incoming and outgoing messages, will be sent to the e-mail address entered as mirror-address below.</div>
 <?php
 PrintHiddenCsrfToken();

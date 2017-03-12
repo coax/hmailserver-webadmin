@@ -20,7 +20,7 @@ if ($action == "edit") {
 ?>
     <div class="box">
       <h2><?php EchoTranslation("Incoming relay") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_incomingrelay_save");

@@ -57,7 +57,7 @@ $avactiondeletattachmentschecked = hmailCheckedIf1($avaction == 1);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Anti-virus") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "smtp_antivirus");

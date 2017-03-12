@@ -33,7 +33,7 @@ $backupcompresschecked = hmailCheckedIf1($backupcompress);
 ?>
     <div class="box">
       <h2><?php EchoTranslation("Backup") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "backup");
@@ -55,7 +55,7 @@ PrintSaveButton();
 
     <div class="box">
       <h2><?php EchoTranslation("Actions") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "backup");

@@ -79,7 +79,7 @@ $IsForwardingRelayChecked = hmailCheckedIf1($IsForwardingRelay);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("IP range") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_securityrange_save");
@@ -91,6 +91,15 @@ PrintPropertyEditRow("securityrangepriority", "Priority", $securityrangepriority
 PrintPropertyEditRow("securityrangelowerip", "Lower IP", $securityrangelowerip, 30, "ip");
 PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip, 30, "ip");
 
+function geoIp($ip) {
+	$pageContent = file_get_contents('http://freegeoip.net/json/' . $ip);
+	$parsedJson  = json_decode($pageContent);
+	echo '<img src="modern/flags/' . $parsedJson->country_code . '.gif" style="margin-right:5px;">' . $parsedJson->country_name;
+}
+?>
+        <p>Country</p>
+        <?php geoIp($securityrangelowerip) ?>
+<?php
 PrintCheckboxRow("Expires", "Expires", $Expires);
 PrintPropertyEditRow("ExpiresTime", "Use ISO date format (YYYY-MM-DD HH:MM:SS)", $ExpiresTime);
  ?>

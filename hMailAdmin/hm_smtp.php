@@ -91,7 +91,7 @@ $SMTPConnectionSecurity = $obSettings->SMTPConnectionSecurity == CONNECTION_SECU
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("SMTP") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "smtp");

@@ -71,7 +71,7 @@ $PrependSubjectChecked = hmailCheckedIf1($PrependSubject);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Anti-spam") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "smtp_antispam");

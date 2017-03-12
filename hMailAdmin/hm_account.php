@@ -96,7 +96,7 @@ $str_server = $obLanguage->String("Server");
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Account") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 if (strlen($error_message) > 0) {
 	$error_message = PreprocessOutput($obLanguage->String($error_message));

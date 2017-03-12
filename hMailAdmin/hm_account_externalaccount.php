@@ -59,9 +59,9 @@ $DaysToKeepMessagesValue = 0;
 if ($DaysToKeepMessages > 0)
 	$DaysToKeepMessagesValue = $DaysToKeepMessages;
 ?>
-    <div class="box">
+    <div class="box medium">
       <h2><?php EchoTranslation("External account") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_account_externalaccount_save");
@@ -82,8 +82,8 @@ PrintPropertyEditRow("Name", "Name", $Name);
             <option value="0" selected>POP3</option>
           </select>
 <?php
-PrintPropertyEditRow("ServerAddress", "Server address", $Name, 255);
-PrintPropertyEditRow("Port", "TCP/IP port", $Name, 25, "number");
+PrintPropertyEditRow("ServerAddress", "Server address", $ServerAddress, 255);
+PrintPropertyEditRow("Port", "TCP/IP port", $Port, 25, "number");
 ?>
           <p><?php EchoTranslation("Connection security")?></p>
           <select name="ConnectionSecurity" class="medium">
@@ -92,7 +92,7 @@ PrintPropertyEditRow("Port", "TCP/IP port", $Name, 25, "number");
             <option value="<?php echo CONNECTION_SECURITY_TLS?>" <?php if ($ConnectionSecurity == CONNECTION_SECURITY_TLS) echo "selected";?> ><?php EchoTranslation("SSL/TLS")?></a>
           </select>
 <?php
-PrintPropertyEditRow("Username", "User name", $Name, 255);
+PrintPropertyEditRow("Username", "User name", $Username, 255);
 PrintPasswordEntry("Password", "Password", 255);
 ?>
         </div>

@@ -10,7 +10,7 @@ $action = hmailGetVar("action","");
 ?>
     <div class="box">
       <h2><?php EchoTranslation("Alias") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_domain_name_save");

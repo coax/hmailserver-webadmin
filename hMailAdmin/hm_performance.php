@@ -50,7 +50,7 @@ function ClearMessageIndexingCache() {
 </script>
     <div class="box medium">
       <h2><?php EchoTranslation("Performance") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form" name="mainform">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form" name="mainform">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "performance");

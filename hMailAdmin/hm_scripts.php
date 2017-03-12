@@ -31,7 +31,7 @@ $scriptingenabledchecked = hmailCheckedIf1($scriptingenabled);
 ?>
     <div class="box">
       <h2><?php EchoTranslation("Scripts") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "scripts");
@@ -51,7 +51,7 @@ PrintSaveButton();
 
     <div class="box">
       <h2><?php EchoTranslation("Actions") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "scripts");
@@ -63,7 +63,7 @@ if ($action == "checksyntax")
 ?>
         <p><input type="submit" value="<?php EchoTranslation("Check syntax")?>"></p>
       </form>
-      <form action="index.php" method="post" onsubmit="return formCheck(this);" class="cd-form">
+      <form action="index.php" method="post" onsubmit="return formCheck(this);" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "scripts");

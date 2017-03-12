@@ -68,7 +68,7 @@ function hideAllPanels() {
 	}
 }
 </script>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="cd-form" name="mainForm">
+      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form" name="mainForm">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_rule_save");

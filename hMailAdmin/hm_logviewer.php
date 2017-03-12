@@ -8,7 +8,7 @@ if (hmailGetAdminLevel() != 2)
     <div class="box large">
       <h2><?php EchoTranslation("hMailServer Log Parser") ?></h2>
       <div style="margin:0 18px 18px;">
-        <form action="" class="cd-form" id="log-parser">
+        <form action="" class="form" id="log-parser">
 <?php
 PrintHiddenCsrfToken();
 ?>
