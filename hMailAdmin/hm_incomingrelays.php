@@ -28,7 +28,7 @@ for ($i = 0; $i < $Count; $i++) {
 	$relayname = PreprocessOutput($relayname);
 
    	echo '            <tr>
-              <td><a href=\"?page=incomingrelay&action=edit&relayid=' . $relayid . '">' . $relayname . '</a></td>
+              <td><a href="?page=incomingrelay&action=edit&relayid=' . $relayid . '">' . $relayname . '</a></td>
               <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $relayname . '</b>:\',\'Yes\',\'?page=background_incomingrelay_save&csrftoken=' . $csrftoken . '&action=delete&relayid=' . $relayid . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }
