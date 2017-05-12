@@ -32,7 +32,7 @@ for ($i = 0; $i < $Count; $i++) {
 
    	echo '            <tr>
               <td><a href="?page=route&action=edit&routeid=' . $routeid . '">' . $routename . '</a></td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $relayname . '</b>:\',\'Yes\',\'?page=background_route_save&csrftoken=' . $csrftoken . '&action=delete&routeid=' . $routeid . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $routename . '</b>:\',\'Yes\',\'?page=background_route_save&csrftoken=' . $csrftoken . '&action=delete&routeid=' . $routeid . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }
 ?>
