@@ -156,7 +156,7 @@ else {
         <div class="hidden">
 <?php
 PrintCheckboxRow("vacationmessageon", "Enabled", $vacationmessageon);
-PrintPropertyEditRow("vacationsubject", "Subject", $vacationsubject);
+PrintPropertyEditRow("vacationsubject", "Subject", $vacationsubject, 200);
 
 PrintPropertyAreaRow("vacationmessage", "Text", $vacationmessage, 6, 55);
 
@@ -169,7 +169,7 @@ PrintCheckboxRow("vacationmessageexpires", "Automatically expires", $vacationmes
         <div class="hidden">
 <?php
 PrintCheckboxRow("forwardenabled", "Enabled", $forwardenabled);
-PrintPropertyEditRow("forwardaddress", "Address", $forwardaddress);
+PrintPropertyEditRow("forwardaddress", "Address", $forwardaddress, 255);
 PrintCheckboxRow("forwardkeeporiginal", "Keep original message", $forwardkeeporiginal);
 ?>
         </div>
@@ -188,8 +188,8 @@ if (hmailGetAdminLevel() != ADMIN_USER) {
         <div class="hidden">
 <?php
 PrintCheckboxRow("adenabled", "Enabled", $adenabled);
-PrintPropertyEditRow("addomain", "Domain", $addomain);
-PrintPropertyEditRow("adusername", "User name", $adusername);
+PrintPropertyEditRow("addomain", "Domain", $addomain, 255);
+PrintPropertyEditRow("adusername", "User name", $adusername, 255);
 ?>
         </div>
 <?php
@@ -258,8 +258,8 @@ if ($accountid == 0) {
         <h3><a href="#"><?php EchoTranslation("Advanced")?></a></h3>
         <div class="hidden">
 <?php
-PrintPropertyEditRow("PersonFirstName", "First name", $PersonFirstName);
-PrintPropertyEditRow("PersonLastName", "Last name", $PersonLastName);
+PrintPropertyEditRow("PersonFirstName", "First name", $PersonFirstName, 60);
+PrintPropertyEditRow("PersonLastName", "Last name", $PersonLastName, 60);
 ?>
         </div>
 <?php if ($accountid > 0) { ?>
