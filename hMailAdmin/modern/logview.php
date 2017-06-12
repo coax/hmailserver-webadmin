@@ -30,9 +30,9 @@ if (file_exists($Filename)) {
 	if ($File) {
 		$events=array();
 		while (($Line = fgets($File)) !== false) {
-			if($Type == 'RAW'){
+			if($Type === 'RAW'){
 				if (!isset($events[0])) $events[0][0] = array('RAW');
-				$events[0][1][] = $Line;
+				$events[0][1][] = cleanNonUTF8($Line);
 				continue;
 			}
 
@@ -59,6 +59,7 @@ echo $out;
 function parse($line){
 	global $events;
 	$line = cleanString($line);
+	$line = cleanNonUTF8($line);
 	$data = explode("\t", $line);
 	switch($data[0]){
 		case 'SMTPD':
@@ -137,8 +138,24 @@ function events(){
 }
 
 function cleanString($str) {
-	$search = array("\r\n", '"', '<', '>', '[nl]', '{em}', '{/em}');
-	$replace = array('', '', '&lt;', '&gt;', '<br>', '<em>', '</em>');
+	$search = array("\r\n", "'", '"', '<', '>', '[nl]', '{em}', '{/em}', "\xC3\xBF");
+	$replace = array('', '', '', '&lt;', '&gt;', '<br>', '<em>', '</em>', '%' );
 	return str_replace($search, $replace, $str);
+}
+
+function cleanNonUTF8($str) {
+	$regex = <<<'END'
+/
+  (
+    (?: [\x00-\x7F]                 # single-byte sequences   0xxxxxxx
+    |   [\xC0-\xDF][\x80-\xBF]      # double-byte sequences   110xxxxx 10xxxxxx
+    |   [\xE0-\xEF][\x80-\xBF]{2}   # triple-byte sequences   1110xxxx 10xxxxxx * 2
+    |   [\xF0-\xF7][\x80-\xBF]{3}   # quadruple-byte sequence 11110xxx 10xxxxxx * 3
+    ){1,100}                        # ...one or more times
+  )
+| .                                 # anything else
+/x
+END;
+	return preg_replace($regex, '$1', $str);
 }
 ?>
