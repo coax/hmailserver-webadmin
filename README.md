@@ -149,7 +149,7 @@ Version 0.9 beta (2016-12-28)
 -----
 - [jQuery](https://jquery.com/)
 - [Modernizr](https://modernizr.com/)
-- [Defunkt Facebox](http://defunkt.io/facebox/Defunkt Facebox)
+- [Defunkt Facebox](http://defunkt.io/facebox/)
 - [tablesort](https://github.com/kylefox/jquery-tablesorttablesort)
 - [datepicker](https://github.com/fengyuanchen/datepicker)
 - [timeago](http://timeago.yarp.com/timeago)
