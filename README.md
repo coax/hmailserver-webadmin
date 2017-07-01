@@ -53,6 +53,13 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
+Version 1.2 (2017-06-12)
+- [fix] multiple typos and small fixes
+- [fix] dropdowns in rule criteria actions
+- [fix] distribution lists checkboxes
+- [new] distribution list add/edit/delete members
+- [fix] maxlength added to account input fields
+
 Version 1.1 (2017-03-12)
 - [new] country name and flag in auto-ban info
 - [tweak] navigation UI improvements
@@ -142,7 +149,7 @@ Version 0.9 beta (2016-12-28)
 -----
 - [jQuery](https://jquery.com/)
 - [Modernizr](https://modernizr.com/)
-- [Defunkt Facebox](http://defunkt.io/facebox/Defunkt Facebox)
+- [Defunkt Facebox](http://defunkt.io/facebox/)
 - [tablesort](https://github.com/kylefox/jquery-tablesorttablesort)
 - [datepicker](https://github.com/fengyuanchen/datepicker)
 - [timeago](http://timeago.yarp.com/timeago)

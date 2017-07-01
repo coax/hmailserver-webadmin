@@ -41,6 +41,10 @@ jQuery(document).ready(function(){
 				success: function(data) {
 					result.html(parseLog(data));
 					button.prop('disabled', false).removeClass('wait');
+				},
+				error: function(data) {
+					result.html('Error loading log file!');
+					button.prop('disabled', false).removeClass('wait');
 				}
 			});
 			return false;

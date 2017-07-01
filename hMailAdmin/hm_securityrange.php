@@ -94,22 +94,24 @@ PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip, 
 function geoIp($ip) {
 	$pageContent = file_get_contents('http://freegeoip.net/json/' . $ip);
 	$parsedJson  = json_decode($pageContent);
-	echo '<img src="modern/flags/' . $parsedJson->country_code . '.gif" style="margin-right:5px;">' . $parsedJson->country_name;
+
+	if (strlen($parsedJson->country_name)>0) {
+		global $obLanguage;
+		echo '<p>' . $obLanguage->String('Country') . '</p><img src="modern/flags/' . $parsedJson->country_code . '.gif" style="margin-right:5px;">' . $parsedJson->country_name . PHP_EOL;
+	}
 }
-?>
-        <p>Country</p>
-        <?php geoIp($securityrangelowerip) ?>
-<?php
+geoIp($securityrangelowerip);
+
 PrintCheckboxRow("Expires", "Expires", $Expires);
 PrintPropertyEditRow("ExpiresTime", "Use ISO date format (YYYY-MM-DD HH:MM:SS)", $ExpiresTime);
- ?>
+?>
         <h3><a href="#"><?php EchoTranslation("Allow connections")?></a></h3>
         <div class="hidden">
 <?php
 PrintCheckboxRow("allowsmtpconnections", "SMTP", $allowsmtpconnections);
 PrintCheckboxRow("allowpop3connections", "POP3", $allowpop3connections);
 PrintCheckboxRow("allowimapconnections", "IMAP", $allowimapconnections);
- ?>
+?>
         </div>
         <h3><a href="#"><?php EchoTranslation("Allow deliveries from")?></a></h3>
         <div class="hidden">
@@ -118,7 +120,7 @@ PrintCheckboxRow("allowlocaltolocal", "Local to local e-mail addresses", $allowl
 PrintCheckboxRow("allowlocaltoremote", "Local to external e-mail addresses", $allowlocaltoremote);
 PrintCheckboxRow("allowremotetolocal", "External to local e-mail addresses", $allowremotetolocal);
 PrintCheckboxRow("allowremotetoremote", "External to external e-mail addresses", $allowremotetoremote);
- ?>
+?>
         </div>
         <h3><a href="#"><?php EchoTranslation("Require SMTP authentication")?></a></h3>
         <div class="hidden">
@@ -127,7 +129,7 @@ PrintCheckboxRow("RequireSMTPAuthLocalToLocal", "Local to local e-mail addresses
 PrintCheckboxRow("RequireSMTPAuthLocalToExternal", "Local to external e-mail addresses", $RequireSMTPAuthLocalToExternal);
 PrintCheckboxRow("RequireSMTPAuthExternalToLocal", "External to local e-mail addresses", $RequireSMTPAuthExternalToLocal);
 PrintCheckboxRow("RequireSMTPAuthExternalToExternal", "External to external e-mail addresses", $RequireSMTPAuthExternalToExternal);
- ?>
+?>
         </div>
         <h3><a href="#"><?php EchoTranslation("Allow connections")?></a></h3>
         <div class="hidden">
@@ -135,7 +137,7 @@ PrintCheckboxRow("RequireSMTPAuthExternalToExternal", "External to external e-ma
 PrintCheckboxRow("enablespamprotection", "Anti-spam", $enablespamprotection);
 PrintCheckboxRow("EnableAntiVirus", "Anti-virus", $EnableAntiVirus);
 PrintCheckboxRow("RequireSSLTLSForAuth", "Require SSL/TLS for authentication", $RequireSSLTLSForAuth);
- ?>
+?>
         </div>
 <?php
 PrintSaveButton();

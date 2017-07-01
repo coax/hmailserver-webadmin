@@ -2,7 +2,7 @@
 <div style="margin:0 18px 18px;">
   <p>hMailServer web admin redesign &amp; coding by <a href="http://www.matecic.com/" target="_blank">Matija Matecic</a></p>
   <p>Additional coding by Andreas Tunberg</p>
-  <p>Version 1.1, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a>
+  <p>Version 1.2, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a>
   <p>hMailServer author Martin Knafve</p>
   <p>License information <a href="https://www.hmailserver.com/documentation/latest/?page=information_copyright" target="_blank">here</a></p>
   <h3>Third party components</h3>
