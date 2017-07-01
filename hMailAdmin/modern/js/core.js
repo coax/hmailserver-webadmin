@@ -18,7 +18,7 @@ jQuery(document).ready(function(){
 
 	//show datepicker
 	if($('[data-toggle="datepicker"]').length){
-		$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', autoHide: true});
+		$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', autoHide: true, weekStart: hmail_config.weekStart});
 	}
 
 	if($('#log-parser').length){
