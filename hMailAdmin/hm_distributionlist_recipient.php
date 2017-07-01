@@ -16,11 +16,10 @@ if (hmailGetAdminLevel() == 1 && $domainid != hmailGetDomainID())
 $recipientaddress = "";
 
 if ($action == "edit") {
-   $obDomain = $obBaseApp->Domains->ItemByDBID($domainid);
-   $obList = $obDomain->DistributionLists->ItemByDBID($distributionlistid);
-   $obRecipient = $obList->Recipients->ItemByDBID($recipientid);
-
-   $recipientaddress = $obRecipient->RecipientAddress;
+	$obDomain = $obBaseApp->Domains->ItemByDBID($domainid);
+	$obList = $obDomain->DistributionLists->ItemByDBID($distributionlistid);
+	$obRecipient = $obList->Recipients->ItemByDBID($recipientid);
+	$recipientaddress = $obRecipient->RecipientAddress;
 }
 ?>
     <div class="box">

@@ -25,7 +25,7 @@ elseif ($action == "delete") {
 	$obRecipient = $obList->Recipients->ItemByDBID($recipientid);
 	$obRecipient->Delete();
 
-	header("Location: index.php?page=distributionlist_recipients&domainid=$domainid&distributionlistid=$distributionlistid");
+	header("Location: index.php?page=distributionlist&domainid=$domainid&action=edit&distributionlistid=$distributionlistid");
 	exit();
 }
 
