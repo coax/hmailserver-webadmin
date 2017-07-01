@@ -50,7 +50,7 @@ if (file_exists($Filename)) {
 	} else {
 		$out = 'Error opening log file.';
 	}
-}
+} else echo 'Log file not found.';
 
 header('Content-Type: application/json');
 $out = json_encode($out);
@@ -88,9 +88,9 @@ function parse_smtp($data){
 	}
 
 	// AUTH LOGIN decoder.
-	// First we get a SENT: 334 VXNlcm5hbWU6 RECEIVED: AUTH LOGIN
+	// First we get a RECEIVED: AUTH LOGIN
 	// The next RECEIVED: line contains login username which is e-mail address, base64 encoded.
-	if (isset($datastore[$data[0] . $data[2]])) {
+	if (isset($datastore[$data[0] . $data[2]]) && strpos($data[5],'SENT: 504 Authentication not enabled.') !== false) {
 		unset($datastore[$data[0] . $data[2]]);
 	}
 
@@ -99,11 +99,7 @@ function parse_smtp($data){
 		$base64 = substr($data[5], strrpos($data[5], ' ') + 1, strlen($data[5]));
 		$data[5] = 'RECEIVED: <b>' . base64_decode($base64) . '</b>';
 		unset($datastore[$data[0] . $data[2]]);
-	} else if (strpos($data[5], 'RECEIVED: AUTH LOGIN ') !== false && strlen($data[5]) > 21) {
-		// Got singel line AUTH LOGIN?
-		$base64 = substr($data[5], strrpos($data[5], ' ') + 1, strlen($data[5]));
-		$data[5] = substr($data[5], 0, strrpos($data[5], ' ') + 1) .' <b>' . base64_decode($base64) . '</b>';
-	} else if (strpos($data[5], 'SENT: 334 VXNlcm5hbWU6') !== false) {
+	} else if (strpos($data[5], 'RECEIVED: AUTH LOGIN') !== false) {
 		// Wait for it.
 		$datastore[$data[0] . $data[2]] = true;
 	}
@@ -142,8 +138,8 @@ function events(){
 }
 
 function cleanString($str) {
-	$search = array("\r\n", "'", '"', '<', '>', '[nl]', '{em}', '{/em}','\n');
-	$replace = array('', '', '', '&lt;', '&gt;', '<br>', '<em>', '</em>','<br>');
+	$search = array("\r\n", "'", '"', '<', '>', '[nl]', '{em}', '{/em}', "\xC3\xBF");
+	$replace = array('', '', '', '&lt;', '&gt;', '<br>', '<em>', '</em>', '%' );
 	return str_replace($search, $replace, $str);
 }
 

@@ -65,29 +65,15 @@ $hmail_config['defaultlanguage'] = "english";
 $hmail_config['rule_editing_level'] = 2;
 
 /*
-   Added in web interface redesign to show webmail links to logged in users.
-   [domain] is needed if you want the script to dynamically change domains.
+  Added in web interface redesign to show webmail links to logged in users.
+  [domain] is needed if you want the script to dynamically change domains.
 
-   If not set (delete or comment the line), the webmail link will not be shown.
+  If not set (delete or comment the line), the webmail link will not be shown.
 
-   Example:
+  Example:
 
-      http://webmail.[domain]
-      http://[domain]/webmail
+    http://webmail.[domain]
+    http://[domain]/webmail
 */
 $hmail_config['webmail'] = "http://webmail.[domain]";
-/*
-   First day of week in datepicker js plugin.
-
-   Possible values:
-
-      0 - Sunday
-      1 - Monday
-      2 - Tuesday
-      3 - Wednesday
-      4 - Thursday
-      5 - Friday
-      6 - Saturday
-*/
-$hmail_config['datepicker_weekStart'] = 1;
 ?>

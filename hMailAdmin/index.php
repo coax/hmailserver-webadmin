@@ -70,11 +70,6 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
   <!--modern-->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <script type="text/javascript">
-    var hmail_config = {
-      weekStart:<?php echo $hmail_config['datepicker_weekStart'] ?>
-    };
-  </script>
   <script type="text/javascript" src="modern/js/jquery.js"></script>
   <script type="text/javascript" src="modern/js/modernizr.js"></script>
   <script type="text/javascript" src="modern/js/core.js"></script>
