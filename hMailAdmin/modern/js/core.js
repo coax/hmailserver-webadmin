@@ -1,5 +1,6 @@
 jQuery(document).ready(function(){
 	//timeago
+	$.timeago.settings.strings.prefixAgo = '';
 	$.timeago.settings.strings.suffixAgo = '';
 	$('time.timeago').timeago();
 
@@ -18,7 +19,7 @@ jQuery(document).ready(function(){
 
 	//show datepicker
 	if($('[data-toggle="datepicker"]').length){
-		$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', autoHide: true, weekStart: hmail_config.weekStart});
+		$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', autoHide: true, weekStart: hmail_config.weekStart, language: 'en-GB'});
 	}
 
 	if($('#log-parser').length){
