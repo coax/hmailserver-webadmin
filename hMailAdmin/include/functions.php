@@ -140,7 +140,7 @@ function  PrintPropertyRow($caption, $value) {
 	echo '<p>' . $caption . '</p><b>' . $value . '</b>' . PHP_EOL;
 }
 
-function PrintPropertyEditRow($name, $caption, $value, $length = 20, $checktype = null, $class = null) {
+function PrintPropertyEditRow($name, $caption, $value, $length = 255, $checktype = null, $class = null) {
 	global $obLanguage;
 	$caption = $obLanguage->String($caption);
 	$value = PreprocessOutput($value);
@@ -277,5 +277,44 @@ function validate_csrf_token_supplied() {
 //convert any date to ISO date format
 function makeIsoDate($date) {
 	return date('Y-m-d H:i:s', strtotime($date));
+}
+
+// New translation class
+class translate
+{
+	private $obLanguage;
+	private $translate = false;
+	private $web_translations_def;
+	private $web_translations;
+
+	public function __construct($obLanguage,$language)
+	{
+		if($language === 'english') return;
+		$this->obLanguage = $obLanguage;
+		//$this->obLanguage = $obBaseApp->GlobalObjects->Languages->ItemByName($language);
+		$this->translate = true;
+		$this->web_translations_def = $this->load_translation('english');
+		$this->web_translations = $this->load_translation($language);
+	}
+	
+	public function String($string)
+	{
+		if(!$this->translate) return $string;
+		if(($value = $this->obLanguage->String($string)) !== $string) return $value;
+		return $this->WebTranslation($string);
+	}
+	private function WebTranslation($phrase2translate)
+	{
+		$arrayKey = array_search($phrase2translate, $this->web_translations_def);
+		if ($arrayKey !== FALSE && isset($this->web_translations[$arrayKey]))
+			return $this->web_translations[$arrayKey];
+		
+		return $phrase2translate;
+	}
+	private function load_translation($language)
+	{
+		if(!file_exists('./languages/' . $language . '.php')) return array();
+		return include('./languages/' . $language . '.php');
+	}
 }
 ?>

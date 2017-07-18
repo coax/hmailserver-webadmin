@@ -49,9 +49,9 @@ PrintHidden("domainid", $domainid);
 PrintHidden("aliasid", $aliasid);
 ?>
         <p><?php EchoTranslation("Redirect from") ?></p>
-        <input type="text" name="aliasname" value="<?php echo PreprocessOutput($aliasname)?>" maxlength="100" checkallownull="false" checkmessage="<?php EchoTranslation("Redirect from")?>" class="req medium">@<?php echo $domainname ?>
+        <input type="text" name="aliasname" value="<?php echo PreprocessOutput($aliasname)?>" maxlength="255" checkallownull="false" checkmessage="<?php EchoTranslation("Redirect from")?>" class="req medium">@<?php echo $domainname ?>
 <?php
-PrintPropertyEditRow("aliasvalue", "To", $aliasvalue, 100);
+PrintPropertyEditRow("aliasvalue", "To", $aliasvalue, 255);
 PrintCheckboxRow("aliasactive", "Enabled", $aliasactive);
 
 PrintSaveButton();

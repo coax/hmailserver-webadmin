@@ -36,7 +36,7 @@ PrintPropertyAreaRow("SslCipherList", "SSL/TLS ciphers", $SslCipherList, 12, 80)
 
 PrintCheckboxRow("VerifyRemoteSslCertificate", "Verify remote server SSL/TLS certificates", $VerifyRemoteSslCertificate);
 ?>
-        <h3>Versions</h3>
+        <h3><?php EchoTranslation("Versions") ?></h3>
 <?php
 PrintCheckboxRow("SslVersion30Enabled", "SSL v3.0", $SslVersion30Enabled);
 PrintCheckboxRow("TlsVersion10Enabled", "TLS v1.0", $TlsVersion10Enabled);

@@ -274,8 +274,8 @@ jQuery(document).ready(function(){
 });
 
 //confirm delete
-function Confirm(question, answer, action) {
-	$.facebox('<div style="margin:36px 18px; text-align:center;"><p>' + question + '</p><input type="button" value="' + answer + '" id="yes"> &nbsp; <input type="button" value="No" onclick="$.facebox.close();"></div>');
+function Confirm(question, yes, no, action) {
+	$.facebox('<div style="margin:36px 18px; text-align:center;"><p>' + question + '</p><input type="button" value="' + yes + '" id="yes"> &nbsp; <input type="button" value="' + no + '" onclick="$.facebox.close();"></div>');
 	$('body').unbind('keypress').keypress(function(e) {
 		if (e.which==13) {
 			$('#yes').click();
