@@ -70,16 +70,23 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
   <!--modern-->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <script type="text/javascript">
+    var hmail_config = {
+      weekStart:<?php echo $hmail_config['datepicker_weekStart'] ?>
+    };
+  </script>
   <script type="text/javascript" src="modern/js/jquery.js"></script>
   <script type="text/javascript" src="modern/js/modernizr.js"></script>
   <script type="text/javascript" src="modern/js/core.js"></script>
   <script type="text/javascript" src="modern/js/timeago.js"></script>
+  <?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script type="text/javascript" src="modern/js/timeago.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
   <script type="text/javascript" src="modern/js/tablesort.js"></script>
   <script type="text/javascript" src="modern/js/facebox.js"></script>
   <script type="text/javascript" src="modern/js/chartist.js"></script>
   <link href="modern/css/chartist.css" rel="stylesheet">
   <script type="text/javascript" src="modern/js/chartist-tooltip.js"></script>
   <script type="text/javascript" src="modern/js/datepicker.js"></script>
+  <?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script type="text/javascript" src="modern/js/datepicker.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
   <link href="modern/css/datepicker.css" rel="stylesheet">
   <link href="modern/css/reset.css" rel="stylesheet">
   <link href="modern/css/core.css" rel="stylesheet">

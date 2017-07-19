@@ -41,5 +41,6 @@ catch(Exception $e) {
 	die;
 }
 
-$obLanguage = $obBaseApp->GlobalObjects->Languages->ItemByName($hmail_config['defaultlanguage']);
+//$obLanguage = $obBaseApp->GlobalObjects->Languages->ItemByName($hmail_config['defaultlanguage']);
+$obLanguage = new translate($obBaseApp,$hmail_config['defaultlanguage']);
 ?>

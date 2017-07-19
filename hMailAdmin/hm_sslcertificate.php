@@ -19,7 +19,7 @@ if ($action == "edit") {
 }
 ?>
     <div class="box">
-      <h2><?php EchoTranslation("SSL certificate") ?></h2>
+      <h2><?php EchoTranslation("SSL Certificate") ?></h2>
       <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
 <?php
 PrintHiddenCsrfToken();
@@ -28,8 +28,8 @@ PrintHidden("action", "$action");
 PrintHidden("id", "$id");
 
 PrintPropertyEditRow("Name", "Name", $Name);
-PrintPropertyEditRow("CertificateFile", "Certificate file", $CertificateFile, 50);
-PrintPropertyEditRow("PrivateKeyFile", "Private key file", $PrivateKeyFile, 50);
+PrintPropertyEditRow("CertificateFile", "Certificate file", $CertificateFile);
+PrintPropertyEditRow("PrivateKeyFile", "Private key file", $PrivateKeyFile);
 
 PrintSaveButton();
 ?>

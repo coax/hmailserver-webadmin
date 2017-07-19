@@ -25,7 +25,7 @@ PrintHiddenCsrfToken();
 PrintHidden("page", "pop3");
 PrintHidden("action", "save");
 
-PrintPropertyEditRow("maxpop3connections", "Maximum number of simultaneous connections (0 for unlimited)", $maxpop3connections, 20, "number", "small");
+PrintPropertyEditRow("maxpop3connections", "Maximum number of simultaneous connections (0 for unlimited)", $maxpop3connections, 11, "number", "small");
 PrintPropertyEditRow("welcomepop3", "Welcome message", $welcomepop3);
 
 PrintSaveButton();
