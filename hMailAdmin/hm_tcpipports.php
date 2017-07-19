@@ -23,6 +23,14 @@ $Count = $obTCPIPPorts->Count();
           </thead>
           <tbody>
 <?php
+$str_SMTP = $obLanguage->String("SMTP");
+$str_POP3 = $obLanguage->String("POP3");
+$str_IMAP = $obLanguage->String("IMAP");
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
+
 for ($i = 0; $i < $Count; $i++) {
 	$obTCPIPPort = $obTCPIPPorts->Item($i);
 
@@ -33,20 +41,20 @@ for ($i = 0; $i < $Count; $i++) {
 	$protocol_name = "";
 	switch ($portprotcol) {
 		case 1:
-			$protocol_name = $obLanguage->String("SMTP");
+			$protocol_name = $str_SMTP;
 			break;
 		case 3:
-			$protocol_name = $obLanguage->String("POP3");
+			$protocol_name = $str_POP3;
 			break;
 		case 5:
-			$protocol_name = $obLanguage->String("IMAP");
+			$protocol_name = $str_IMAP;
 		break;
 	}
 
 	echo '            <tr>
               <td><a href="?page=tcpipport&action=edit&tcpipportid=' . $portid . '">' . $protocol_name . '</a></td>
               <td><a href="?page=tcpipport&action=edit&tcpipportid=' . $portid . '">' . $portnumber . '</a></td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $protocol_name . '</b>:\',\'Yes\',\'?page=background_tcpipport_save&csrftoken=' . $csrftoken . '&action=delete&tcpipportid=' . $portid . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $protocol_name . ' ' . $portnumber . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_tcpipport_save&csrftoken=' . $csrftoken . '&action=delete&tcpipportid=' . $portid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

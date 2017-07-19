@@ -115,38 +115,38 @@ echo '          <option' . $disabled . ' value=' . eRASendUsingRoute . $eRASendU
         </div>
         <div id="panel-<?php echo eRAForwardEmail?>" style="display:none;">
           <p><?php EchoTranslation("To")?></p>
-          <input type="text" name="To" value="<?php echo PreprocessOutput($To)?>">
+          <input type="text" name="To" maxlength="255" value="<?php echo PreprocessOutput($To)?>">
         </div>
         <div id="panel-<?php echo eRAReply?>" style="display:none;">
           <p><?php EchoTranslation("From (Name)")?><br/></p>
-          <input type="text" name="FromName" value="<?php echo PreprocessOutput($FromName)?>">
+          <input type="text" name="FromName" maxlength="255" value="<?php echo PreprocessOutput($FromName)?>">
           <p><?php EchoTranslation("From (Address)")?><br/></p>
-          <input type="text" name="FromAddress" value="<?php echo PreprocessOutput($FromAddress)?>">
+          <input type="text" name="FromAddress" maxlength="255" value="<?php echo PreprocessOutput($FromAddress)?>">
           <p><?php EchoTranslation("Subject")?></p>
-          <input type="text" name="Subject" value="<?php echo PreprocessOutput($Subject)?>">
+          <input type="text" name="Subject" maxlength="255" value="<?php echo PreprocessOutput($Subject)?>">
           <p><?php EchoTranslation("Body")?></p>
           <textarea name="Body" cols="30" rows="5"><?php echo PreprocessOutput($Body)?></textarea>
         </div>
         <div id="panel-<?php echo eRAMoveToImapFolder?>" style="display:none;">
           <p><?php EchoTranslation("IMAP folder")?></p>
-          <input type="text" name="IMAPFolder" value="<?php echo PreprocessOutput($IMAPFolder)?>">
+          <input type="text" name="IMAPFolder" maxlength="255" value="<?php echo PreprocessOutput($IMAPFolder)?>">
         </div>
         <div id="panel-<?php echo eRARunScriptFunction?>" style="display:none;">
           <p><?php EchoTranslation("Script function")?></p>
-          <input type="text" name="ScriptFunction" value="<?php echo PreprocessOutput($ScriptFunction)?>">
+          <input type="text" name="ScriptFunction" maxlength="255" value="<?php echo PreprocessOutput($ScriptFunction)?>">
         </div>
         <div id="panel-<?php echo eRAStopRuleProcessing?>" style="display:none;">
           <!-- empty panel -->
         </div>
         <div id="panel-<?php echo eRABindToAddress?>" style="display:none;">
         <p><?php EchoTranslation("IP address")?></p>
-        <input type="text" name="BindToAddress" value="<?php echo PreprocessOutput($Value)?>">
+        <input type="text" name="BindToAddress" maxlength="255" value="<?php echo PreprocessOutput($Value)?>">
         </div>
         <div id="panel-<?php echo eRASetHeaderValue?>" style="display:none;">
           <p><?php EchoTranslation("Header name")?></p>
-          <input type="text" name="HeaderName" value="<?php echo PreprocessOutput($HeaderName)?>">
+          <input type="text" name="HeaderName" maxlength="80" value="<?php echo PreprocessOutput($HeaderName)?>">
           <p><?php EchoTranslation("Value")?><br/></p>
-          <input type="text" name="Value" value="<?php echo PreprocessOutput($Value)?>">
+          <input type="text" name="Value" maxlength="255" value="<?php echo PreprocessOutput($Value)?>">
         </div>
         <div id="panel-<?php echo eRASendUsingRoute?>" style="display:none;">
           <p><?php EchoTranslation("Route")?></p>

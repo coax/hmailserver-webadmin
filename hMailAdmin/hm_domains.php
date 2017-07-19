@@ -22,12 +22,19 @@ $DomainCount = $obBaseApp->Domains->Count();
           </thead>
           <tbody>
 <?php
+
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
+$str_unlimited = $obLanguage->String("Unlimited");
+
 for ($i = 1; $i <= $DomainCount; $i++) {
 	$obDomain = $obBaseApp->Domains->Item($i-1);
 	$domainname = $obDomain->Name;
 	$domainid = $obDomain->ID;
 	$domainmaxsize = $obDomain->MaxSize;
-	$domainactive = $obDomain->Active ? $obLanguage->String("Yes") : $obLanguage->String("No"); //modified
+	$domainactive = $obDomain->Active ? $str_yes : $str_no; //modified
 	$domainname = PreprocessOutput($domainname);
 	$domainname_escaped = GetStringForJavaScript($domainname);
 
@@ -44,14 +51,14 @@ for ($i = 1; $i <= $DomainCount; $i++) {
 		$Percentage = Round((($domainmaxsize - $DomainSize) / ($domainmaxsize)) * 100);
 		if ($Percentage<=10) $Color = "red";
 		elseif ($Percentage<=30) $Color = "yellow";
-	}else $domainmaxsize = "Unlimited";
+	}else $domainmaxsize = $str_unlimited;
 
 	echo '            <tr>
               <td><a href="?page=domain&action=edit&domainid=' . $domainid . '">' . $domainname . '</a></td>
               <td class=' . $Color . '>' . number_format($DomainSize, 2, ".", "") . '</td>
               <td>' . $domainmaxsize . '</td>
               <td>' . $domainactive . '</td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $domainname . '</b>:\',\'Yes\',\'?page=background_domain_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $domainname . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_domain_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

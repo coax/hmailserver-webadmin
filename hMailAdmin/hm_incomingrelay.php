@@ -27,7 +27,7 @@ PrintHidden("page", "background_incomingrelay_save");
 PrintHidden("action", $action);
 PrintHidden("relayid", $relayid);
 
-PrintPropertyEditRow("relayname", "Name", $relayname, 30);
+PrintPropertyEditRow("relayname", "Name", $relayname, 100);
 PrintPropertyEditRow("relaylowerip", "Lower IP", $relaylowerip, 25);
 PrintPropertyEditRow("relayupperip", "Upper IP", $relayupperip, 25);
 

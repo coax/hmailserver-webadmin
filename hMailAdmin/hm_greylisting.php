@@ -40,9 +40,9 @@ PrintHidden("page", "greylisting");
 PrintHidden("action", "save");
 
 PrintCheckboxRow("greylistingenabled", "Enabled", $greylistingenabled);
-PrintPropertyEditRow("greylistinginitialdelay", "Minutes to defer delivery attempts", $greylistinginitialdelay, 20, "", "small");
-PrintPropertyEditRow("greylistinginitialdelete", "Days before removing unused records", $greylistinginitialdelete, 20, "", "small");
-PrintPropertyEditRow("greylistingfinaldelete", "Days before removing used records", $greylistingfinaldelete, 20, "", "small");
+PrintPropertyEditRow("greylistinginitialdelay", "Minutes to defer delivery attempts", $greylistinginitialdelay, 11, "", "small");
+PrintPropertyEditRow("greylistinginitialdelete", "Days before removing unused records", $greylistinginitialdelete, 11, "", "small");
+PrintPropertyEditRow("greylistingfinaldelete", "Days before removing used records", $greylistingfinaldelete, 11, "", "small");
 
 PrintCheckboxRow("BypassGreylistingOnSPFSuccess", "Bypass Greylisting on SPF Pass", $BypassGreylistingOnSPFSuccess);
 PrintCheckboxRow("BypassGreylistingOnMailFromMX", "Bypass Greylisting when message arrives from A or MX record.", $BypassGreylistingOnMailFromMX);

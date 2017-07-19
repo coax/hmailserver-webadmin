@@ -8,6 +8,11 @@ if (hmailGetAdminLevel() != ADMIN_SERVER)
 $obSettings = $obBaseApp->Settings();
 $obSecurityRanges = $obSettings->SecurityRanges();
 $Count = $obSecurityRanges->Count();
+
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
 ?>
     <div class="box large">
       <h2><?php EchoTranslation("IP Ranges") ?> <span>(<?php echo $Count ?>)</span></h2>
@@ -24,22 +29,23 @@ $Count = $obSecurityRanges->Count();
           <tbody>
 <?php
 function humanTiming($time) {
+	global $obLanguage;
 	$time = $time - time();
-	if($time < 1) return 'Expired';
+	if($time < 1) return $obLanguage->String("Expired");
 	$tokens = array (
-		31536000 => 'year',
-		2592000 => 'month',
-		604800 => 'week',
-		86400 => 'day',
-		3600 => 'hour',
-		60 => 'minute',
-		1 => 'second'
+		31536000 => array('year','years'),
+		2592000 => array('month','months'),
+		604800 => array('week','weeks'),
+		86400 => array('day','days'),
+		3600 => array('hour','hours'),
+		60 => array('minute','minutes'),
+		1 => array('second','seconds')
 	);
 
 	foreach ($tokens as $unit => $text) {
 		if ($time < $unit) continue;
 		$numberOfUnits = floor($time / $unit);
-		return $numberOfUnits . ' ' . $text . (($numberOfUnits>1) ? 's' : '');
+		return $numberOfUnits . ' ' . $obLanguage->String($numberOfUnits>1 ? $text[1] : $text[0]);
 	}
 }
 
@@ -50,7 +56,7 @@ for ($i = 0; $i < $Count; $i++) {
 
 	$securityrangename = PreprocessOutput($securityrangename);
 	$securityrangepriority = $obSecurityRange->Priority;
-	$ExpiresTime = $obSecurityRange->Expires ? humanTiming(strtotime(makeIsoDate($obSecurityRange->ExpiresTime))) : 'Never';
+	$ExpiresTime = $obSecurityRange->Expires ? humanTiming(strtotime(makeIsoDate($obSecurityRange->ExpiresTime))) : $obLanguage->String("Never");
 	$LowerIp = $obSecurityRange->LowerIP;
 
 
@@ -58,7 +64,7 @@ for ($i = 0; $i < $Count; $i++) {
               <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . (strpos($securityrangename,'Auto-ban:')!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
               <td>' . $securityrangepriority . '</td>
               <td>' . $ExpiresTime . '</td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $securityrangename . '</b>:\',\'Yes\',\'?page=background_securityrange_save&csrftoken=' . $csrftoken . '&action=delete&securityrangeid=' . $securityrangeid . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $securityrangename . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_securityrange_save&csrftoken=' . $csrftoken . '&action=delete&securityrangeid=' . $securityrangeid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

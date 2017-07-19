@@ -8,6 +8,11 @@ if (hmailGetAdminLevel() != ADMIN_SERVER)
 $obSettings = $obBaseApp->Settings();
 $obIncomingRelays = $obSettings->IncomingRelays();
 $Count = $obIncomingRelays->Count();
+
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
 ?>
     <div class="box large">
       <h2><?php EchoTranslation("Incoming relays") ?> <span>(<?php echo $Count ?>)</span></h2>
@@ -29,7 +34,7 @@ for ($i = 0; $i < $Count; $i++) {
 
    	echo '            <tr>
               <td><a href="?page=incomingrelay&action=edit&relayid=' . $relayid . '">' . $relayname . '</a></td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $relayname . '</b>:\',\'Yes\',\'?page=background_incomingrelay_save&csrftoken=' . $csrftoken . '&action=delete&relayid=' . $relayid . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $relayname . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_incomingrelay_save&csrftoken=' . $csrftoken . '&action=delete&relayid=' . $relayid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

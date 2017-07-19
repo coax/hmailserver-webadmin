@@ -69,7 +69,7 @@ if (strlen($resultString) > 0) {
 ?>
         </p>
 <?php
-PrintSaveButton("Run");
+PrintSaveButton("Start");
 ?>
       </form>
     </div>

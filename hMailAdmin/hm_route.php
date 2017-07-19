@@ -49,9 +49,9 @@ PrintHidden("page", "background_route_save");
 PrintHidden("action", $action);
 PrintHidden("routeid", $routeid);
 
-PrintPropertyEditRow("routedomainname", "Domain", $routedomainname, 30);
-PrintPropertyEditRow("routetargetsmtphost", "Target SMTP host", $routetargetsmtphost, 25);
-PrintPropertyEditRow("routetargetsmtpport", "TCP/IP port", $routetargetsmtpport, 4, "number", "small");
+PrintPropertyEditRow("routedomainname", "Domain", $routedomainname, 255);
+PrintPropertyEditRow("routetargetsmtphost", "Target SMTP host", $routetargetsmtphost, 255);
+PrintPropertyEditRow("routetargetsmtpport", "TCP/IP port", $routetargetsmtpport, 10, "number", "small");
 ?>
           <h3><a href="#"><?php EchoTranslation("Delivery") ?></a></h3>
           <div class="hidden">
@@ -60,8 +60,8 @@ PrintPropertyEditRow("routenumberoftries", "Number of retries", $routenumberoftr
 PrintPropertyEditRow("routemminutesbetweentry", "Minutes between every retry", $routemminutesbetweentry, 4, "number", "small");
 PrintCheckboxRow("routerequiresauth", "Server requires authentication", $routerequiresauth);
 
-PrintPropertyEditRow("routeauthusername", "Username", $routeauthusername, 30, null, "medium");
-PrintPropertyEditRow("routeauthpassword", "Password", "", 20, null, "medium");
+PrintPropertyEditRow("routeauthusername", "User name", $routeauthusername, 255, null, "medium");
+PrintPropertyEditRow("routeauthpassword", "Password", "", 255, null, "medium");
 ?>
             <p><?php EchoTranslation("Connection security")?></p>
             <select name="ConnectionSecurity" class="medium">

@@ -8,7 +8,7 @@ $action = hmailGetVar("action","");
 if (hmailGetAdminLevel() == 1 && ($domainid != hmailGetDomainID() || $action != "edit"))
 	hmailHackingAttemp();
 
-$admin_rights = (hmailGetAdminLevel()  === ADMIN_SERVER);
+$admin_rights = (hmailGetAdminLevel() === ADMIN_SERVER);
 
 $domainname = "";
 $domainactive = 1;
@@ -113,9 +113,11 @@ PrintHidden("domainid", $DomainID);
 
 
 $str_name = $obLanguage->String("Name");
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
 $domainname = PreprocessOutput($domainname);
 if ($admin_rights)
-	PrintPropertyEditRow("domainname", "Domain name", $domainname);
+	PrintPropertyEditRow("domainname", "Domain name", $domainname, 80);
 else
 	echo $domainname;
 
@@ -124,13 +126,17 @@ if ($admin_rights)
 else {
 	echo '<p>' . $obLanguage->String("Active") . ':</p>';
 	if ($domainactive == 1)
-		echo $obLanguage->String("Yes");
+		echo $str_yes;
 	else
-		echo $obLanguage->String("No");
-	}
+		echo $str_no;
+}
 
-	if (isset($obDomain) && hmailGetAdminLevel() == ADMIN_SERVER) {
+if (isset($obDomain) && $admin_rights) {
+	if ($DomainID == 0)
+		echo '<div class="warning">' . $obLanguage->String("You must save the domain before you can edit names.") . '</div>' . PHP_EOL;
+	else {
 		$str_delete = $obLanguage->String("Remove");
+		$str_confirm = $obLanguage->String("Confirm delete");
 ?>
           <h3><a href="#"><?php EchoTranslation("Names") ?></a></h3>
           <div class="hidden">
@@ -143,24 +149,25 @@ else {
               </thead>
               <tbody>
 <?php
-	$obDomainAliases = $obDomain->DomainAliases;
+		$obDomainAliases = $obDomain->DomainAliases;
 
-	for ($i = 0; $i < $obDomainAliases->Count; $i++) {
-		$obDomainAlias = $obDomainAliases->Item($i);
-		$aliasid = $obDomainAlias->ID;
-		$name = $obDomainAlias->AliasName;
+		for ($i = 0; $i < $obDomainAliases->Count; $i++) {
+			$obDomainAlias = $obDomainAliases->Item($i);
+			$aliasid = $obDomainAlias->ID;
+			$name = $obDomainAlias->AliasName;
 
-		echo '                <tr>
+			echo '                <tr>
                   <td><a href="#">' . PreprocessOutput($name) . '</a></td>
-                  <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . PreprocessOutput($name) . '</b>:\',\'Yes\',\'?page=background_domain_name_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&aliasid=' . $aliasid . '\');" class="delete">Delete</a></td>
+                  <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . PreprocessOutput($name) . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_domain_name_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&aliasid=' . $aliasid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
                 </tr>' . PHP_EOL;
-	}
+		}
 ?>
               </tbody>
             </table>
             <div class="buttons center"><a href="?page=domain_aliasname&action=add&domainid=<?php echo $DomainID ?>" class="button"><?php EchoTranslation("Add") ?></a></div>
           </div>
 <?php
+	}
 }
 ?>
           <h3><a href="#"><?php EchoTranslation("Signature") ?></a></h3>
@@ -196,14 +203,14 @@ $MaxNumberOfAliases = PreprocessOutput($MaxNumberOfAliases);
 $MaxNumberOfDistributionLists = PreprocessOutput($MaxNumberOfDistributionLists);
 
 if ($admin_rights) {
-	PrintPropertyEditRow("domainmaxsize", "Maximum size (MB)", $domainmaxsize, 8, "number", "small");
-	PrintPropertyEditRow("domainmaxmessagesize", "Max message size (KB)", $domainmaxmessagesize, 8, "number", "small");
-	PrintPropertyEditRow("MaxAccountSize", "Max size of accounts (MB)", $MaxAccountSize, 8, "number", "small");
-	PrintPropertyEditRow("MaxNumberOfAccounts", "Max number of accounts", $MaxNumberOfAccounts, 8, "number", "small");
+	PrintPropertyEditRow("domainmaxsize", "Maximum size (MB)", $domainmaxsize, 11, "number", "small");
+	PrintPropertyEditRow("domainmaxmessagesize", "Max message size (KB)", $domainmaxmessagesize, 11, "number", "small");
+	PrintPropertyEditRow("MaxAccountSize", "Max size of accounts (MB)", $MaxAccountSize, 11, "number", "small");
+	PrintPropertyEditRow("MaxNumberOfAccounts", "Max number of accounts", $MaxNumberOfAccounts, 11, "number", "small");
 	echo '            <div style="display:inline-block; position:relative;"><input type="checkbox" name="MaxNumberOfAccountsEnabled" id="MaxNumberOfAccountsEnabled" value="1" ' . $MaxNumberOfAccountsEnabled . '><label for="MaxNumberOfAccountsEnabled"></label></div>' . PHP_EOL;
-	PrintPropertyEditRow("MaxNumberOfAliases", "Max number of aliases", $MaxNumberOfAliases, 8, "number", "small");
+	PrintPropertyEditRow("MaxNumberOfAliases", "Max number of aliases", $MaxNumberOfAliases, 11, "number", "small");
 	echo '            <div style="display:inline-block; position:relative;"><input type="checkbox" name="MaxNumberOfAliasesEnabled" id="MaxNumberOfAliasesEnabled" value="1" ' . $MaxNumberOfAliasesEnabledChecked . '><label for="MaxNumberOfAliasesEnabled"></label></div>' . PHP_EOL;
-	PrintPropertyEditRow("MaxNumberOfDistributionLists", "Max number of distribution lists", $MaxNumberOfDistributionLists, 8, "number", "small");
+	PrintPropertyEditRow("MaxNumberOfDistributionLists", "Max number of distribution lists", $MaxNumberOfDistributionLists, 11, "number", "small");
 	echo '            <div style="display:inline-block; position:relative;"><input type="checkbox" name="MaxNumberOfDistributionListsEnabled" id="MaxNumberOfDistributionListsEnabled" value="1" ' . $MaxNumberOfDistributionListsEnabledChecked . '><label for="MaxNumberOfDistributionListsEnabled"></label></div>' . PHP_EOL;
 } else {
 	PrintPropertyRow("Maximum size (MB)", Round($domainmaxsize,3));
@@ -219,8 +226,8 @@ if ($admin_rights) {
           <div class="hidden">
 <?php
 PrintCheckboxRow("DKIMSignEnabled", $obLanguage->String("Enabled"), $DKIMSignEnabled);
-PrintPropertyEditRow("DKIMPrivateKeyFile", $obLanguage->String("Private key file"), $DKIMPrivateKeyFile, 50);
-PrintPropertyEditRow("DKIMSelector", $obLanguage->String("Selector"), $DKIMSelector, 20);
+PrintPropertyEditRow("DKIMPrivateKeyFile", $obLanguage->String("Private key file"), $DKIMPrivateKeyFile, 255);
+PrintPropertyEditRow("DKIMSelector", $obLanguage->String("Selector"), $DKIMSelector, 255);
 ?>
             <p>Header method</p>
             <div style="position:relative; display:inline-block;"><input type="radio" name="DKIMHeaderCanonicalizationMethod" value="1" id="1" <?php if ($DKIMHeaderCanonicalizationMethod == 1) echo "checked"?>><label for="1">Simple</label></div>
@@ -235,7 +242,7 @@ PrintPropertyEditRow("DKIMSelector", $obLanguage->String("Selector"), $DKIMSelec
           <h3><a href="#"><?php EchoTranslation("Advanced") ?></a></h3>
           <div class="hidden">
 <?php
-PrintPropertyEditRow("domainpostmaster", $obLanguage->String("Catch-all address"), $domainpostmaster, 40);
+PrintPropertyEditRow("domainpostmaster", $obLanguage->String("Catch-all address"), $domainpostmaster, 80);
 ?>
           </div>
           <h3><a href="#"><?php EchoTranslation("Plus addressing") ?></a></h3>

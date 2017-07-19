@@ -28,7 +28,7 @@ PrintHidden("action", $action);
 PrintHidden("routeid", $routeid);
 PrintHidden("routeaddressid", $routeaddressid);
 
-PrintPropertyEditRow("routeaddress", "Address", $routeaddress, 35, "email");
+PrintPropertyEditRow("routeaddress", "Address", $routeaddress, 255, "email");
 
 PrintSaveButton();
 ?>
