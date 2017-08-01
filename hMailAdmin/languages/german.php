@@ -84,3 +84,4 @@ return array(
 	
 	200 => 'Bestätige Löschen',
 );
+?>
