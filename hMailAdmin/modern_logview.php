@@ -2,9 +2,9 @@
 //ini_set('display_errors', 1);
 define('IN_WEBADMIN', true);
 
-require_once("../config.php");
-require_once("../include/initialization_test.php");
-require_once("../initialize.php");
+require_once("./config.php");
+require_once("./include/initialization_test.php");
+require_once("./initialize.php");
 
 if (hmailGetAdminLevel() != 2)
 	hmailHackingAttemp();
@@ -15,14 +15,22 @@ function filter_result($str, $findme, $type=true) {
 	}
 }
 
-$Type = !empty($_POST['LogType']) ? $_POST['LogType'] : 'SMTPD';
+function filter_result_type($str, $types) {
+	foreach ($types as $v) {
+		if (!is_null($result = filter_result($str, $v, true)))
+			return $result;
+	}
+}
+
+$Types = !empty($_POST['LogTypes']) ? $_POST['LogTypes'] : array('SMTPD');
+$AllTypes = in_array('ALL', $Types);
+$RawType = !empty($_POST['LogType']) ? true : false;
 $Filter = !empty($_POST['LogFilter']) ? $_POST['LogFilter'] : null;
 $Filename = !empty($_POST['LogFilename']) ? $_POST['LogFilename'] : date("Y-m-d");
 $Filename = 'hmailserver_' . $Filename . '.log';
 $Path = $obBaseApp->Settings->Directories->LogDirectory;
 $Filename = $Path . '\\' . $Filename;
 
-$out = 'Log file not found.';
 if (file_exists($Filename)) {
 	$Filesize = filesize($Filename);
 	$File = fopen($Filename, 'r');
@@ -30,14 +38,14 @@ if (file_exists($Filename)) {
 	if ($File) {
 		$events=array();
 		while (($Line = fgets($File)) !== false) {
-			if($Type === 'RAW'){
+			if ($RawType){
 				if (!isset($events[0])) $events[0][0] = array('RAW');
 				$events[0][1][] = cleanNonUTF8($Line);
 				continue;
 			}
 
 			$Unfiltered = $Line;
-			$Filtered = $Type == 'ALL' ? $Unfiltered : filter_result($Unfiltered, $Type, true);
+			$Filtered = $AllTypes ? $Unfiltered :filter_result_type($Unfiltered, $Types);
 			if (!is_null($Filter)) {
 				$Filtered = filter_result($Filtered, $Filter, false);
 				$Filtered = preg_replace("/\w*?$Filter\w*/i", "{em}$0{/em}", $Filtered);
@@ -48,8 +56,10 @@ if (file_exists($Filename)) {
 		fclose($File);
 		$out = events();
 	} else {
-		$out = 'Error opening log file.';
+		$out = $obLanguage->String("Error opening log file");
 	}
+} else {
+	$out = $obLanguage->String("Log file not found");
 }
 
 header('Content-Type: application/json');
@@ -90,9 +100,6 @@ function parse_smtp($data){
 	// AUTH LOGIN decoder.
 	// First we get a SENT: 334 VXNlcm5hbWU6 RECEIVED: AUTH LOGIN
 	// The next RECEIVED: line contains login username which is e-mail address, base64 encoded.
-	if (isset($datastore[$data[0] . $data[2]])) {
-		unset($datastore[$data[0] . $data[2]]);
-	}
 
 	if (isset($datastore[$data[0] . $data[2]]) && strpos($data[5],'RECEIVED: ') !== false) {
 		// We got it.
@@ -137,7 +144,7 @@ function events(){
 	foreach ($events as $data) {
 		$out[] = $data;
 	}
-	if (empty($out)) $out = 'No entries in log.';
+	if (empty($out)) $out = $obLanguage->String("No matched entries in the log file");
 	return $out;
 }
 

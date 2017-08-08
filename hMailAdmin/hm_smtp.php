@@ -140,7 +140,7 @@ PrintCheckboxRow("AllowSMTPAuthPlain", "Allow plain text authentication", $Allow
 PrintCheckboxRow("AllowMailFromNull", "Allow empty sender address", $AllowMailFromNull);
 PrintCheckboxRow("AllowIncorrectLineEndings", "Allow incorrectly formatted line endings", $AllowIncorrectLineEndings);
 PrintCheckboxRow("DisconnectInvalidClients", "Disconnect client after too many invalid commands", $DisconnectInvalidClients);
-PrintPropertyEditRow("MaxNumberOfInvalidCommands", "Maximum number of invalid commands", $MaxNumberOfInvalidCommands, 11);
+PrintPropertyEditRow("MaxNumberOfInvalidCommands", "Maximum number of invalid commands", $MaxNumberOfInvalidCommands, 4, "number", "small");
 ?>
         </div>
         <h3><a href="#"><?php EchoTranslation("Advanced")?></a></h3>
