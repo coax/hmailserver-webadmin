@@ -40,7 +40,7 @@ if (file_exists($Filename)) {
 		while (($Line = fgets($File)) !== false) {
 			if ($RawType){
 				if (!isset($events[0])) $events[0][0] = array('RAW');
-				$events[0][1][] = cleanNonUTF8($Line);
+				$events[0][1][] = htmlentities(cleanNonUTF8($Line));
 				continue;
 			}
 
