@@ -30,7 +30,7 @@ jQuery(document).ready(function(){
 			button = $(':submit', form);
 			$.ajax({
 				type: 'post',
-				url: './modern/logview.php',
+				url: './modern_logview.php',
 				data: params,
 				cache: false,
 				timeout: 50000,
@@ -42,6 +42,7 @@ jQuery(document).ready(function(){
 				success: function(data) {
 					result.html(parseLog(data));
 					button.prop('disabled', false).removeClass('wait');
+					contentHeight = $('#content').height() + 55;
 				},
 				error: function(data) {
 					result.html('Error loading log file!');
@@ -162,7 +163,7 @@ jQuery(document).ready(function(){
 				var queue = '';
 				if (json[2] !== 0) {
 					$.each(json[2], function(key, data){
-						queue += '<tr><td><a href="#" onclick="$.facebox({ajax:\'modern/view.php?q=' + data[5] + '\'}); return false;">' + data[0] + '</a></td><td>' + data[1] + '</td><td>' + data[2] + '</td><td>' + data[3] + '</td><td>' + data[4] + '</td><td>' + data[6] + '</td></tr>';
+						queue += '<tr><td><a href="#" onclick="$.facebox({ajax:\'modern_view.php?q=' + data[5] + '\'}); return false;">' + data[0] + '</a></td><td>' + data[1] + '</td><td>' + data[2] + '</td><td>' + data[3] + '</td><td>' + data[4] + '</td><td>' + data[6] + '</td></tr>';
 					});
 				}
 				$('#queue').html(queue);

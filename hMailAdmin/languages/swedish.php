@@ -66,6 +66,7 @@ return array(
 	63 => 'Om du ändrar dessa inställningar måste hMailServer startas om för att ändringarna ska träda i kraft.',
 	64 => 'Lägg till ny port',
 	65 => 'Lägg till ny vitlista',
+	66 => 'Meddelandet är inte längre i kö.',
 
 	100 => 'Loggparser',
 	101 => 'hMailServer loggparser',
@@ -81,6 +82,10 @@ return array(
 	111 => 'Parse logg',
 	112 => 'Tryck på "Parse logg" knappen',
 	113 => 'Rensa resultat',
+	114 => 'Resultat',
+	115 => 'Loggfilen hittades inte',
+	116 => 'Det gick inte att öppna loggfilen',
+	117 => 'Inga matchade poster i loggfilen',
 
 	200 => 'Bekräfta borttagning',
 );

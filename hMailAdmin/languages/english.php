@@ -66,6 +66,7 @@ return array(
 	63 => 'If you change these settings, hMailServer needs to be restarted for the changes to take effect.', // tcpipport
 	64 => 'Add new port',
 	65 => 'Add new whitelist',
+	66 => 'Message no longer in queue.',
 
 	100 => 'Log parser',
 	101 => 'hMailServer log parser',
@@ -81,6 +82,10 @@ return array(
 	111 => 'Parse log',
 	112 => 'Click on "Parse log" button',
 	113 => 'Clear results',
+	114 => 'Results',
+	115 => 'Log file not found',
+	116 => 'Error opening log file',
+	117 => 'No matched entries in the log file',
 
 	200 => 'Confirm delete',
 );
