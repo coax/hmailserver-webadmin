@@ -65,6 +65,32 @@ $hmail_config['defaultlanguage'] = "english";
 $hmail_config['rule_editing_level'] = 2;
 
 /*
+   Deny or allow built-in Administrator to login.
+
+   If you deny built-in Administrator you can set admin level to
+   "server" on a email account to not lose administrator functionality.
+
+   Possible values:
+
+   0 - Deny Administrator to login.
+   1 - Allow Administrator to login.
+   2 - Allow Administrator to login from addresses listed in allow_admin_addresses.
+*/
+
+$hmail_config['allow_admin_login'] = 1;
+
+/*
+   Ip addresses and/or ranges to allow built-in Administrator.
+   Range is in IP/CIDR format eg 192.168.0.1/24 fe80::/64
+   Separated with ",".
+   
+   Example:
+      $hmail_config['allow_admin_addresses'] = "192.168.0.0/24,fe80::/64,10.0.0.0/8";
+*/
+
+$hmail_config['allow_admin_addresses'] = "";
+
+/*
    Added in web interface redesign to show webmail links to logged in users.
    [domain] is needed if you want the script to dynamically change domains.
 
@@ -75,7 +101,9 @@ $hmail_config['rule_editing_level'] = 2;
       http://webmail.[domain]
       http://[domain]/webmail
 */
+
 $hmail_config['webmail'] = "http://webmail.[domain]";
+
 /*
    First day of week in datepicker js plugin.
 
@@ -89,5 +117,7 @@ $hmail_config['webmail'] = "http://webmail.[domain]";
       5 - Friday
       6 - Saturday
 */
+
 $hmail_config['datepicker_weekStart'] = 1;
+
 ?>
