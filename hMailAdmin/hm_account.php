@@ -138,9 +138,23 @@ PrintPropertyRow("Last logon time", $accountlastlogontime);
 ?>
         <p><?php EchoTranslation("Administration level")?></p>
         <select name="accountadminlevel" <?php if ($admin_rights == 0) echo " disabled ";?> class="medium">
-          <option value="0" <?php if ($accountadminlevel == 0) echo " selected "; ?>><?php echo $str_user; ?></option>
-          <option value="1" <?php if ($accountadminlevel == 1) echo " selected "; ?>><?php echo $str_domain; ?></option>
-          <option value="2" <?php if ($accountadminlevel == 2) echo " selected "; ?>><?php echo $str_server; ?></option>
+        <?php 
+        if ($admin_rights >= 0) {
+           echo '<option value="0"';
+           if ($accountadminlevel == 0) echo " selected ";
+           echo '>'.$str_user.'</option>';
+        }
+        if ($admin_rights == 1) {
+           echo '<option value="1"';
+           if ($accountadminlevel == 1) echo " selected ";
+           echo '>'.$str_domain.'</option>';
+        }
+        if (hmailGetAdminLevel() === ADMIN_SERVER) {
+           echo '<option value="2"';
+           if ($accountadminlevel == 2) echo " selected ";
+           echo '>'.$str_server.'</option>';
+        }
+        ?>
         </select>
 <?php
 if ($admin_rights)
