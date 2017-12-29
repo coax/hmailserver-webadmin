@@ -146,7 +146,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
           <a href="?page=securityranges"><?php EchoTranslation("IP Ranges") ?><span class="count"><?php echo $TotalIpRanges ?></span></a>
         </li>
         <li class="logs <?php if ($page=='hm_logviewer') echo 'active' ?>">
-          <a href="?page=logviewer"><?php EchoTranslation("Log parser") ?></a>
+          <a href="?page=logviewer"><?php EchoTranslation("Log viewer") ?></a>
         </li>
         <li class="label"><?php EchoTranslation("Action") ?></li>
 <?php
@@ -176,7 +176,7 @@ switch($ServerState) {
 		$state = $obLanguage->String("Stopping");
 		break;
 	default:
-		$state = $obLanguage->String("Unknown");
+		$state = "Unknown";
 		break;
 }
 
@@ -192,8 +192,7 @@ switch($ServerState) {
 		$controlbutton = $obLanguage->String("Pause");
 		break;
 	default:
-		$controlaction = 0;
-		$controlbutton = $obLanguage->String("Unknown");
+		$state = "Unknown";
 		break;
 }
 ?>

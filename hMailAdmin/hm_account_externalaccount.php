@@ -82,8 +82,8 @@ PrintPropertyEditRow("Name", "Name", $Name);
             <option value="0" selected>POP3</option>
           </select>
 <?php
-PrintPropertyEditRow("ServerAddress", "Server address", $ServerAddress);
-PrintPropertyEditRow("Port", "TCP/IP port", $Port, 10, "number");
+PrintPropertyEditRow("ServerAddress", "Server address", $ServerAddress, 255);
+PrintPropertyEditRow("Port", "TCP/IP port", $Port, 25, "number");
 ?>
           <p><?php EchoTranslation("Connection security")?></p>
           <select name="ConnectionSecurity" class="medium">

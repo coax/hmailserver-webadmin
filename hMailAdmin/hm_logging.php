@@ -41,7 +41,7 @@ PrintHidden("action", "save");
 
 PrintCheckboxRow("logenabled", "Enabled", $logenabled);
 ?>
-        <h3><?php EchoTranslation("Log") ?></h3>
+        <h3>Log</h3>
 <?php
 PrintCheckboxRow("logapplication", "Application", $logapplication);
 PrintCheckboxRow("logsmtp", "SMTP", $logsmtp);
@@ -51,7 +51,7 @@ PrintCheckboxRow("logdebug", "Debug", $logdebug);
 PrintCheckboxRow("logtcpip", "TCP/IP", $logtcpip);
 PrintCheckboxRow("logawstats", "AWStats", $logawstats);
 ?>
-        <h3><?php EchoTranslation("Settings") ?></h3>
+        <h3>Settings</h3>
 <?php
 PrintCheckboxRow("KeepFilesOpen", "Keep files open", $KeepFilesOpen);
 

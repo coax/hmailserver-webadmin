@@ -68,30 +68,30 @@ PrintCheckboxRow("cacheenabled", "Enabled", $cacheenabledchecked);
           </tr>
           <tr>
             <td><?php EchoTranslation("Domain")?></td>
-            <td><input type="text" name="cachedomainttl" maxlength="11" value="<?php echo PreprocessOutput($cachedomainttl)?>" checkallownull="false" checktype="number" checkmessage="<?php EchoTranslation("Domain")?>" class="medium"></td>
+            <td><input type="text" name="cachedomainttl" value="<?php echo PreprocessOutput($cachedomainttl)?>" checkallownull="false" checktype="number" checkmessage="<?php EchoTranslation("Domain")?>" class="medium"></td>
             <td><?php echo $cachedomainhitrate?></td>
           </tr>
           <tr>
             <td><?php EchoTranslation("Account")?></td>
-            <td><input type="text" name="cacheaccountttl" maxlength="11" value="<?php echo PreprocessOutput($cacheaccountttl)?>" checkallownull="false" checktype="number" checkmessage="<?php EchoTranslation("Account")?>" class="medium"></td>
+            <td><input type="text" name="cacheaccountttl" value="<?php echo PreprocessOutput($cacheaccountttl)?>" checkallownull="false" checktype="number" checkmessage="<?php EchoTranslation("Account")?>" class="medium"></td>
             <td><?php echo $cacheaccounthitrate?></td>
           </tr>
           <tr>
             <td><?php EchoTranslation("Alias")?></td>
-            <td><input type="text" name="cachealiasttl" maxlength="11" value="<?php echo PreprocessOutput($cachealiasttl)?>" checkallownull="false" checktype="number" checkmessage="<?php EchoTranslation("Alias")?>" class="medium"></td>
+            <td><input type="text" name="cachealiasttl" value="<?php echo PreprocessOutput($cachealiasttl)?>" checkallownull="false" checktype="number" checkmessage="<?php EchoTranslation("Alias")?>" class="medium"></td>
             <td><?php echo $cachealiashitrate?></td>
           </tr>
           <tr>
             <td><?php EchoTranslation("Distribution list")?></td>
-            <td><input type="text" name="cachedistributionlistttl" maxlength="11" value="<?php echo PreprocessOutput($cachedistributionlistttl)?>" checkallownull="false" checktype="number" checkmessage="<?php EchoTranslation("Distribution list")?>" class="medium"></td>
+            <td><input type="text" name="cachedistributionlistttl" value="<?php echo PreprocessOutput($cachedistributionlistttl)?>" checkallownull="false" checktype="number" checkmessage="<?php EchoTranslation("Distribution list")?>" class="medium"></td>
             <td><?php echo $cachedistributionlisthitrate?></td>
           </tr>
         </table>
         <h3><?php EchoTranslation("Threading")?></h3>
 <?php
-PrintPropertyEditRow("tcpipthreads", "Max number of command threads", $tcpipthreads, 11, "number", "small");
-PrintPropertyEditRow("maxdeliverythreads", "Delivery threads", $maxdeliverythreads, 11, "number", "small");
-PrintPropertyEditRow("MaxAsynchronousThreads", "Max number of asynchronous task threads", $MaxAsynchronousThreads, 11, "number", "small");
+PrintPropertyEditRow("tcpipthreads", "Max number of command threads", $tcpipthreads, 25, "number", "small");
+PrintPropertyEditRow("maxdeliverythreads", "Delivery threads", $maxdeliverythreads, 25, "number", "small");
+PrintPropertyEditRow("MaxAsynchronousThreads", "Max number of asynchronous task threads", $MaxAsynchronousThreads, 4, "number", "small");
 ?>
         <p><?php EchoTranslation("Worker thread priority")?></p>
         <select name="workerthreadpriority" class="medium">

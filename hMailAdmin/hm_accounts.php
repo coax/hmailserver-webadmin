@@ -32,12 +32,6 @@ $currentaccountid = hmailGetAccountID();
 <?php
 $obAccounts = $obDomain->Accounts;
 
-$str_yes = $obLanguage->String("Yes");
-$str_no = $obLanguage->String("No");
-$str_delete = $obLanguage->String("Remove");
-$str_confirm = $obLanguage->String("Confirm delete");
-$str_unlimited = $obLanguage->String("Unlimited");
-
 for ($i = 0; $i < $Count; $i++) {
 	$obAccount = $obAccounts->Item($i);
 	$accountaddress = $obAccount->Address;
@@ -48,21 +42,21 @@ for ($i = 0; $i < $Count; $i++) {
 	$accountaddress_escaped = GetStringForJavaScript($accountaddress);
 
 	//added
-	$AccountEnabled = $obAccount->Active ? $str_yes : $str_no;
+	$AccountEnabled = $obAccount->Active ? $obLanguage->String("Yes") : $obLanguage->String("No");
 	$AccountSize = $obAccount->Size();
 	$Color = "green";
 	if($accountmaxsize > 0){
 		$Percentage = Round((($accountmaxsize - $AccountSize) / ($accountmaxsize)) * 100);
 		if ($Percentage<=10) $Color = "red";
 		elseif ($Percentage<=30) $Color = "yellow";
-	}else $accountmaxsize = $str_unlimited;
+	}else $accountmaxsize = "Unlimited";
 
 	echo '            <tr>
               <td><a href="?page=account&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '">' . $accountaddress . '</a></td>
               <td class=' . $Color . '>' . number_format($AccountSize, 2, ".", "") . '</td>
               <td>' . $accountmaxsize . '</td>
               <td>' . $AccountEnabled . '</td>
-              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $accountaddress . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_account_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $accountaddress . '</b>:\',\'Yes\',\'?page=background_account_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

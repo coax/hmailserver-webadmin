@@ -76,7 +76,7 @@ echo '                  <option value=' . eFTFrom . $eFTFromSelected . '>' . Get
               </td>
               <td>
                 <p><input type="radio" name="UsePredefined" value="0" id="2" <?php if ($UsePredefined == 0) echo "checked"?>><label for="2"><?php EchoTranslation("Custom header field")?></label></p>
-                <input type="text" name="HeaderField" maxlength="255" value="<?php echo PreprocessOutput($HeaderField);?>">
+                <input type="text" name="HeaderField" value="<?php echo PreprocessOutput($HeaderField);?>">
               </td>
             </tr>
           </tbody>
@@ -110,7 +110,7 @@ echo '                  <option value=' . eMTEquals . $eMTEqualsSelected . '>' .
               </td>
               <td>
                 <p><?php EchoTranslation("Value")?></p>
-                <input type="text" name="MatchValue" maxlength="255" value="<?php echo PreprocessOutput($MatchValue);?>">
+                <input type="text" name="MatchValue" value="<?php echo PreprocessOutput($MatchValue);?>">
               </td>
             </tr>
           </tbody>

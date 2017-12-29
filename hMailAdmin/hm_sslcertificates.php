@@ -21,11 +21,6 @@ $Count = $SSLCertificates->Count();
           </thead>
           <tbody>
 <?php
-$str_yes = $obLanguage->String("Yes");
-$str_no = $obLanguage->String("No");
-$str_delete = $obLanguage->String("Remove");
-$str_confirm = $obLanguage->String("Confirm delete");
-
 for ($i = 0; $i < $Count; $i++) {
 	$sslCertificate = $SSLCertificates->Item($i);
 	$id = $sslCertificate->ID;
@@ -34,12 +29,12 @@ for ($i = 0; $i < $Count; $i++) {
 
 	echo '            <tr>
               <td><a href="?page=sslcertificate&action=edit&id=' . $id . '">' . $name . '</a></td>
-             <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $name . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_sslcertificate_save&csrftoken=' . $csrftoken . '&action=delete&id=' . $id . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
+             <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $name . '</b>:\',\'Yes\',\'?page=background_sslcertificate_save&csrftoken=' . $csrftoken . '&action=delete&id=' . $id . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=sslcertificate&action=add" class="button"><?php EchoTranslation("Add new SSL certificate") ?></a></div>
+        <div class="buttons center"><a href="?page=sslcertificate&action=add" class="button"><?php EchoTranslation("Add SSL certificate") ?></a></div>
       </div>
     </div>

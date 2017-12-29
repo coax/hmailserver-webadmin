@@ -2,9 +2,9 @@
 //ini_set('display_errors', 1);
 define('IN_WEBADMIN', true);
 
-require_once("./config.php");
-require_once("./include/initialization_test.php");
-require_once("./initialize.php");
+require_once("../config.php");
+require_once("../include/initialization_test.php");
+require_once("../initialize.php");
 
 if (hmailGetAdminLevel() != 2)
 	hmailHackingAttemp();
@@ -15,22 +15,14 @@ function filter_result($str, $findme, $type=true) {
 	}
 }
 
-function filter_result_type($str, $types) {
-	foreach ($types as $v) {
-		if (!is_null($result = filter_result($str, $v, true)))
-			return $result;
-	}
-}
-
-$Types = !empty($_POST['LogTypes']) ? $_POST['LogTypes'] : array('SMTPD');
-$AllTypes = in_array('ALL', $Types);
-$RawType = !empty($_POST['LogType']) ? true : false;
+$Type = !empty($_POST['LogType']) ? $_POST['LogType'] : 'SMTPD';
 $Filter = !empty($_POST['LogFilter']) ? $_POST['LogFilter'] : null;
 $Filename = !empty($_POST['LogFilename']) ? $_POST['LogFilename'] : date("Y-m-d");
 $Filename = 'hmailserver_' . $Filename . '.log';
 $Path = $obBaseApp->Settings->Directories->LogDirectory;
 $Filename = $Path . '\\' . $Filename;
 
+$out = 'Log file not found.';
 if (file_exists($Filename)) {
 	$Filesize = filesize($Filename);
 	$File = fopen($Filename, 'r');
@@ -38,14 +30,14 @@ if (file_exists($Filename)) {
 	if ($File) {
 		$events=array();
 		while (($Line = fgets($File)) !== false) {
-			if ($RawType){
+			if($Type === 'RAW'){
 				if (!isset($events[0])) $events[0][0] = array('RAW');
-				$events[0][1][] = htmlentities(cleanNonUTF8($Line));
+				$events[0][1][] = cleanNonUTF8($Line);
 				continue;
 			}
 
 			$Unfiltered = $Line;
-			$Filtered = $AllTypes ? $Unfiltered :filter_result_type($Unfiltered, $Types);
+			$Filtered = $Type == 'ALL' ? $Unfiltered : filter_result($Unfiltered, $Type, true);
 			if (!is_null($Filter)) {
 				$Filtered = filter_result($Filtered, $Filter, false);
 				$Filtered = preg_replace("/\w*?$Filter\w*/i", "{em}$0{/em}", $Filtered);
@@ -56,11 +48,9 @@ if (file_exists($Filename)) {
 		fclose($File);
 		$out = events();
 	} else {
-		$out = $obLanguage->String("Error opening log file");
+		$out = 'Error opening log file.';
 	}
-} else {
-	$out = $obLanguage->String("Log file not found");
-}
+} else echo 'Log file not found.';
 
 header('Content-Type: application/json');
 $out = json_encode($out);
@@ -98,19 +88,18 @@ function parse_smtp($data){
 	}
 
 	// AUTH LOGIN decoder.
-	// First we get a SENT: 334 VXNlcm5hbWU6 RECEIVED: AUTH LOGIN
+	// First we get a RECEIVED: AUTH LOGIN
 	// The next RECEIVED: line contains login username which is e-mail address, base64 encoded.
+	if (isset($datastore[$data[0] . $data[2]]) && strpos($data[5],'SENT: 504 Authentication not enabled.') !== false) {
+		unset($datastore[$data[0] . $data[2]]);
+	}
 
 	if (isset($datastore[$data[0] . $data[2]]) && strpos($data[5],'RECEIVED: ') !== false) {
 		// We got it.
 		$base64 = substr($data[5], strrpos($data[5], ' ') + 1, strlen($data[5]));
 		$data[5] = 'RECEIVED: <b>' . base64_decode($base64) . '</b>';
 		unset($datastore[$data[0] . $data[2]]);
-	} else if (strpos($data[5], 'RECEIVED: AUTH LOGIN ') !== false && strlen($data[5]) > 21) {
-		// Got singel line AUTH LOGIN?
-		$base64 = substr($data[5], strrpos($data[5], ' ') + 1, strlen($data[5]));
-		$data[5] = substr($data[5], 0, strrpos($data[5], ' ') + 1) .' <b>' . base64_decode($base64) . '</b>';
-	} else if (strpos($data[5], 'SENT: 334 VXNlcm5hbWU6') !== false) {
+	} else if (strpos($data[5], 'RECEIVED: AUTH LOGIN') !== false) {
 		// Wait for it.
 		$datastore[$data[0] . $data[2]] = true;
 	}
@@ -144,13 +133,13 @@ function events(){
 	foreach ($events as $data) {
 		$out[] = $data;
 	}
-	if (empty($out)) $out = $obLanguage->String("No matched entries in the log file");
+	if (empty($out)) $out = 'No entries in log.';
 	return $out;
 }
 
 function cleanString($str) {
-	$search = array("\r\n", "'", '"', '<', '>', '[nl]', '{em}', '{/em}','\n');
-	$replace = array('', '', '', '&lt;', '&gt;', '<br>', '<em>', '</em>','<br>');
+	$search = array("\r\n", "'", '"', '<', '>', '[nl]', '{em}', '{/em}', "\xC3\xBF");
+	$replace = array('', '', '', '&lt;', '&gt;', '<br>', '<em>', '</em>', '%' );
 	return str_replace($search, $replace, $str);
 }
 

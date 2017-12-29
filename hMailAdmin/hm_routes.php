@@ -21,10 +21,7 @@ $obRoutes = $obSettings->Routes();
 
 $Count = $obRoutes->Count();
 
-$str_yes = $obLanguage->String("Yes");
-$str_no = $obLanguage->String("No");
 $str_delete = $obLanguage->String("Remove");
-$str_confirm = $obLanguage->String("Confirm delete");
 
 for ($i = 0; $i < $Count; $i++) {
 	$obRoute = $obRoutes->Item($i);
@@ -35,7 +32,7 @@ for ($i = 0; $i < $Count; $i++) {
 
    	echo '            <tr>
               <td><a href="?page=route&action=edit&routeid=' . $routeid . '">' . $routename . '</a></td>
-              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $routename . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_route_save&csrftoken=' . $csrftoken . '&action=delete&routeid=' . $routeid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $routename . '</b>:\',\'Yes\',\'?page=background_route_save&csrftoken=' . $csrftoken . '&action=delete&routeid=' . $routeid . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

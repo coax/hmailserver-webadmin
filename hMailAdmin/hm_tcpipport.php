@@ -40,7 +40,7 @@ PrintHidden("tcpipportid", "$tcpipportid");
           <option value="5" <?php if ($protocol == "5") echo "selected";?> ><?php EchoTranslation("IMAP")?></option>
         </select>
 <?php
-PrintPropertyEditRow("Address", "TCP/IP address", $Address, 20);
+PrintPropertyEditRow("Address", "TCP/IP address", $Address, 15);
 PrintPropertyEditRow("portnumber", "TCP/IP port", $portnumber, 10, "number", "small");
 ?>
         <p><?php EchoTranslation("Connection security")?></p>
@@ -66,7 +66,7 @@ for ($i = 0; $i < $SSLCertificates->Count; $i++) {
 }
 ?>
         </select>
-        <div class="warning"><?php EchoTranslation("If you change these settings, hMailServer needs to be restarted for the changes to take effect.") ?></div>
+        <div class="warning">If you change these settings, hMailServer needs to be restarted for the changes to take effect.</div>
 <?php
 PrintSaveButton();
 ?>

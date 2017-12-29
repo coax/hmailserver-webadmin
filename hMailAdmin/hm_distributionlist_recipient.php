@@ -33,7 +33,7 @@ PrintHidden("distributionlistid", $distributionlistid);
 PrintHidden("domainid", $domainid);
 PrintHidden("recipientid", $recipientid);
 
-PrintPropertyEditRow("recipientaddress", "Address", $recipientaddress, 255, "email");
+PrintPropertyEditRow("recipientaddress", "Address", $recipientaddress, 30, "email");
 
 PrintSaveButton();
 ?>

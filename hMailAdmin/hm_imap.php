@@ -40,8 +40,8 @@ PrintHiddenCsrfToken();
 PrintHidden("page", "imap");
 PrintHidden("action", "save");
 
-PrintPropertyEditRow("MaxIMAPConnections", "Maximum number of simultaneous connections (0 for unlimited)", $MaxIMAPConnections, 11, "number", "small");
-PrintPropertyEditRow("welcomeimap", "Welcome message", $welcomeimap);
+PrintPropertyEditRow("MaxIMAPConnections", "Maximum number of simultaneous connections (0 for unlimited)", $MaxIMAPConnections, 50, "number", "small");
+PrintPropertyEditRow("welcomeimap", "Welcome message", $welcomeimap, 50);
 ?>
         <h3><a href="#"><?php EchoTranslation("Advanced")?></a></h3>
         <div class="hidden">

@@ -97,27 +97,27 @@ PrintHiddenCsrfToken();
 PrintHidden("page", "smtp");
 PrintHidden("action", "save");
 
-PrintPropertyEditRow("maxsmtpconnections", "Maximum number of simultaneous connections (0 for unlimited)", $maxsmtpconnections, 11, "number", "small");
+PrintPropertyEditRow("maxsmtpconnections", "Maximum number of simultaneous connections (0 for unlimited)", $maxsmtpconnections, 20, "number", "small");
 PrintPropertyEditRow("welcomesmtp", "Welcome message", $welcomesmtp);
-PrintPropertyEditRow("maxmessagesize", "Max message size (KB)", $maxmessagesize, 11, "number", "small");
+PrintPropertyEditRow("maxmessagesize", "Max message size (KB)", $maxmessagesize, 5, "number", "small");
 ?>
         <h3><a href="#"><?php EchoTranslation("Delivery of e-mail")?></a></h3>
         <div class="hidden">
 <?php
 PrintPropertyEditRow("smtpnooftries", "Number of retries", $smtpnooftries, 4, "number", "small");
 PrintPropertyEditRow("smtpminutesbetweentry", "Minutes between every retry", $smtpminutesbetweentry, 4, "number", "small");
-PrintPropertyEditRow("HostName", "Local host name", $HostName);
+PrintPropertyEditRow("HostName", "Local host name", $HostName, 20);
  ?>
         </div>
         <h3><a href="#"><?php EchoTranslation("SMTP relayer")?></a></h3>
         <div class="hidden">
 <?php
-PrintPropertyEditRow("smtprelayer", "Remote host name", $smtprelayer);
-PrintPropertyEditRow("smtprelayerport", "Remote TCP/IP port", $smtprelayerport, 11, "number", "small");
+PrintPropertyEditRow("smtprelayer", "Remote host name", $smtprelayer, 25);
+PrintPropertyEditRow("smtprelayerport", "Remote TCP/IP port", $smtprelayerport, 25, "number", "small");
 PrintPropertyEditRow("HostName", "Local host name", $HostName);
 PrintCheckboxRow("SMTPRelayerRequiresAuthentication", "Server requires authentication", $SMTPRelayerRequiresAuthentication);
-PrintPropertyEditRow("SMTPRelayerUsername", "Username", $SMTPRelayerUsername, 255, null, "medium");
-PrintPasswordEntry("SMTPRelayerPassword", "Password", 255, "medium");
+PrintPropertyEditRow("SMTPRelayerUsername", "Username", $SMTPRelayerUsername, 30, null, "medium");
+PrintPasswordEntry("SMTPRelayerPassword", "Password", 20, "medium");
 ?>
           <p><?php EchoTranslation("Connection security")?></p>
           <select name="SMTPRelayerConnectionSecurity" class="medium">
@@ -140,7 +140,7 @@ PrintCheckboxRow("AllowSMTPAuthPlain", "Allow plain text authentication", $Allow
 PrintCheckboxRow("AllowMailFromNull", "Allow empty sender address", $AllowMailFromNull);
 PrintCheckboxRow("AllowIncorrectLineEndings", "Allow incorrectly formatted line endings", $AllowIncorrectLineEndings);
 PrintCheckboxRow("DisconnectInvalidClients", "Disconnect client after too many invalid commands", $DisconnectInvalidClients);
-PrintPropertyEditRow("MaxNumberOfInvalidCommands", "Maximum number of invalid commands", $MaxNumberOfInvalidCommands, 4, "number", "small");
+PrintCheckboxRow("MaxNumberOfInvalidCommands", "Maximum number of invalid commands", $MaxNumberOfInvalidCommands);
 ?>
         </div>
         <h3><a href="#"><?php EchoTranslation("Advanced")?></a></h3>
@@ -148,11 +148,11 @@ PrintPropertyEditRow("MaxNumberOfInvalidCommands", "Maximum number of invalid co
 <?php
 PrintPropertyEditRow("smtpdeliverybindtoip", "Bind to local IP address", $smtpdeliverybindtoip, 20, "ip");
 PrintPropertyEditRow("maxsmtprecipientsinbatch", "Maximum number of recipients in batch", $maxsmtprecipientsinbatch, 4, "number", "small");
-PrintPropertyEditRow("HostName", "Local host name", $HostName);
+PrintPropertyEditRow("HostName", "Local host name", $HostName, 20);
 PrintCheckboxRow("SMTPConnectionSecurity", "Use STARTTLS if available", $SMTPConnectionSecurity);
 PrintPropertyEditRow("smtprulelooplimit", "Rule Loop Limit", $smtprulelooplimit, 3, "number", "small");
 PrintCheckboxRow("AddDeliveredToHeader", "Add Delivered-To header", $AddDeliveredToHeader);
-PrintPropertyEditRow("MaxNumberOfMXHosts", "Maximum number of recipient hosts", $MaxNumberOfMXHosts, 11, "number", "small");
+PrintPropertyEditRow("MaxNumberOfMXHosts", "Maximum number of recipient hosts", $MaxNumberOfMXHosts, 20, "number", "small");
 ?>
         </div>
 <?php

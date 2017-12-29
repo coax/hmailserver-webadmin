@@ -19,6 +19,10 @@ Features
 - works with latest hMailServer (stable) version
 - continuous development
 
+Roadmap for 2017
+-----
+- buy community license for [Imperavi Grafs](https://imperavi.com/grafs/) (hence the donation link below)
+
 Donate
 -----
 Don't worry, hMailAdmin will stay free - but I do need your support in order to continue to develop it! Thank you :)
@@ -49,15 +53,6 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
-Version 1.3 (2017-12-29)
-- [new] translation class for missing phrases in hMailServer, anyone can add new languages (eg. italian.php) to /languages folder
-- [new] config.php: allow or deny built-in Administrator within IP range or address
-- [new] config.php: week start day
-- [new] view IP address on IP ranges list
-- [fix] minor translation and maxlength fixes
-- [tweak] update 3rd party plugins
-- [tweak] CSS optimization
-
 Version 1.2 (2017-06-12)
 - [fix] multiple typos and small fixes
 - [fix] dropdowns in rule criteria actions
@@ -169,10 +164,6 @@ Feel free to ask any question or report bug via GitHub Issues. I'll try to answe
 There's an official thread on [hMailServer forums](https://www.hmailserver.com/forum/viewtopic.php?f=10&t=30713).
 
 If you want to help me with this project, simply fork it and let me know ;)
-
-Thanks
------
-Andreas Tunberg and other contributors who make developing easier.
 
 Copyright?
 -----

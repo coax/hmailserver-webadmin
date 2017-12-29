@@ -51,7 +51,7 @@ PrintHidden("distributionlistid", $distributionlistid);
 PrintHidden("domainid", $domainid);
 ?>
         <p><?php EchoTranslation("Address") ?></p>
-        <input type="text" name="listaddress" value="<?php echo PreprocessOutput($listaddress) ?>" size="255" checkallownull="false" checkmessage="<?php EchoTranslation("Address") ?>" class="req medium"> @<?php echo $domainname ?>
+        <input type="text" name="listaddress" value="<?php echo PreprocessOutput($listaddress) ?>" size="30" checkallownull="false" checkmessage="<?php EchoTranslation("Address") ?>" class="req medium"> @<?php echo $domainname ?>
 <?php
 PrintCheckboxRow("listactive", "Enabled", $listactivechecked);
 ?>
@@ -64,8 +64,8 @@ PrintCheckboxRow("listactive", "Enabled", $listactivechecked);
             <option value="2"<?php if ($Mode == 2) echo " selected";?>><?php EchoTranslation("Announcements - Only allow messages from the following address:") ?></option>
           </select>
 <?php
-PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 255);
-PrintCheckboxRow("listrequiresmtpauth", "Require SMTP authentication", $listrequiresmtpauthchecked);
+PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 30);
+PrintCheckboxRow("listrequiresmtpauth", "Require SMTP Authentication", $listrequiresmtpauthchecked);
 ?>
         </div>
 <?php
@@ -86,10 +86,7 @@ if ($action=='edit') {
 	$obList = $obDomain->DistributionLists->ItemByDBID($distributionlistid);
 	$obRecipients = $obList->Recipients;
 	$Count = $obRecipients->Count();
-	$str_yes = $obLanguage->String("Yes");
-	$str_no = $obLanguage->String("No");
 	$str_delete = $obLanguage->String("Remove");
-	$str_confirm = $obLanguage->String("Confirm delete");
 
 	for ($i = 0; $i < $Count; $i++) {
 		$obRecipient = $obRecipients->Item($i);
@@ -99,7 +96,7 @@ if ($action=='edit') {
 
 		echo '              <tr>
                 <td><a href="?page=distributionlist_recipient&action=edit&domainid=' . $domainid . '&distributionlistid=' . $distributionlistid . '&recipientid=' . $recipientid . '">' . $recipientaddress . '</a></td>
-                <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $recipientaddress . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_distributionlist_recipient_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&distributionlistid=' . $distributionlistid . '&recipientid=' . $recipientid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
+                <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $recipientaddress . '</b>:\',\'Yes\',\'?page=background_distributionlist_recipient_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&distributionlistid=' . $distributionlistid . '&recipientid=' . $recipientid . '\');" class="delete">Delete</a></td>
               </tr>' . PHP_EOL;
 	}
 ?>
@@ -110,7 +107,7 @@ if ($action=='edit') {
 <?php
 } else {
 ?>
-        <div class="warning"><?php EchoTranslation("You must save distribution list before you can edit members.") ?></div>
+        <div class="warning">You must save distribution list before you can edit members.</div>
 <?php
 }
 PrintSaveButton();

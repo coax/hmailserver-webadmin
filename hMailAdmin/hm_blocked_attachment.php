@@ -29,7 +29,7 @@ PrintHidden("page", "background_blocked_attachment_save");
 PrintHidden("action", $action);
 PrintHidden("id", $id);
 
-PrintPropertyEditRow("wildcard", "Wildcard", $wildcard);
+PrintPropertyEditRow("wildcard", "Wildcard", $wildcard, 10);
 PrintPropertyAreaRow("description", "Description", $description);
 
 PrintSaveButton();

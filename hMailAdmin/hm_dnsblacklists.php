@@ -8,10 +8,6 @@ if (hmailGetAdminLevel() != ADMIN_SERVER)
 $obSettings = $obBaseApp->Settings();
 $dnsBlacklists = $obSettings->AntiSpam->DNSBlackLists;
 $Count = $dnsBlacklists->Count();
-$str_yes = $obLanguage->String("Yes");
-$str_no = $obLanguage->String("No");
-$str_delete = $obLanguage->String("Remove");
-$str_confirm = $obLanguage->String("Confirm delete");
 ?>
     <div class="box large">
       <h2><?php EchoTranslation("DNS blacklists") ?> <span>(<?php echo $Count ?>)</span></h2>
@@ -40,7 +36,7 @@ for ($i = 0; $i < $Count; $i++) {
               <td><a href="?page=dnsblacklist&action=edit&id=' . $id . '">' . $name . '</a></td>
               <td>' . $Score . '</td>
               <td>' . $enabled . '</td>
-              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $name . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_dnsblacklist_save&csrftoken=' . $csrftoken . '&action=delete&id=' . $id . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $name . '</b>:\',\'Yes\',\'?page=background_dnsblacklist_save&csrftoken=' . $csrftoken . '&action=delete&id=' . $id . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

@@ -28,11 +28,6 @@ $obAliases = $obDomain->Aliases;
           </thead>
           <tbody>
 <?php
-$str_yes = $obLanguage->String("Yes");
-$str_no = $obLanguage->String("No");
-$str_delete = $obLanguage->String("Remove");
-$str_confirm = $obLanguage->String("Confirm delete");
-
 for ($i = 0; $i < $Count; $i++) {
 	$obAlias = $obAliases->Item($i);
 	$aliasname = $obAlias->Name;
@@ -41,12 +36,12 @@ for ($i = 0; $i < $Count; $i++) {
 	$aliasname = PreprocessOutput($aliasname);
 	$aliasname_escaped = GetStringForJavaScript($aliasname);
 
-	$aliasactive = $obAlias->Active ? $str_yes : $str_no; //added
+	$aliasactive = $obAlias->Active ? $obLanguage->String("Yes") : $obLanguage->String("No"); //added
 
 	echo '            <tr>
               <td><a href="?page=alias&action=edit&domainid=' . $domainid . '&aliasid=' . $aliasid . '">' . $aliasname . '</a></td>
               <td>' . $aliasactive . '</td>
-              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $aliasname . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_alias_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&aliasid=' . $aliasid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
+              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $aliasname . '</b>:\',\'Yes\',\'?page=background_alias_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&aliasid=' . $aliasid . '\');" class="delete">Delete</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

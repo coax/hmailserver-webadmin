@@ -37,7 +37,7 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
     </div>
 
     <div class="box">
-      <h2><?php EchoTranslation("Current sessions") ?></h2>
+      <h2><?php EchoTranslation("Open sessions") ?></h2>
       <div id="sessions" style="margin:30px auto; width:150px; height:150px;"></div>
       <div class="grey">
         <div><span id="smtp"><?php echo $SessionsSmtp ?></span><br>SMTP</div>
@@ -62,7 +62,7 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
           </thead>
         </table>
       </div>
-      <div style="margin:0 18px 18px 18px; max-height:400px; overflow-y:scroll;">
+      <div style="margin:0 18px; max-height:400px; overflow-y:scroll;">
         <table class="queue" id="queue">
           <tbody>
 <?php
