@@ -73,8 +73,8 @@ PrintPropertyEditRow("MaximumMessageSize", "Maximum message size to virus scan (
         <div class="hidden">
 <?php
 PrintCheckboxRow("clamwinenabled", "Enabled", $clamwinenabled);
-PrintPropertyEditRow("clamwinexecutable", "ClamScan executable", $clamwinexecutable, 60);
-PrintPropertyEditRow("clamwindbfolder", "Path to ClamScan database", $clamwindbfolder, 60);
+PrintPropertyEditRow("clamwinexecutable", "ClamScan executable", $clamwinexecutable);
+PrintPropertyEditRow("clamwindbfolder", "Path to ClamScan database", $clamwindbfolder);
 ?>
           <p><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('ClamWin');"></p>
           <div id="ClamWinTestResult"></div>
@@ -116,6 +116,11 @@ PrintCheckboxRow("EnableAttachmentBlocking", "Block attachments with the followi
 <?php
 $blockedAttachments = $obAntivirus->BlockedAttachments;
 
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
+
 for ($i = 0; $i < $blockedAttachments->Count; $i++) {
 	$blockedAttachment = $blockedAttachments->Item($i);
 	$id = $blockedAttachment->ID;
@@ -125,7 +130,7 @@ for ($i = 0; $i < $blockedAttachments->Count; $i++) {
 	echo '            <tr>
               <td><a href="?page=blocked_attachment&action=edit&id=' . $id . '">' . PreprocessOutput($wildcard) . '</a></td>
               <td>' . PreprocessOutput($description) . '</td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . PreprocessOutput($wildcard) . '</b>:\',\'Yes\',\'?page=background_blocked_attachment_save&csrftoken=' . $csrftoken . '&action=delete&id=' . $id . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . PreprocessOutput($wildcard) . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_blocked_attachment_save&csrftoken=' . $csrftoken . '&action=delete&id=' . $id . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

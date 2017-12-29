@@ -86,22 +86,27 @@ PrintHidden("page", "background_securityrange_save");
 PrintHidden("action", $action);
 PrintHidden("securityrangeid", $securityrangeid);
 
-PrintPropertyEditRow("securityrangename", "Name", $securityrangename, 255);
+PrintPropertyEditRow("securityrangename", "Name", $securityrangename, 100);
 PrintPropertyEditRow("securityrangepriority", "Priority", $securityrangepriority, 5, "number", "small");
 PrintPropertyEditRow("securityrangelowerip", "Lower IP", $securityrangelowerip, 30, "ip");
 PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip, 30, "ip");
 
 function geoIp($ip) {
+	global $obLanguage;
+	if ($ip === '0.0.0.0') return $obLanguage->String('Unknown');
+	$regex = '/(127\.0\.0\.1)|^(10\.)|^(192\.168\.)|^(172\.(1[6-9]|2[0-9]|3[0-1]))/';
+	if (preg_match($regex, $ip)) return $obLanguage->String('Local IP range');
+
 	$pageContent = file_get_contents('http://freegeoip.net/json/' . $ip);
 	$parsedJson  = json_decode($pageContent);
 
-	if (strlen($parsedJson->country_name)>0) {
-		global $obLanguage;
-		echo '<p>' . $obLanguage->String('Country') . '</p><img src="modern/flags/' . $parsedJson->country_code . '.gif" style="margin-right:5px;">' . $parsedJson->country_name . PHP_EOL;
-	}
+	if(!$parsedJson->country_code)return $obLanguage->String('Unknown');
+		return '<img src="flags/' . $parsedJson->country_code . '.gif" style="margin-right:5px;">' . $parsedJson->country_name;
 }
-geoIp($securityrangelowerip);
-
+?>
+         <p><?php EchoTranslation("Country") ?></p>
+         <?php echo geoIp($securityrangelowerip) ?>
+ <?php
 PrintCheckboxRow("Expires", "Expires", $Expires);
 PrintPropertyEditRow("ExpiresTime", "Use ISO date format (YYYY-MM-DD HH:MM:SS)", $ExpiresTime);
 ?>
@@ -131,7 +136,7 @@ PrintCheckboxRow("RequireSMTPAuthExternalToLocal", "External to local e-mail add
 PrintCheckboxRow("RequireSMTPAuthExternalToExternal", "External to external e-mail addresses", $RequireSMTPAuthExternalToExternal);
 ?>
         </div>
-        <h3><a href="#"><?php EchoTranslation("Allow connections")?></a></h3>
+        <h3><a href="#"><?php EchoTranslation("Other")?></a></h3>
         <div class="hidden">
 <?php
 PrintCheckboxRow("enablespamprotection", "Anti-spam", $enablespamprotection);

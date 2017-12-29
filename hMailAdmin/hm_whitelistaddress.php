@@ -32,10 +32,10 @@ PrintHidden("page", "background_whitelistaddress_save");
 PrintHidden("action", "$action");
 PrintHidden("ID", "$ID");
 
-PrintPropertyEditRow("Description", "Description", $Description, 50);
+PrintPropertyEditRow("Description", "Description", $Description);
 PrintPropertyEditRow("LowerIPAddress", "Lower IP", $LowerIPAddress, 20);
 PrintPropertyEditRow("UpperIPAddress", "Upper IP", $UpperIPAddress, 20);
-PrintPropertyEditRow("EmailAddress", "E-mail address", $EmailAddress, 50);
+PrintPropertyEditRow("EmailAddress", "E-mail address", $EmailAddress);
 
 PrintSaveButton();
 ?>

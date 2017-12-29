@@ -1,8 +1,8 @@
 <?php
 define('IN_WEBADMIN', true);
 
-require_once("../config.php");
-require_once("../initialize.php");
+require_once("./config.php");
+require_once("./initialize.php");
 
 define("STSMTP", 1);
 define("STPOP3", 3);

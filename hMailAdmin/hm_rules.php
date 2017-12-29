@@ -9,6 +9,10 @@ $rules = $obBaseApp->Rules();
 $Count = $rules->Count();
 $str_yes = $obLanguage->String("Yes");
 $str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
+$str_move_up= $obLanguage->String("Move up");
+$str_move_down = $obLanguage->String("Move down");
 ?>
     <div class="box large">
       <h2><?php EchoTranslation("Rules") ?> <span>(<?php echo $Count ?>)</span></h2>
@@ -33,15 +37,15 @@ for ($i = 0; $i < $Count; $i++) {
 
 	$move = '';
 	if ($i > 0)
-		$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruleup&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow up">Up</a>';
+		$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruleup&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow up" title="' . $str_move_up . '">' . $str_move_up . '</a>';
 	if ($i < $Count-1)
-		$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruledown&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow down">Down</a>';
+		$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruledown&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow down" title="' . $str_move_down . '">' . $str_move_down . '</a>';
 
 	echo '            <tr>
               <td><a href="?page=rule&action=edit&domainid=0&accountid=0&ruleid=' . $ruleid . '">' . $rulename . '</a></td>
               <td>' . $enabled . '</td>
               <td>' . $move . '</td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $rulename . '</b>:\',\'Yes\',\'?page=background_rule_save&savetype=rule&csrftoken=' . $csrftoken . '&action=delete&domainid=0&accountid=0&action=delete&ruleid=' . $ruleid . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $rulename . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_rule_save&savetype=rule&csrftoken=' . $csrftoken . '&action=delete&domainid=0&accountid=0&action=delete&ruleid=' . $ruleid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

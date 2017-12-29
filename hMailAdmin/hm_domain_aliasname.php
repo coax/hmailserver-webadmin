@@ -17,7 +17,7 @@ PrintHidden("page", "background_domain_name_save");
 PrintHidden("action", $action);
 PrintHidden("domainid", $domainid);
 
-PrintPropertyEditRow("aliasname", "Domain name", "", 100, "req");
+PrintPropertyEditRow("aliasname", "Domain name", "", 255, "req");
 
 PrintSaveButton();
 ?>

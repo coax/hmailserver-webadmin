@@ -1,5 +1,6 @@
 jQuery(document).ready(function(){
 	//timeago
+	$.timeago.settings.strings.prefixAgo = '';
 	$.timeago.settings.strings.suffixAgo = '';
 	$('time.timeago').timeago();
 
@@ -18,7 +19,7 @@ jQuery(document).ready(function(){
 
 	//show datepicker
 	if($('[data-toggle="datepicker"]').length){
-		$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', autoHide: true});
+		$('[data-toggle="datepicker"]').datepicker({format: 'yyyy-mm-dd', autoHide: true, weekStart: hmail_config.weekStart, language: 'en-GB'});
 	}
 
 	if($('#log-parser').length){
@@ -29,7 +30,7 @@ jQuery(document).ready(function(){
 			button = $(':submit', form);
 			$.ajax({
 				type: 'post',
-				url: './modern/logview.php',
+				url: './logview.php',
 				data: params,
 				cache: false,
 				timeout: 50000,
@@ -41,6 +42,7 @@ jQuery(document).ready(function(){
 				success: function(data) {
 					result.html(parseLog(data));
 					button.prop('disabled', false).removeClass('wait');
+					contentHeight = $('#content').height() + 55;
 				},
 				error: function(data) {
 					result.html('Error loading log file!');
@@ -143,7 +145,7 @@ jQuery(document).ready(function(){
 		});
 		Refresh();
 		function Refresh(){
-			$.getJSON('modern/json.php',
+			$.getJSON('./json.php',
 			function(json) {
 				//Processed messages
 				var data = {series: json[0]};
@@ -161,7 +163,7 @@ jQuery(document).ready(function(){
 				var queue = '';
 				if (json[2] !== 0) {
 					$.each(json[2], function(key, data){
-						queue += '<tr><td><a href="#" onclick="$.facebox({ajax:\'modern/view.php?q=' + data[5] + '\'}); return false;">' + data[0] + '</a></td><td>' + data[1] + '</td><td>' + data[2] + '</td><td>' + data[3] + '</td><td>' + data[4] + '</td><td>' + data[6] + '</td></tr>';
+						queue += '<tr><td><a href="#" onclick="$.facebox({ajax:\'view.php?q=' + data[5] + '\'}); return false;">' + data[0] + '</a></td><td>' + data[1] + '</td><td>' + data[2] + '</td><td>' + data[3] + '</td><td>' + data[4] + '</td><td>' + data[6] + '</td></tr>';
 					});
 				}
 				$('#queue').html(queue);
@@ -269,13 +271,13 @@ jQuery(document).ready(function(){
 	//$('.domain').on('click', function(){
 	//	var domain = $(this).attr('rel');
 	//	$(this).parent().addClass('has-children');
-	//	$('<ul>').load('./modern/domain.php?domainid=' + domain).insertAfter($(this));
+	//	$('<ul>').load('./domain.php?domainid=' + domain).insertAfter($(this));
 	//});
 });
 
 //confirm delete
-function Confirm(question, answer, action) {
-	$.facebox('<div style="margin:36px 18px; text-align:center;"><p>' + question + '</p><input type="button" value="' + answer + '" id="yes"> &nbsp; <input type="button" value="No" onclick="$.facebox.close();"></div>');
+function Confirm(question, yes, no, action) {
+	$.facebox('<div style="margin:36px 18px; text-align:center;"><p>' + question + '</p><input type="button" value="' + yes + '" id="yes"> &nbsp; <input type="button" value="' + no + '" onclick="$.facebox.close();"></div>');
 	$('body').unbind('keypress').keypress(function(e) {
 		if (e.which==13) {
 			$('#yes').click();
@@ -411,7 +413,7 @@ function parseLogGroup(data) {
 	if(data[0][0]=='RAW') return parseLogRaw(data);
 	var out = '<div><span>' + data[0][0];
 	if(data[0][0]=='SMTPD'||data[0][0]=='SMTPC'||data[0][0]=='POP3D'||data[0][0]=='POP3C'||data[0][0]=='IMAPD')
-		out += ' &nbsp;&ndash;&nbsp; ' + data[0][1] + ' &nbsp;&ndash;&nbsp; ' + data[0][2] + ' <sup><a href="https://href.li/?http://ip-api.com/line/' + data[0][2] + '" target="_blank">?</a></sup>';
+		out += ' &nbsp;&ndash;&nbsp; ' + data[0][1] + ' &nbsp;&ndash;&nbsp; ' + data[0][2] + ' <sup><a href="https://href.li/?https://ipinfo.io/' + data[0][2] + '" target="_blank">?</a></sup>';
 	out += '</span><ul>';
 	$.each(data[1],function(k,v){
 		var css = '';

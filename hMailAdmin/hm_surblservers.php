@@ -23,11 +23,16 @@ $Count = $dnsBlacklists->Count();
           </thead>
           <tbody>
 <?php
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
+
 for ($i = 0; $i < $Count; $i++) {
 	$dnsBlackList = $dnsBlacklists->Item($i);
 	$id = $dnsBlackList->ID;
 	$name = PreprocessOutput($dnsBlackList->DNSHost);
-	$enabled = $dnsBlackList->Active ? $obLanguage->String("Yes") : $obLanguage->String("No");
+	$enabled = $dnsBlackList->Active ? $str_yes : $str_no;
 	$name = PreprocessOutput($name);
 	$Score = $dnsBlackList->Score; //added
 	if (strlen($name)==0) $name = "(unnamed)";
@@ -36,7 +41,7 @@ for ($i = 0; $i < $Count; $i++) {
               <td><a href="?page=surblserver&action=edit&id=' . $id . '">' . $name . '</a></td>
               <td>' . $Score . '</td>
               <td>' . $enabled . '</td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $name . '</b>:\',\'Yes\',\'?page=background_surblserver_save&csrftoken=' . $csrftoken . '&action=delete&id=' . $id . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $name . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_surblserver_save&csrftoken=' . $csrftoken . '&action=delete&id=' . $id . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>
