@@ -1,8 +1,8 @@
 <h2>Impressum</h2>
 <div style="margin:0 18px 18px;">
   <p>hMailServer web admin redesign &amp; coding by <a href="http://www.matecic.com/" target="_blank">Matija Matecic</a></p>
-  <p>Additional coding by Andreas Tunberg</p>
-  <p>Version 1.2, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a>
+  <p>Additional coding by <a href="https://github.com/tunis78" target="_blank">Andreas Tunberg</a></p>
+  <p>Version 1.3, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a>
   <p>hMailServer author Martin Knafve</p>
   <p>License information <a href="https://www.hmailserver.com/documentation/latest/?page=information_copyright" target="_blank">here</a></p>
   <h3>Third party components</h3>
@@ -21,5 +21,7 @@
   </ul>
   <h3>Donate</h3>
   <p>Don't worry, hMailAdmin will stay free - but I do need your support in order to continue to develop it! Thank you :)</p>
-  <p><a href="https://www.paypal.me/MatijaMatecic/"><img src="modern/css//btn_donate_pp_142x27.png" alt="PayPal donate"></a></p>
+  <p><a href="https://www.paypal.me/MatijaMatecic/" target="_blank"><img src="css/btn_donate_pp_142x27.png" alt="PayPal donate"></a></p>
+  <p>Bitcoin: <a href="bitcoin:18vKLpbNpWv4MC1VFWpCvkDU2jt8tQgGmZ">18vKLpbNpWv4MC1VFWpCvkDU2jt8tQgGmZ</a></p>
+  <p>Litecoin: <a href="litecoin:LZCwVvv3LgoVctnGQZLsUFYLFeyKiVPpvB">LZCwVvv3LgoVctnGQZLsUFYLFeyKiVPpvB</a></p>
 </div>

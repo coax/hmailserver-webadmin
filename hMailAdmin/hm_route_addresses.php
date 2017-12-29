@@ -25,17 +25,19 @@ $obAddresses = $obRoute->Addresses();
 
 $Count = $obAddresses->Count();
 
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
 $str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
 
-for ($i = 0; $i < $Count; $i++)
-	{
+for ($i = 0; $i < $Count; $i++) {
 	$obAddress = $obAddresses->Item($i);
 	$routeaddress = PreprocessOutput($obAddress->Address);
 	$routeaddressid = $obAddress->ID;
 
    	echo '            <tr>
               <td><a href="?page=route_address&action=edit&routeid=' . $routeid . '&routeaddressid=' . $routeaddressid . '">' . $routeaddress . '</a></td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $routeaddress . '</b>:\',\'Yes\',\'?page=background_route_address_save&csrftoken=' . $csrftoken . '&action=delete&routeid=' . $routeid . '&routeaddressid=' . $routeaddressid . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $routeaddress . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_route_address_save&csrftoken=' . $csrftoken . '&action=delete&routeid=' . $routeid . '&routeaddressid=' . $routeaddressid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

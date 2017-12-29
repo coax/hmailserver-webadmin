@@ -61,28 +61,29 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>hMailAdmin</title>
+  <meta charset="utf-8">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <title>hMailAdmin</title>
-  <!--modern-->
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <script type="text/javascript" src="modern/js/jquery.js"></script>
-  <script type="text/javascript" src="modern/js/modernizr.js"></script>
-  <script type="text/javascript" src="modern/js/core.js"></script>
-  <script type="text/javascript" src="modern/js/timeago.js"></script>
-  <script type="text/javascript" src="modern/js/tablesort.js"></script>
-  <script type="text/javascript" src="modern/js/facebox.js"></script>
-  <script type="text/javascript" src="modern/js/chartist.js"></script>
-  <link href="modern/css/chartist.css" rel="stylesheet">
-  <script type="text/javascript" src="modern/js/chartist-tooltip.js"></script>
-  <script type="text/javascript" src="modern/js/datepicker.js"></script>
-  <link href="modern/css/datepicker.css" rel="stylesheet">
-  <link href="modern/css/reset.css" rel="stylesheet">
-  <link href="modern/css/core.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+  <script>var hmail_config = {weekStart:<?php echo $hmail_config['datepicker_weekStart'] ?>};</script>
+  <script src="js/jquery.js"></script>
+  <script src="js/modernizr.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/timeago.js"></script>
+  <?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script src="js/timeago.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
+  <script src="js/tablesort.js"></script>
+  <script src="js/facebox.js"></script>
+  <script src="js/chartist.js"></script>
+  <link href="css/chartist.css" rel="stylesheet">
+  <script src="js/chartist-tooltip.js"></script>
+  <script src="js/datepicker.js"></script>
+  <?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script src="js/datepicker.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
+  <link rel="stylesheet" href="css/datepicker.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/core.css">
 </head>
 
 <body>
@@ -111,7 +112,7 @@ if (hmail_isloggedin()) {
 include "include_treemenu.php";
 ?>
       </ul>
-      <a href="modern/impressum.php" rel="facebox" class="impressum">hMailAdmin 1.2</a>
+      <a href="impressum.php" rel="facebox" class="impressum">hMailAdmin 1.3</a>
     </div>
     <div id="content">
 <?php

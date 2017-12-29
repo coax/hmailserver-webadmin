@@ -23,6 +23,11 @@ $Count = $obWhiteListAddresses->Count();
           </thead>
           <tbody>
 <?php
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
+
 for ($i = 0; $i < $Count; $i++) {
 	$obAddress = $obWhiteListAddresses->Item($i);
 	$ID = $obAddress->ID;
@@ -38,7 +43,7 @@ for ($i = 0; $i < $Count; $i++) {
               <td><a href="?page=whitelistaddress&action=edit&ID=' . $ID . '">' . $LowerIPAddress . '</a></td>
               <td><a href="?page=whitelistaddress&action=edit&ID=' . $ID . '">' . $UpperIPAddress . '</a></td>
               <td><a href="?page=whitelistaddress&action=edit&ID=' . $ID . '">' . $EmailAddress . '</a></td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $Description . '</b>:\',\'Yes\',\'?page=background_whitelistaddress_save&csrftoken=' . $csrftoken . '&action=delete&ID=' . $ID . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $Description . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_whitelistaddress_save&csrftoken=' . $csrftoken . '&action=delete&ID=' . $ID . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>
