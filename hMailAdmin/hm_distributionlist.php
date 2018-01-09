@@ -32,8 +32,6 @@ if ($action == "edit") {
 }
 
 $domainname = $obDomain->Name;
-$listactivechecked = hmailCheckedIf1($listactive); //fixme, not working
-$listrequiresmtpauthchecked = hmailCheckedIf1($listrequiresmtpauth); //fixme, not working
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Distribution list") ?></h2>
@@ -53,7 +51,7 @@ PrintHidden("domainid", $domainid);
         <p><?php EchoTranslation("Address") ?></p>
         <input type="text" name="listaddress" value="<?php echo PreprocessOutput($listaddress) ?>" size="255" checkallownull="false" checkmessage="<?php EchoTranslation("Address") ?>" class="req medium"> @<?php echo $domainname ?>
 <?php
-PrintCheckboxRow("listactive", "Enabled", $listactivechecked);
+PrintCheckboxRow("listactive", "Enabled", $listactive);
 ?>
         <h3><a href="#"><?php EchoTranslation("Security")?></a></h3>
         <div class="hidden">
@@ -65,7 +63,7 @@ PrintCheckboxRow("listactive", "Enabled", $listactivechecked);
           </select>
 <?php
 PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 255);
-PrintCheckboxRow("listrequiresmtpauth", "Require SMTP authentication", $listrequiresmtpauthchecked);
+PrintCheckboxRow("listrequiresmtpauth", "Require SMTP authentication", $listrequiresmtpauth);
 ?>
         </div>
 <?php

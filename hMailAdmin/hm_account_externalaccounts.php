@@ -15,6 +15,10 @@ if (hmailGetAdminLevel() == 1 && $domainid != hmailGetDomainID())
 $obDomain = $obBaseApp->Domains->ItemByDBID($domainid);
 $obAccount = $obDomain->Accounts->ItemByDBID($accountid);
 $obFetchAccounts = $obAccount->FetchAccounts();
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
 
 $action = hmailGetVar("action","");
 ?>
@@ -44,7 +48,7 @@ for ($i = 0; $i < $Count; $i++) {
 	echo '          <tr>
             <td><a href="?page=account_externalaccount&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '">' . $Name . '</a></td>
             <td><a href="?page=account_externalaccount&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '">' . $ServerAddress . '</a></td>
-            <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $Name . '</b>:\',\'Yes\',\'?page=background_account_externalaccount_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '\');" class="delete">Delete</a></td>
+            <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $Name . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_account_externalaccount_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             <td><a href="?page=background_account_externalaccount_save&csrftoken=' . $csrftoken . 'action=downloadnow&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '">' . $str_downloadnow . '</a></td>
           </tr>' . PHP_EOL;
 }
