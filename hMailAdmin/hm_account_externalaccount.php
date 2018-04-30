@@ -55,7 +55,7 @@ $EnabledChecked = hmailCheckedIf1($Enabled);
 $ProcessMIMERecipientsChecked = hmailCheckedIf1($ProcessMIMERecipients);
 $ProcessMIMEDateChecked = hmailCheckedIf1($ProcessMIMEDate);
 
-$DaysToKeepMessagesValue = 0;
+$DaysToKeepMessagesValue = 7;
 if ($DaysToKeepMessages > 0)
 	$DaysToKeepMessagesValue = $DaysToKeepMessages;
 ?>
@@ -75,15 +75,15 @@ PrintCheckboxRow("Enabled", "Enabled", $Enabled);
         <h3><a href="#"><?php EchoTranslation("Server information")?></a></h3>
         <div class="hidden">
 <?php
-PrintPropertyEditRow("Name", "Name", $Name);
+PrintPropertyEditRow("Name", "Name", $Name, 255, "medium");
 ?>
           <p><?php EchoTranslation("Type")?></p>
           <select name="Type" class="medium">
             <option value="0" selected>POP3</option>
           </select>
 <?php
-PrintPropertyEditRow("ServerAddress", "Server address", $ServerAddress);
-PrintPropertyEditRow("Port", "TCP/IP port", $Port, 10, "number");
+PrintPropertyEditRow("ServerAddress", "Server address", $ServerAddress, 255, "medium");
+PrintPropertyEditRow("Port", "TCP/IP port", $Port, 10, "medium number");
 ?>
           <p><?php EchoTranslation("Connection security")?></p>
           <select name="ConnectionSecurity" class="medium">
@@ -92,8 +92,8 @@ PrintPropertyEditRow("Port", "TCP/IP port", $Port, 10, "number");
             <option value="<?php echo CONNECTION_SECURITY_TLS?>" <?php if ($ConnectionSecurity == CONNECTION_SECURITY_TLS) echo "selected";?> ><?php EchoTranslation("SSL/TLS")?></a>
           </select>
 <?php
-PrintPropertyEditRow("Username", "User name", $Username, 255);
-PrintPasswordEntry("Password", "Password", 255);
+PrintPropertyEditRow("Username", "User name", $Username, 255, "medium");
+PrintPasswordEntry("Password", "Password", 255, "medium");
 ?>
         </div>
         <h3><a href="#"><?php EchoTranslation("Settings")?></a></h3>
@@ -101,18 +101,16 @@ PrintPasswordEntry("Password", "Password", 255);
 <?php
 PrintPropertyEditRow("MinutesBetweenFetch", "Minutes between download", $MinutesBetweenFetch, 10, "number", "small");
 PrintCheckboxRow("ProcessMIMERecipients", "Deliver to recipients in MIME headers", $ProcessMIMERecipients);
+PrintCheckboxRow("EnableRouteRecipients", "Allow route recipients", $EnableRouteRecipients);
 PrintCheckboxRow("ProcessMIMEDate", "Retrieve date from Received header", $ProcessMIMEDate);
 PrintCheckboxRow("UseAntiSpam", "Anti-spam", $UseAntiSpam);
 PrintCheckboxRow("UseAntiVirus", "Anti-virus", $UseAntiVirus);
-PrintCheckboxRow("EnableRouteRecipients", "Allow route recipients", $EnableRouteRecipients);
 ?>
           <p>&nbsp;</p>
-          <div style="position:relative; display:inline-block;"><input type="radio" name="DaysToKeepMessages" value="-1" id="1" <?php if ($DaysToKeepMessages == -1) echo "checked";?>><label for="1"><?php EchoTranslation("Delete messages immediately")?></label></div>
-          <p>&nbsp;</p>
-          <div style="position:relative; display:inline-block;"><input type="radio" name="DaysToKeepMessages" value="0" id="2" <?php if ($DaysToKeepMessages == 0) echo "checked";?>><label for="2"><?php EchoTranslation("Do not delete messages")?></label></div>
-          <p>&nbsp;</p>
+          <div style="position:relative;"><input type="radio" name="DaysToKeepMessages" value="-1" id="1" <?php if ($DaysToKeepMessages == -1) echo "checked";?>><label for="1"><?php EchoTranslation("Delete messages immediately")?></label></div>
           <div style="position:relative; display:inline-block;"><input type="radio" name="DaysToKeepMessages" value="" id="3" <?php if ($DaysToKeepMessages > 0) echo "checked";?>><label for="3"><?php EchoTranslation("Delete messages after")?></label></div>
-          <p><input type="text" name="DaysToKeepMessagesValue" value="<?php echo PreprocessOutput($DaysToKeepMessagesValue)?>" class="num small"> <?php EchoTranslation("days")?></p>
+          <input type="text" name="DaysToKeepMessagesValue" value="<?php echo PreprocessOutput($DaysToKeepMessagesValue)?>" class="num small"> <?php EchoTranslation("days")?>
+          <div style="position:relative;"><input type="radio" name="DaysToKeepMessages" value="0" id="2" <?php if ($DaysToKeepMessages == 0) echo "checked";?>><label for="2"><?php EchoTranslation("Do not delete messages")?></label></div>
         </div>
 <?php
 PrintSaveButton();

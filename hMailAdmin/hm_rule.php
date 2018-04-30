@@ -50,7 +50,6 @@ PrintCheckboxRow("Active", "Active", $Active);
 ?>
         <div style="position:relative; display:inline-block;"><p><input type="radio" name="UseAND" value="1" id="1" <?php if ($UseAND == 1) echo "checked"?>><label for="1"><?php EchoTranslation("Use AND") ?></label></p></div>
         <div style="position:relative; display:inline-block;"><p><input type="radio" name="UseAND" value="0" id="2" <?php if ($UseAND == 0) echo "checked"?>><label for="2"><?php EchoTranslation("Use OR") ?></label></p></div>
-
 <?php
 if ($ruleid == 0) {
 	echo '<div class="warning">' . $obLanguage->String("You must save the rule before you can edit criteria and actions.") . '</div>' . PHP_EOL;

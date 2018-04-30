@@ -280,15 +280,13 @@ function makeIsoDate($date) {
 }
 
 // New translation class
-class translate
-{
+class translate {
 	private $obLanguage;
 	private $translate = false;
 	private $web_translations_def;
 	private $web_translations;
 
-	public function __construct($obLanguage,$language)
-	{
+	public function __construct($obLanguage,$language) {
 		if($language === 'english') return;
 		$this->obLanguage = $obLanguage;
 		//$this->obLanguage = $obBaseApp->GlobalObjects->Languages->ItemByName($language);
@@ -296,23 +294,22 @@ class translate
 		$this->web_translations_def = $this->load_translation('english');
 		$this->web_translations = $this->load_translation($language);
 	}
-	
-	public function String($string)
-	{
+
+	public function String($string) {
 		if(!$this->translate) return $string;
 		if(($value = $this->obLanguage->String($string)) !== $string) return $value;
 		return $this->WebTranslation($string);
 	}
-	private function WebTranslation($phrase2translate)
-	{
+
+	private function WebTranslation($phrase2translate) {
 		$arrayKey = array_search($phrase2translate, $this->web_translations_def);
 		if ($arrayKey !== FALSE && isset($this->web_translations[$arrayKey]))
 			return $this->web_translations[$arrayKey];
-		
+
 		return $phrase2translate;
 	}
-	private function load_translation($language)
-	{
+
+	private function load_translation($language) {
 		if(!file_exists('./languages/' . $language . '.php')) return array();
 		return include('./languages/' . $language . '.php');
 	}

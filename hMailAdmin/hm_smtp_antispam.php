@@ -108,6 +108,7 @@ PrintPropertyEditRow("SpamAssassinPort", "TCP/IP port", $SpamAssassinPort, 10, "
 PrintCheckboxRow("SpamAssassinMergeScore", "Use score from SpamAssassin", $SpamAssassinMergeScore);
 PrintPropertyEditRow("SpamAssassinScore", "Score", $SpamAssassinScore, 4, "number", "small");
 ?>
+          <p>Test SpamAssassin connection</p>
           <p><a href="#" onclick="return TestScanner('SpamAssassin');" class="button"><?php EchoTranslation("Test")?></a></p>
           <div id="SpamAssassinTestResult"></div>
         </div>

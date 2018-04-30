@@ -14,6 +14,10 @@ $obDomain = $obBaseApp->Domains->ItemByDBID($domainid);
 $obLists = $obDomain->DistributionLists();
 $Count = $obLists->Count();
 $obDistributionLists = $obDomain->DistributionLists;
+$str_yes = $obLanguage->String("Yes");
+$str_no = $obLanguage->String("No");
+$str_delete = $obLanguage->String("Remove");
+$str_confirm = $obLanguage->String("Confirm delete");
 ?>
     <div class="box large">
       <h2><?php EchoTranslation("Distribution lists") ?> <span>(<?php echo $Count ?>)</span></h2>
@@ -41,7 +45,7 @@ for ($i = 0; $i < $Count; $i++) {
 	echo '            <tr>
               <td><a href="?page=distributionlist&action=edit&domainid=' . $domainid . '&distributionlistid=' . $listid . '">' . $listaddress . '</a></td>
               <td>' . $listactive . '</td>
-              <td><a href="#" onclick="return Confirm(\'Confirm delete <b>' . $listaddress . '</b>:\',\'Yes\',\'?page=background_distributionlist_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&distributionlistid=' . $listid . '\');" class="delete">Delete</a></td>
+              <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $listaddress . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_distributionlist_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&distributionlistid=' . $listid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
             </tr>' . PHP_EOL;
 }
 ?>

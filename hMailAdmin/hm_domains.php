@@ -22,7 +22,6 @@ $DomainCount = $obBaseApp->Domains->Count();
           </thead>
           <tbody>
 <?php
-
 $str_yes = $obLanguage->String("Yes");
 $str_no = $obLanguage->String("No");
 $str_delete = $obLanguage->String("Remove");

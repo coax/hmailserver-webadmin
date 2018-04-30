@@ -8,7 +8,6 @@ if (hmailGetAdminLevel() != ADMIN_SERVER)
 $obSettings = $obBaseApp->Settings();
 $obIncomingRelays = $obSettings->IncomingRelays();
 $Count = $obIncomingRelays->Count();
-
 $str_yes = $obLanguage->String("Yes");
 $str_no = $obLanguage->String("No");
 $str_delete = $obLanguage->String("Remove");

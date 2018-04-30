@@ -30,12 +30,12 @@ $AddSignaturesToLocalMail = 1;
 $AddSignaturesToReplies = 0;
 
 $MaxNumberOfAccounts = 0;
-$MaxNumberOfAliases  = 0;
+$MaxNumberOfAliases = 0;
 $MaxNumberOfDistributionLists = 0;
-$MaxAccountSize      = 0;
+$MaxAccountSize = 0;
 
 $MaxNumberOfAccountsEnabled = 0;
-$MaxNumberOfAliasesEnabled  = 0;
+$MaxNumberOfAliasesEnabled = 0;
 $MaxNumberOfDistributionListsEnabled = 0;
 
 $DKIMSignEnabled = 0;
@@ -129,14 +129,14 @@ else {
 		echo $str_yes;
 	else
 		echo $str_no;
-}
+	}
 
-if (isset($obDomain) && $admin_rights) {
-	if ($DomainID == 0)
-		echo '<div class="warning">' . $obLanguage->String("You must save the domain before you can edit names.") . '</div>' . PHP_EOL;
-	else {
-		$str_delete = $obLanguage->String("Remove");
-		$str_confirm = $obLanguage->String("Confirm delete");
+	if (isset($obDomain) && $admin_rights) {
+		if ($DomainID == 0)
+			echo '<div class="warning">' . $obLanguage->String("You must save the domain before you can edit names.") . '</div>' . PHP_EOL;
+		else {
+			$str_delete = $obLanguage->String("Remove");
+			$str_confirm = $obLanguage->String("Confirm delete");
 ?>
           <h3><a href="#"><?php EchoTranslation("Names") ?></a></h3>
           <div class="hidden">

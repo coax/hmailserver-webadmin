@@ -30,8 +30,7 @@ $str_no = $obLanguage->String("No");
 $str_delete = $obLanguage->String("Remove");
 $str_confirm = $obLanguage->String("Confirm delete");
 
-for ($i = 0; $i < $Count; $i++)
-	{
+for ($i = 0; $i < $Count; $i++) {
 	$obAddress = $obAddresses->Item($i);
 	$routeaddress = PreprocessOutput($obAddress->Address);
 	$routeaddressid = $obAddress->ID;

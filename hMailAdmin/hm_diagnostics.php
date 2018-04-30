@@ -35,9 +35,9 @@ if($action == "performTests") {
 				$resultString .= PreprocessOutput($detailsRows[$subRow]) . '<br>';
 			}
 		}
-		$resultString .= "<br/>";
+		$resultString .= "<br>";
 	}
-	$resultString .= "<br/><br/>";
+	$resultString .= "<br><br>";
 }
 ?>
     <div class="box medium">

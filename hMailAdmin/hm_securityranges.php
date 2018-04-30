@@ -21,6 +21,7 @@ $str_confirm = $obLanguage->String("Confirm delete");
           <thead>
             <tr>
               <th><?php EchoTranslation("Name")?></th>
+              <th style="width:20%;"><?php EchoTranslation("IP address") ?></th>
               <th style="width:10%;"><?php EchoTranslation("Priority") ?></th>
               <th style="width:20%;"><?php EchoTranslation("Expires") ?></th>
               <th style="width:32px;" class="no-sort">&nbsp;</th>
@@ -41,7 +42,6 @@ function humanTiming($time) {
 		60 => array('minute','minutes'),
 		1 => array('second','seconds')
 	);
-
 	foreach ($tokens as $unit => $text) {
 		if ($time < $unit) continue;
 		$numberOfUnits = floor($time / $unit);
@@ -62,6 +62,7 @@ for ($i = 0; $i < $Count; $i++) {
 
 	echo '            <tr>
               <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . (strpos($securityrangename,'Auto-ban:')!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
+              <td>' . $LowerIp . '</td>
               <td>' . $securityrangepriority . '</td>
               <td>' . $ExpiresTime . '</td>
               <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $securityrangename . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_securityrange_save&csrftoken=' . $csrftoken . '&action=delete&securityrangeid=' . $securityrangeid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>

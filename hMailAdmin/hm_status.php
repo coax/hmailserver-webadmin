@@ -20,9 +20,9 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
       <h2><?php EchoTranslation("Server") ?></h2>
       <div id="activity" style="margin:15px auto; width:100%; height:180px;"></div>
       <div class="grey">
-        <div><span><?php echo $state ?></span><br><?php EchoTranslation("Status") ?></div>
-        <div><span><time class="timeago" datetime="<?php echo $ServerUptime ?>"><?php echo $ServerUptime ?></time></span><br><?php EchoTranslation("Server uptime") ?></div>
-        <div><span><?php echo $ServerVersion ?></span><br><?php EchoTranslation("Version") ?></div>
+        <div><span><?php echo $state ?></span><br><?php EchoTranslation("status") ?></div>
+        <div><span><time class="timeago" datetime="<?php echo $ServerUptime ?>"><?php echo $ServerUptime ?></time></span><br><?php EchoTranslation("server uptime") ?></div>
+        <div><span><?php echo $ServerVersion ?></span><br><?php EchoTranslation("version") ?></div>
       </div>
     </div>
 
@@ -62,7 +62,7 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
           </thead>
         </table>
       </div>
-      <div style="margin:0 18px; max-height:400px; overflow-y:scroll;">
+      <div style="margin:0 18px 18px 18px; max-height:400px; overflow-y:scroll;">
         <table class="queue" id="queue">
           <tbody>
 <?php
@@ -94,6 +94,6 @@ if (strlen($MessagesUndelivered) > 0) {
         </table>
       </div>
       <div class="grey">
-        <div style="width:100%;"><span id="count"><?php echo $QueueCount ?></span><br><?php EchoTranslation("Messages in queue") ?></div>
+        <div style="width:100%;"><span id="count"><?php echo $QueueCount ?></span><br><?php EchoTranslation("messages in queue") ?></div>
       </div>
     </div>

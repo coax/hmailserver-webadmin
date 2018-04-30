@@ -16,7 +16,7 @@ if (hmailGetAdminLevel() == 1 && $domainid != hmailGetDomainID())
 
 $obDomain = $obBaseApp->Domains->ItemByDBID($domainid);
 
-$admin_rights = (hmailGetAdminLevel()  === ADMIN_SERVER || hmailGetAdminLevel()  === ADMIN_DOMAIN);
+$admin_rights = (hmailGetAdminLevel() === ADMIN_SERVER || hmailGetAdminLevel() === ADMIN_DOMAIN);
 
 $accountactive = 1;
 $accountmaxsize = 0;
@@ -119,7 +119,7 @@ if ($admin_rights)
 	echo '<input type="text" name="accountaddress" value="' . $accountaddress . '" checkallownull="false" checkmessage="' . $str_address . '" class="req medium">';
 else
 	echo $accountaddress;
-?>@<?php echo $domainname?>
+?> @<?php echo $domainname?>
         <p><?php EchoTranslation("Password")?></p>
         <input type="password" name="accountpassword" value="" class="medium" autocomplete="off">
         <p><?php EchoTranslation("Maximum size (MB)")?></p>
@@ -138,9 +138,23 @@ PrintPropertyRow("Last logon time", $accountlastlogontime);
 ?>
         <p><?php EchoTranslation("Administration level")?></p>
         <select name="accountadminlevel" <?php if ($admin_rights == 0) echo " disabled ";?> class="medium">
-          <option value="0" <?php if ($accountadminlevel == 0) echo " selected "; ?>><?php echo $str_user; ?></option>
-          <option value="1" <?php if ($accountadminlevel == 1) echo " selected "; ?>><?php echo $str_domain; ?></option>
-          <option value="2" <?php if ($accountadminlevel == 2) echo " selected "; ?>><?php echo $str_server; ?></option>
+<?php
+if ($admin_rights >= 0) {
+	echo '<option value="0"';
+	if ($accountadminlevel == 0) echo " selected ";
+	echo '>'.$str_user.'</option>';
+}
+if ($admin_rights == 1) {
+	echo '<option value="1"';
+	if ($accountadminlevel == 1) echo " selected ";
+	echo '>'.$str_domain.'</option>';
+}
+if (hmailGetAdminLevel() === ADMIN_SERVER) {
+	echo '<option value="2"';
+	if ($accountadminlevel == 2) echo " selected ";
+	echo '>'.$str_server.'</option>';
+}
+?>
         </select>
 <?php
 if ($admin_rights)
@@ -157,9 +171,7 @@ else {
 <?php
 PrintCheckboxRow("vacationmessageon", "Enabled", $vacationmessageon);
 PrintPropertyEditRow("vacationsubject", "Subject", $vacationsubject, 200);
-
 PrintPropertyAreaRow("vacationmessage", "Text", $vacationmessage, 6, 55);
-
 PrintCheckboxRow("vacationmessageexpires", "Automatically expire", $vacationmessageexpires);
 ?>
           <p><?php EchoTranslation("Expiration date")?> (YYYY-MM-DD)</p>
@@ -293,7 +305,7 @@ for ($i = 0; $i < $Count; $i++) {
                 <td><a href="?page=account_externalaccount&csrftoken=' . $csrftoken . '&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '">' . $Name . '</a></td>
                 <td><a href="?page=account_externalaccount&csrftoken=' . $csrftoken . '&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '">' . $ServerAddress . '</a></td>
                 <td><a href="?page=background_account_externalaccount_save&csrftoken=' . $csrftoken . '&action=downloadnow&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '" class="download">' . $str_downloadnow . '</a></td>
-                <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $Name . '</b>:\',\'Yes\',\'?page=background_account_externalaccount_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
+                <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $Name . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_account_externalaccount_save&csrftoken=' . $csrftoken . '&action=delete&domainid=' . $domainid . '&accountid=' . $accountid . '&faid=' . $FAID . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
               </tr>' . PHP_EOL;
 }
 ?>
