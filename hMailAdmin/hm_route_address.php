@@ -20,7 +20,7 @@ if ($action == "edit") {
 ?>
     <div class="box">
       <h2><?php EchoTranslation("Address") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_route_address_save");

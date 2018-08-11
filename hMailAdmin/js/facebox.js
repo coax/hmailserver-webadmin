@@ -12,8 +12,8 @@
 		settings: {
 			opacity: 0.5,
 			overlay: true,
-			loadingImage: 'css/loading.gif',
-			closeImage: 'css/close.png',
+			loadingImage: 'css/loading.svg',
+			closeImage: 'css/close.svg',
 			imageTypes: ['png', 'jpg', 'jpeg', 'gif'],
 			faceboxHtml: '<div id="facebox"><div class="popup"><div class="content"></div><a href="#" class="close"></a></div></div>'
 		},

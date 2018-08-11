@@ -20,7 +20,6 @@ else
 
 if ($action == "edit") {
 	$ruleAction = $rule->Actions->ItemByDBID($actionid);
-
 	$To = $ruleAction->To;
 	$IMAPFolder = $ruleAction->IMAPFolder;
 	$ScriptFunction = $ruleAction->ScriptFunction;
@@ -68,7 +67,7 @@ function hideAllPanels() {
 	}
 }
 </script>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form" name="mainForm">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_rule_save");

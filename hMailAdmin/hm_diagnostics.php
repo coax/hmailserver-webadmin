@@ -42,13 +42,13 @@ if($action == "performTests") {
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Diagnostics") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "diagnostics");
 PrintHidden("action", "performTests");
 ?>
-        <div class="warning"><?php EchoTranslation("This tool lets you perform diagnostics on your hMailServer installation."); ?></div>
+        <p class="warning bottom"><?php EchoTranslation("This tool lets you perform diagnostics on your hMailServer installation."); ?></p>
         <p><?php EchoTranslation("Select the domain you want to run tests on."); ?></p>
         <select name="LocalDomainName">
 <?php
@@ -62,9 +62,9 @@ for ($i = 0; $i < $obDomains->Count; $i++) {
         <p>
 <?php
 if (strlen($resultString) > 0) {
-	echo "<i>";
+	echo "<p>";
 	echo $resultString;
-	echo "</i>";
+	echo "</p>";
 }
 ?>
         </p>

@@ -183,18 +183,19 @@ function PrintLargeTableHeader($caption) {
 </tr>' . PHP_EOL;
 }
 
-function PrintSaveButton($caption = "Save", $cancel = "Cancel") {
-	global $obLanguage;
-	$caption = $obLanguage->String($caption);
-	$cancel = $obLanguage->String($cancel);
-	echo '<div class="buttons"><input type="submit" value="' . $caption . '"><a href="javascript:window.history.back();" class="cancel">' . $cancel . '</a></div>' . PHP_EOL;
+function PrintSaveButton($Caption = null, $Cancel = null, $Url = null) {
+	if (!$Caption) $Caption = Translate('Save');
+	if (!$Cancel) $Cancel = Translate('Cancel');
+	if (!$Url) $Url = 'javascript:window.history.back();';
+
+	echo '<div class="buttons"><button>' . $Caption . '</button><a href="' . $Url . '" class="cancel">' . $Cancel . '</a></div>' . PHP_EOL;
 }
 
 function PrintHidden($name, $value) {
 	$name = PreprocessOutput($name);
 	$value = PreprocessOutput($value);
 
-	echo '<input type="hidden" name="' . $name . '" value="' . $value . '">' . PHP_EOL;
+	echo '        <input type="hidden" name="' . $name . '" value="' . $value . '">' . PHP_EOL;
 }
 
 function PrintHiddenCsrfToken() {
@@ -313,5 +314,17 @@ class translate {
 		if(!file_exists('./languages/' . $language . '.php')) return array();
 		return include('./languages/' . $language . '.php');
 	}
+}
+
+//Version check
+function Version() {
+	$json = file_get_contents("https://raw.githubusercontent.com/coax/hmailserver-webadmin/master/version.txt");
+	return json_decode($json);
+}
+
+//Translate without echo
+function Translate($string) {
+	global $obLanguage;
+	return $obLanguage->String($string);
 }
 ?>

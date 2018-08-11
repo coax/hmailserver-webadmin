@@ -1,7 +1,7 @@
 <?php
 if (!defined('IN_WEBADMIN'))
    exit();
-  
+
 define("eFTUnknown", 0);
 define("eFTFrom", 1);
 define("eFTTo", 2);
@@ -11,7 +11,7 @@ define("eFTBody", 5);
 define("eFTMessageSize", 6);
 define("eFTRecipientList", 7);
 define("eFTDeliveryAttempts", 8);
-   
+
 define("eMTUnknown", 0);
 define("eMTEquals", 1);
 define("eMTContains", 2);
@@ -33,13 +33,13 @@ define("eRASetHeaderValue", 7);
 define("eRASendUsingRoute", 8);
 define("eRACreateCopy", 9);
 define("eRABindToAddress", 10);
-   
+
 function GetPredefinedFieldString($predefinedField)
 {
    global $obLanguage;
-   
+
    $result = "";
-   
+
    switch ($predefinedField)
    {
       case eFTBody:
@@ -71,16 +71,16 @@ function GetPredefinedFieldString($predefinedField)
          break;
    }
 
-   return $obLanguage->String($result);
+   return Translate($result);
 }
 
 function GetMatchTypeString($matchType)
 {
 
    global $obLanguage;
-   
+
    $result = 0;
-   
+
    switch ($matchType)
    {
       case eMTContains:
@@ -115,7 +115,7 @@ function GetMatchTypeString($matchType)
          break;
    }
 
-   return $obLanguage->String($result);
+   return Translate($result);
 }
 
 function GetRuleActionString($eRuleActionType)
@@ -154,14 +154,14 @@ function GetRuleActionString($eRuleActionType)
          $result = "Create and send copy";
 		 break;
 	  case eRABindToAddress:
-         $result = "Bind to local IP address";		
+         $result = "Bind to local IP address";
 		 break;
       default:
          $result = "Unknown";
          break;
    }
 
-   return $obLanguage->String($result);
+   return Translate($result);
 }
 
 

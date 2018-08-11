@@ -15,6 +15,7 @@ Features
 - form validation
 - table sorting
 - log parser
+- blacklist check
 - based on original PHPWebAdmin
 - works with latest hMailServer (stable) version
 - continuous development
@@ -23,7 +24,7 @@ Donate
 -----
 Don't worry, hMailAdmin will stay free - but I do need your support in order to continue to develop it! Thank you :)
 
-[![PayPal donate button](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/MatijaMatecic/)
+[![PayPal donate button](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/MatijaMatecic/10EUR)
 
 How to use
 -----
@@ -49,6 +50,22 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
+Version 1.4 (2018-08-11)
+- [new] Blacklist check (under Utilities)
+- [new] Dashboard: Live logging (thanks to @tunis)
+- [tweak] Dashboard: new delivery queue view
+- [tweak] IP Range: delete banned IP button
+- [tweak] Domains: visual quota bar for each domain
+- [tweak] Domain: show accounts button
+- [tweak] Accounts: visual quota bar for each account
+- [fix] IP Ranges: new IP to country lookup API link
+- [tweak] back button now returns to parent page (instead of previous page in browser history)
+- [fix] even more form validations, maxlength fixes
+- [new] textarea autosize
+- [new] version checker
+- [tweak] added empty text in tables
+- [tweak] small layout changes, CSS tweaks, all icons changed to SVG
+
 Version 1.3 (2017-12-29)
 - [new] translation class for missing phrases in hMailServer, anyone can add new languages (eg. italian.php) to /languages folder
 - [new] config.php: allow or deny built-in Administrator within IP range or address
@@ -154,9 +171,10 @@ Version 0.9 beta (2016-12-28)
 -----
 - [jQuery](https://jquery.com/)
 - [Modernizr](https://modernizr.com/)
-- [Defunkt Facebox](http://defunkt.io/facebox/Defunkt Facebox)
+- [Defunkt Facebox](http://defunkt.io/facebox/)
 - [tablesort](https://github.com/kylefox/jquery-tablesorttablesort)
 - [datepicker](https://github.com/fengyuanchen/datepicker)
+- [autosize](https://github.com/jackmoore/autosize)
 - [timeago](http://timeago.yarp.com/timeago)
 - [Chartist](https://gionkunz.github.io/chartist-js/Chartist)
 - [CodyHouse Responsive Sidebar Navigation](https://codyhouse.co/gem/responsive-sidebar-navigation/)

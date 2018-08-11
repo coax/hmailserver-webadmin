@@ -35,10 +35,10 @@ $aliasactivechecked = hmailCheckedIf1($aliasactive);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Alias") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 if (strlen($error_message) > 0) {
-	$error_message = $obLanguage->String($error_message);
+	$error_message = Translate($error_message);
 	echo '<div class="warning">' . $error_message . '</div>';
 }
 
@@ -49,7 +49,7 @@ PrintHidden("domainid", $domainid);
 PrintHidden("aliasid", $aliasid);
 ?>
         <p><?php EchoTranslation("Redirect from") ?></p>
-        <input type="text" name="aliasname" value="<?php echo PreprocessOutput($aliasname)?>" maxlength="255" checkallownull="false" checkmessage="<?php EchoTranslation("Redirect from")?>" class="req medium">@<?php echo $domainname ?>
+        <input type="text" name="aliasname" value="<?php echo PreprocessOutput($aliasname)?>" maxlength="255" checkallownull="false" checkmessage="<?php EchoTranslation("Redirect from")?>" class="req medium"> @<?php echo $domainname ?>
 <?php
 PrintPropertyEditRow("aliasvalue", "To", $aliasvalue, 255);
 PrintCheckboxRow("aliasactive", "Enabled", $aliasactive);

@@ -22,14 +22,14 @@ $AutoBanMinutes = $obSettings->AutoBanMinutes;
 ?>
     <div class="box">
       <h2><?php EchoTranslation("Auto-ban") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "autoban");
 PrintHidden("action", "save");
 
 PrintCheckboxRow("AutoBanOnLogonFailure", "Enabled", $AutoBanOnLogonFailure);
-PrintPropertyEditRow("MaxInvalidLogonAttempts", "Max invalid logon attempts", $MaxInvalidLogonAttempts, 4, "number", "medium");
+PrintPropertyEditRow("MaxInvalidLogonAttempts", "Max. invalid logon attempts", $MaxInvalidLogonAttempts, 4, "number", "medium");
 PrintPropertyEditRow("MaxInvalidLogonAttemptsWithin", "Minutes before reset", $MaxInvalidLogonAttemptsWithin, 4, "number", "medium");
 PrintPropertyEditRow("AutoBanMinutes", "Minutes to auto-ban", $AutoBanMinutes, 5, "number", "medium");
 

@@ -34,7 +34,7 @@ $IMAPHierarchyDelimiter = $obSettings->IMAPHierarchyDelimiter;
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("IMAP") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "imap");
@@ -45,12 +45,14 @@ PrintPropertyEditRow("welcomeimap", "Welcome message", $welcomeimap);
 ?>
         <h3><a href="#"><?php EchoTranslation("Advanced")?></a></h3>
         <div class="hidden">
+          <h3><?php EchoTranslation("Extensions")?></a></h3>
 <?php
 PrintCheckboxRow("IMAPSortEnabled", "IMAP Sort", $IMAPSortEnabled);
 PrintCheckboxRow("IMAPQuotaEnabled", "IMAP Quota", $IMAPQuotaEnabled);
 PrintCheckboxRow("IMAPIdleEnabled", "IMAP Idle", $IMAPIdleEnabled);
 PrintCheckboxRow("IMAPACLEnabled", "IMAP ACL", $IMAPACLEnabled);
 ?>
+          <h3><?php EchoTranslation("Other")?></a></h3>
           <p><?php EchoTranslation("Hierarchy delimiter")?></p>
           <select name="IMAPHierarchyDelimiter" class="small">
             <option value="." <?php if ($IMAPHierarchyDelimiter == ".") echo "selected";?> >.</option>

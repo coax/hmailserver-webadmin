@@ -119,4 +119,6 @@ $hmail_config['webmail'] = "http://webmail.[domain]";
 */
 
 $hmail_config['datepicker_weekStart'] = 1;
+
+$hmail_config['version'] = 1.4;
 ?>

@@ -71,7 +71,7 @@ $PrependSubjectChecked = hmailCheckedIf1($PrependSubject);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Anti-spam") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "smtp_antispam");
@@ -81,7 +81,7 @@ PrintPropertyEditRow("SpamMarkThreshold", "Spam mark threshold", $SpamMarkThresh
 PrintCheckboxRow("AddHeaderSpam", "Add X-hMailServer-Spam", $AddHeaderSpam);
 PrintCheckboxRow("AddHeaderReason", "Add X-hMailServer-Reason", $AddHeaderReason);
 PrintCheckboxRow("PrependSubject", "Add to message subject", $PrependSubject);
-PrintPropertyEditRow("PrependSubjectText", "Add to message subject", $PrependSubjectText);
+PrintPropertyEditRow("PrependSubjectText", "", $PrependSubjectText);
 
 PrintPropertyEditRow("SpamDeleteThreshold", "Spam delete threshold", $SpamDeleteThreshold, 6, "number", "small");
 PrintPropertyEditRow("MaximumMessageSize", "Maximum message size to scan (KB)", $MaximumMessageSize, 11, "number", "small");
@@ -109,8 +109,8 @@ PrintCheckboxRow("SpamAssassinMergeScore", "Use score from SpamAssassin", $SpamA
 PrintPropertyEditRow("SpamAssassinScore", "Score", $SpamAssassinScore, 4, "number", "small");
 ?>
           <p>Test SpamAssassin connection</p>
-          <p><a href="#" onclick="return TestScanner('SpamAssassin');" class="button"><?php EchoTranslation("Test")?></a></p>
-          <div id="SpamAssassinTestResult"></div>
+          <div class="buttons bottom"><a href="#" onclick="return TestScanner('SpamAssassin');" class="button"><?php EchoTranslation("Test")?></a></div>
+          <div id="SpamAssassinTestResult" class="bottom"></div>
         </div>
 <?php
 PrintSaveButton();
