@@ -7,9 +7,9 @@ require_once("include/initialization_test.php");
 require_once("initialize.php");
 ?>
 <h2>Impressum</h2>
-<p>hMailAdmin version <?php echo $hmail_config['version'] ?>, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a><?php
+<p>hMailAdmin (PHPWebAdmin redesign project) version <?php echo $hmail_config['version'] ?>, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a><?php
 $version = Version();
-if ($hmail_config['version']<$version) echo ', <b><a href="https://github.com/coax/hmailserver-webadmin/releases/tag/v' . $version .'" target="_blank">version ' . $version . ' available for download</a></b>' . PHP_EOL;
+if ($hmail_config['version']<$version) echo ', <b><a href="https://github.com/coax/hmailserver-webadmin/releases/latest" target="_blank">version ' . $version . ' available for download</a></b>' . PHP_EOL;
 ?>
 <p>Redesign &amp; coding by <a href="http://www.matecic.com/" target="_blank">Matija Matecic</a></p>
 <p>Additional coding by <a href="https://github.com/tunis78" target="_blank">Andreas Tunberg</a></p>
@@ -22,7 +22,7 @@ if ($hmail_config['version']<$version) echo ', <b><a href="https://github.com/co
   <li style="padding-bottom:4px;"><a href="https://jquery.com/" target="_blank">&middot; jQuery</a></li>
   <li style="padding-bottom:4px;"><a href="https://modernizr.com/" target="_blank">&middot; Modernizr</a></li>
   <li style="padding-bottom:4px;"><a href="http://defunkt.io/facebox/" target="_blank">&middot; Defunkt Facebox</a></li>
-  <li style="padding-bottom:4px;"><a href="https://github.com/kylefox/jquery-tablesort" target="_blank">&middot; tablesort</a></li>
+  <li style="padding-bottom:4px;"><a href="https://github.com/joequery/Stupid-Table-Plugin" target="_blank">&middot; stupidtable</a></li>
   <li style="padding-bottom:4px;"><a href="https://github.com/fengyuanchen/datepicker" target="_blank">&middot; datepicker</a></li>
   <li style="padding-bottom:4px;"><a href="https://github.com/jackmoore/autosize" target="_blank">&middot; autosize</a></li>
   <li style="padding-bottom:4px;"><a href="https://timeago.yarp.com/" target="_blank">&middot; timeago</a></li>

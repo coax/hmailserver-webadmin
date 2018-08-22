@@ -65,8 +65,8 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
     <div class="box large">
       <h2><?php EchoTranslation("Live logging") ?></h2>
       <div id="live-logging">
-        <div id="results" style="height:300px;"></div>
+        <div id="results" style="display:none; height:300px;"></div>
 		<?php $state = isset($_SESSION['livelogging']) && $_SESSION['livelogging'] == 'enabled' ? 'enabled' : 'disabled' ?>
-        <button data-state="<?php echo $state ?>"><?php EchoTranslation(($state=='enabled'?"Stop":"Start")) ?></button>
+        <button data-state="<?php echo $state ?>"><?php EchoTranslation(($state=='enabled' ? "Stop" : "Start")) ?></button><div style="display:none; margin-left:18px;"><input type="checkbox" name="autoscroll" id="autoscroll" value="1"><label for="autoscroll"><?php EchoTranslation("Autoscrolling") ?></label></div>
       </div>
     </div>

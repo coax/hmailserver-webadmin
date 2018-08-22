@@ -173,6 +173,9 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
         <li class="logs <?php if ($page=='hm_logviewer') echo 'active' ?>">
           <a href="?page=logviewer"><?php EchoTranslation("Log parser") ?></a>
         </li>
+        <li class="dmarc <?php if ($page=='hm_dmarcreports') echo 'active' ?>">
+          <a href="?page=dmarcreports"><?php EchoTranslation("DMARC reports") ?></a>
+        </li>
         <li class="label"><?php EchoTranslation("Action") ?></li>
 <?php
 $Action = hmailGetVar("action","");

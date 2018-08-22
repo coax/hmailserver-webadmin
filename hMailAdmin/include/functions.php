@@ -125,7 +125,7 @@ function ExceptionHandler($exception) {
 	die;
 }
 
-function ErrorHandler( $errno, $errstr, $errfile ) {
+function ErrorHandler($errno, $errstr, $errfile, $errline) {
 	$errfile = basename($errfile);
 
 	include "error.php";
@@ -137,7 +137,7 @@ function  PrintPropertyRow($caption, $value) {
 	global $obLanguage;
 	$caption = $obLanguage->String($caption);
 
-	echo '<p>' . $caption . '</p><b>' . $value . '</b>' . PHP_EOL;
+	echo '          <p>' . $caption . '</p><b>' . $value . '</b>' . PHP_EOL;
 }
 
 function PrintPropertyEditRow($name, $caption, $value, $length = 255, $checktype = null, $class = null) {
@@ -147,7 +147,7 @@ function PrintPropertyEditRow($name, $caption, $value, $length = 255, $checktype
 	$req = '';
 	if (isset($checktype)) $req = 'req ';
 
-	echo '<p>' . $caption . '</p><input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" checktype="' . $checktype . '" size="' . $length . '" maxlength="' . $length . '" class="' . $req . $class . ' ' . $checktype . '">' . PHP_EOL;
+	echo '          <p>' . $caption . '</p><input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" checktype="' . $checktype . '" size="' . $length . '" maxlength="' . $length . '" class="' . $req . $class . ' ' . $checktype . '">' . PHP_EOL;
 }
 
 function PrintPropertyAreaRow($name, $caption, $value, $rows = 5, $cols = 20, $class = "") {
@@ -155,7 +155,7 @@ function PrintPropertyAreaRow($name, $caption, $value, $rows = 5, $cols = 20, $c
 	$caption = $obLanguage->String($caption);
 	$value = PreprocessOutput($value);
 
-	echo '<p>' . $caption . '</p><textarea name="' . $name . '" id="' . $name . '" rows="' . $rows . '" cols="' . $cols . '" class="' . $class . '">' . $value . '</textarea>' . PHP_EOL;
+	echo '          <p>' . $caption . '</p><textarea name="' . $name . '" id="' . $name . '" rows="' . $rows . '" cols="' . $cols . '" class="' . $class . '">' . $value . '</textarea>' . PHP_EOL;
 }
 
 
@@ -163,7 +163,7 @@ function PrintPasswordEntry($name, $caption, $length = 20, $class = "") {
 	global $obLanguage;
 	$caption = $obLanguage->String($caption);
 
-	echo '<p>' . $caption . '</p><input type="password" name="' . $name . '" id="' . $name . '" size="' . $length . '" class="' . $class . '" autocomplete="off">' . PHP_EOL;
+	echo '          <p>' . $caption . '</p><input type="password" name="' . $name . '" id="' . $name . '" size="' . $length . '" class="' . $class . '" autocomplete="off">' . PHP_EOL;
 }
 
 function PrintCheckboxRow($name, $caption, $checked) {
@@ -171,7 +171,7 @@ function PrintCheckboxRow($name, $caption, $checked) {
 	$caption = $obLanguage->String($caption);
 	$checked_text = hmailCheckedIf1($checked);
 
-	echo '<p><input type="checkbox" name="' . $name . '" id="' . $name . '" value="1" ' . $checked_text . '><label for="' . $name . '">' . $caption . '</label></p>' . PHP_EOL;
+	echo '          <p><input type="checkbox" name="' . $name . '" id="' . $name . '" value="1" ' . $checked_text . '><label for="' . $name . '">' . $caption . '</label></p>' . PHP_EOL;
 }
 
 function PrintLargeTableHeader($caption) {
@@ -188,14 +188,14 @@ function PrintSaveButton($Caption = null, $Cancel = null, $Url = null) {
 	if (!$Cancel) $Cancel = Translate('Cancel');
 	if (!$Url) $Url = 'javascript:window.history.back();';
 
-	echo '<div class="buttons"><button>' . $Caption . '</button><a href="' . $Url . '" class="cancel">' . $Cancel . '</a></div>' . PHP_EOL;
+	echo '          <div class="buttons"><button>' . $Caption . '</button><a href="' . $Url . '" class="cancel">' . $Cancel . '</a></div>' . PHP_EOL;
 }
 
 function PrintHidden($name, $value) {
 	$name = PreprocessOutput($name);
 	$value = PreprocessOutput($value);
 
-	echo '        <input type="hidden" name="' . $name . '" value="' . $value . '">' . PHP_EOL;
+	echo '          <input type="hidden" name="' . $name . '" value="' . $value . '">' . PHP_EOL;
 }
 
 function PrintHiddenCsrfToken() {
@@ -316,15 +316,30 @@ class translate {
 	}
 }
 
-//Version check
+// Version check
 function Version() {
 	$json = file_get_contents("https://raw.githubusercontent.com/coax/hmailserver-webadmin/master/version.txt");
-	return json_decode($json);
+	$parsed = json_decode($json);
+	return $parsed;
 }
 
-//Translate without echo
+// Translate without echo
 function Translate($string) {
 	global $obLanguage;
 	return $obLanguage->String($string);
+}
+
+// IP 2 Country
+function GeoIp($ip) {
+	global $obLanguage;
+	if ($ip === '0.0.0.0') return Translate('Unknown');
+	$regex = '/(127\.0\.0\.1)|^(10\.)|^(192\.168\.)|^(169\.254\.)|^(172\.(1[6-9]|2[0-9]|3[0-1]))/';
+	if (preg_match($regex, $ip)) return Translate('Local IP range');
+
+	$json = file_get_contents('http://geoip.nekudo.com/api/' . $ip);
+	$parsed = json_decode($json);
+
+	if(!$parsed->country->code) return Translate('Unknown');
+	return '<p><img src="flags/' . $parsed->country->code . '.gif" style="margin-right:5px;">' . $parsed->country->name . '</p>';
 }
 ?>

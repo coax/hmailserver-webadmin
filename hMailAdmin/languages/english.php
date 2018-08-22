@@ -68,7 +68,7 @@ return array(
 	65 => 'Add new whitelist',
 	66 => 'Message no longer in queue.',
 	67 => 'ASAP',
-	
+
 	68 => 'You haven\'t added any accounts.',
 	69 => 'You haven\'t added any aliases.',
 	70 => 'You haven\'t added any blacklists.',
@@ -82,7 +82,15 @@ return array(
 	78 => 'You haven\'t added any SURBL servers.',
 	79 => 'You haven\'t added any ports.',
 	80 => 'You haven\'t added any whitelists.',
-	
+
+	81 => 'Blacklist check',
+	82 => 'Enter IP to check',
+	83 => 'Check',
+	84 => 'Results will be shown here',
+	85 => 'Listed',
+	86 => 'Not listed',
+	87 => 'Please enter a valid IP address',
+
 	90 => 'Show accounts',
 	91 => 'DKIM Signing',
 	92 => 'Selector',
@@ -110,6 +118,39 @@ return array(
 	115 => 'Log file not found',
 	116 => 'Error opening log file',
 	117 => 'No matched entries in the log file',
+
+	118 => 'Live logging',
+	119 => 'Autoscrolling',
+
+	120 => 'DMARC reports',
+	121 => '# new reports added.',
+	122 => 'Delete DMARC report',
+	123 => 'DMARC Report Details',
+	124 => 'Provider',
+	125 => 'Report ID',
+	126 => 'Coverage',
+	127 => 'Extra contact',
+	128 => 'Email contact',
+	129 => 'DMARC report',
+	130 => 'Policy Details',
+	131 => 'Policy',
+	132 => 'DKIM alignment',
+	133 => 'Percentage',
+	134 => 'Sub-domain Policy',
+	135 => 'SPF alignment',
+	136 => 'Identified Sources',
+	137 => 'Server',
+	138 => 'DMARC Compliance',
+	139 => 'Disposition',
+	140 => 'DKIM domain (result)',
+	141 => 'SPF domain (result)',
+	142 => 'Pass',
+	143 => 'Fail',
+	144 => 'Reject', // policy
+	145 => 'Quarantine', //policy None //policy
+	146 => 'IMAP extension not enabled in php.ini',
+	147 => 'Cannot connect to server',
+	148 => 'DMARC reports are not enabled in config.php',
 
 	200 => 'Confirm delete',
 );

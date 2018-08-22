@@ -17,9 +17,9 @@ jQuery(document).ready(function() {
 		$('[name=username]').focus();
 	}
 
-	// init "tablesorter" plugin
+	// init "stupidtable" plugin
 	if ($('.tablesort').length) {
-		$('.tablesort').tablesort();
+		$('.tablesort').stupidtable();
 	}
 
 	// init "facebox" plugin
@@ -108,12 +108,43 @@ jQuery(document).ready(function() {
 
 	// live logging
 	if ($('#live-logging').length) {
-		$('#live-logging button').click(function() {
-			var result = $('#results'),
-				state = $(this).data('state') == 'enabled' ? 'disabled' : 'enabled',
-				button = $(this),
+		function ShowHide(state, result, autoscroll) {
+			if (state=='enabled') {
+				result.css('display','block');
+				autoscroll.parent().css('display','inline-block');
+			} else {
+				result.css('display','none');
+				autoscroll.parent().css('display','none');
+			}
+		}
+
+		var autoscroll = $('#autoscroll'),
+			button = $('#live-logging button'),
+			state = button.data('state'),
+			result = $('#results'),
+			scrolling;
+
+		ShowHide(state, result, autoscroll);
+
+		autoscroll.change(function() {
+			if (this.checked) {
+				// autoscrolling
+				scrolling = setInterval(function() {
+					result.animate({
+						scrollTop: result[0].scrollHeight
+					}, 1000);
+				}, 2500);
+			} else {
+				clearInterval(scrolling);
+			}
+		});
+
+		button.click(function() {
+			var state = $(this).data('state') == 'enabled' ? 'disabled' : 'enabled',
 				width = button.width(),
 				text = button.text();
+
+			ShowHide(state, result, autoscroll);
 
 			$.ajax({
 				type: 'post',
@@ -256,7 +287,7 @@ jQuery(document).ready(function() {
 					}
 					$('#queue tbody').html(queue);
 					// server
-					activity_array.push(parseInt(json[3]));
+					activity_array.push(parseInt(json[4]));
 					activity_array.splice(0, 1);
 					data = {
 						series: [activity_array]
@@ -267,11 +298,6 @@ jQuery(document).ready(function() {
 
 					// live logging
 					$('#results').append(parseLog(json[5]));
-					if ($('#live-logging button').data('state')=='enabled') {
-						$('#results').animate({
-							scrollTop: $('#results')[0].scrollHeight
-						}, 1000);
-					}
 				});
 		}
 		setInterval(Refresh, 5000);

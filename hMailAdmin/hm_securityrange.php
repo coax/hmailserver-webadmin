@@ -99,23 +99,10 @@ PrintPropertyEditRow("securityrangepriority", "Priority", $securityrangepriority
 PrintPropertyEditRow("securityrangelowerip", "Lower IP", $securityrangelowerip, 30, "ip");
 PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip, 30, "ip");
 
-function geoIp($ip) {
-	global $obLanguage;
-	if ($ip === '0.0.0.0') return Translate('Unknown');
-	$regex = '/(127\.0\.0\.1)|^(10\.)|^(192\.168\.)|^(172\.(1[6-9]|2[0-9]|3[0-1]))/';
-	if (preg_match($regex, $ip)) return Translate('Local IP range');
-
-	$pageContent = file_get_contents('http://geoip.nekudo.com/api/' . $ip);
-	$parsedJson  = json_decode($pageContent);
-
-	if(!$parsedJson->country->code) return Translate('Unknown');
-	return '<p><img src="flags/' . $parsedJson->country->code . '.gif" style="margin-right:5px;">' . $parsedJson->country->name . '</p>';
-}
-
 if ($securityrangeid>0) {
 ?>
          <p><?php EchoTranslation("Country") ?></p>
-         <b><?php echo geoIp($securityrangelowerip) ?></b>
+         <b><?php echo GeoIp($securityrangelowerip) ?></b>
  <?php
 }
 

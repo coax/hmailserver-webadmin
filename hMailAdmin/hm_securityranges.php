@@ -19,10 +19,10 @@ $str_confirm = Translate("Confirm delete");
       <table class="tablesort">
         <thead>
           <tr>
-            <th><?php EchoTranslation("Name")?></th>
-            <th style="width:20%;"><?php EchoTranslation("IP address") ?></th>
-            <th style="width:10%;"><?php EchoTranslation("Priority") ?></th>
-            <th style="width:20%;"><?php EchoTranslation("Expires") ?></th>
+            <th data-sort="string"><?php EchoTranslation("Name")?></th>
+            <th style="width:20%;" data-sort="string"><?php EchoTranslation("IP address") ?></th>
+            <th style="width:10%;" data-sort="int"><?php EchoTranslation("Priority") ?></th>
+            <th style="width:20%;" data-sort="int"><?php EchoTranslation("Expires") ?></th>
             <th style="width:32px;" class="no-sort">&nbsp;</th>
           </tr>
         </thead>
@@ -63,7 +63,7 @@ if ($Count>0) {
             <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . (strpos($securityrangename,'Auto-ban:')!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
             <td>' . $LowerIp . '</td>
             <td>' . $securityrangepriority . '</td>
-            <td>' . $ExpiresTime . '</td>
+            <td data-sort-value="' . strtotime($obSecurityRange->ExpiresTime) . '">' . $ExpiresTime . '</td>
             <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $securityrangename . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_securityrange_save&csrftoken=' . $csrftoken . '&action=delete&securityrangeid=' . $securityrangeid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
           </tr>' . PHP_EOL;
 	}

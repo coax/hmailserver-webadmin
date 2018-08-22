@@ -120,5 +120,51 @@ $hmail_config['webmail'] = "http://webmail.[domain]";
 
 $hmail_config['datepicker_weekStart'] = 1;
 
-$hmail_config['version'] = 1.4;
+/*
+	DMARC report analyser.
+
+   Download new reports from IMAP.
+   Unpack and / or save in dmarcreport directory.
+
+   REQUIRED: IMAP extension
+
+   The directory "dmarcreports" must exist and have write permission to it.
+*/
+
+$hmail_config['dmarc_enable'] = false;
+
+/*
+   IMAP account user name
+*/
+
+$hmail_config['dmarc_username'] = 'dmarc@example.com';
+
+/*
+   IMAP account password
+*/
+
+$hmail_config['dmarc_password'] = 'password';
+
+/*
+   IMAP server IP
+*/
+
+$hmail_config['dmarc_hostip'] = '127.0.0.1';
+
+/*
+   IMAP server port
+*/
+
+$hmail_config['dmarc_port'] = 993;
+
+/*
+   IMAP server encryption
+
+   Possible values:
+      ssl   - ssl encryption
+      tsl   - tsl encryption
+      notls - no encryption
+*/
+
+$hmail_config['dmarc_encryption'] = 'ssl';
 ?>

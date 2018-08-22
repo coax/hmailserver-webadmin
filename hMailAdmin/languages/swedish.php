@@ -68,7 +68,7 @@ return array(
 	65 => 'Lägg till ny vitlista',
 	66 => 'Meddelandet är inte längre i kö.',
 	67 => 'ASAP',
-	
+
 	68 => 'Du har inga konton än.',
 	69 => 'Du har inga alias än.',
 	70 => 'Du har inga svartlistor än.',
@@ -82,7 +82,15 @@ return array(
 	78 => 'Du har inga SURBL servrar än.',
 	79 => 'Du har inga portar än.',
 	80 => 'Du har inga vitlistor än.',
-	
+
+	81 => 'DNS svartlistningar kontroll',
+	82 => 'Ange IP för att kontrollera',
+	83 => 'Kolla upp',
+	84 => 'Resultat visas här',
+	85 => 'Listad',
+	86 => 'Inte listad',
+	87 => 'Ange en giltig IP-adress',
+
 	90 => 'Visa konton',
 	91 => 'DKIM-signering',
 	92 => 'Selektor',
@@ -110,6 +118,39 @@ return array(
 	115 => 'Loggfilen hittades inte',
 	116 => 'Det gick inte att öppna loggfilen',
 	117 => 'Inga matchade poster i loggfilen',
+
+	118 => 'Live loggning',
+	119 => 'Autoumatisk skrollning',
+
+	120 => 'DMARC rapporter',
+	121 => '# nya rapporter till laggda.',
+	122 => 'Ta bort DMARC rapporten',
+	123 => 'DMARC rapport detaljer',
+	124 => 'Leverantör',
+	125 => 'Rapport ID',
+	126 => 'Rapportering',
+	127 => 'Extra kontakt',
+	128 => 'Email kontakt',
+	129 => 'DMARC rapport',
+	130 => 'Policy detaljer',
+	131 => 'Policy',
+	132 => 'DKIM alignment',
+	133 => 'Procentsats',
+	134 => 'Underdomänpolicy',
+	135 => 'SPF alignment',
+	136 => 'Identifierade källor',
+	137 => 'Server',
+	138 => 'DMARC efterlevnad',
+	139 => 'Dispositioner',
+	140 => 'DKIM domän (resultat)',
+	141 => 'SPF domän (resultat)',
+	142 => 'Pass',
+	143 => 'Fail',
+	144 => 'Avvisa', // policy
+	145 => 'Karantän', //policy None //policy
+	146 => 'IMAP extension not enabled in php.ini',
+	147 => 'Kan inte kontakta server',
+	148 => 'DMARC rapporter är inte aktiverat i config.php',
 
 	200 => 'Bekräfta borttagning',
 );

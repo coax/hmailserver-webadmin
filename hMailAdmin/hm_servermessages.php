@@ -10,7 +10,7 @@ if (hmailGetAdminLevel() != ADMIN_SERVER)
       <table class="tablesort">
         <thead>
           <tr>
-            <th style="width:100%;"><?php EchoTranslation("Message type")?></th>
+            <th style="width:100%;" data-sort="string"><?php EchoTranslation("Message type")?></th>
           </tr>
         </thead>
         <tbody>

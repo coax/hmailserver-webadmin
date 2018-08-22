@@ -12,11 +12,11 @@ $Count = $obBaseApp->Domains->Count();
       <table class="tablesort">
         <thead>
           <tr>
-            <th><?php EchoTranslation("Domain name") ?></th>
-            <th style="width:12%;"><?php EchoTranslation("Size (MB)") ?></th>
-            <th style="width:12%;"><?php EchoTranslation("Max. (MB)") ?></th>
+            <th data-sort="string"><?php EchoTranslation("Domain name") ?></th>
+            <th style="width:12%;" data-sort="float"><?php EchoTranslation("Size (MB)") ?></th>
+            <th style="width:12%;" data-sort="float"><?php EchoTranslation("Max. (MB)") ?></th>
             <th style="width:15%;" class="no-sort">&nbsp;</th>
-            <th style="width:8%;"><?php EchoTranslation("Enabled") ?></th>
+            <th style="width:8%;" data-sort="string"><?php EchoTranslation("Enabled") ?></th>
             <th style="width:32px;" class="no-sort">&nbsp;</th>
           </tr>
         </thead>

@@ -15,8 +15,8 @@ $Count = $obTCPIPPorts->Count();
       <table class="tablesort">
         <thead>
           <tr>
-            <th><?php EchoTranslation("Protocol")?></th>
-            <th style="width:45%;"><?php EchoTranslation("TCP/IP port")?></th>
+            <th data-sort="string"><?php EchoTranslation("Protocol")?></th>
+            <th style="width:45%;" data-sort="int"><?php EchoTranslation("TCP/IP port")?></th>
             <th style="width:32px;" class="no-sort">&nbsp;</th>
           </tr>
         </thead>

@@ -18,9 +18,9 @@ $str_confirm = Translate("Confirm delete");
       <table class="tablesort">
         <thead>
           <tr>
-            <th><?php EchoTranslation("Name")?></th>
-            <th style="width:15%;"><?php EchoTranslation("Score")?></th>
-            <th style="width:15%;"><?php EchoTranslation("Enabled")?></th>
+            <th data-sort="string"><?php EchoTranslation("Name")?></th>
+            <th style="width:15%;" data-sort="int"><?php EchoTranslation("Score")?></th>
+            <th style="width:15%;" data-sort="string"><?php EchoTranslation("Enabled")?></th>
             <th style="width:32px;" class="no-sort">&nbsp;</th>
           </tr>
         </thead>

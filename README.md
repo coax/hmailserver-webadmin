@@ -50,6 +50,15 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
+Version 1.5 (2018-08-22)
+- [tweak] changes to config.php
+- [tweak] Server graph on dashboard displays delivery queue count
+- [new] DMARC reports in side navigation (thanks to @tunis)
+- [new] IMAP folders under Account
+- [tweak] replaced "tablesort" with "stupidtable" plugin
+- [tweak] added APIPA addresses to regex in geoIp() function
+- [fix] CSS fix
+
 Version 1.4 (2018-08-11)
 - [new] Blacklist check (under Utilities)
 - [new] Dashboard: Live logging (thanks to @tunis)
@@ -172,7 +181,7 @@ Version 0.9 beta (2016-12-28)
 - [jQuery](https://jquery.com/)
 - [Modernizr](https://modernizr.com/)
 - [Defunkt Facebox](http://defunkt.io/facebox/)
-- [tablesort](https://github.com/kylefox/jquery-tablesorttablesort)
+- [stupidtable](https://github.com/joequery/Stupid-Table-Plugin)
 - [datepicker](https://github.com/fengyuanchen/datepicker)
 - [autosize](https://github.com/jackmoore/autosize)
 - [timeago](http://timeago.yarp.com/timeago)
