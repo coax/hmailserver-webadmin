@@ -113,7 +113,6 @@ PrintPropertyEditRow("HostName", "Local host name", $HostName);
 <?php
 PrintPropertyEditRow("smtprelayer", "Remote host name", $smtprelayer);
 PrintPropertyEditRow("smtprelayerport", "Remote TCP/IP port", $smtprelayerport, 11, "number", "small");
-PrintPropertyEditRow("HostName", "Local host name", $HostName);
 PrintCheckboxRow("SMTPRelayerRequiresAuthentication", "Server requires authentication", $SMTPRelayerRequiresAuthentication);
 PrintPropertyEditRow("SMTPRelayerUsername", "User name", $SMTPRelayerUsername, 255, null, "medium");
 PrintPasswordEntry("SMTPRelayerPassword", "Password", 255, "medium");
@@ -149,13 +148,12 @@ PrintPropertyEditRow("MaxNumberOfInvalidCommands", "Maximum number of invalid co
 <?php
 PrintPropertyEditRow("smtpdeliverybindtoip", "Bind to local IP address", $smtpdeliverybindtoip, 20, "ip");
 PrintPropertyEditRow("maxsmtprecipientsinbatch", "Maximum number of recipients in batch", $maxsmtprecipientsinbatch, 4, "number", "small");
-PrintPropertyEditRow("HostName", "Local host name", $HostName);
 PrintCheckboxRow("SMTPConnectionSecurity", "Use STARTTLS if available", $SMTPConnectionSecurity);
 ?>
           <h3><?php EchoTranslation("Other")?></h3>
 <?php
-PrintPropertyEditRow("smtprulelooplimit", "Rule Loop Limit", $smtprulelooplimit, 3, "number", "small");
 PrintCheckboxRow("AddDeliveredToHeader", "Add Delivered-To header", $AddDeliveredToHeader);
+PrintPropertyEditRow("smtprulelooplimit", "Rule Loop Limit", $smtprulelooplimit, 3, "number", "small");
 PrintPropertyEditRow("MaxNumberOfMXHosts", "Maximum number of recipient hosts", $MaxNumberOfMXHosts, 11, "number", "small");
 ?>
         </div>
