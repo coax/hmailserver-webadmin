@@ -146,7 +146,7 @@ PrintPropertyEditRow("MaxNumberOfInvalidCommands", "Maximum number of invalid co
         <div class="hidden">
           <h3><?php EchoTranslation("Delivery of e-mail")?></h3>
 <?php
-PrintPropertyEditRow("smtpdeliverybindtoip", "Bind to local IP address", $smtpdeliverybindtoip, 20, "ip");
+PrintPropertyEditRow("smtpdeliverybindtoip", "Bind to local IP address", $smtpdeliverybindtoip, 20, null, "ip");
 PrintPropertyEditRow("maxsmtprecipientsinbatch", "Maximum number of recipients in batch", $maxsmtprecipientsinbatch, 4, "number", "small");
 PrintCheckboxRow("SMTPConnectionSecurity", "Use STARTTLS if available", $SMTPConnectionSecurity);
 ?>

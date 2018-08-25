@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
 				url: './blacklists.php',
 				data: form.serialize(),
 				cache: false,
-				timeout: 10000,
+				timeout: 15000,
 				dataType: 'text',
 				beforeSend: function() {
 					result.text('Please wait... this might take some time');
