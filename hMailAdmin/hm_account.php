@@ -272,7 +272,7 @@ if (GetHasRuleAccess($DomainId, $AccountId)) {
                   <td><a href="?page=rule&action=edit&domainid=' . $DomainId . '&accountid=' . $AccountId . '&ruleid=' . $ruleid . '">' . $rulename . '</a></td>
                   <td>' . $enabled . '</td>
                   <td>' . $move . '</td>
-                  <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $rulename . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_rule_save&action=delete&savetype=rule&domainid=' . $DomainId . '&accountid=' . $AccountId . '&ruleid=' . $ruleid . '\');" class="delete" title="' . $str_delete . '&csrftoken=' . $csrftoken . '">' . $str_delete . '</a></td>
+                  <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $rulename . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_rule_save&action=delete&savetype=rule&domainid=' . $DomainId . '&accountid=' . $AccountId . '&ruleid=' . $ruleid . '&csrftoken=' . $csrftoken . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
                 </tr>' . PHP_EOL;
 		}
 ?>
