@@ -336,10 +336,10 @@ function GeoIp($ip) {
 	$regex = '/(127\.0\.0\.1)|^(10\.)|^(192\.168\.)|^(169\.254\.)|^(172\.(1[6-9]|2[0-9]|3[0-1]))/';
 	if (preg_match($regex, $ip)) return Translate('Local IP range');
 
-	$json = file_get_contents('http://geoip.nekudo.com/api/' . $ip);
+	$json = file_get_contents('https://extreme-ip-lookup.com/json/' . $ip);
 	$parsed = json_decode($json);
 
-	if(!$parsed->country->code) return Translate('Unknown');
-	return '<p><img src="flags/' . $parsed->country->code . '.gif" style="margin-right:5px;">' . $parsed->country->name . '</p>';
+	if(!$parsed->countryCode) return Translate('Unknown');
+	return '<p><img src="flags/' . $parsed->countryCode . '.gif" style="margin-right:5px;">' . $parsed->country . '</p>';
 }
 ?>
