@@ -324,7 +324,7 @@ nav {display:none;}
 
 	/* side menu */
 	#sidebar {width:200px;}
-	#sidebar > ul > li > a {padding:12px 0 12px 42px; text-align:left; border-bottom:none;}
+	#sidebar > ul > li > a {padding:12px 0 12px 42px; text-align:left; border-bottom:none; overflow:hidden; text-overflow:ellipsis;}
 	#sidebar > ul > li > a::before {top:10px; left:18px; margin:0;}
 	#sidebar .label {display:block; padding:8px 18px}
 	#sidebar .has-children > ul {min-width:100%; width:auto;}
