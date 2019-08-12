@@ -30,12 +30,12 @@ if ($ruleid != 0) {
 	$UseAND = 1;
 }
 
-$str_delete = $obLanguage->String("Remove");
-$str_add = $obLanguage->String("Add");
+$str_delete = Translate("Remove");
+$str_add = Translate("Add");
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Rule") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_rule_save");
@@ -45,19 +45,19 @@ PrintHidden("domainid", $domainid);
 PrintHidden("accountid", $accountid);
 PrintHidden("ruleid", $ruleid);
 
-PrintPropertyEditRow("Name", "Name", $Name, 100);
+PrintPropertyEditRow("Name", "Name", $Name, 100, " ");
 PrintCheckboxRow("Active", "Active", $Active);
 ?>
         <div style="position:relative; display:inline-block;"><p><input type="radio" name="UseAND" value="1" id="1" <?php if ($UseAND == 1) echo "checked"?>><label for="1"><?php EchoTranslation("Use AND") ?></label></p></div>
         <div style="position:relative; display:inline-block;"><p><input type="radio" name="UseAND" value="0" id="2" <?php if ($UseAND == 0) echo "checked"?>><label for="2"><?php EchoTranslation("Use OR") ?></label></p></div>
 <?php
 if ($ruleid == 0) {
-	echo '<div class="warning">' . $obLanguage->String("You must save the rule before you can edit criteria and actions.") . '</div>' . PHP_EOL;
+	echo '<p class="warning bottom">' . Translate("You must save the rule before you can edit criteria and actions.") . '</p>' . PHP_EOL;
 } else {
-	$str_yes = $obLanguage->String("Yes");
-	$str_no = $obLanguage->String("No");
-	$str_delete = $obLanguage->String("Remove");
-	$str_confirm = $obLanguage->String("Confirm delete");
+	$str_yes = Translate("Yes");
+	$str_no = Translate("No");
+	$str_delete = Translate("Remove");
+	$str_confirm = Translate("Confirm delete");
 ?>
         <h3><a href="#"><?php EchoTranslation("Criteria") ?></a></h3>
         <div class="hidden">
@@ -96,7 +96,7 @@ if ($ruleid == 0) {
 ?>
             </tbody>
           </table>
-          <div class="buttons center"><a href="?page=rule_criteria&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button"><?php EchoTranslation("Add new criteria") ?></a></div>
+          <div class="buttons center bottom"><a href="?page=rule_criteria&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button"><?php EchoTranslation("Add new criteria") ?></a></div>
         </div>
         <h3><a href="#"><?php EchoTranslation("Actions") ?></a></h3>
         <div class="hidden">
@@ -113,8 +113,8 @@ if ($ruleid == 0) {
 	$Actions = $rule->Actions;
 	$count = $Actions->Count;
 
-	$str_move_up= $obLanguage->String("Move up");
-	$str_move_down = $obLanguage->String("Move down");
+	$str_move_up= Translate("Move up");
+	$str_move_down = Translate("Move down");
 
 	for ($i = 0; $i < $count; $i++) {
 		$action = $Actions->Item($i);
@@ -137,7 +137,7 @@ if ($ruleid == 0) {
 ?>
             </tbody>
           </table>
-          <div class="buttons center"><a href="?page=rule_action&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button"><?php EchoTranslation("Add new action") ?></a></div>
+          <div class="buttons center bottom"><a href="?page=rule_action&action=add&domainid=<?php echo $domainid ?>&accountid=<?php echo $accountid ?>&ruleid=<?php echo $ruleid ?>" class="button"><?php EchoTranslation("Add new action") ?></a></div>
         </div>
 <?php
 }

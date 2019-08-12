@@ -1,13 +1,4 @@
 <?php
-//ini_set('display_errors', 1);
-define('IN_WEBADMIN', true);
-
-require_once("./config.php");
-require_once("./include/initialization_test.php");
-require_once("./initialize.php");
-
-if (hmailGetAdminLevel() != 2)
-	hmailHackingAttemp();
 
 function filter_result($str, $findme, $type=true) {
 	if ( ($pos = stripos($str, $findme)) !== false && (!$type || $pos < 3)) {
@@ -22,49 +13,8 @@ function filter_result_type($str, $types) {
 	}
 }
 
-$Types = !empty($_POST['LogTypes']) ? $_POST['LogTypes'] : array('SMTPD');
-$AllTypes = in_array('ALL', $Types);
-$RawType = !empty($_POST['LogType']) ? true : false;
-$Filter = !empty($_POST['LogFilter']) ? $_POST['LogFilter'] : null;
-$Filename = !empty($_POST['LogFilename']) ? $_POST['LogFilename'] : date("Y-m-d");
-$Filename = 'hmailserver_' . $Filename . '.log';
-$Path = $obBaseApp->Settings->Directories->LogDirectory;
-$Filename = $Path . '\\' . $Filename;
-
-if (file_exists($Filename)) {
-	$Filesize = filesize($Filename);
-	$File = fopen($Filename, 'r');
-
-	if ($File) {
-		$events=array();
-		while (($Line = fgets($File)) !== false) {
-			if ($RawType){
-				if (!isset($events[0])) $events[0][0] = array('RAW');
-				$events[0][1][] = htmlentities(cleanNonUTF8($Line));
-				continue;
-			}
-
-			$Unfiltered = $Line;
-			$Filtered = $AllTypes ? $Unfiltered :filter_result_type($Unfiltered, $Types);
-			if (!is_null($Filter)) {
-				$Filtered = filter_result($Filtered, $Filter, false);
-				$Filtered = preg_replace("/\w*?$Filter\w*/i", "{em}$0{/em}", $Filtered);
-			}
-
-			if (!is_null($Filtered)) parse($Filtered);
-		}
-		fclose($File);
-		$out = events();
-	} else {
-		$out = $obLanguage->String("Error opening log file");
-	}
-} else {
-	$out = $obLanguage->String("Log file not found");
-}
-
-header('Content-Type: application/json');
-$out = json_encode($out);
-echo $out;
+$events=array();
+$datastore = array();
 
 function parse($line){
 	global $events;
@@ -89,7 +39,6 @@ function parse($line){
 	}
 }
 
-$datastore = array();
 function parse_smtp($data){
 	global $datastore,$events;
 
@@ -144,7 +93,7 @@ function events(){
 	foreach ($events as $data) {
 		$out[] = $data;
 	}
-	if (empty($out)) $out = $obLanguage->String("No matched entries in the log file");
+	if (empty($out)) $out = Translate("No matched entries in the log file");
 	return $out;
 }
 

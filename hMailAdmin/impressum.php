@@ -1,27 +1,37 @@
+<?php
+define('IN_WEBADMIN', true);
+define('CSRF_ENABLED', true);
+
+require_once("config.php");
+require_once("include/initialization_test.php");
+require_once("initialize.php");
+?>
 <h2>Impressum</h2>
-<div style="margin:0 18px 18px;">
-  <p>hMailServer web admin redesign &amp; coding by <a href="http://www.matecic.com/" target="_blank">Matija Matecic</a></p>
-  <p>Additional coding by <a href="https://github.com/tunis78" target="_blank">Andreas Tunberg</a></p>
-  <p>Version 1.3, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a>
-  <p>hMailServer author Martin Knafve</p>
-  <p>License information <a href="https://www.hmailserver.com/documentation/latest/?page=information_copyright" target="_blank">here</a></p>
-  <h3>Third party components</h3>
-  <p>This section lists third party components and libraries used in hMailAdmin:</p>
-  <ul style="padding:0 10px;">
-    <li style="padding-bottom:4px;"><a href="https://jquery.com/" target="_blank">jQuery</a></li>
-    <li style="padding-bottom:4px;"><a href="https://modernizr.com/" target="_blank">Modernizr</a></li>
-    <li style="padding-bottom:4px;"><a href="http://defunkt.io/facebox/" target="_blank">Defunkt Facebox</a></li>
-    <li style="padding-bottom:4px;"><a href="https://github.com/kylefox/jquery-tablesort" target="_blank">tablesort</a></li>
-    <li style="padding-bottom:4px;"><a href="https://github.com/fengyuanchen/datepicker" target="_blank">datepicker</a></li>
-    <li style="padding-bottom:4px;"><a href="https://timeago.yarp.com/" target="_blank">timeago</a></li>
-    <li style="padding-bottom:4px;"><a href="https://gionkunz.github.io/chartist-js/" target="_blank">Chartist</a></li>
-    <li style="padding-bottom:4px;"><a href="https://codyhouse.co/gem/responsive-sidebar-navigation/" target="_blank">CodyHouse Responsive Sidebar Navigation</a></li>
-    <li style="padding-bottom:4px;"><a href="https://useiconic.com/open/" target="_blank">Open Iconic</a></li>
-    <!--<li style="padding-bottom:4px;"><a href="https://github.com/hazarkarabay/hmailserver-logviewer" target="_blank">hMailServer log viewer</a></li>-->
-  </ul>
-  <h3>Donate</h3>
-  <p>Don't worry, hMailAdmin will stay free - but I do need your support in order to continue to develop it! Thank you :)</p>
-  <p><a href="https://www.paypal.me/MatijaMatecic/" target="_blank"><img src="css/btn_donate_pp_142x27.png" alt="PayPal donate"></a></p>
-  <p>Bitcoin: <a href="bitcoin:18vKLpbNpWv4MC1VFWpCvkDU2jt8tQgGmZ">18vKLpbNpWv4MC1VFWpCvkDU2jt8tQgGmZ</a></p>
-  <p>Litecoin: <a href="litecoin:LZCwVvv3LgoVctnGQZLsUFYLFeyKiVPpvB">LZCwVvv3LgoVctnGQZLsUFYLFeyKiVPpvB</a></p>
-</div>
+<p>hMailAdmin (PHPWebAdmin redesign project) version <?php echo $hmail_config['version'] ?>, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a><?php
+$version = Version();
+if ($hmail_config['version']<$version) echo ', <b><a href="https://github.com/coax/hmailserver-webadmin/releases/latest" target="_blank">version ' . $version . ' available for download</a></b>' . PHP_EOL;
+?>
+<p>Redesign &amp; coding by <a href="http://www.matecic.com/" target="_blank">Matija Matecic</a></p>
+<p>Additional coding by <a href="https://github.com/tunis78" target="_blank">Andreas Tunberg</a></p>
+<h3>hMailServer</h3>
+<p>hMailServer version <?php echo $obBaseApp->Version ?>, source on <a href="https://github.com/hmailserver/hmailserver/" target="_blank">GitHub</a></p>
+<p>Author Martin Knafve</p>
+<h3>Third party components</h3>
+<p>This section lists third party components and libraries used in hMailAdmin:</p>
+<ul style="padding:0 10px;">
+  <li style="padding-bottom:4px;"><a href="https://jquery.com/" target="_blank">&middot; jQuery</a></li>
+  <li style="padding-bottom:4px;"><a href="https://modernizr.com/" target="_blank">&middot; Modernizr</a></li>
+  <li style="padding-bottom:4px;"><a href="http://defunkt.io/facebox/" target="_blank">&middot; Defunkt Facebox</a></li>
+  <li style="padding-bottom:4px;"><a href="https://github.com/joequery/Stupid-Table-Plugin" target="_blank">&middot; stupidtable</a></li>
+  <li style="padding-bottom:4px;"><a href="https://github.com/fengyuanchen/datepicker" target="_blank">&middot; datepicker</a></li>
+  <li style="padding-bottom:4px;"><a href="https://github.com/jackmoore/autosize" target="_blank">&middot; autosize</a></li>
+  <li style="padding-bottom:4px;"><a href="https://timeago.yarp.com/" target="_blank">&middot; timeago</a></li>
+  <li style="padding-bottom:4px;"><a href="https://gionkunz.github.io/chartist-js/" target="_blank">&middot; Chartist</a></li>
+  <li style="padding-bottom:4px;"><a href="https://codyhouse.co/gem/responsive-sidebar-navigation/" target="_blank">&middot; CodyHouse Responsive Sidebar Navigation</a></li>
+  <li style="padding-bottom:10px;"><a href="https://useiconic.com/open/" target="_blank">&middot; Open Iconic</a></li>
+</ul>
+<h3>Donate</h3>
+<p>Don't worry, hMailAdmin will stay free - but I do need your support in order to continue developing it! Thank you :)</p>
+<a href="https://www.paypal.me/MatijaMatecic/10EUR" target="_blank" style="display:inline-block; width:30%; height:70px; background:url(css/logo-paypal.svg) 50% 10% no-repeat; background-size:60%; margin-right:4%; padding-top:50px; text-align:center;">Buy me a coffee</a>
+<a href="https://chart.googleapis.com/chart?chs=500x500&chld=L|2&cht=qr&chl=bitcoin:146oNCuLztGUFZXsi6pUeNFGG4HGZ1YCGy" target="_blank" style="display:inline-block; width:30%; height:70px; background:url(css/logo-bitcoin.svg) 50% 10% no-repeat; background-size:60%; margin-right:4%; padding-top:50px; text-align:center;">Buy me a coffee</a>
+<a href="https://chart.googleapis.com/chart?chs=500x500&chld=L|2&cht=qr&chl=0x5d62dCdEf782826Ff0c4613D3836c8691dc6B609" target="_blank" style="display:inline-block; width:30%; height:70px; background:url(css/logo-ethereum.svg) 50% 10% no-repeat; background-size:60%; padding-top:50px; text-align:center;">Buy me a coffee</a>

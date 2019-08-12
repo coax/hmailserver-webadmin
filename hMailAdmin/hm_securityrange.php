@@ -79,7 +79,7 @@ $IsForwardingRelayChecked = hmailCheckedIf1($IsForwardingRelay);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("IP range") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_securityrange_save");
@@ -87,26 +87,25 @@ PrintHidden("action", $action);
 PrintHidden("securityrangeid", $securityrangeid);
 
 PrintPropertyEditRow("securityrangename", "Name", $securityrangename, 100);
+
+$str_yes = Translate("Yes");
+$str_no = Translate("No");
+$str_delete = Translate("Remove");
+$str_confirm = Translate("Confirm delete");
+
+if ($securityrangeid>0) echo '<div class="buttons bottom"><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $securityrangename . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_securityrange_save&csrftoken=' . $csrftoken . '&action=delete&securityrangeid=' . $securityrangeid . '\');" class="button">' . $str_delete . '</a></div>';
+
 PrintPropertyEditRow("securityrangepriority", "Priority", $securityrangepriority, 5, "number", "small");
 PrintPropertyEditRow("securityrangelowerip", "Lower IP", $securityrangelowerip, 30, "ip");
 PrintPropertyEditRow("securityrangeupperip", "Upper IP", $securityrangeupperip, 30, "ip");
 
-function geoIp($ip) {
-	global $obLanguage;
-	if ($ip === '0.0.0.0') return $obLanguage->String('Unknown');
-	$regex = '/(127\.0\.0\.1)|^(10\.)|^(192\.168\.)|^(172\.(1[6-9]|2[0-9]|3[0-1]))/';
-	if (preg_match($regex, $ip)) return $obLanguage->String('Local IP range');
-
-	$pageContent = file_get_contents('http://freegeoip.net/json/' . $ip);
-	$parsedJson  = json_decode($pageContent);
-
-	if(!$parsedJson->country_code)return $obLanguage->String('Unknown');
-		return '<img src="flags/' . $parsedJson->country_code . '.gif" style="margin-right:5px;">' . $parsedJson->country_name;
-}
+if ($securityrangeid>0) {
 ?>
          <p><?php EchoTranslation("Country") ?></p>
-         <?php echo geoIp($securityrangelowerip) ?>
+         <b><?php echo GeoIp($securityrangelowerip) ?></b>
  <?php
+}
+
 PrintCheckboxRow("Expires", "Expires", $Expires);
 PrintPropertyEditRow("ExpiresTime", "Use ISO date format (YYYY-MM-DD HH:MM:SS)", $ExpiresTime);
 ?>
@@ -145,7 +144,7 @@ PrintCheckboxRow("RequireSSLTLSForAuth", "Require SSL/TLS for authentication", $
 ?>
         </div>
 <?php
-PrintSaveButton();
+PrintSaveButton(null, null, '?page=securityranges');
 ?>
       </form>
     </div>

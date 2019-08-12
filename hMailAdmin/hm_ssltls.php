@@ -26,7 +26,7 @@ $TlsVersion13Enabled = $obSettings->TlsVersion13Enabled;
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Security") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "ssltls");

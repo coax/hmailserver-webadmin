@@ -4,22 +4,20 @@ if (!defined('IN_WEBADMIN'))
 ?>
         <li class="label"><?php EchoTranslation("Main") ?></li>
 <?php
-//user
+//User only
 if (hmailGetAdminLevel() == 0) {
 	$domainname = hmailGetUserDomainName($username);
 
 	$obDomain = $obBaseApp->Domains->ItemByName($domainname);
 	$obAccounts = $obDomain->Accounts;
-
 	$obAccount = $obAccounts->ItemByAddress($username);
-
 	$accountaddress = $obAccount->Address;
 	$accountaddress = str_replace("'", "\'", $accountaddress);
 	$accountaddress = PreprocessOutput($accountaddress);
 
 	$url = htmlentities("?page=account&action=edit&accountid=" . $obAccount->ID . "&domainid=" . $obDomain->ID);
 
-	//webmail parser
+	//Webmail parser
 	if(isset($hmail_config['webmail']))
 		$Webmail = str_replace("[domain]", $domainname, $hmail_config['webmail']);
 ?>
@@ -29,30 +27,51 @@ if (hmailGetAdminLevel() == 0) {
             <li><a href="?page=account_externalaccounts&accountid=<?php echo $obAccount->ID ?>&domainid=<?php echo $obDomain->ID ?>"><?php EchoTranslation("External accounts") ?></a></li>
           </ul>
         </li>
-        <?php if(isset($Webmail)) { ?><li class="webmail"><a href="<?php echo $Webmail ?>"><?php EchoTranslation("Webmail") ?></a></li><?php } ?>
+        <?php if(isset($Webmail)) { ?><li class="webmail"><a href="<?php echo $Webmail ?>" target="_blank"><?php EchoTranslation("Webmail") ?></a></li><?php } ?>
 <?php
 }
 
-//domain
+//Domain admin
 if (hmailGetAdminLevel() == 1) {
 	$domainname = hmailGetUserDomainName($username);
 	$obDomain = $obBaseApp->Domains->ItemByName($domainname);
 
 	GetStringForDomain($obDomain);
+
+	$obAccounts = $obDomain->Accounts;
+	$obAccount = $obAccounts->ItemByAddress($username);
+	$accountaddress = $obAccount->Address;
+	$accountaddress = str_replace("'", "\'", $accountaddress);
+	$accountaddress = PreprocessOutput($accountaddress);
+
+	$url = htmlentities("?page=account&action=edit&accountid=" . $obAccount->ID . "&domainid=" . $obDomain->ID);
+
+	//Webmail parser
+	if(isset($hmail_config['webmail']))
+		$Webmail = str_replace("[domain]", $domainname, $hmail_config['webmail']);
+?>
+        <li class="has-children user <?php if (strpos('hm_account,hm_account_externalaccounts', $page) !== false) echo 'active' ?>">
+          <a href="<?php echo $url ?>"><?php echo $accountaddress ?></a>
+          <ul>
+            <li><a href="?page=account_externalaccounts&accountid=<?php echo $obAccount->ID ?>&domainid=<?php echo $obDomain->ID ?>"><?php EchoTranslation("External accounts") ?></a></li>
+          </ul>
+        </li>
+        <?php if(isset($Webmail)) { ?><li class="webmail"><a href="<?php echo $Webmail ?>" target="_blank"><?php EchoTranslation("Webmail") ?></a></li><?php } ?>
+<?php
 }
 
-//admin
+//Admin
 if (hmailGetAdminLevel() == 2) {
 	$obSettings = $obBaseApp->Settings();
 
-	//counters
+	//Counters
 	$Domains = $obBaseApp->Domains();
 	$TotalDomains = $Domains->Count();
 
 	$Rules = $obBaseApp->Rules();
 	$TotalRules = $Rules->Count();
 
-	$Blacklists = $obSettings->Antispam->DNSBlackLists();
+	$Blacklists = $obSettings->AntiSpam->DNSBlackLists();
 	$TotalBlacklists = $Blacklists->Count();
 
 	$IpRanges = $obSettings->SecurityRanges();
@@ -66,8 +85,13 @@ if (hmailGetAdminLevel() == 2) {
 
 	$Ports = $obSettings->TCPIPPorts();
 	$TotalPorts = $Ports->Count();
+
+	$TotalSURBLServers = $obSettings->AntiSpam->SURBLServers->Count();
+	$TotalWhiteListAddresses = $obSettings->AntiSpam->WhiteListAddresses->Count();
+	$TotalSSLCertificates = $obSettings->SSLCertificates->Count();
+
 ?>
-        <li class="status <?php if ($page=='hm_status') echo 'active' ?>"><a href="?page=status"><?php EchoTranslation("Dashboard") ?></a></li>
+        <li class="status <?php if (($page=='hm_status') || ($page=='hm_frontpage')) echo 'active' ?>"><a href="?page=status"><?php EchoTranslation("Dashboard") ?></a></li>
         <li class="has-children domains <?php if (strpos('hm_domains,hm_domain,hm_accounts,hm_account,hm_aliases,hm_aliase,hm_distributionlists,hm_distributionlist,hm_domain_aliasname', $page) !== false) echo 'active' ?>">
           <a href="?page=domains"><?php EchoTranslation("Domains") ?><span class="count"><?php echo $TotalDomains ?></span></a>
           <ul>
@@ -104,9 +128,9 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
               <a href="?page=smtp_antispam" class="more"><?php EchoTranslation("Anti-spam") ?></a>
               <ul>
                 <li><a href="?page=dnsblacklists"><?php EchoTranslation("DNS blacklists") ?><span class="count"><?php echo $TotalBlacklists ?></span></a></li>
-                <li><a href="?page=surblservers"><?php EchoTranslation("SURBL servers") ?></a></li>
+                <li><a href="?page=surblservers"><?php EchoTranslation("SURBL servers") ?><span class="count"><?php echo $TotalSURBLServers ?></span></a></li>
                 <li><a href="?page=greylisting"><?php EchoTranslation("Greylisting") ?></a></li>
-                <li><a href="?page=whitelistaddresses"><?php EchoTranslation("White listing") ?></a></li>
+                <li><a href="?page=whitelistaddresses"><?php EchoTranslation("White listing") ?><span class="count"><?php echo $TotalWhiteListAddresses ?></span></a></li>
               </ul>
             </li>
             <li><a href="?page=smtp_antivirus"><?php EchoTranslation("Anti-virus") ?></a></li>
@@ -114,7 +138,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
             <li class="has-children">
               <a href="#" class="more"><?php EchoTranslation("Advanced") ?></a>
               <ul>
-                <li><a href="?page=sslcertificates"><?php EchoTranslation("SSL certificates") ?></a></li>
+                <li><a href="?page=sslcertificates"><?php EchoTranslation("SSL certificates") ?><span class="count"><?php echo $TotalSSLCertificates ?></span></a></li>
                 <li><a href="?page=autoban"><?php EchoTranslation("Auto ban") ?></a></li>
                 <li><a href="?page=securityranges"><?php EchoTranslation("IP Ranges") ?><span class="count"><?php echo $TotalIpRanges ?></span></a></li>
                 <li><a href="?page=incomingrelays"><?php EchoTranslation("Incoming relays") ?><span class="count"><?php echo $TotalRelays ?></span></a></li>
@@ -131,6 +155,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
         <li class="has-children utilities">
           <a href="#"><?php EchoTranslation("Utilities") ?></a>
           <ul>
+            <li><a href="?page=blacklistcheck"><?php EchoTranslation("Blacklist check") ?></a></li>
             <li><a href="?page=backup"><?php EchoTranslation("Backup") ?></a></li>
             <li><a href="?page=diagnostics"><?php EchoTranslation("Diagnostics") ?></a></li>
           </ul>
@@ -148,6 +173,9 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
         <li class="logs <?php if ($page=='hm_logviewer') echo 'active' ?>">
           <a href="?page=logviewer"><?php EchoTranslation("Log parser") ?></a>
         </li>
+        <li class="dmarc <?php if ($page=='hm_dmarcreports') echo 'active' ?>">
+          <a href="?page=dmarcreports"><?php EchoTranslation("DMARC reports") ?></a>
+        </li>
         <li class="label"><?php EchoTranslation("Action") ?></li>
 <?php
 $Action = hmailGetVar("action","");
@@ -164,19 +192,19 @@ $ServerState = $obBaseApp->ServerState();
 
 switch($ServerState) {
 	case 1:
-		$state = $obLanguage->String("Stopped");
+		$state = Translate("Stopped");
 		break;
 	case 2:
-		$state = $obLanguage->String("Starting");
+		$state = Translate("Starting");
 		break;
 	case 3:
-		$state = $obLanguage->String("Running");
+		$state = Translate("Running");
 		break;
 	case 4:
-		$state = $obLanguage->String("Stopping");
+		$state = Translate("Stopping");
 		break;
 	default:
-		$state = $obLanguage->String("Unknown");
+		$state = Translate("Unknown");
 		break;
 }
 
@@ -184,16 +212,16 @@ switch($ServerState) {
 	case 1:
 	case 4:
 		$controlaction = 1;
-		$controlbutton = $obLanguage->String("Resume");
+		$controlbutton = Translate("Resume");
 		break;
 	case 2:
 	case 3:
 		$controlaction = 0;
-		$controlbutton = $obLanguage->String("Pause");
+		$controlbutton = Translate("Pause");
 		break;
 	default:
 		$controlaction = 0;
-		$controlbutton = $obLanguage->String("Unknown");
+		$controlbutton = Translate("Unknown");
 		break;
 }
 ?>
@@ -224,8 +252,7 @@ function GetStringForDomain($Domain) {
 	if (hmailGetVar("domainid")==$DomainId) $DomainName = '<span class="active">' . $DomainName . '</span>';
 
 	if ($current_domainid != $DomainId && hmailGetAdminLevel() == ADMIN_SERVER) {
-		// If the user is logged on as a system administrator, only show accounts
-		// for the currently selected domain.
+		//If the user is logged on as a system administrator, only show accounts for the currently selected domain.
 		echo '            <li><a href="?page=domain&action=edit&domainid=' . $DomainId . '">' . $DomainName . '</a></li>' . PHP_EOL;
 		return;
 	} else

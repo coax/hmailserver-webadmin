@@ -50,7 +50,7 @@ function ClearMessageIndexingCache() {
 </script>
     <div class="box medium">
       <h2><?php EchoTranslation("Performance") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form" name="mainform">
+      <form action="index.php" method="post" class="form" name="mainform">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "performance");
@@ -87,28 +87,32 @@ PrintCheckboxRow("cacheenabled", "Enabled", $cacheenabledchecked);
             <td><?php echo $cachedistributionlisthitrate?></td>
           </tr>
         </table>
-        <h3><?php EchoTranslation("Threading")?></h3>
+        <h3><a href="#"><?php EchoTranslation("Threading") ?></a></h3>
+        <div class="hidden">
 <?php
 PrintPropertyEditRow("tcpipthreads", "Max number of command threads", $tcpipthreads, 11, "number", "small");
 PrintPropertyEditRow("maxdeliverythreads", "Delivery threads", $maxdeliverythreads, 11, "number", "small");
 PrintPropertyEditRow("MaxAsynchronousThreads", "Max number of asynchronous task threads", $MaxAsynchronousThreads, 11, "number", "small");
 ?>
-        <p><?php EchoTranslation("Worker thread priority")?></p>
-        <select name="workerthreadpriority" class="medium">
-          <option value="2" <?php if ($workerthreadpriority == "2") echo "selected";?> >Highest</option>
-          <option value="1" <?php if ($workerthreadpriority == "1") echo "selected";?> >Above normal</option>
-          <option value="0" <?php if ($workerthreadpriority == "0") echo "selected";?> >Normal</option>
-          <option value="-1" <?php if ($workerthreadpriority == "-1") echo "selected";?> >Below normal</option>
-          <option value="-2" <?php if ($workerthreadpriority == "-2") echo "selected";?> >Lowest</option>
-          <option value="-15" <?php if ($workerthreadpriority == "-15") echo "selected";?> >Idle</option>
-        </select>
-        <h3><?php EchoTranslation("Message indexing")?></h3>
+          <p><?php EchoTranslation("Worker thread priority")?></p>
+          <select name="workerthreadpriority" class="medium">
+            <option value="2" <?php if ($workerthreadpriority == "2") echo "selected";?> >Highest</option>
+            <option value="1" <?php if ($workerthreadpriority == "1") echo "selected";?> >Above normal</option>
+            <option value="0" <?php if ($workerthreadpriority == "0") echo "selected";?> >Normal</option>
+            <option value="-1" <?php if ($workerthreadpriority == "-1") echo "selected";?> >Below normal</option>
+            <option value="-2" <?php if ($workerthreadpriority == "-2") echo "selected";?> >Lowest</option>
+            <option value="-15" <?php if ($workerthreadpriority == "-15") echo "selected";?> >Idle</option>
+          </select>
+        </div>
+        <h3><a href="#"><?php EchoTranslation("Message indexing") ?></a></h3>
+        <div class="hidden">
 <?php
 PrintCheckboxRow("MessageIndexingEnabled", "Enabled", $MessageIndexingEnabled);
 ?>
-        <p><?php EchoTranslation("Status")?></p>
-        <?php echo $TotalIndexedCount . " / ". $TotalMessageCount;?>
-        <p><a href="#" onclick="ClearMessageIndexingCache();" class="button"><?php EchoTranslation("Clear")?></a></p>
+          <p><?php EchoTranslation("Status") ?></p>
+          <b><?php echo $TotalIndexedCount . " / ". $TotalMessageCount; ?></b>
+          <div class="buttons bottom"><a href="#" onclick="ClearMessageIndexingCache();" class="button"><?php EchoTranslation("Clear") ?></a></div>
+        </div>
 <?php
 PrintSaveButton();
 ?>

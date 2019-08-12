@@ -25,7 +25,6 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
         <div><span><?php echo $ServerVersion ?></span><br><?php EchoTranslation("version") ?></div>
       </div>
     </div>
-
     <div class="box">
       <h2><?php EchoTranslation("Processed messages") ?></h2>
       <div id="processed" style="margin:30px auto; width:150px; height:150px;"></div>
@@ -35,7 +34,6 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
         <div><span id="spam"><?php echo $MessagesSpam ?></span><br><?php EchoTranslation("Spam") ?></div>
       </div>
     </div>
-
     <div class="box">
       <h2><?php EchoTranslation("Current sessions") ?></h2>
       <div id="sessions" style="margin:30px auto; width:150px; height:150px;"></div>
@@ -45,11 +43,10 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
         <div><span id="imap"><?php echo $SessionsImap ?></span><br>IMAP</div>
       </div>
     </div>
-
     <div class="box large">
-      <h2><?php EchoTranslation("Delivery queue") ?></h2>
-      <div style="margin:0 18px;">
-        <table class="queue" style="width:99%;">
+      <h2><?php EchoTranslation("Delivery queue") ?> <span>(<span id="count">0</span>)</span></h2>
+      <div style="position:relative; max-height:455px; overflow-y:auto;">
+        <table id="queue">
           <thead>
             <tr>
               <th>ID</th>
@@ -60,40 +57,16 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
               <th><?php EchoTranslation("Retries") ?></th>
             </tr>
           </thead>
-        </table>
-      </div>
-      <div style="margin:0 18px 18px 18px; max-height:400px; overflow-y:scroll;">
-        <table class="queue" id="queue">
           <tbody>
-<?php
-$QueueCount = 0;
-if (strlen($MessagesUndelivered) > 0) {
-	$list = explode("\r\n", $MessagesUndelivered);
-	$QueueCount = count($list);
-
-	foreach ($list as $line) {
-		$columns = explode("\t", $line);
-
-		if (count($columns)>4) {
-			$columns[4] = makeIsoDate($columns[4]);
-			if ($columns[4] <= "1970-01-01 01:00:00") $columns[4] = "ASAP";
-
-			echo '            <tr>
-              <td><a href="modern/view.php?q=' . $columns[5] . '" rel="facebox">' . $columns[0] . '</a></td>
-              <td>' . makeIsoDate($columns[1]) . '</td>
-              <td>' . PreprocessOutput($columns[2]) . '</td>
-              <td>' . PreprocessOutput($columns[3]) . '</td>
-              <td>' . $columns[4] . '</td>
-              <td>' . $columns[7] . '</td>
-            </tr>' . PHP_EOL;
-		}
-	}
-}
-?>
           </tbody>
         </table>
       </div>
-      <div class="grey">
-        <div style="width:100%;"><span id="count"><?php echo $QueueCount ?></span><br><?php EchoTranslation("messages in queue") ?></div>
+    </div>
+    <div class="box large">
+      <h2><?php EchoTranslation("Live logging") ?></h2>
+      <div id="live-logging">
+        <div id="results" style="display:none; height:300px;"></div>
+		<?php $state = isset($_SESSION['livelogging']) && $_SESSION['livelogging'] == 'enabled' ? 'enabled' : 'disabled' ?>
+        <button data-state="<?php echo $state ?>"><?php EchoTranslation(($state=='enabled' ? "Stop" : "Start")) ?></button><div style="display:none; margin-left:18px;"><input type="checkbox" name="autoscroll" id="autoscroll" value="1"><label for="autoscroll"><?php EchoTranslation("Autoscrolling") ?></label></div>
       </div>
     </div>

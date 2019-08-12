@@ -8,7 +8,7 @@ header('Content-Security-Policy: default-src \'none\'; script-src \'self\' \'uns
 header('X-XSS-Protection: 1; mode=block');
 
 if (!file_exists("config.php")) {
-	echo "Please rename config-dist.php to config.php. The file is found in the PHPWebAdmin root folder.";
+	echo "Please rename config-dist.php to config.php. The file is found in the hMailAdmin root folder.";
 	die;
 }
 
@@ -33,7 +33,7 @@ if ($isbackground)
 else
 	$page = "hm_$page.php";
 
-// Check that the page really exists.
+// Check that page really exists
 $page = stripslashes($page);
 $page = basename($page, ".php");
 
@@ -44,19 +44,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $isbackground) {
 	validate_csrf_token_supplied();
 }
 
-// If it's a background page, run here.
+// If it's background page, run here
 if ($isbackground) {
 	include './' . $page . '.php';
-	// Page is run, die now.
+	//Page is run, die now
 	die;
 }
 
 $csrftoken = get_csrf_session_token();
 
-//dynamic documentation link
+// Dynamic documentation link
 $DocumentationLink = 'https://www.hmailserver.com/documentation/latest/?page=reference_' . hmailGetVar("page");
 
-$username = isset($_SESSION['session_username'])?$_SESSION['session_username']:''; //moved from include_treemenu.php
+// Get username for top nav
+$username = isset($_SESSION['session_username']) ? $_SESSION['session_username'] : '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -71,19 +72,20 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
   <script>var hmail_config = {weekStart:<?php echo $hmail_config['datepicker_weekStart'] ?>};</script>
   <script src="js/jquery.js"></script>
   <script src="js/modernizr.js"></script>
-  <script src="js/core.js"></script>
+  <script src="js/core.js?v=<?php echo $hmail_config['version'] ?>"></script>
   <script src="js/timeago.js"></script>
-  <?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script src="js/timeago.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
-  <script src="js/tablesort.js"></script>
+<?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script src="js/timeago.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
+  <script src="js/stupidtable.js"></script>
   <script src="js/facebox.js"></script>
   <script src="js/chartist.js"></script>
   <link href="css/chartist.css" rel="stylesheet">
   <script src="js/chartist-tooltip.js"></script>
   <script src="js/datepicker.js"></script>
-  <?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script src="js/datepicker.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
+  <script src="js/autosize.js"></script>
+<?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script src="js/datepicker.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
   <link rel="stylesheet" href="css/datepicker.css">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/core.css">
+  <link rel="stylesheet" href="css/core.css?v=<?php echo $hmail_config['version'] ?>">
 </head>
 
 <body>
@@ -91,7 +93,7 @@ $username = isset($_SESSION['session_username'])?$_SESSION['session_username']:'
 if (hmail_isloggedin()) {
 ?>
   <header>
-    <a href="index.php" id="logo"><span>hMailServer</span></a>
+    <a href="index.php" class="logo"><span>hMailServer</span></a>
     <nav>
       <ul id="top">
         <li class="has-children account">
@@ -108,22 +110,34 @@ if (hmail_isloggedin()) {
     <div id="sidebar">
       <ul>
 <?php
-//build tree menu
-include "include_treemenu.php";
+	include "include_treemenu.php";
 ?>
       </ul>
-      <a href="impressum.php" rel="facebox" class="impressum">hMailAdmin 1.3</a>
+      <a href="./impressum.php" rel="facebox" class="impressum"><?php
+
+	if (hmailGetAdminLevel() == 2) {
+		if (!isset($_SESSION['version'])) $_SESSION['version'] = Version();
+		$version = $_SESSION['version'];
+		if ($hmail_config['version'] < $version)
+			echo '<span class="warning" style="width:62%; margin:auto;">hMailAdmin ' . $version . ' available</span>';
+		else
+			echo 'About hMailAdmin ' . $hmail_config['version'];
+	}
+	else
+		echo 'About hMailAdmin ' . $hmail_config['version'];
+?></a>
     </div>
     <div id="content">
 <?php
 	include './' . $page . '.php';
+	echo PHP_EOL;
 ?>
     </div>
+  </main>
 <?php
 } else {
 	include "hm_login.php";
 }
 ?>
-  </main>
 </body>
 </html>

@@ -10,7 +10,7 @@ $obAntivirus = $obSettings->AntiVirus();
 
 $action = hmailGetVar("action","");
 
-$str_delete = $obLanguage->String("Remove");
+$str_delete = Translate("Remove");
 
 if($action == "save") {
 	$obAntivirus->Action = hmailGetVar("avaction",0);
@@ -57,7 +57,7 @@ $avactiondeletattachmentschecked = hmailCheckedIf1($avaction == 1);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Anti-virus") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "smtp_antivirus");
@@ -76,8 +76,8 @@ PrintCheckboxRow("clamwinenabled", "Enabled", $clamwinenabled);
 PrintPropertyEditRow("clamwinexecutable", "ClamScan executable", $clamwinexecutable);
 PrintPropertyEditRow("clamwindbfolder", "Path to ClamScan database", $clamwindbfolder);
 ?>
-          <p><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('ClamWin');"></p>
-          <div id="ClamWinTestResult"></div>
+          <div class="buttons bottom"><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('ClamWin');"></div>
+          <div id="ClamWinTestResult" class="bottom"></div>
         </div>
         <h3><a href="#">ClamAV</a></h3>
         <div class="hidden">
@@ -86,8 +86,8 @@ PrintCheckboxRow("ClamAVEnabled", "Use ClamAV", $ClamAVEnabled);
 PrintPropertyEditRow("ClamAVHost", "Host name", $ClamAVHost);
 PrintPropertyEditRow("ClamAVPort", "TCP/IP port", $ClamAVPort, 5, "number");
 ?>
-          <p><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('ClamAV');"></p>
-          <div id="ClamAVTestResult"></div>
+          <div class="buttons bottom"><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('ClamAV');"></div>
+          <div id="ClamAVTestResult" class="bottom"></div>
         </div>
         <h3><a href="#"><?php EchoTranslation("External virus scanner")?></a></h3>
         <div class="hidden">
@@ -96,8 +96,8 @@ PrintCheckboxRow("customscannerenabled", "Enabled", $customscannerenabled);
 PrintPropertyEditRow("customscannerexecutable", "Scanner executable", $customscannerexecutable, 60);
 PrintPropertyEditRow("customscannerreturnvalue", "Return value", $customscannerreturnvalue, 5, "number");
 ?>
-          <p><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('External');"></p>
-          <div id="ExternalTestResult"></div>
+          <div class="buttons bottom"><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('External');"></div>
+          <div id="ExternalTestResult" class="bottom"></div>
         </div>
         <h3><a href="#"><?php EchoTranslation("Block attachments")?></a></h3>
         <div class="hidden">
@@ -116,10 +116,10 @@ PrintCheckboxRow("EnableAttachmentBlocking", "Block attachments with the followi
 <?php
 $blockedAttachments = $obAntivirus->BlockedAttachments;
 
-$str_yes = $obLanguage->String("Yes");
-$str_no = $obLanguage->String("No");
-$str_delete = $obLanguage->String("Remove");
-$str_confirm = $obLanguage->String("Confirm delete");
+$str_yes = Translate("Yes");
+$str_no = Translate("No");
+$str_delete = Translate("Remove");
+$str_confirm = Translate("Confirm delete");
 
 for ($i = 0; $i < $blockedAttachments->Count; $i++) {
 	$blockedAttachment = $blockedAttachments->Item($i);
@@ -136,7 +136,7 @@ for ($i = 0; $i < $blockedAttachments->Count; $i++) {
 ?>
           </tbody>
         </table>
-        <div class="buttons center"><a href="?page=blocked_attachment&action=add" class="button"><?php EchoTranslation("Add new extension") ?></a></div>
+        <div class="buttons center bottom"><a href="?page=blocked_attachment&action=add" class="button"><?php EchoTranslation("Add new extension") ?></a></div>
         </div>
 <?php
 PrintSaveButton();

@@ -12,18 +12,18 @@ $messagetext = $obServerMessage->Text;
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Server message") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_servermessage_save");
 PrintHidden("messageid", "$messageid");
 ?>
-        <p><?php EchoTranslation("Name")?></p>
-        <?php echo PreprocessOutput($messagename)?>
+        <p><?php EchoTranslation("Name") ?></p>
+        <b><?php echo PreprocessOutput($messagename) ?></b>
 <?php
-PrintPropertyAreaRow("messagetext", "Message text", $messagetext, 20, 100);
+PrintPropertyAreaRow("messagetext", "Message text", $messagetext, 10, 100);
 
-PrintSaveButton();
+PrintSaveButton(null, null, '?page=servermessages');
 ?>
       </form>
     </div>

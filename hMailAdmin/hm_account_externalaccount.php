@@ -19,7 +19,6 @@ $obAccount = $obDomain->Accounts->ItemByDBID($accountid);
 
 if ($action == "edit") {
 	$obFetchAccount = $obAccount->FetchAccounts->ItemByDBID($faid);
-
 	$Enabled = $obFetchAccount->Enabled;
 	$Name = $obFetchAccount->Name;
 	$DaysToKeepMessages = $obFetchAccount->DaysToKeepMessages;
@@ -35,7 +34,7 @@ if ($action == "edit") {
 	$EnableRouteRecipients = $obFetchAccount->EnableRouteRecipients;
 	$ConnectionSecurity = $obFetchAccount->ConnectionSecurity;
 } else {
-	$Enabled = 1;
+	$Enabled = 0;
 	$Name = "";
 	$DaysToKeepMessages = 0;
 	$MinutesBetweenFetch = 30;
@@ -61,7 +60,7 @@ if ($DaysToKeepMessages > 0)
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("External account") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_account_externalaccount_save");
@@ -70,13 +69,11 @@ PrintHidden("faid", $faid);
 PrintHidden("domainid", $domainid);
 PrintHidden("accountid", $accountid);
 
+PrintPropertyEditRow("Name", "Name", $Name, 255, "medium");
 PrintCheckboxRow("Enabled", "Enabled", $Enabled);
 ?>
         <h3><a href="#"><?php EchoTranslation("Server information")?></a></h3>
         <div class="hidden">
-<?php
-PrintPropertyEditRow("Name", "Name", $Name, 255, "medium");
-?>
           <p><?php EchoTranslation("Type")?></p>
           <select name="Type" class="medium">
             <option value="0" selected>POP3</option>
@@ -101,12 +98,13 @@ PrintPasswordEntry("Password", "Password", 255, "medium");
 <?php
 PrintPropertyEditRow("MinutesBetweenFetch", "Minutes between download", $MinutesBetweenFetch, 10, "number", "small");
 PrintCheckboxRow("ProcessMIMERecipients", "Deliver to recipients in MIME headers", $ProcessMIMERecipients);
+echo '          <div style="padding-left:18px;">';
 PrintCheckboxRow("EnableRouteRecipients", "Allow route recipients", $EnableRouteRecipients);
+echo '          </div>';
 PrintCheckboxRow("ProcessMIMEDate", "Retrieve date from Received header", $ProcessMIMEDate);
 PrintCheckboxRow("UseAntiSpam", "Anti-spam", $UseAntiSpam);
 PrintCheckboxRow("UseAntiVirus", "Anti-virus", $UseAntiVirus);
 ?>
-          <p>&nbsp;</p>
           <div style="position:relative;"><input type="radio" name="DaysToKeepMessages" value="-1" id="1" <?php if ($DaysToKeepMessages == -1) echo "checked";?>><label for="1"><?php EchoTranslation("Delete messages immediately")?></label></div>
           <div style="position:relative; display:inline-block;"><input type="radio" name="DaysToKeepMessages" value="" id="3" <?php if ($DaysToKeepMessages > 0) echo "checked";?>><label for="3"><?php EchoTranslation("Delete messages after")?></label></div>
           <input type="text" name="DaysToKeepMessagesValue" value="<?php echo PreprocessOutput($DaysToKeepMessagesValue)?>" class="num small"> <?php EchoTranslation("days")?>

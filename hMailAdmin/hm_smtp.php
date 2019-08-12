@@ -91,7 +91,7 @@ $SMTPConnectionSecurity = $obSettings->SMTPConnectionSecurity == CONNECTION_SECU
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("SMTP") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "smtp");
@@ -103,20 +103,18 @@ PrintPropertyEditRow("maxmessagesize", "Max message size (KB)", $maxmessagesize,
 ?>
         <h3><a href="#"><?php EchoTranslation("Delivery of e-mail")?></a></h3>
         <div class="hidden">
+          <h3><?php EchoTranslation("Delivery of e-mail")?></h3>
 <?php
 PrintPropertyEditRow("smtpnooftries", "Number of retries", $smtpnooftries, 4, "number", "small");
 PrintPropertyEditRow("smtpminutesbetweentry", "Minutes between every retry", $smtpminutesbetweentry, 4, "number", "small");
 PrintPropertyEditRow("HostName", "Local host name", $HostName);
  ?>
-        </div>
-        <h3><a href="#"><?php EchoTranslation("SMTP relayer")?></a></h3>
-        <div class="hidden">
+        <h3><?php EchoTranslation("SMTP relayer")?></a></h3>
 <?php
 PrintPropertyEditRow("smtprelayer", "Remote host name", $smtprelayer);
 PrintPropertyEditRow("smtprelayerport", "Remote TCP/IP port", $smtprelayerport, 11, "number", "small");
-PrintPropertyEditRow("HostName", "Local host name", $HostName);
 PrintCheckboxRow("SMTPRelayerRequiresAuthentication", "Server requires authentication", $SMTPRelayerRequiresAuthentication);
-PrintPropertyEditRow("SMTPRelayerUsername", "Username", $SMTPRelayerUsername, 255, null, "medium");
+PrintPropertyEditRow("SMTPRelayerUsername", "User name", $SMTPRelayerUsername, 255, null, "medium");
 PrintPasswordEntry("SMTPRelayerPassword", "Password", 255, "medium");
 ?>
           <p><?php EchoTranslation("Connection security")?></p>
@@ -132,6 +130,7 @@ PrintPasswordEntry("SMTPRelayerPassword", "Password", 255, "medium");
 <?php
 PrintCheckboxRow("SendStatistics", "Send statistics to hMailServer.com", $SendStatistics);
 ?>
+          <p class="warning bottom"><?php EchoTranslation("If you enable statistics, statistics is sent to hMailServer.com every 1000 message. The only thing included in the statistics is your version number. No personal information or information on your configuration is sent."); ?></p>
         </div>
         <h3><a href="#"><?php EchoTranslation("RFC compliance")?></a></h3>
         <div class="hidden">
@@ -145,13 +144,16 @@ PrintPropertyEditRow("MaxNumberOfInvalidCommands", "Maximum number of invalid co
         </div>
         <h3><a href="#"><?php EchoTranslation("Advanced")?></a></h3>
         <div class="hidden">
+          <h3><?php EchoTranslation("Delivery of e-mail")?></h3>
 <?php
-PrintPropertyEditRow("smtpdeliverybindtoip", "Bind to local IP address", $smtpdeliverybindtoip, 20, "ip");
+PrintPropertyEditRow("smtpdeliverybindtoip", "Bind to local IP address", $smtpdeliverybindtoip, 20, null, "ip");
 PrintPropertyEditRow("maxsmtprecipientsinbatch", "Maximum number of recipients in batch", $maxsmtprecipientsinbatch, 4, "number", "small");
-PrintPropertyEditRow("HostName", "Local host name", $HostName);
 PrintCheckboxRow("SMTPConnectionSecurity", "Use STARTTLS if available", $SMTPConnectionSecurity);
-PrintPropertyEditRow("smtprulelooplimit", "Rule Loop Limit", $smtprulelooplimit, 3, "number", "small");
+?>
+          <h3><?php EchoTranslation("Other")?></h3>
+<?php
 PrintCheckboxRow("AddDeliveredToHeader", "Add Delivered-To header", $AddDeliveredToHeader);
+PrintPropertyEditRow("smtprulelooplimit", "Rule Loop Limit", $smtprulelooplimit, 3, "number", "small");
 PrintPropertyEditRow("MaxNumberOfMXHosts", "Maximum number of recipient hosts", $MaxNumberOfMXHosts, 11, "number", "small");
 ?>
         </div>

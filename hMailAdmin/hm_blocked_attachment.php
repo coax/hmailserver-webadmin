@@ -22,17 +22,17 @@ if ($action == "edit") {
 ?>
     <div class="box">
       <h2><?php EchoTranslation("Blocked attachment") ?></h2>
-      <form action="index.php" method="post" onsubmit="return $(this).validation();" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "background_blocked_attachment_save");
 PrintHidden("action", $action);
 PrintHidden("id", $id);
 
-PrintPropertyEditRow("wildcard", "Wildcard", $wildcard);
-PrintPropertyAreaRow("description", "Description", $description);
+PrintPropertyEditRow("wildcard", "Wildcard", $wildcard, 80, " ");
+PrintPropertyAreaRow("description", "Description", $description, 4);
 
-PrintSaveButton();
+PrintSaveButton(null, null, '?page=smtp_antivirus');
 ?>
       </form>
     </div>
