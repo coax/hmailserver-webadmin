@@ -2,9 +2,9 @@
 return array(
 	0 => 'Logga in',
 	1 => 'Meny',
-	2 => 'Main',
+	2 => 'Huvud',
 	3 => 'Webmail',
-	4 => 'Dashboard',
+	4 => 'Anslagstavla',
 	5 => 'Konfiguration',
 	6 => 'Dokumentation',
 	7 => 'Snabblänkar',
