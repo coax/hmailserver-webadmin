@@ -4,7 +4,7 @@ return array(
 	1 => 'Meny',
 	2 => 'Huvud',
 	3 => 'Webmail',
-	4 => 'Instrumentpanel',
+	4 => 'Anslagstavla',
 	5 => 'Konfiguration',
 	6 => 'Dokumentation',
 	7 => 'Snabblänkar',
