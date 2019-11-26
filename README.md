@@ -3,7 +3,7 @@ hMailAdmin: an hMailServer PHPWebAdmin redesign project
 
 I was delighted when first started using hMailServer on my Windows 2016 server (replaced SmarterMail) but web-interface was punch in the eye so I decided to redesign it. The new layout is fully responsive and free to use/download.
 
-![](http://www.coax.hr/img/hmailserver-redesign.png)
+![](https://i.imgur.com/vwgbXJH.png)
 
 Features
 -----
