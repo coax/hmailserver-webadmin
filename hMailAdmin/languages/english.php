@@ -155,6 +155,8 @@ return array(
 	146 => 'IMAP extension not enabled in php.ini',
 	147 => 'Cannot connect to server',
 	148 => 'DMARC reports are not enabled in config.php',
+	
+	149 => 'You haven\'t added any greylisting white addresses',
 
 	200 => 'Confirm delete',
 );

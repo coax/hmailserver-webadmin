@@ -88,6 +88,7 @@ if (hmailGetAdminLevel() == 2) {
 
 	$TotalSURBLServers = $obSettings->AntiSpam->SURBLServers->Count();
 	$TotalWhiteListAddresses = $obSettings->AntiSpam->WhiteListAddresses->Count();
+	$TotalGreyListWhiteListAddresses = $obSettings->AntiSpam->GreyListingWhiteAddresses->Count();
 	$TotalSSLCertificates = $obSettings->SSLCertificates->Count();
 
 ?>
@@ -129,7 +130,12 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
               <ul>
                 <li><a href="?page=dnsblacklists"><?php EchoTranslation("DNS blacklists") ?><span class="count"><?php echo $TotalBlacklists ?></span></a></li>
                 <li><a href="?page=surblservers"><?php EchoTranslation("SURBL servers") ?><span class="count"><?php echo $TotalSURBLServers ?></span></a></li>
-                <li><a href="?page=greylisting"><?php EchoTranslation("Greylisting") ?></a></li>
+                <li class="has-children">
+					<a href="?page=greylisting" class="more"><?php EchoTranslation("Greylisting") ?></a>
+					<ul>
+						<li><a href="?page=greylistingwhiteaddresses"><?php EchoTranslation("Greylisting White listing") ?><span class="count"><?php echo $TotalGreyListWhiteListAddresses ?></span></a></li>
+					</ul>
+				</li>
                 <li><a href="?page=whitelistaddresses"><?php EchoTranslation("White listing") ?><span class="count"><?php echo $TotalWhiteListAddresses ?></span></a></li>
               </ul>
             </li>

@@ -221,7 +221,8 @@ nav {display:none;}
 	table tbody tr:nth-child(even) {background:#f9fafa;}
 	table tbody tr:hover {background:#f2f2f2;}
 	table th:nth-child(1) {text-indent:10px;}
-	table td a:nth-child(1) {padding-left:10px;}
+	/* table td a:nth-child(1) {padding-left:10px;} */
+	table td:first-child a {padding-left:10px;}
 	table#queue th:nth-child(1), table#queue td:nth-child(1) {width:9%; padding-right:1%;}
 	table#queue th:nth-child(2), table#queue th:nth-child(5), table#queue td:nth-child(2), table#queue td:nth-child(5) {width:15%; padding-right:1%;}
 	table#queue th:nth-child(3), table#queue th:nth-child(4), table#queue td:nth-child(3), table#queue td:nth-child(4) {width:28%; padding-right:1%;}
