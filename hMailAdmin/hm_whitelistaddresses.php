@@ -14,8 +14,8 @@ $Count = $obWhiteListAddresses->Count();
         <thead>
           <tr>
             <th data-sort="string"><?php EchoTranslation("Description")?></th>
-            <th style="width:25%;" data-sort="string"><?php EchoTranslation("Lower IP")?></th>
-            <th style="width:25%;" data-sort="string"><?php EchoTranslation("Upper IP")?></th>
+            <th style="width:25%;" data-sort="ipaddress"><?php EchoTranslation("Lower IP")?></th>
+            <th style="width:25%;" data-sort="ipaddress"><?php EchoTranslation("Upper IP")?></th>
             <th style="width:20%;" data-sort="string"><?php EchoTranslation("E-mail address")?></th>
             <th style="width:32px;" class="no-sort">&nbsp;</th>
           </tr>

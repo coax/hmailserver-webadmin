@@ -20,7 +20,7 @@ $str_confirm = Translate("Confirm delete");
         <thead>
           <tr>
             <th data-sort="string"><?php EchoTranslation("Name")?></th>
-            <th style="width:20%;" data-sort="string"><?php EchoTranslation("IP address") ?></th>
+            <th style="width:20%;" data-sort="ipaddress"><?php EchoTranslation("IP address") ?></th>
             <th style="width:10%;" data-sort="int"><?php EchoTranslation("Priority") ?></th>
             <th style="width:20%;" data-sort="int"><?php EchoTranslation("Expires") ?></th>
             <th style="width:32px;" class="no-sort">&nbsp;</th>

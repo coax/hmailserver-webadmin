@@ -19,6 +19,8 @@ $str_confirm = Translate("Confirm delete");
         <thead>
           <tr>
             <th data-sort="string"><?php EchoTranslation("Name")?></th>
+            <th style="width:25%;" data-sort="ipaddress"><?php EchoTranslation("Lower IP")?></th>
+            <th style="width:25%;" data-sort="ipaddress"><?php EchoTranslation("Upper IP")?></th>
             <th style="width:32px;" class="no-sort">&nbsp;</th>
           </tr>
         </thead>
@@ -28,11 +30,15 @@ if ($Count>0) {
 	for ($i = 0; $i < $Count; $i++) {
 		$obIncomingRelay = $obIncomingRelays->Item($i);
 		$relayname = $obIncomingRelay->Name;
+		$relaylowerip = $obIncomingRelay->LowerIP;
+		$relayupperip = $obIncomingRelay->UpperIP;
 		$relayid = $obIncomingRelay->ID;
 		$relayname = PreprocessOutput($relayname);
 
 	   	echo '          <tr>
             <td><a href="?page=incomingrelay&action=edit&relayid=' . $relayid . '">' . $relayname . '</a></td>
+            <td><a href="?page=incomingrelay&action=edit&relayid=' . $relayid . '">' . $relaylowerip . '</a></td>
+            <td><a href="?page=incomingrelay&action=edit&relayid=' . $relayid . '">' . $relayupperip . '</a></td>
             <td><a href="#" onclick="return Confirm(\'' . $str_confirm . ' <b>' . $relayname . '</b>:\',\'' . $str_yes . '\',\'' . $str_no . '\',\'?page=background_incomingrelay_save&csrftoken=' . $csrftoken . '&action=delete&relayid=' . $relayid . '\');" class="delete" title="' . $str_delete . '">' . $str_delete . '</a></td>
           </tr>' . PHP_EOL;
 	}
