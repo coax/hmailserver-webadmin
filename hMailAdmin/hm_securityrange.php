@@ -9,7 +9,12 @@ $securityrangeid = hmailGetVar("securityrangeid",0);
 $action = hmailGetVar("action","");
 
 $securityrangename = "";
-$securityrangepriority = 100;
+if (preg_match("(5\.[^789].\d+", $obBaseApp->Version)) {
+	$securityrangepriority = 20;
+}
+else {
+	$securityrangepriority = 100;
+}
 $securityrangelowerip = "0.0.0.0";
 $securityrangeupperip = "255.255.255.255";
 
