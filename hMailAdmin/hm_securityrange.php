@@ -9,7 +9,7 @@ $securityrangeid = hmailGetVar("securityrangeid",0);
 $action = hmailGetVar("action","");
 
 $securityrangename = "";
-if (preg_match("(5\.[^789].\d+", $obBaseApp->Version)) {
+if (preg_match("(5\.[^789].\d+)", $obBaseApp->Version)) {
 	$securityrangepriority = 20;
 }
 else {
