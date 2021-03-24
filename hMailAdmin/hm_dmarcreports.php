@@ -126,7 +126,6 @@ function unzip($zipfile)
 {
 	$zip = new ZipArchive;
 	$data = false;
-	$zip->open($zipfile);
 	if ($zip->open($zipfile) === TRUE) {
 		$data = $zip->getFromName($zipfile);
 	}
