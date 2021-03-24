@@ -124,18 +124,13 @@ function save_attachment($inbox, $email_number, $part, $part_number, $folder) {
 
 function unzip($zipfile)
 {
-	$zip = zip_open($zipfile);
-	if (!is_resource($zip))
-		return false;
+	$zip = new ZipArchive;
 	$data = false;
-	$zip_entry = zip_read($zip);
-	if (!$zip_entry)
-		return false;
-	if (zip_entry_open($zip, $zip_entry, 'r')) {
-		$data = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-		zip_entry_close($zip_entry);
+	$zip->open($zipfile);
+	if ($zip->open($zipfile) === TRUE) {
+		$data = $zip->getFromName($zipfile);
 	}
-	zip_close($zip);
+	$zip->close();
 	return $data;
 }
 
