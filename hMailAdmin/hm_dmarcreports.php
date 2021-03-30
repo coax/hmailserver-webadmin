@@ -101,9 +101,11 @@ function save_attachment($inbox, $email_number, $part, $part_number, $folder) {
 				case substr( $filename, -4 ) === '.zip':
 					$tempfile = $folder . '/' . 'temp' . $part_number;
 					file_put_contents($tempfile, $data);
-					if ($data = unzip($tempfile)) {
+					$zip = new ZipArchive;
+					if(!$zip->open($tempfile)){
 						$filename = str_replace('.zip', '.xml', $filename);
-						file_put_contents($folder . '/' . $filename, $data);
+						$zip->extractTo($folder . '/' . $filename);
+						$zip->close();
 					}
 					unlink($tempfile);
 					break;
@@ -120,23 +122,6 @@ function save_attachment($inbox, $email_number, $part, $part_number, $folder) {
 		}
 	}
 	return 0;
-}
-
-function unzip($zipfile)
-{
-	$zip = zip_open($zipfile);
-	if (!is_resource($zip))
-		return false;
-	$data = false;
-	$zip_entry = zip_read($zip);
-	if (!$zip_entry)
-		return false;
-	if (zip_entry_open($zip, $zip_entry, 'r')) {
-		$data = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-		zip_entry_close($zip_entry);
-	}
-	zip_close($zip);
-	return $data;
 }
 
 /* Search directory for reports. */
