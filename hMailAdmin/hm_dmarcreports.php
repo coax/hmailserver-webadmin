@@ -102,9 +102,8 @@ function save_attachment($inbox, $email_number, $part, $part_number, $folder) {
 					$tempfile = $folder . '/' . 'temp' . $part_number;
 					file_put_contents($tempfile, $data);
 					$zip = new ZipArchive;
-					if(!$zip->open($tempfile)){
-						$filename = str_replace('.zip', '.xml', $filename);
-						$zip->extractTo($folder . '/' . $filename);
+					if($zip->open($tempfile)){
+						$zip->extractTo($folder . '/');
 						$zip->close();
 					}
 					unlink($tempfile);
