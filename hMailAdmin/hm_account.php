@@ -174,7 +174,7 @@ PrintCheckboxRow("vacationmessageexpires", "Automatically expire", $VacationMess
           <div class="hidden">
 <?php
 PrintCheckboxRow("forwardenabled", "Enabled", $ForwardEnabled);
-PrintPropertyEditRow("forwardaddress", "Address", $ForwardAddress, 255);
+PrintPropertyEditRow("forwardaddress", "Address", $ForwardAddress, 255, null, "email");
 PrintCheckboxRow("forwardkeeporiginal", "Keep original message", $ForwardKeepOriginal);
 ?>
           </div>
