@@ -535,6 +535,10 @@ $.fn.validation = function() {
 		action = form.attr('action');
 
 	button.prop('disabled', true).addClass('wait').width(width).text('.');
+	
+	if ($('#forwardaddress').length) {
+		$('#forwardaddress').toggleClass( 'req', $('#forwardenabled').is(':checked') );
+	}
 
 	$('.req', this).each(function() {
 		var input = $(this).val();
