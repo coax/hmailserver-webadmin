@@ -73,8 +73,8 @@ PrintPropertyEditRow("MaximumMessageSize", "Maximum message size to virus scan (
         <div class="hidden">
 <?php
 PrintCheckboxRow("clamwinenabled", "Enabled", $clamwinenabled);
-PrintPropertyEditRow("clamwinexecutable", "ClamScan executable", $clamwinexecutable);
-PrintPropertyEditRow("clamwindbfolder", "Path to ClamScan database", $clamwindbfolder);
+PrintPropertyEditRow("clamwinexecutable", "ClamScan executable", $clamwinexecutable, 255);
+PrintPropertyEditRow("clamwindbfolder", "Path to ClamScan database", $clamwindbfolder, 255);
 ?>
           <div class="buttons bottom"><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('ClamWin');"></div>
           <div id="ClamWinTestResult" class="bottom"></div>
@@ -93,7 +93,7 @@ PrintPropertyEditRow("ClamAVPort", "TCP/IP port", $ClamAVPort, 5, "number");
         <div class="hidden">
 <?php
 PrintCheckboxRow("customscannerenabled", "Enabled", $customscannerenabled);
-PrintPropertyEditRow("customscannerexecutable", "Scanner executable", $customscannerexecutable, 60);
+PrintPropertyEditRow("customscannerexecutable", "Scanner executable", $customscannerexecutable, 255);
 PrintPropertyEditRow("customscannerreturnvalue", "Return value", $customscannerreturnvalue, 5, "number");
 ?>
           <div class="buttons bottom"><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('External');"></div>
