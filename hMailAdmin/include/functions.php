@@ -20,11 +20,11 @@ function hmailGetVar($p_varname, $p_defaultvalue = null, $p_isnumeric = false) {
 	} else if (isset($_POST[$p_varname])) {
 		$retval = $_POST[$p_varname];
 	} else if (isset($_REQUEST[$p_varname])) {
-		$retval	= $_REQUEST[$p_varname];
+		$retval = $_REQUEST[$p_varname];
 	}
 
-	//if (get_magic_quotes_gpc())
-		$retval = stripslashes($retval);
+	/*if (get_magic_quotes_gpc())
+		$retval = stripslashes($retval);*/
 
 	if ($p_isnumeric) {
 		$retval = intval($retval);

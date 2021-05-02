@@ -93,7 +93,7 @@ PrintPropertyEditRow("ClamAVPort", "TCP/IP port", $ClamAVPort, 5, "number");
         <div class="hidden">
 <?php
 PrintCheckboxRow("customscannerenabled", "Enabled", $customscannerenabled);
-PrintPropertyEditRow("customscannerexecutable", "Scanner executable", $customscannerexecutable, 60);
+PrintPropertyEditRow("customscannerexecutable", "Scanner executable", $customscannerexecutable);
 PrintPropertyEditRow("customscannerreturnvalue", "Return value", $customscannerreturnvalue, 5, "number");
 ?>
           <div class="buttons bottom"><input type="button" value="<?php EchoTranslation("Test")?>" onclick="return TestScanner('External');"></div>
