@@ -536,8 +536,26 @@ $.fn.validation = function() {
 
 	button.prop('disabled', true).addClass('wait').width(width).text('.');
 	
-	if ($('#forwardaddress').length) {
+	// conditional checks
+	if ($('#forwardenabled').length) {
 		$('#forwardaddress').toggleClass( 'req', $('#forwardenabled').is(':checked') );
+	}
+	if ($('#DKIMSignEnabled').length) {
+		$('#DKIMPrivateKeyFile').toggleClass( 'req', $('#DKIMSignEnabled').is(':checked') );
+		$('#DKIMSelector').toggleClass( 'req', $('#DKIMSignEnabled').is(':checked') );
+	}
+	if ($('#clamwinenabled').length) {
+		$('#clamwinexecutable').toggleClass( 'req', $('#clamwinenabled').is(':checked') );
+		$('#clamwindbfolder').toggleClass( 'req', $('#clamwinenabled').is(':checked') );
+	}
+	if ($('#ClamAVEnabled').length) {
+		$('#ClamAVHost').toggleClass( 'req', $('#ClamAVEnabled').is(':checked') );
+	}
+	if ($('#customscannerenabled').length) {
+		$('#customscannerexecutable').toggleClass( 'req', $('#customscannerenabled').is(':checked') );
+	}
+	if ($('#SpamAssassinEnabled').length) {
+		$('#SpamAssassinHost').toggleClass( 'req', $('#SpamAssassinEnabled').is(':checked') );
 	}
 
 	$('.req', this).each(function() {
