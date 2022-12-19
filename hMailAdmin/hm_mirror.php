@@ -21,7 +21,7 @@ PrintHiddenCsrfToken();
 PrintHidden("page", "mirror");
 PrintHidden("action", "save");
 
-PrintPropertyEditRow("mirroremailaddress", "Mirror e-mail address", $mirroremailaddress, 255, "email");
+PrintPropertyEditRow("mirroremailaddress", "Mirror e-mail address", $mirroremailaddress, 40, "email");
 
 PrintSaveButton();
 ?>
