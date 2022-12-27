@@ -19,7 +19,7 @@ if($action == "save")
 	$obSettings->IMAPIdleEnabled  = hmailGetVar("IMAPIdleEnabled",0);
 	$obSettings->IMAPACLEnabled  = hmailGetVar("IMAPACLEnabled",0);
 
-   if (preg_match("(5\.[^789].\d+)", $obBaseApp->Version)) {
+   if (preg_match("(5\.[789].\d+)", $obBaseApp->Version)) {
       $obSettings->IMAPSASLPlainEnabled  = hmailGetVar("IMAPSASLPlainEnabled",0);
       $obSettings->IMAPSASLInitialResponseEnabled  = hmailGetVar("IMAPSASLInitialResponseEnabled",0);
       $obSettings->IMAPMasterUser  = hmailGetVar("IMAPMasterUser","");
@@ -36,7 +36,7 @@ $IMAPQuotaEnabled = $obSettings->IMAPQuotaEnabled;
 $IMAPIdleEnabled  = $obSettings->IMAPIdleEnabled;
 $IMAPACLEnabled  = $obSettings->IMAPACLEnabled;
 
-if (preg_match("(5\.[^789].\d+)", $obBaseApp->Version)) {
+if (preg_match("(5\.[789].\d+)", $obBaseApp->Version)) {
    $IMAPSASLPlainEnabled  = $obSettings->IMAPSASLPlainEnabled;
    $IMAPSASLInitialResponseEnabled  = $obSettings->IMAPSASLInitialResponseEnabled;
    $IMAPMasterUser  = $obSettings->IMAPMasterUser;
@@ -63,7 +63,7 @@ PrintCheckboxRow("IMAPSortEnabled", "IMAP Sort", $IMAPSortEnabled);
 PrintCheckboxRow("IMAPQuotaEnabled", "IMAP Quota", $IMAPQuotaEnabled);
 PrintCheckboxRow("IMAPIdleEnabled", "IMAP Idle", $IMAPIdleEnabled);
 PrintCheckboxRow("IMAPACLEnabled", "IMAP ACL", $IMAPACLEnabled);
-if (preg_match("(5\.[^789].\d+)", $obBaseApp->Version)) {
+if (preg_match("(5\.[789].\d+)", $obBaseApp->Version)) {
    PrintCheckboxRow("IMAPSASLPlainEnabled", "SASL Plain", $IMAPSASLPlainEnabled);
    PrintCheckboxRow("IMAPSASLInitialResponseEnabled", "SASL Initial Client Response", $IMAPSASLInitialResponseEnabled);
    PrintPropertyEditRow("IMAPMasterUser", "IMAP Master user", $IMAPMasterUser);
