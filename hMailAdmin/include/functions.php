@@ -166,12 +166,17 @@ function PrintPasswordEntry($name, $caption, $length = 20, $class = "") {
 	echo '          <p>' . $caption . '</p><input type="password" name="' . $name . '" id="' . $name . '" size="' . $length . '" class="' . $class . '" autocomplete="off">' . PHP_EOL;
 }
 
-function PrintCheckboxRow($name, $caption, $checked) {
+function PrintCheckboxRow($name, $caption, $checked, $disabled = false) {
 	global $obLanguage;
 	$caption = $obLanguage->String($caption);
 	$checked_text = hmailCheckedIf1($checked);
 
-	echo '          <p><input type="checkbox" name="' . $name . '" id="' . $name . '" value="1" ' . $checked_text . '><label for="' . $name . '">' . $caption . '</label></p>' . PHP_EOL;
+	$disabledstr = "";
+	if ($disabled){
+		$disabledstr = " disabled ";
+	}
+
+	echo '          <p><input type="checkbox"' . $disabledstr . 'name="' . $name . '" id="' . $name . '" value="1" ' . $checked_text . '><label for="' . $name . '">' . $caption . '</label></p>' . PHP_EOL;
 }
 
 function PrintLargeTableHeader($caption) {
