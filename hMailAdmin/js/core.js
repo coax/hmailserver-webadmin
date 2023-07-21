@@ -595,7 +595,7 @@ function TestScanner(check) {
 			csrftoken = $('[name=csrftoken]').val();
 			exe = $('#customscannerexecutable').val();
 			val = $('#customscannerreturnvalue').val();
-			url = 'index.php?page=background_ajax_virustest&TestType=External&csrftoken=' + csrftoken + '&Executable=' + exe + '&ReturnValue=' + val;
+			url = 'index.php?page=background_ajax_virustest&TestType=External&csrftoken=' + csrftoken + '&Executable=' + encodeURIComponent(exe) + '&ReturnValue=' + val;
 			CallAjax(url, result);
 			break;
 		case 'SpamAssassin':
