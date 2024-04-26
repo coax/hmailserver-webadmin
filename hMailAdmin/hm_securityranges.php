@@ -60,7 +60,7 @@ if ($Count>0) {
 		$LowerIp = $obSecurityRange->LowerIP;
 
 		echo '          <tr>
-            <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . (strpos($securityrangename,'Auto-ban:')!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
+            <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . ($obSecurityRange->Expires!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
             <td>' . $LowerIp . '</td>
             <td>' . $securityrangepriority . '</td>
             <td data-sort-value="' . strtotime($obSecurityRange->ExpiresTime) . '">' . $ExpiresTime . '</td>
