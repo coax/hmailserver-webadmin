@@ -557,6 +557,9 @@ $.fn.validation = function() {
 	if ($('#SpamAssassinEnabled').length) {
 		$('#SpamAssassinHost').toggleClass( 'req', $('#SpamAssassinEnabled').is(':checked') );
 	}
+    if ($('#DistributionListMode').length) {
+        $('#RequireSenderAddress').toggleClass( 'req', $('#DistributionListMode').find(":selected").val() == 2);
+    }
 
 	$('.req', this).each(function() {
 		var input = $(this).val();
