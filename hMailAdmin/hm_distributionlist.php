@@ -63,32 +63,10 @@ PrintCheckboxRow("listactive", "Enabled", $listactive);
             <option value="2"<?php if ($Mode == 2) echo " selected";?>><?php EchoTranslation("Announcements - Only allow messages from the following address:") ?></option>
           </select>
 <?php
-PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 255, ($Mode == 2) == 1 ? 'email' : null);
+PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 255, null, ($Mode == 2) == 1 ? 'email' : null);
 PrintCheckboxRow("listrequiresmtpauth", "Require SMTP authentication", $listrequiresmtpauth);
 ?>
         </div>
-        <script>
-            $(function() {
-                var hide = <?php echo ($Mode == 2) == 0 ? 'true' : 'false' ?>;
-                if (hide) {
-                    $("#RequireSenderAddress").hide(); 
-                    $("#RequireSenderAddress").removeAttr('checktype');                
-                    $("#RequireSenderAddress").removeClass("email");
-                }
-                $( "select[name='Mode']" ).on( "change", function() {
-                  if ( $(this).val() != '2') {    
-                    $("#RequireSenderAddress").hide();  
-                    $("#RequireSenderAddress").removeAttr('checktype');     
-                    $("#RequireSenderAddress").removeClass("email");
-                  }
-                  else {
-                    $("#RequireSenderAddress").show();  
-                    $("#RequireSenderAddress").attr('checktype', 'email');
-                    $("#RequireSenderAddress").addClass("email");
-                  }
-                });
-            });
-        </script>    
 <?php
 if ($action=='edit') {
 ?>

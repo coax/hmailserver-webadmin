@@ -404,6 +404,23 @@ jQuery(document).ready(function() {
 		});
 	}
 
+    // distributionlists
+    if ($('#DistributionListMode').length) {
+        if ($('#DistributionListMode').find(':selected').val() != 2) {
+            $('RequireSenderAddress').hide();
+            $('#RequireSenderAddress').removeClass('email');
+        }
+        $('select[name="Mode"]').on('change', function() {
+            if ($(this).val() != '2') {
+                $('#RequireSenderAddress').hide();
+                $('#RequireSenderAddress').removeClass('email');
+            } else {
+                $('#RequireSenderAddress').show();
+                $('#RequireSenderAddress').addClass('email');
+            }
+        });
+    }
+
 /*
 	// abandoned idea, onclick loads domain
 	$('.domain').on('click', function(){
@@ -557,9 +574,9 @@ $.fn.validation = function() {
 	if ($('#SpamAssassinEnabled').length) {
 		$('#SpamAssassinHost').toggleClass( 'req', $('#SpamAssassinEnabled').is(':checked') );
 	}
-    if ($('#DistributionListMode').length) {
-        $('#RequireSenderAddress').toggleClass( 'req', $('#DistributionListMode').find(":selected").val() == 2);
-    }
+	if ($('#DistributionListMode').length) {
+		$('#RequireSenderAddress').toggleClass( 'req', $('#DistributionListMode').find(":selected").val() == 2);
+	}
 
 	$('.req', this).each(function() {
 		var input = $(this).val();
@@ -620,7 +637,7 @@ function TestScanner(check) {
 			csrftoken = $('[name=csrftoken]').val();
 			exe = $('#customscannerexecutable').val();
 			val = $('#customscannerreturnvalue').val();
-			url = 'index.php?page=background_ajax_virustest&TestType=External&csrftoken=' + csrftoken + '&Executable=' + exe + '&ReturnValue=' + val;
+			url = 'index.php?page=background_ajax_virustest&TestType=External&csrftoken=' + csrftoken + '&Executable=' + encodeURIComponent(exe) + '&ReturnValue=' + val;
 			CallAjax(url, result);
 			break;
 		case 'SpamAssassin':
