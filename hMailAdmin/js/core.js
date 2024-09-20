@@ -408,15 +408,12 @@ jQuery(document).ready(function() {
     if ($('#DistributionListMode').length) {
         if ($('#DistributionListMode').find(':selected').val() != 2) {
             $('RequireSenderAddress').hide();
-            $('#RequireSenderAddress').removeClass('email');
         }
         $('select[name="Mode"]').on('change', function() {
             if ($(this).val() != '2') {
                 $('#RequireSenderAddress').hide();
-                $('#RequireSenderAddress').removeClass('email');
             } else {
                 $('#RequireSenderAddress').show();
-                $('#RequireSenderAddress').addClass('email');
             }
         });
     }

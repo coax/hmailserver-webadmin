@@ -63,7 +63,7 @@ PrintCheckboxRow("listactive", "Enabled", $listactive);
             <option value="2"<?php if ($Mode == 2) echo " selected";?>><?php EchoTranslation("Announcements - Only allow messages from the following address:") ?></option>
           </select>
 <?php
-PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 255, null, ($Mode == 2) == 1 ? 'email' : null);
+PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 255, null, "email");
 PrintCheckboxRow("listrequiresmtpauth", "Require SMTP authentication", $listrequiresmtpauth);
 ?>
         </div>
