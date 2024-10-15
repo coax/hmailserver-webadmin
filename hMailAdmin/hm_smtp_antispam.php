@@ -28,7 +28,8 @@ if($action == "save") {
 	$antiSpamSettings->UseMXChecksScore = hmailGetVar("usemxchecksscore",0);
 	$antiSpamSettings->CheckHostInHelo = hmailGetVar("checkhostinhelo", 0);
 	$antiSpamSettings->CheckHostInHeloScore = hmailGetVar("checkhostinheloscore", 0);
-
+	//$antiSpamSettings->CheckPTR = hmailGetVar("checkptr", 0);
+	//$antiSpamSettings->CheckPTRScore = hmailGetVar("checkptrscore", 0);
 
 	$antiSpamSettings->AddHeaderSpam = hmailGetVar("AddHeaderSpam", 0);
 	$antiSpamSettings->AddHeaderReason = hmailGetVar("AddHeaderReason", 0);
@@ -56,6 +57,8 @@ $usemxchecks = $antiSpamSettings->UseMXChecks;
 $usemxchecksscore = $antiSpamSettings->UseMXChecksScore;
 $checkhostinhelo = $antiSpamSettings->CheckHostInHelo;
 $checkhostinheloscore = $antiSpamSettings->CheckHostInHeloScore;
+//$checkptr = $antiSpamSettings->CheckPTR;
+//$checkptrscore = $antiSpamSettings->CheckPTRScore;
 
 $DKIMVerificationEnabled = $antiSpamSettings->DKIMVerificationEnabled;
 $DKIMVerificationFailureScore = $antiSpamSettings->DKIMVerificationFailureScore;
@@ -95,6 +98,8 @@ PrintCheckboxRow("checkhostinhelo", "Check host in the HELO command", $checkhost
 PrintPropertyEditRow("checkhostinheloscore", "Score", $checkhostinheloscore, 4, "number", "small");
 PrintCheckboxRow("usemxchecks", "Check that sender has DNS-MX records", $usemxchecks);
 PrintPropertyEditRow("usemxchecksscore", "Score", $usemxchecksscore, 4, "number", "small");
+//PrintCheckboxRow("checkptr", "Check rDNS/PTR", $checkptr);
+//PrintPropertyEditRow("checkptrscore", "Score", $checkptrscore, 4, "number", "small");
 PrintCheckboxRow("DKIMVerificationEnabled", "Verify DKIM-Signature header", $DKIMVerificationEnabled);
 PrintPropertyEditRow("DKIMVerificationFailureScore", "Score", $DKIMVerificationFailureScore, 4, "number", "small");
 ?>

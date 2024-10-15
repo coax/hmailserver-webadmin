@@ -166,12 +166,17 @@ function PrintPasswordEntry($name, $caption, $length = 20, $class = "") {
 	echo '          <p>' . $caption . '</p><input type="password" name="' . $name . '" id="' . $name . '" size="' . $length . '" class="' . $class . '" autocomplete="off">' . PHP_EOL;
 }
 
-function PrintCheckboxRow($name, $caption, $checked) {
+function PrintCheckboxRow($name, $caption, $checked, $disabled = false) {
 	global $obLanguage;
 	$caption = $obLanguage->String($caption);
 	$checked_text = hmailCheckedIf1($checked);
 
-	echo '          <p><input type="checkbox" name="' . $name . '" id="' . $name . '" value="1" ' . $checked_text . '><label for="' . $name . '">' . $caption . '</label></p>' . PHP_EOL;
+	$disabledstr = "";
+	if ($disabled) {
+		$disabledstr = " disabled ";
+	}
+
+	echo '          <p><input type="checkbox"' . $disabledstr . 'name="' . $name . '" id="' . $name . '" value="1" ' . $checked_text . '><label for="' . $name . '">' . $caption . '</label></p>' . PHP_EOL;
 }
 
 function PrintLargeTableHeader($caption) {
@@ -336,10 +341,34 @@ function GeoIp($ip) {
 	$regex = '/(127\.0\.0\.1)|^(10\.)|^(192\.168\.)|^(169\.254\.)|^(172\.(1[6-9]|2[0-9]|3[0-1]))/';
 	if (preg_match($regex, $ip)) return Translate('Local IP range');
 
-	$json = file_get_contents('https://extreme-ip-lookup.com/json/' . $ip);
-	$parsed = json_decode($json);
+	set_error_handler(function() { /* Ignore errors */ });
 
-	if(!$parsed->countryCode) return Translate('Unknown');
-	return '<p><img src="flags/' . $parsed->countryCode . '.gif" style="margin-right:5px;">' . $parsed->country . '</p>';
+	try {
+		$json = file_get_contents('http://ip-api.com/json/' . $ip . '?fields=country,countryCode');
+		$parsed = json_decode($json);
+		if(!isset($parsed->countryCode)) return Translate('Unknown');
+		return '<p><img src="flags/' . $parsed->countryCode . '.gif" style="margin-right:5px;">' . $parsed->country . '</p>';
+	} catch (Exception $e) {
+		// Handle the error if necessary
+	}
+
+	restore_error_handler();
+}
+
+// Breadcrumbs
+function Breadcrumbs($DomainId = null, $AccountId = null) {
+	if ($DomainId) {
+		global $obBaseApp;
+		$obDomain = $obBaseApp->Domains->ItemByDBID($DomainId);
+		$DomainName = $obDomain->Name;
+		echo '    <div class="breadcrumbs"><a href="?page=domains">' . Translate("Domains") . '</a> &gt; <a href="?page=domain&action=edit&domainid=' . $DomainId . '">' . $DomainName . '</a>';
+		if ($AccountId) {
+			$obAccount = $obDomain->Accounts->ItemByDBID($AccountId);
+			$AccountAddress = $obAccount->Address;
+			echo ' &gt; <a href="?page=account&action=edit&domainid=' . $DomainId . '&accountid=' . $AccountId . '">' .$AccountAddress . '</a>';
+
+		}
+		echo '</div>';
+	}
 }
 ?>

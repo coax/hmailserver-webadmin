@@ -7,8 +7,13 @@ if (hmailGetAdminLevel() != ADMIN_SERVER)
 
 $domainid = hmailGetVar("domainid", 0, true);
 $action = hmailGetVar("action","");
+
+// Breadcrumbs
+$DomainId = hmailGetVar("domainid", 0);
+$AccountId = hmailGetVar("accountid", 0);
+Breadcrumbs($DomainId, $AccountId);
 ?>
-    <div class="box">
+    <div class="box small">
       <h2><?php EchoTranslation("Alias") ?></h2>
       <form action="index.php" method="post" class="form">
 <?php

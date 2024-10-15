@@ -123,7 +123,7 @@ if ($AccountId > 0) {
 		elseif ($Width >= 70) $Color = "#ffb565";
 		elseif ($Width < 1) $Width = 1;
 
-		echo '          <div style="margin:-14px 0 18px 0; width:100%; height:13px; background:#f2f2f2; border-radius:2px;"><div style="width:' . $Width . '%; height:100%; background:' . $Color . '; border-radius:2px;"></div></div>';
+		echo '          <div style="margin:-14px 0 18px 0; width:100%; height:13px; background:#f2f2f2; border-radius:2px;"><div style="width:' . $Width . '%; max-width:100%; height:100%; background:' . $Color . '; border-radius:2px;"></div></div>';
 	}
 
 	PrintPropertyRow("Last logon time", $AccountLastLogonTime);
@@ -174,7 +174,7 @@ PrintCheckboxRow("vacationmessageexpires", "Automatically expire", $VacationMess
           <div class="hidden">
 <?php
 PrintCheckboxRow("forwardenabled", "Enabled", $ForwardEnabled);
-PrintPropertyEditRow("forwardaddress", "Address", $ForwardAddress, 255);
+PrintPropertyEditRow("forwardaddress", "Address", $ForwardAddress, 255, null, "email");
 PrintCheckboxRow("forwardkeeporiginal", "Keep original message", $ForwardKeepOriginal);
 ?>
           </div>

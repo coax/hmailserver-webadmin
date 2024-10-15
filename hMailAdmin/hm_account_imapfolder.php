@@ -44,6 +44,11 @@ if ($Action == "edit") {
 	$FolderParent = "";
 	$FolderSubscribed = false;
 }
+
+// Breadcrumbs
+$DomainId = hmailGetVar("domainid", 0);
+$AccountId = hmailGetVar("accountid", 0);
+Breadcrumbs($DomainId, $AccountId);
 ?>
       <div class="box small">
         <h2><?php EchoTranslation("IMAP folder") ?></h2>

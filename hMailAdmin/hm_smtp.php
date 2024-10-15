@@ -41,7 +41,6 @@ if($action == "save") {
 	$obSettings->AllowIncorrectLineEndings = hmailGetVar("AllowIncorrectLineEndings",0);
 	$obSettings->DisconnectInvalidClients = hmailGetVar("DisconnectInvalidClients",0);
 	$obSettings->MaxNumberOfInvalidCommands = hmailGetVar("MaxNumberOfInvalidCommands",0);
-	$obSettings->SendStatistics = hmailGetVar("SendStatistics",0);
 	$obSettings->AddDeliveredToHeader = hmailGetVar("AddDeliveredToHeader",0);
 	$obSettings->MaxNumberOfMXHosts = hmailGetVar("MaxNumberOfMXHosts", 15);
 
@@ -76,14 +75,12 @@ $AllowMailFromNull = $obSettings->DenyMailFromNull == "0";
 $AllowIncorrectLineEndings = $obSettings->AllowIncorrectLineEndings;
 $DisconnectInvalidClients = $obSettings->DisconnectInvalidClients;
 $MaxNumberOfInvalidCommands = $obSettings->MaxNumberOfInvalidCommands;
-$SendStatistics = $obSettings->SendStatistics;
 $AddDeliveredToHeader = $obSettings->AddDeliveredToHeader;
 
 $AllowSMTPAuthPlainChecked = hmailCheckedIf1($AllowSMTPAuthPlain);
 $AllowMailFromNullChecked = hmailCheckedIf1($AllowMailFromNull);
 $AllowIncorrectLineEndingsChecked = hmailCheckedIf1($AllowIncorrectLineEndings);
-$DisconnectInvalidClientsChecked = hmailCheckedIf1($DisconnectInvalidClients );
-$SendStatisticsChecked = hmailCheckedIf1($SendStatistics );
+$DisconnectInvalidClientsChecked = hmailCheckedIf1($DisconnectInvalidClients);
 
 $MaxNumberOfMXHosts = $obSettings->MaxNumberOfMXHosts;
 
@@ -124,13 +121,6 @@ PrintPasswordEntry("SMTPRelayerPassword", "Password", 255, "medium");
             <option value="<?php echo CONNECTION_SECURITY_STARTTLSREQUIRED?>" <?php if ($SMTPRelayerConnectionSecurity == CONNECTION_SECURITY_STARTTLSREQUIRED) echo "selected";?> ><?php EchoTranslation("STARTTLS (Required)")?></a>
             <option value="<?php echo CONNECTION_SECURITY_TLS?>" <?php if ($SMTPRelayerConnectionSecurity == CONNECTION_SECURITY_TLS) echo "selected";?> ><?php EchoTranslation("SSL/TLS")?></a>
           </select>
-        </div>
-        <h3><a href="#"><?php EchoTranslation("Statistics")?></a></h3>
-        <div class="hidden">
-<?php
-PrintCheckboxRow("SendStatistics", "Send statistics to hMailServer.com", $SendStatistics);
-?>
-          <p class="warning bottom"><?php EchoTranslation("If you enable statistics, statistics is sent to hMailServer.com every 1000 message. The only thing included in the statistics is your version number. No personal information or information on your configuration is sent."); ?></p>
         </div>
         <h3><a href="#"><?php EchoTranslation("RFC compliance")?></a></h3>
         <div class="hidden">

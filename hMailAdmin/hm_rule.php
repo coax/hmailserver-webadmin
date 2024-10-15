@@ -32,6 +32,11 @@ if ($ruleid != 0) {
 
 $str_delete = Translate("Remove");
 $str_add = Translate("Add");
+
+// Breadcrumbs
+$DomainId = hmailGetVar("domainid", 0);
+$AccountId = hmailGetVar("accountid", 0);
+Breadcrumbs($DomainId, $AccountId);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Rule") ?></h2>

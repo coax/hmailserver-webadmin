@@ -20,7 +20,7 @@ $str_confirm = Translate("Confirm delete");
         <thead>
           <tr>
             <th data-sort="string"><?php EchoTranslation("Name")?></th>
-            <th style="width:20%;" data-sort="ipaddress"><?php EchoTranslation("IP address") ?></th>
+            <th style="width:20%;" data-sort="string"><?php EchoTranslation("IP address") ?></th>
             <th style="width:10%;" data-sort="int"><?php EchoTranslation("Priority") ?></th>
             <th style="width:20%;" data-sort="int"><?php EchoTranslation("Expires") ?></th>
             <th style="width:32px;" class="no-sort">&nbsp;</th>
@@ -60,7 +60,7 @@ if ($Count>0) {
 		$LowerIp = $obSecurityRange->LowerIP;
 
 		echo '          <tr>
-            <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . (strpos($securityrangename,'Auto-ban:')!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
+            <td><a href="?page=securityrange&action=edit&securityrangeid=' . $securityrangeid . '"' . ($obSecurityRange->Expires!==false?' class="red"':'') . '>' . $securityrangename . '</a></td>
             <td>' . $LowerIp . '</td>
             <td>' . $securityrangepriority . '</td>
             <td data-sort-value="' . strtotime($obSecurityRange->ExpiresTime) . '">' . $ExpiresTime . '</td>

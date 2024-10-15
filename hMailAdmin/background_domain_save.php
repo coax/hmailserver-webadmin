@@ -32,6 +32,7 @@ $MaxNumberOfAliasesEnabled = hmailGetVar("MaxNumberOfAliasesEnabled","0");
 $MaxNumberOfDistributionListsEnabled = hmailGetVar("MaxNumberOfDistributionListsEnabled","0");
 
 $DKIMSignEnabled = hmailGetVar("DKIMSignEnabled", "0");
+//$DKIMSignAliasesEnabled = hmailGetVar("DKIMSignAliasesEnabled", "0");
 $DKIMPrivateKeyFile = hmailGetVar("DKIMPrivateKeyFile", "");
 $DKIMSelector = hmailGetVar("DKIMSelector", "");
 
@@ -72,6 +73,14 @@ $obDomain->AddSignaturesToLocalMail = $AddSignaturesToLocalMail;
 $obDomain->AddSignaturesToReplies = $AddSignaturesToReplies;
 
 $obDomain->DKIMSignEnabled = $DKIMSignEnabled;
+/*
+if ($obDomain->DomainAliases->Count > 0) {
+	$obDomain->DKIMSignAliasesEnabled = $DKIMSignAliasesEnabled;
+}
+else {
+	$obDomain->DKIMSignAliasesEnabled = 0;
+}
+*/
 $obDomain->DKIMPrivateKeyFile = $DKIMPrivateKeyFile;
 $obDomain->DKIMSelector = $DKIMSelector;
 $obDomain->DKIMHeaderCanonicalizationMethod = $DKIMHeaderCanonicalizationMethod;

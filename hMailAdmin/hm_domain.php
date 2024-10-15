@@ -33,6 +33,7 @@ $MaxNumberOfAccountsEnabled = 0;
 $MaxNumberOfAliasesEnabled = 0;
 $MaxNumberOfDistributionListsEnabled = 0;
 $DKIMSignEnabled = 0;
+//$DKIMSignAliasesEnabled = 0;
 $DKIMPrivateKeyFile = "";
 $DKIMSelector = "";
 $DKIMHeaderCanonicalizationMethod = 2;
@@ -65,6 +66,7 @@ if ($action == "edit") {
 	$MaxNumberOfAliasesEnabled = $obDomain->MaxNumberOfAliasesEnabled;
 	$MaxNumberOfDistributionListsEnabled = $obDomain->MaxNumberOfDistributionListsEnabled;
 	$DKIMSignEnabled = $obDomain->DKIMSignEnabled;
+	//$DKIMSignAliasesEnabled = $obDomain->DomainAliases->Count > 0 ? $obDomain->DKIMSignAliasesEnabled : 0;
 	$DKIMPrivateKeyFile = $obDomain->DKIMPrivateKeyFile;
 	$DKIMSelector = $obDomain->DKIMSelector;
 	$DKIMHeaderCanonicalizationMethod = $obDomain->DKIMHeaderCanonicalizationMethod;
@@ -211,6 +213,7 @@ if ($admin_rights) {
           <div class="hidden">
 <?php
 PrintCheckboxRow("DKIMSignEnabled", Translate("Enabled"), $DKIMSignEnabled);
+//PrintCheckboxRow("DKIMSignAliasesEnabled", Translate("Sign aliases"), $DKIMSignAliasesEnabled, $obDomain->DomainAliases->Count == 0);
 PrintPropertyEditRow("DKIMPrivateKeyFile", Translate("Private key file"), $DKIMPrivateKeyFile, 255);
 PrintPropertyEditRow("DKIMSelector", Translate("Selector"), $DKIMSelector, 255);
 ?>

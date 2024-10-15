@@ -40,7 +40,7 @@
 
 /* reset */
 * {box-sizing:border-box; margin:0; padding:0;}
-html {box-sizing:border-box;}
+html {box-sizing:border-box; min-height:100%;}
 *, *:before, *:after {box-sizing:inherit;}
 
 /* global */
@@ -79,6 +79,10 @@ h2 span {font-weight:300; color:#888;}
 h3 {font-size:11px; padding:0 0 20px 0; color:#3e454c;}
 h3 a {color:#3e454c; border-bottom:1px dotted #3e454c;}
 #facebox h3 {padding:20px 0 0 0;}
+
+/* breadcrumbs */
+.breadcrumbs {margin-bottom:9px; color:#888;}
+.breadcrumbs a:hover {text-decoration:underline;}
 
 /* facebox modal */
 #facebox {position:absolute; top:0; left:0; z-index:100; text-align:left; display:none;}
@@ -221,8 +225,7 @@ nav {display:none;}
 	table tbody tr:nth-child(even) {background:#f9fafa;}
 	table tbody tr:hover {background:#f2f2f2;}
 	table th:nth-child(1) {text-indent:10px;}
-	/* table td a:nth-child(1) {padding-left:10px;} */
-	table td:first-child a {padding-left:10px;}
+	table td a:nth-child(1) {padding-left:10px;}
 	table#queue th:nth-child(1), table#queue td:nth-child(1) {width:9%; padding-right:1%;}
 	table#queue th:nth-child(2), table#queue th:nth-child(5), table#queue td:nth-child(2), table#queue td:nth-child(5) {width:15%; padding-right:1%;}
 	table#queue th:nth-child(3), table#queue th:nth-child(4), table#queue td:nth-child(3), table#queue td:nth-child(4) {width:28%; padding-right:1%;}

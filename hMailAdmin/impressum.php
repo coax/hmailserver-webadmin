@@ -11,8 +11,8 @@ require_once("initialize.php");
 $version = Version();
 if ($hmail_config['version']<$version) echo ', <b><a href="https://github.com/coax/hmailserver-webadmin/releases/latest" target="_blank">version ' . $version . ' available for download</a></b>' . PHP_EOL;
 ?>
-<p>Redesign &amp; coding by <a href="http://www.matecic.com/" target="_blank">Matija Matecic</a></p>
-<p>Additional coding by <a href="https://github.com/tunis78" target="_blank">Andreas Tunberg</a></p>
+<p>Redesign &amp; coding by <a href="https://matija.matecic.com/" target="_blank">Matija Matecic</a></p>
+<p>Additional coding by <a href="https://github.com/tunis78" target="_blank">Andreas Tunberg</a> and <a href="https://github.com/RvdHout" target="_blank">Ruud van den Hout</a></p>
 <h3>hMailServer</h3>
 <p>hMailServer version <?php echo $obBaseApp->Version ?>, source on <a href="https://github.com/hmailserver/hmailserver/" target="_blank">GitHub</a></p>
 <p>Author Martin Knafve</p>
@@ -28,10 +28,9 @@ if ($hmail_config['version']<$version) echo ', <b><a href="https://github.com/co
   <li style="padding-bottom:4px;"><a href="https://timeago.yarp.com/" target="_blank">&middot; timeago</a></li>
   <li style="padding-bottom:4px;"><a href="https://gionkunz.github.io/chartist-js/" target="_blank">&middot; Chartist</a></li>
   <li style="padding-bottom:4px;"><a href="https://codyhouse.co/gem/responsive-sidebar-navigation/" target="_blank">&middot; CodyHouse Responsive Sidebar Navigation</a></li>
-  <li style="padding-bottom:10px;"><a href="https://useiconic.com/open/" target="_blank">&middot; Open Iconic</a></li>
+  <li style="padding-bottom:10px;">&middot; Open Iconic</li>
 </ul>
 <h3>Donate</h3>
 <p>Don't worry, hMailAdmin will stay free - but I do need your support in order to continue developing it! Thank you :)</p>
 <a href="https://www.paypal.me/MatijaMatecic/10EUR" target="_blank" style="display:inline-block; width:30%; height:70px; background:url(css/logo-paypal.svg) 50% 10% no-repeat; background-size:60%; margin-right:4%; padding-top:50px; text-align:center;">Buy me a coffee</a>
-<a href="https://chart.googleapis.com/chart?chs=500x500&chld=L|2&cht=qr&chl=bitcoin:146oNCuLztGUFZXsi6pUeNFGG4HGZ1YCGy" target="_blank" style="display:inline-block; width:30%; height:70px; background:url(css/logo-bitcoin.svg) 50% 10% no-repeat; background-size:60%; margin-right:4%; padding-top:50px; text-align:center;">Buy me a coffee</a>
-<a href="https://chart.googleapis.com/chart?chs=500x500&chld=L|2&cht=qr&chl=0x5d62dCdEf782826Ff0c4613D3836c8691dc6B609" target="_blank" style="display:inline-block; width:30%; height:70px; background:url(css/logo-ethereum.svg) 50% 10% no-repeat; background-size:60%; padding-top:50px; text-align:center;">Buy me a coffee</a>
+<a href="https://pay.withbitcoin.org/api/v1/invoices?storeId=8thKA61gYGhmax2SeNo1LLzDg4yG1eMoo9dV8Mm2PUgx&price=10&currency=EUR" target="_blank" style="display:inline-block; width:30%; height:70px; background:url(css/logo-bitcoin.svg) 50% 10% no-repeat; background-size:60%; margin-right:4%; padding-top:50px; text-align:center;">Buy me a coffee</a>

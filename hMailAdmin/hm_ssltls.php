@@ -24,6 +24,13 @@ if($action == "save") {
 		$obSettings->TlsVersion12Enabled = hmailGetVar("TlsVersion12Enabled", 0);
 		$obSettings->TlsVersion13Enabled = hmailGetVar("TlsVersion13Enabled", 0);
 	}
+	$obSettings->TlsOptionPreferServerCiphersEnabled = hmailGetVar("TlsOptionPreferServerCiphersEnabled", 0);
+	if (hmailGetVar("TlsVersion12Enabled", 0) > 0 || hmailGetVar("TlsVersion13Enabled", 0) > 0 ) {
+		$obSettings->TlsOptionPrioritizeChaChaEnabled = hmailGetVar("TlsOptionPrioritizeChaChaEnabled", 0);
+	}
+	else {
+		$obSettings->TlsOptionPrioritizeChaChaEnabled = 0;
+	}
 }
 
 $VerifyRemoteSslCertificate = $obSettings->VerifyRemoteSslCertificate;
@@ -39,6 +46,10 @@ else {
 	$TlsVersion11Enabled = $obSettings->TlsVersion11Enabled;
 	$TlsVersion12Enabled = $obSettings->TlsVersion12Enabled;
 	$TlsVersion13Enabled = $obSettings->TlsVersion13Enabled;
+}
+if (preg_match("(5\.[789].\d+)", $obBaseApp->Version)) {
+	$TlsOptionPreferServerCiphersEnabled = $obSettings->TlsOptionPreferServerCiphersEnabled;
+	$TlsOptionPrioritizeChaChaEnabled = $obSettings->TlsOptionPrioritizeChaChaEnabled;
 }
 ?>
     <div class="box medium">
@@ -66,6 +77,14 @@ else {
 	PrintCheckboxRow("TlsVersion11Enabled", "TLS v1.1", $TlsVersion11Enabled);
 	PrintCheckboxRow("TlsVersion12Enabled", "TLS v1.2", $TlsVersion12Enabled);
 	PrintCheckboxRow("TlsVersion13Enabled", "TLS v1.3", $TlsVersion13Enabled);
+}
+
+if (preg_match("(5\.[789].\d+)", $obBaseApp->Version)) {
+?>
+        <h3><?php EchoTranslation("Cipher priority") ?></h3>
+<?php
+	PrintCheckboxRow("TlsOptionPreferServerCiphersEnabled", "Prefer server ciphers", $TlsOptionPreferServerCiphersEnabled);
+	PrintCheckboxRow("TlsOptionPrioritizeChaChaEnabled", "Prioritize ChaCha20Poly1305 when client does (requires TLS v1.2 or TLS v1.3)", $TlsOptionPrioritizeChaChaEnabled);
 }
 
 PrintSaveButton();

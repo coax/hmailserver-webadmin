@@ -56,13 +56,14 @@ PrintCheckboxRow("listactive", "Enabled", $listactive);
         <h3><a href="#"><?php EchoTranslation("Security")?></a></h3>
         <div class="hidden">
           <p><?php EchoTranslation("Mode")?></p>
-          <select name="Mode">
+          <select name="Mode" id="DistributionListMode">
             <option value="0"<?php if ($Mode == 0) echo " selected";?>><?php EchoTranslation("Public - Anyone can send to the list") ?></option>
             <option value="1"<?php if ($Mode == 1) echo " selected";?>><?php EchoTranslation("Membership - Only members can send to the list") ?></option>
             <option value="2"<?php if ($Mode == 2) echo " selected";?>><?php EchoTranslation("Announcements - Only allow messages from the following address:") ?></option>
+            <option value="3"<?php if ($Mode == 3) echo " selected";?>><?php EchoTranslation("Domain - Anyone in the domain can send to the list") ?></option>
           </select>
 <?php
-PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 255);
+PrintPropertyEditRow("RequireSenderAddress", "Address", $RequireSenderAddress, 255, null, "email");
 PrintCheckboxRow("listrequiresmtpauth", "Require SMTP authentication", $listrequiresmtpauth);
 ?>
         </div>

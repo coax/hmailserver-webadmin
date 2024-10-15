@@ -4,7 +4,7 @@ if (!defined('IN_WEBADMIN'))
 ?>
         <li class="label"><?php EchoTranslation("Main") ?></li>
 <?php
-//User only
+// User only
 if (hmailGetAdminLevel() == 0) {
 	$domainname = hmailGetUserDomainName($username);
 
@@ -17,7 +17,7 @@ if (hmailGetAdminLevel() == 0) {
 
 	$url = htmlentities("?page=account&action=edit&accountid=" . $obAccount->ID . "&domainid=" . $obDomain->ID);
 
-	//Webmail parser
+	// Webmail parser
 	if(isset($hmail_config['webmail']))
 		$Webmail = str_replace("[domain]", $domainname, $hmail_config['webmail']);
 ?>
@@ -31,7 +31,7 @@ if (hmailGetAdminLevel() == 0) {
 <?php
 }
 
-//Domain admin
+// Domain admin
 if (hmailGetAdminLevel() == 1) {
 	$domainname = hmailGetUserDomainName($username);
 	$obDomain = $obBaseApp->Domains->ItemByName($domainname);
@@ -46,13 +46,14 @@ if (hmailGetAdminLevel() == 1) {
 
 	$url = htmlentities("?page=account&action=edit&accountid=" . $obAccount->ID . "&domainid=" . $obDomain->ID);
 
-	//Webmail parser
+	// Webmail parser
 	if(isset($hmail_config['webmail']))
 		$Webmail = str_replace("[domain]", $domainname, $hmail_config['webmail']);
 ?>
         <li class="has-children user <?php if (strpos('hm_account,hm_account_externalaccounts', $page) !== false) echo 'active' ?>">
           <a href="<?php echo $url ?>"><?php echo $accountaddress ?></a>
           <ul>
+            <li><a href="<?php echo $url ?>"><?php EchoTranslation("Account") ?></a></li>
             <li><a href="?page=account_externalaccounts&accountid=<?php echo $obAccount->ID ?>&domainid=<?php echo $obDomain->ID ?>"><?php EchoTranslation("External accounts") ?></a></li>
           </ul>
         </li>
@@ -60,11 +61,11 @@ if (hmailGetAdminLevel() == 1) {
 <?php
 }
 
-//Admin
+// Admin
 if (hmailGetAdminLevel() == 2) {
 	$obSettings = $obBaseApp->Settings();
 
-	//Counters
+	// Counters
 	$Domains = $obBaseApp->Domains();
 	$TotalDomains = $Domains->Count();
 
@@ -88,7 +89,6 @@ if (hmailGetAdminLevel() == 2) {
 
 	$TotalSURBLServers = $obSettings->AntiSpam->SURBLServers->Count();
 	$TotalWhiteListAddresses = $obSettings->AntiSpam->WhiteListAddresses->Count();
-	$TotalGreyListWhiteListAddresses = $obSettings->AntiSpam->GreyListingWhiteAddresses->Count();
 	$TotalSSLCertificates = $obSettings->SSLCertificates->Count();
 
 ?>
@@ -130,12 +130,7 @@ for ($i = 1; $i <= $TotalDomains; $i++) {
               <ul>
                 <li><a href="?page=dnsblacklists"><?php EchoTranslation("DNS blacklists") ?><span class="count"><?php echo $TotalBlacklists ?></span></a></li>
                 <li><a href="?page=surblservers"><?php EchoTranslation("SURBL servers") ?><span class="count"><?php echo $TotalSURBLServers ?></span></a></li>
-                <li class="has-children">
-					<a href="?page=greylisting" class="more"><?php EchoTranslation("Greylisting") ?></a>
-					<ul>
-						<li><a href="?page=greylistingwhiteaddresses"><?php EchoTranslation("Greylisting White listing") ?><span class="count"><?php echo $TotalGreyListWhiteListAddresses ?></span></a></li>
-					</ul>
-				</li>
+                <li><a href="?page=greylisting"><?php EchoTranslation("Greylisting") ?></a></li>
                 <li><a href="?page=whitelistaddresses"><?php EchoTranslation("White listing") ?><span class="count"><?php echo $TotalWhiteListAddresses ?></span></a></li>
               </ul>
             </li>
@@ -248,8 +243,8 @@ PrintHidden("controlaction", $controlaction);
 function GetStringForDomain($Domain) {
 	$DomainId = $Domain->ID;
 
-	$current_domainid = hmailGetVar("domainid",0);
-	//$current_accountid = hmailGetVar("accountid",0);
+	$current_domainid = hmailGetVar("domainid", 0);
+	//$current_accountid = hmailGetVar("accountid", 0);
 
 	$DomainName = $Domain->Name;
 	$DomainName = PreprocessOutput($DomainName);
@@ -258,7 +253,7 @@ function GetStringForDomain($Domain) {
 	if (hmailGetVar("domainid")==$DomainId) $DomainName = '<span class="active">' . $DomainName . '</span>';
 
 	if ($current_domainid != $DomainId && hmailGetAdminLevel() == ADMIN_SERVER) {
-		//If the user is logged on as a system administrator, only show accounts for the currently selected domain.
+		// If the user is logged on as a system administrator, only show accounts for the currently selected domain.
 		echo '            <li><a href="?page=domain&action=edit&domainid=' . $DomainId . '">' . $DomainName . '</a></li>' . PHP_EOL;
 		return;
 	} else
