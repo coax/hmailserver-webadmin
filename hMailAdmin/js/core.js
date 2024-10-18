@@ -191,7 +191,7 @@ jQuery(document).ready(function() {
 
 			$.ajax({
 				type: 'post',
-				url: './logs.php',
+				url: './custom_logs.php',
 				data: {
 					LiveLogging: state
 				},
