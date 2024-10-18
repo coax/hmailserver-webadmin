@@ -5,7 +5,7 @@ if (!defined('IN_WEBADMIN'))
 if (hmailGetAdminLevel() != 2)
 	hmailHackingAttemp();
 
-if (empty($hmail_config['dmarc_enable'])) exit('<div class="box large"><h2>' . Translate("DMARC reports") . '</h2><p class="warning">' . Translate("DMARC reports are not enabled in config.php") . '</p></div>');
+if (empty($hmail_config['dmarc_enable'])) exit('<div class="box large"><h2>' . Translate("DMARC reports") . '</h2><p>&nbsp;</p><p class="warning">' . Translate("DMARC reports are not enabled in config.php") . '</p></div>') . PHP_EOL;
 
 
 /* Download new reports from imap.

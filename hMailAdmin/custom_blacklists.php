@@ -29,17 +29,20 @@ function dnsbllookup($ip) {
 			if (checkdnsrr($reverse_ip . '.' . $host . '.', 'A')) $listed .= $reverse_ip . '.' . $host . '<br>';
 		}
 	}
-	if (empty($listed)) echo Translate('Not listed');
-	else echo Translate('Listed') . ':<br>' . $listed;
+	if (empty($listed)) echo '<font class="green">' . Translate('Not listed') . '</font>';
+	else echo '<font class="red">' . Translate('Listed') . ':</font><br>' . $listed;
 }
+
+echo '<p>';
 if (isset($_GET['ip']) && $_GET['ip'] != null) {
 	$ip = $_GET['ip'];
 	if (filter_var($ip, FILTER_VALIDATE_IP)) {
-		echo dnsbllookup($ip);
+		dnsbllookup($ip);
 	} else {
-		echo Translate('Please enter a valid IP address');
+		echo Translate('Enter a valid IP address');
 	}
 } else {
-	echo Translate('Please enter a valid IP address');
+	echo Translate('Enter a valid IP address');
 }
+echo '</p>';
 ?>

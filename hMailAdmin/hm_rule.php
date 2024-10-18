@@ -32,11 +32,6 @@ if ($ruleid != 0) {
 
 $str_delete = Translate("Remove");
 $str_add = Translate("Add");
-
-// Breadcrumbs
-$DomainId = hmailGetVar("domainid", 0);
-$AccountId = hmailGetVar("accountid", 0);
-Breadcrumbs($DomainId, $AccountId);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("Rule") ?></h2>
@@ -129,9 +124,9 @@ if ($ruleid == 0) {
 
 		$move = '';
 		if ($i > 0)
-			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=actionup&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow up" title="' . $str_move_up . '">' . $str_move_up . '</a>';
+			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=actionup&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" title="' . $str_move_up . '"><i data-feather="arrow-up"></i></a>';
 		if ($i < $count-1)
-			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=actiondown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" class="arrow down" title="' . $str_move_down . '">' . $str_move_down . '</a>';
+			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=actiondown&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '" title="' . $str_move_down . '"><i data-feather="arrow-down"></i></a>';
 
 		echo '              <tr>
                 <td><a href="?page=rule_action&action=edit&domainid=' . $domainid . '&accountid=' . $accountid . '&ruleid=' . $ruleid . '&actionid=' . $actionid . '">' . $actionName . '</a></td>

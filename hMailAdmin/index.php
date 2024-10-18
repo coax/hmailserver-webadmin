@@ -70,24 +70,26 @@ $username = isset($_SESSION['session_username']) ? $_SESSION['session_username']
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.ico">
   <script>var hmail_config = {weekStart:<?php echo $hmail_config['datepicker_weekStart'] ?>};</script>
-  <script src="js/jquery.js"></script>
+  <script src="js/jquery-2.2.4.min.js"></script>
   <script src="js/modernizr.js"></script>
   <script src="js/core.js?v=<?php echo $hmail_config['version'] ?>"></script>
-  <script src="js/timeago.js"></script>
+  <script src="js/timeago.min.js"></script>
 <?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script src="js/timeago.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
-  <script src="js/stupidtable.js"></script>
+  <script src="js/stupidtable.min.js"></script>
   <script src="js/facebox.js"></script>
-  <script src="js/chartist.js"></script>
-  <link href="css/chartist.css" rel="stylesheet">
+  <script src="js/chartist.min.js"></script>
+  <link href="css/chartist.min.css" rel="stylesheet">
   <script src="js/chartist-tooltip.js"></script>
-  <script src="js/datepicker.js"></script>
-  <script src="js/autosize.js"></script>
+  <script src="js/datepicker.min.js"></script>
+  <link href="css/datepicker.min.css" rel="stylesheet">
+  <script src="js/autosize.min.js"></script>
+  <script src="js/feather.min.js"></script>
+  <script src="js/jbox.all.min.js"></script>
+  <link href="css/jbox.all.min.css" rel="stylesheet">
 <?php if ($hmail_config['defaultlanguage'] != 'english') echo '<script src="js/datepicker.' . $hmail_config['defaultlanguage'] . '.js"></script>'; ?>
-  <link rel="stylesheet" href="css/datepicker.css">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/core.css?v=<?php echo $hmail_config['version'] ?>">
+  <link href="css/reset.css" rel="stylesheet">
+  <link href="css/core.css?v=<?php echo $hmail_config['version'] ?>" rel="stylesheet">
 </head>
-
 <body>
 <?php
 if (hmail_isloggedin()) {
@@ -95,15 +97,16 @@ if (hmail_isloggedin()) {
   <header>
     <a href="index.php" class="logo"><span>hMailServer</span></a>
     <nav>
-      <ul id="top">
-        <li class="has-children account">
-          <a href="#"><?php echo $username ?></a>
-          <ul>
-            <li><a href="logout.php"><?php EchoTranslation("Logout") ?></a></li>
-          </ul>
-        </li>
-      </ul>
+<?php
+// Breadcrumbs
+$DomainId = hmailGetVar("domainid", 0);
+$AccountId = hmailGetVar("accountid", 0);
+Breadcrumbs($DomainId, $AccountId);
+?>
     </nav>
+    <ul id="top">
+      <li><a href="logout.php"><i data-feather="log-out"></i><?php EchoTranslation("Logout") ?></a></li>
+    </ul>
     <a href="#" id="mobile"><?php EchoTranslation("Menu") ?><span></span></a>
   </header>
   <main>
@@ -113,18 +116,13 @@ if (hmail_isloggedin()) {
 	include "include_treemenu.php";
 ?>
       </ul>
-      <a href="./impressum.php" rel="facebox" class="impressum"><?php
+      <a href="./impressum.php" rel="facebox" class="impressum">About hMailAdmin <?php echo $hmail_config['version'];
 
 	if (hmailGetAdminLevel() == 2) {
 		if (!isset($_SESSION['version'])) $_SESSION['version'] = Version();
 		$version = $_SESSION['version'];
-		if ($hmail_config['version'] < $version)
-			echo '<span class="warning" style="width:62%; margin:auto;">hMailAdmin ' . $version . ' available</span>';
-		else
-			echo 'About hMailAdmin ' . $hmail_config['version'];
+		if ($hmail_config['version'] < $version) echo '<span><i data-feather="github"></i>version ' . $version . ' available</span>';
 	}
-	else
-		echo 'About hMailAdmin ' . $hmail_config['version'];
 ?></a>
     </div>
     <div id="content">

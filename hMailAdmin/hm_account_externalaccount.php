@@ -24,7 +24,7 @@ if ($action == "edit") {
 	$DaysToKeepMessages = $obFetchAccount->DaysToKeepMessages;
 	$MinutesBetweenFetch = $obFetchAccount->MinutesBetweenFetch;
 	$Port = $obFetchAccount->Port;
-	$MIMERecipientHeaders = $obFetchAccount->MIMERecipientHeaders;
+	//$MIMERecipientHeaders = $obFetchAccount->MIMERecipientHeaders;
 	$ProcessMIMERecipients = $obFetchAccount->ProcessMIMERecipients;
 	$ProcessMIMEDate = $obFetchAccount->ProcessMIMEDate;
 	$ServerAddress = $obFetchAccount->ServerAddress;
@@ -40,7 +40,7 @@ if ($action == "edit") {
 	$DaysToKeepMessages = 0;
 	$MinutesBetweenFetch = 30;
 	$Port = 110;
-	$MIMERecipientHeaders = "To,CC,X-RCPT-To,X-Envelope-To";
+	//$MIMERecipientHeaders = "To,CC,X-RCPT-To,X-Envelope-To";
 	$ProcessMIMERecipients = 0;
 	$ProcessMIMEDate = 0;
 	$ServerAddress = "";
@@ -59,11 +59,6 @@ $ProcessMIMEDateChecked = hmailCheckedIf1($ProcessMIMEDate);
 $DaysToKeepMessagesValue = 7;
 if ($DaysToKeepMessages > 0)
 	$DaysToKeepMessagesValue = $DaysToKeepMessages;
-
-// Breadcrumbs
-$DomainId = hmailGetVar("domainid", 0);
-$AccountId = hmailGetVar("accountid", 0);
-Breadcrumbs($DomainId, $AccountId);
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("External account") ?></h2>
@@ -104,7 +99,7 @@ PrintPasswordEntry("Password", "Password", 255, "medium");
         <div class="hidden">
 <?php
 PrintPropertyEditRow("MinutesBetweenFetch", "Minutes between download", $MinutesBetweenFetch, 10, "number", "small");
-PrintPropertyEditRow("MIMERecipientHeaders", "MIME recipient headers", $MIMERecipientHeaders, 255, "large");
+//PrintPropertyEditRow("MIMERecipientHeaders", "MIME recipient headers", $MIMERecipientHeaders, 255, "large");
 PrintCheckboxRow("ProcessMIMERecipients", "Deliver to recipients in MIME headers", $ProcessMIMERecipients);
 echo '          <div style="padding-left:18px;">';
 PrintCheckboxRow("EnableRouteRecipients", "Allow route recipients", $EnableRouteRecipients);

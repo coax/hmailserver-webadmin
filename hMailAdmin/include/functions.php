@@ -361,11 +361,11 @@ function Breadcrumbs($DomainId = null, $AccountId = null) {
 		global $obBaseApp;
 		$obDomain = $obBaseApp->Domains->ItemByDBID($DomainId);
 		$DomainName = $obDomain->Name;
-		echo '    <div class="breadcrumbs"><a href="?page=domains">' . Translate("Domains") . '</a> &gt; <a href="?page=domain&action=edit&domainid=' . $DomainId . '">' . $DomainName . '</a>';
+		echo '    <div class="breadcrumbs"><a href="?page=domains">' . Translate("Domains") . '</a> &rarr; <a href="?page=domain&action=edit&domainid=' . $DomainId . '">' . $DomainName . '</a>';
 		if ($AccountId) {
 			$obAccount = $obDomain->Accounts->ItemByDBID($AccountId);
 			$AccountAddress = $obAccount->Address;
-			echo ' &gt; <a href="?page=account&action=edit&domainid=' . $DomainId . '&accountid=' . $AccountId . '">' .$AccountAddress . '</a>';
+			echo ' &rarr; <a href="?page=account&action=edit&domainid=' . $DomainId . '&accountid=' . $AccountId . '">' .$AccountAddress . '</a>';
 
 		}
 		echo '</div>';

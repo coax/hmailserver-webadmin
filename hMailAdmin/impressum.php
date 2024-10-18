@@ -7,9 +7,10 @@ require_once("include/initialization_test.php");
 require_once("initialize.php");
 ?>
 <h2>Impressum</h2>
-<p>hMailAdmin (PHPWebAdmin redesign project) version <?php echo $hmail_config['version'] ?>, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a><?php
+<p>hMailAdmin (PHPWebAdmin redesign project) version <?php echo $hmail_config['version'] ?>, source on <a href="https://github.com/coax/hmailserver-webadmin" target="_blank">GitHub</a>
+<?php
 $version = Version();
-if ($hmail_config['version']<$version) echo ', <b><a href="https://github.com/coax/hmailserver-webadmin/releases/latest" target="_blank">version ' . $version . ' available for download</a></b>' . PHP_EOL;
+if ($hmail_config['version']<$version) echo '<p class="warning"><a href="https://github.com/coax/hmailserver-webadmin/releases/latest" target="_blank">New version ' . $version . ' available on GitHub</a></p>' . PHP_EOL;
 ?>
 <p>Redesign &amp; coding by <a href="https://matija.matecic.com/" target="_blank">Matija Matecic</a></p>
 <p>Additional coding by <a href="https://github.com/tunis78" target="_blank">Andreas Tunberg</a> and <a href="https://github.com/RvdHout" target="_blank">Ruud van den Hout</a></p>
@@ -27,8 +28,8 @@ if ($hmail_config['version']<$version) echo ', <b><a href="https://github.com/co
   <li style="padding-bottom:4px;"><a href="https://github.com/jackmoore/autosize" target="_blank">&middot; autosize</a></li>
   <li style="padding-bottom:4px;"><a href="https://timeago.yarp.com/" target="_blank">&middot; timeago</a></li>
   <li style="padding-bottom:4px;"><a href="https://gionkunz.github.io/chartist-js/" target="_blank">&middot; Chartist</a></li>
-  <li style="padding-bottom:4px;"><a href="https://codyhouse.co/gem/responsive-sidebar-navigation/" target="_blank">&middot; CodyHouse Responsive Sidebar Navigation</a></li>
-  <li style="padding-bottom:10px;">&middot; Open Iconic</li>
+  <li style="padding-bottom:4px;"><a href="https://github.com/StephanWagner/jBox" target="_blank">&middot; jBox</a></li>
+  <li style="padding-bottom:10px;"><a href="https://feathericons.com/" target="_blank">&middot; Feather</a></li>
 </ul>
 <h3>Donate</h3>
 <p>Don't worry, hMailAdmin will stay free - but I do need your support in order to continue developing it! Thank you :)</p>

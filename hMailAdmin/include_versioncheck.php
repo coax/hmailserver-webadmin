@@ -11,5 +11,5 @@ define('REQUIRED_VERSION', '5.6.8-B2574');
 //define('REQUIRED_VERSION', '5.6.9-B2607');
 
 // Actual hMailAdmin version
-$hmail_config['version'] = 1.6;
+$hmail_config['version'] = 1.7;
 ?>

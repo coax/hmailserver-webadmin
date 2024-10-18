@@ -106,7 +106,7 @@ else
 if ($admin_rights) {
 	PrintCheckboxRow("domainactive", "Enabled", $domainactive);
 
-	if ($DomainId<>'') echo '        <div class="buttons bottom"><a href="?page=accounts&domainid=' . $DomainId . '" class="button">' . Translate("Show accounts") . '</a></div>';
+	if ($DomainId<>'') echo '        <div class="buttons bottom"><a href="?page=accounts&domainid=' . $DomainId . '" class="button">' . Translate("Accounts") . '</a></div>';
 } else {
 	echo '<p>' . Translate("Active") . ':</p>';
 	if ($domainactive == 1)

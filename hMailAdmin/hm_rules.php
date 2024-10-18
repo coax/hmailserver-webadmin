@@ -37,9 +37,9 @@ if ($Count>0) {
 
 		$move = '';
 		if ($i > 0)
-			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruleup&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow up" title="' . $str_move_up . '">' . $str_move_up . '</a>';
+			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruleup&domainid=0&accountid=0&ruleid=' . $ruleid . '" title="' . $str_move_up . '"><i data-feather="arrow-up"></i></a>';
 		if ($i < $Count-1)
-			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruledown&domainid=0&accountid=0&ruleid=' . $ruleid . '" class="arrow down" title="' . $str_move_down . '">' . $str_move_down . '</a>';
+			$move = $move . '<a href="?page=background_rule_save&csrftoken=' . $csrftoken . '&action=move&savetype=ruledown&domainid=0&accountid=0&ruleid=' . $ruleid . '" title="' . $str_move_down . '"><i data-feather="arrow-down"></i></a>';
 
 		echo '          <tr>
             <td><a href="?page=rule&action=edit&domainid=0&accountid=0&ruleid=' . $ruleid . '">' . $rulename . '</a></td>

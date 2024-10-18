@@ -17,17 +17,16 @@ $SessionsPop3 = $obStatus->SessionCount(STPOP3);
 $SessionsImap = $obStatus->SessionCount(STIMAP);
 ?>
     <div class="box">
-      <h2><?php EchoTranslation("Server") ?></h2>
-      <div id="activity" style="margin:15px auto; width:100%; height:180px;"></div>
+      <h2><?php EchoTranslation("Server") ?> <span><?php echo $state ?></span></h2>
+      <div id="activity" style="margin:10px auto 20px;width:100%; height:150px;"></div>
       <div class="grey">
-        <div><span><?php echo $state ?></span><br><?php EchoTranslation("status") ?></div>
-        <div><span><time class="timeago" datetime="<?php echo $ServerUptime ?>"><?php echo $ServerUptime ?></time></span><br><?php EchoTranslation("server uptime") ?></div>
-        <div><span><?php echo $ServerVersion ?></span><br><?php EchoTranslation("version") ?></div>
+        <div style="width:49%;"><span><time class="timeago" datetime="<?php echo $ServerUptime ?>"><?php echo $ServerUptime ?></time></span><br><?php EchoTranslation("server uptime") ?></div>
+        <div style="width:49%;"><span><?php echo $ServerVersion ?></span><br><?php EchoTranslation("version") ?></div>
       </div>
     </div>
     <div class="box">
       <h2><?php EchoTranslation("Processed messages") ?></h2>
-      <div id="processed" style="margin:30px auto; width:150px; height:150px;"></div>
+      <div id="processed" style="margin:10px auto 20px; width:150px; height:150px;"></div>
       <div class="grey">
         <div><span id="legit"><?php echo $MessagesProcessed ?></span><br><?php EchoTranslation("Processed") ?></div>
         <div><span id="virus"><?php echo $MessagesVirus ?></span><br><?php EchoTranslation("Virus") ?></div>
@@ -36,7 +35,7 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
     </div>
     <div class="box">
       <h2><?php EchoTranslation("Current sessions") ?></h2>
-      <div id="sessions" style="margin:30px auto; width:150px; height:150px;"></div>
+      <div id="sessions" style="margin:10px auto 20px; width:150px; height:150px;"></div>
       <div class="grey">
         <div><span id="smtp"><?php echo $SessionsSmtp ?></span><br>SMTP</div>
         <div><span id="pop3"><?php echo $SessionsPop3 ?></span><br>POP3</div>
@@ -55,6 +54,7 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
               <th><?php EchoTranslation("To") ?></th>
               <th><?php EchoTranslation("Next try") ?></th>
               <th><?php EchoTranslation("Retries") ?></th>
+              <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -66,7 +66,7 @@ $SessionsImap = $obStatus->SessionCount(STIMAP);
       <h2><?php EchoTranslation("Live logging") ?></h2>
       <div id="live-logging">
         <div id="results" style="display:none; height:300px;"></div>
-		<?php $state = isset($_SESSION['livelogging']) && $_SESSION['livelogging'] == 'enabled' ? 'enabled' : 'disabled' ?>
+<?php $state = isset($_SESSION['livelogging']) && $_SESSION['livelogging'] == 'enabled' ? 'enabled' : 'disabled' ?>
         <button data-state="<?php echo $state ?>"><?php EchoTranslation(($state=='enabled' ? "Stop" : "Start")) ?></button><div style="display:none; margin-left:18px;"><input type="checkbox" name="autoscroll" id="autoscroll" value="1"><label for="autoscroll"><?php EchoTranslation("Autoscrolling") ?></label></div>
       </div>
     </div>

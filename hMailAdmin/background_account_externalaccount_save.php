@@ -42,11 +42,13 @@ $obFA->Enabled = hmailGetVar("Enabled",0);
 $obFA->Name = hmailGetVar("Name",0);
 $obFA->MinutesBetweenFetch = hmailGetVar("MinutesBetweenFetch",0);
 $obFA->Port = hmailGetVar("Port",0);
+/*
 $obFA->MIMERecipientHeaders  = hmailGetVar("MIMERecipientHeaders","To,CC,X-RCPT-To,X-Envelope-To");
 if (strlen($obFA->MIMERecipientHeaders) > 0)
   $obFA->ProcessMIMERecipients = hmailGetVar("ProcessMIMERecipients",0);
 else
   $obFA->ProcessMIMERecipients = 0;
+*/
 $obFA->ProcessMIMEDate = hmailGetVar("ProcessMIMEDate",0);
 $obFA->ServerAddress = hmailGetVar("ServerAddress",0);
 $obFA->ServerType = hmailGetVar("ServerType",0);
