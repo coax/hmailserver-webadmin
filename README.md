@@ -3,7 +3,7 @@ hMailAdmin: an hMailServer PHPWebAdmin redesign project
 
 I was delighted when first started using hMailServer on my Windows 2016 server (replaced SmarterMail) but web-interface was punch in the eye so I decided to redesign it. The new layout is fully responsive and free to use/download.
 
-![](https://i.imgur.com/vwgbXJH.png)
+![hmailadmin-v1 7](https://github.com/user-attachments/assets/19ef5ab2-b70c-4e16-a52b-98996f09d898)
 
 Features
 -----
@@ -50,6 +50,20 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
+Version 1.7 (2024-10-18)
+- [tweak] UI refresh (better navigation on desktop/tablet/mobile, new login, new icons)
+- [new] notices with warnings
+- [new] added Protocols and Greylisting White listing pages
+- [new] possible to delete message from Delivery queue
+- [tweak] breadcrumbs repositioned to header nav
+- [fix] various JavaScript fixes and optimizations
+
+Version 1.6 (2024-10-15)
+- [new] added breadcrumbs to several pages (Alias, External accounts, Rules, IMAP folders)
+- [tweak] merged some pull requests
+- [fix] new IP to Country API (shows flags in IP Ranges)
+- [fix] part of navigation on mobile UI wasn't clickable
+
 Version 1.5 (2018-08-22)
 - [tweak] changes to config.php
 - [tweak] Server graph on dashboard displays delivery queue count
@@ -186,8 +200,8 @@ Version 0.9 beta (2016-12-28)
 - [autosize](https://github.com/jackmoore/autosize)
 - [timeago](http://timeago.yarp.com/timeago)
 - [Chartist](https://gionkunz.github.io/chartist-js/Chartist)
-- [CodyHouse Responsive Sidebar Navigation](https://codyhouse.co/gem/responsive-sidebar-navigation/)
-- [Open Iconic](https://useiconic.com/open/)
+- [jBox](https://github.com/StephanWagner/jBox)
+- [Feather](https://feathericons.com/)
 
 Questions and contributions
 -----
@@ -203,6 +217,6 @@ Andreas Tunberg and other contributors who make developing easier.
 
 Copyright?
 -----
-Author: [Matija Matečić](http://www.matecic.com)
+Author: [Matija Matečić](https://matija.matecic.com)
 
 Released under [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/) (use it freely in personal/commercial project but don't resell, provided "as-is")
