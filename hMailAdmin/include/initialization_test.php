@@ -17,4 +17,18 @@ if (!isset($hmail_config['rule_editing_level'])) {
 	echo '<p>To resolve this, please use the config.php which comes with this version of WebAdmin.</p>' . PHP_EOL;
 	die;
 }
+
+// Create "logs" folder with subfolders if doesn't exist
+$logsDir = './logs/';
+$dmarcDir = './logs/dmarc/';
+$tlsDir = './logs/tls/';
+if (!file_exists($logsDir)) {
+	mkdir($logsDir, 0777, true);
+}
+if (!file_exists($dmarcDir)) {
+	mkdir($dmarcDir, 0777, true);
+}
+if (!file_exists($tlsDir)) {
+	mkdir($tlsDir, 0777, true);
+}
 ?>

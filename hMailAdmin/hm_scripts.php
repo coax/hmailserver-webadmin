@@ -21,8 +21,11 @@ if($action == "save") {
 	$obScripting->Language = hmailGetVar("scriptinglanguage",0);
 } elseif ($action == "checksyntax"){
 	$syntax_result = $obScripting->CheckSyntax();
+	$message = $syntax_result;
+
 } elseif ($action == "reloadscripts") {
 	$obScripting->Reload();
+	$message = Translate("Scripts reloaded");
 }
 
 $scriptingenabled = $obScripting->Enabled;
@@ -48,7 +51,6 @@ PrintSaveButton();
 ?>
       </form>
     </div>
-
     <div class="box">
       <h2><?php EchoTranslation("Actions") ?></h2>
       <form action="index.php" method="post" class="form">
@@ -56,19 +58,20 @@ PrintSaveButton();
 PrintHiddenCsrfToken();
 PrintHidden("page", "scripts");
 PrintHidden("action", "checksyntax");
-
-if ($action == "checksyntax")
-	echo $syntax_result;
-	echo "<br/>";
 ?>
-        <p><input type="submit" value="<?php EchoTranslation("Check syntax")?>"></p>
+        <p><button><?php EchoTranslation("Check syntax")?></button></p>
       </form>
-      <form action="index.php" method="post" onsubmit="return formCheck(this);" class="form">
+      <form action="index.php" method="post" class="form">
 <?php
 PrintHiddenCsrfToken();
 PrintHidden("page", "scripts");
 PrintHidden("action", "reloadscripts");
 ?>
-        <p><input type="submit" value="<?php EchoTranslation("Reload scripts")?>"></p>
+        <p><button><?php EchoTranslation("Reload scripts")?></button></p>
       </form>
+<?php
+if (isset($message))
+	if ($message)
+		echo '      <p class="warning" style="margin-top:18px;">' . $message . '</p>';
+?>
     </div>

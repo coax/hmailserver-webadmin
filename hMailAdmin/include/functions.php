@@ -137,7 +137,7 @@ function  PrintPropertyRow($caption, $value) {
 	global $obLanguage;
 	$caption = $obLanguage->String($caption);
 
-	echo '          <p>' . $caption . '</p><b>' . $value . '</b>' . PHP_EOL;
+	echo '          <p>' . Translate($caption) . '</p><b>' . $value . '</b>' . PHP_EOL;
 }
 
 function PrintPropertyEditRow($name, $caption, $value, $length = 255, $checktype = null, $class = null) {
@@ -337,8 +337,8 @@ function Translate($string) {
 // IP 2 Country
 function GeoIp($ip) {
 	global $obLanguage;
-	if ($ip === '0.0.0.0') return Translate('Unknown');
-	$regex = '/(127\.0\.0\.1)|^(10\.)|^(192\.168\.)|^(169\.254\.)|^(172\.(1[6-9]|2[0-9]|3[0-1]))/';
+	if ($ip === '0.0.0.0' || $ip === "::") return Translate('Unknown');
+	$regex = '/(127\.0\.0\.1)|^(::1)$|^(10\.)|^(192\.168\.)|^(169\.254\.)|^(172\.(1[6-9]|2[0-9]|3[0-1]))/';
 	if (preg_match($regex, $ip)) return Translate('Local IP range');
 
 	set_error_handler(function() { /* Ignore errors */ });
@@ -369,6 +369,17 @@ function Breadcrumbs($DomainId = null, $AccountId = null) {
 
 		}
 		echo '</div>';
+	}
+}
+
+// Get client IP address
+function get_client_ip() {
+	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+		return $_SERVER['HTTP_CLIENT_IP'];
+	} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		return $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		return $_SERVER['REMOTE_ADDR'];
 	}
 }
 ?>

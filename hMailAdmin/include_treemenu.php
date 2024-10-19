@@ -184,9 +184,22 @@ if ((hmailGetAdminLevel() == ADMIN_SERVER) && ($page != 'hm_domains')) {
         <li class="<?php if ($page=='hm_logviewer') echo 'active' ?>">
           <a href="?page=logviewer"><i data-feather="activity"></i><?php EchoTranslation("Log parser") ?></a>
         </li>
+<?php
+if (!empty($hmail_config['dmarc_enable'])) {
+?>
         <li class="<?php if ($page=='hm_dmarcreports') echo 'active' ?>">
           <a href="?page=dmarcreports"><i data-feather="inbox"></i><?php EchoTranslation("DMARC reports") ?></a>
         </li>
+<?php
+}
+
+if (!empty($hmail_config['tlsreport_enable'])) { ?>
+        <li class="<?php if ($page=='hm_tlsreports') echo 'active' ?>">
+          <a href="?page=tlsreports"><i data-feather="lock"></i>TLS reports</a>
+        </li>
+<?php
+}
+?>
         <li class="label"><?php EchoTranslation("Action") ?></li>
 <?php
 $Action = hmailGetVar("action","");

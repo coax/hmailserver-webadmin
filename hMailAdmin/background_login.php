@@ -5,6 +5,55 @@ if (!defined('IN_WEBADMIN'))
 $username = hmailGetVar("username", "");
 $password = hmailGetVar("password", "");
 
+// Check failed logins
+$failed_log_file = './logs/failed_logins.json';
+$cooldown = new DateTime('now');
+$cooldown->modify('-5 minutes');
+$attempts = 0;
+
+if (file_exists($failed_log_file)) {
+	$failed_logins = json_decode(file_get_contents($failed_log_file), true);
+
+	if (is_array($failed_logins)) {
+		foreach ($failed_logins as $data) {
+			$date_time = new DateTime($data['date']);
+			if ($date_time > $cooldown && $data['ip'] === get_client_ip()) {
+				$attempts++;
+			}
+
+			if ($attempts >= 5) {
+				header("refresh:0; url=" . $hmail_config['rooturl'] . "index.php?page=login&error=2");
+				exit();
+			}
+		}
+	}
+}
+
+// Save failed login
+function save_failed_login($date, $message, $ip) {
+	global $failed_log_file;
+
+	if (file_exists($failed_log_file)) {
+		$json_data = file_get_contents($failed_log_file);
+		$failed_logins = json_decode($json_data, true);
+
+		if (json_last_error() !== JSON_ERROR_NONE || !is_array($failed_logins)) {
+			$failed_logins = [];
+		}
+	} else {
+		$failed_logins = [];
+	}
+
+	$failed_logins[] = [
+		'date' => $date,
+		'message' => $message,
+		'ip' => $ip
+	];
+
+	file_put_contents($failed_log_file, json_encode($failed_logins, JSON_PRETTY_PRINT | LOCK_EX));
+}
+
+
 if (Allow_admin($username) && Login($username, $password)) {
 	header("refresh:0; url=" . $hmail_config['rooturl']);
 	exit();
@@ -37,6 +86,7 @@ function Login($username, $password) {
 function LoginError() {
 	global $hmail_config;
 	header("refresh:0; url=" . $hmail_config['rooturl'] . "index.php?page=login&error=1");
+	save_failed_login(date('Y-m-d H:i:s'), 'Login failed', get_client_ip());
 	exit();
 }
 

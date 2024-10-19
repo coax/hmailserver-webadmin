@@ -24,7 +24,7 @@ function get_reports() {
 	if (!$inbox = @imap_open($hostname, $hmail_config['dmarc_username'], $hmail_config['dmarc_password']))
 		return Translate("Cannot connect to server") . ': ' . imap_last_error();
 
-	$folder = './dmarcreports';
+	$folder = './logs/dmarc';
 	$count = 0;
 	//$emails = imap_search($inbox, 'UNSEEN');
 	$emails = imap_search($inbox, 'ALL');

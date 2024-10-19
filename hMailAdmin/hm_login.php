@@ -16,7 +16,12 @@ PrintHidden("page", "background_login");
         <div><input type="password" name="password" size="25" maxlength="255" autocomplete="off" class="req"><i data-feather="eye-off" id="toggle-password"></i></div>
 <?php
 $error = hmailGetVar("error");
-if ($error == "1") echo '<span class="warning bottom">' . Translate("Incorrect username or password.") . '</span>';
+if ($error) {
+	echo '<span class="warning bottom">';
+	if ($error == "1") echo Translate("Incorrect username or password.");
+	if ($error == "2") echo Translate("Too many failed logins. Cool down for 5 minutes.");
+	echo '</span>';
+}
 ?>
         <p><button><?php EchoTranslation("Sign in") ?></button></p>
       </form>
