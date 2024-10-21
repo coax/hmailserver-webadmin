@@ -279,7 +279,7 @@ table .hidden:hover {background:none;}
 			$report_id = $report['id'];
 			$report_name = $report['domain'] . ' &ndash; ' . $report['org'];
 			$report_unixtime = $report['date_begin'];
-			$report_date = date('d.m.Y H:i:s', $report_unixtime);
+			$report_date = date('Y-m-d H:i:s', $report_unixtime);
 ?>
           <tr>
             <td>
@@ -304,7 +304,7 @@ table .hidden:hover {background:none;}
     </tr>
     <tr>
       <th><?php EchoTranslation("Coverage") ?></th>
-      <td><?php echo date('Y-m-d H:i:s',$report['date_begin']) ?> - <?php echo date('Y-m-d H:i:s', $report['date_end']) ?></td>
+      <td><?php echo date('Y-m-d H:i:s', $report['date_begin']) ?> - <?php echo date('Y-m-d H:i:s', $report['date_end']) ?></td>
       <th><?php EchoTranslation("Extra contact") ?></th>
       <td><?php echo $report['extra_contact_info'] ?></td>
     </tr>

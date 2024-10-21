@@ -129,7 +129,7 @@ if ($AccountId > 0) {
 	// Convert string to Unix time
 	$unixTime = strtotime($AccountLastLogonTime);
 	// Pass the new date format as a string and the original date in Unix time
-	$AccountLastLogonTime = date("d.m.Y H:i:s", $unixTime);
+	$AccountLastLogonTime = date('Y-m-d H:i:s', $unixTime);
 
 	PrintPropertyRow("Last logon time", $AccountLastLogonTime);
 }

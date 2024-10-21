@@ -58,10 +58,10 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
-Version 1.8 (2024-10-22)
+Version 1.8 (2024-10-21)
 - [fix] date formatting on different locales
 - [tweak] added Translate() into PrintPropertyRow function
-- [new] Check for and prevent too many failed login attempts
+- [new] check for and prevent too many failed login attempts
 - [new] added TLS reports from @kimboslice99
 - [fix] Check syntax and Reload scripts didn't work
 - [tweak] hides DMARC and/or TLS reports from navigation if not enabled in config.php
