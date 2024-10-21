@@ -5,26 +5,35 @@ if (!defined('IN_WEBADMIN'))
 if (hmailGetAdminLevel() != 2)
 	hmailHackingAttemp();
 
-if (empty($hmail_config['dmarc_enable'])) exit('<div class="box large"><h2>' . Translate("DMARC reports") . '</h2><p>&nbsp;</p><p class="warning">' . Translate("DMARC reports are not enabled in config.php") . '</p></div>') . PHP_EOL;
+if (empty($hmail_config['dmarc_enable'])) exit('<div class="box large"><h2>' . Translate("DMARC reports") . '</h2><p class="warning" style="margin-top:18px;">' . Translate("DMARC reports are not enabled in config.php") . '</p></div>') . PHP_EOL;
 
+$folder = './logs/dmarc/';
 
-/* Download new reports from imap.
- * Unpack and / or save in dmarcreport directory. */
+/* Download new reports from IMAP.
+ * Unpack and/or save in DMARC log folder. */
 
-function get_reports() {
+function get_reports($folder) {
 	global $hmail_config;
-	if (!extension_loaded('imap'))
+
+	if (!extension_loaded('imap')) {
 		return Translate("IMAP extension not enabled in php.ini");
+		exit();
+	}
 
 	if($hmail_config['dmarc_encryption'])
 		$hmail_config['dmarc_encryption'] = '/' . $hmail_config['dmarc_encryption'];
 	$hostname = '{' . $hmail_config['dmarc_hostip'] . ':' . $hmail_config['dmarc_port'] . $hmail_config['dmarc_encryption'] . '/novalidate-cert}INBOX';
 
 	/* try to connect */
-	if (!$inbox = @imap_open($hostname, $hmail_config['dmarc_username'], $hmail_config['dmarc_password']))
-		return Translate("Cannot connect to server") . ': ' . imap_last_error();
+	set_error_handler(function() { /* Ignore errors */ });
+	try {
+		if (!$inbox = @imap_open($hostname, $hmail_config['dmarc_username'], $hmail_config['dmarc_password']))
+			return imap_last_error();
+	} catch (Exception $e) {
+		// Handle the error if necessary
+	}
+	restore_error_handler();
 
-	$folder = './logs/dmarc';
 	$count = 0;
 	//$emails = imap_search($inbox, 'UNSEEN');
 	$emails = imap_search($inbox, 'ALL');
@@ -99,11 +108,11 @@ function save_attachment($inbox, $email_number, $part, $part_number, $folder) {
 
 			switch (true) {
 				case substr( $filename, -4 ) === '.zip':
-					$tempfile = $folder . '/' . 'temp' . $part_number;
+					$tempfile = $folder . 'temp' . $part_number;
 					file_put_contents($tempfile, $data);
 					$zip = new ZipArchive;
 					if($zip->open($tempfile)){
-						$zip->extractTo($folder . '/');
+						$zip->extractTo($folder);
 						$zip->close();
 					}
 					unlink($tempfile);
@@ -111,11 +120,11 @@ function save_attachment($inbox, $email_number, $part, $part_number, $folder) {
 				case substr( $filename, -3 ) === '.gz':
 					if ($data = gzdecode($data)) {
 						$filename = str_replace(array('.xml.gz', '.gz'), '.xml', $filename);
-						file_put_contents($folder . '/' . $filename, $data);
+						file_put_contents($folder . $filename, $data);
 					}
 					break;
 				default:
-					file_put_contents($folder . '/' . $filename, $data);
+					file_put_contents($folder . $filename, $data);
 			}
 			return 1;
 		}
@@ -124,11 +133,14 @@ function save_attachment($inbox, $email_number, $part, $part_number, $folder) {
 }
 
 /* Search directory for reports. */
-$new_report_count = get_reports();
-$files = glob('./dmarcreports/*.xml');
+$new_report_count = get_reports($folder);
+$files = glob($folder . '*.xml');
 $reports_count = count($files);
-if (!empty($files)) $reports = parse($files);
-else $reports = array();
+if (!empty($files)) {
+	$reports = parse($files);
+} else {
+	$reports = array();
+}
 
 /* Open xml and phrase them. */
 function parse($files) {
@@ -214,7 +226,7 @@ function parse($files) {
 	return $out;
 }
 ?>
-<script type="text/javascript">
+<script>
 $(document).ready(function(){
 	if($('a.toggle').length){
 		$('a.toggle').on('click', function() {
@@ -235,26 +247,32 @@ $(document).ready(function(){
 <style>
 td.aligned {background-color:#9f9; padding-left:5px;}
 td.unaligned {background-color:#f99; padding-left:5px;}
-table.dmarc tbody tr:nth-child(3n) {background: #f9fafa}
-table.dmarc tbody tr:nth-child(2n) {background: #eaeaea}
-table.dmarc tbody tr:hover {background: #f2f2f2}
-.dmarc table {margin:15px 0}
-div.dmarc {overflow-x:auto}
+table.dmarc tbody tr:nth-child(3n) {background:#f9fafa;}
+table.dmarc tbody tr:nth-child(2n) {background:#eaeaea;}
+table.dmarc tbody tr:hover {background:#f2f2f2;}
+.dmarc table {margin:15px 0;}
+div.dmarc {overflow-x:auto;}
 }
 </style>
     <div class="box large">
       <h2><?php EchoTranslation("DMARC reports") ?> <span>(<?php echo $reports_count ?>)</span></h2>
 <?php
-	if(!empty($new_report_count))
-	{
-		if(is_int($new_report_count))
-			echo '<div>' . str_replace('#',$new_report_count,Translate("# new reports added.")) . '</div>';
-		else
-			echo '<p class="warning">' . $new_report_count . '</p>';
+	if (!empty($new_report_count)) {
+		if (is_int($new_report_count)) {
+			$message = str_replace('#', $new_report_count, Translate('# new reports added.'));
+		} else {
+			$message = $new_report_count;
+		}
+	} else {
+		if (empty($reports))
+			$message = 'No reports.';
 	}
+?>
+      <p class="warning" style="margin-top:18px;"><?php echo Translate($message); ?></p>
+<?php
 	$id = 0;
 	foreach( $reports as $report ) {
-		echo '<h3><a href="#">'.$report['domain'].' &#8211; '.$report['org'].' &#8211; '.date('Y-m-d',$report['date_begin']).'</a></h3>';
+		echo '<h3><a href="#">' . $report['domain'] . ' &#8211; ' . $report['org'] . ' &#8211; ' . date('Y-m-d', $report['date_begin']) . '</a></h3>';
 ?>
       <div class="hidden dmarc">
         <div class="buttons"><a class="button" href="#" onclick="return Confirm('<?php EchoTranslation("Confirm delete") ?> <b><?php EchoTranslation("DMARC report") ?></b>','<?php EchoTranslation("Yes") ?>','<?php EchoTranslation("No") ?>','?page=background_dmarcreports&dfn=<?php echo $report['filename'] ?>&csrftoken=<?php echo $csrftoken ?>');"><?php EchoTranslation("Delete DMARC report") ?></a></div>
@@ -268,7 +286,7 @@ div.dmarc {overflow-x:auto}
           </tr>
           <tr>
             <th><?php EchoTranslation("Coverage") ?>:</th>
-            <td><?php echo date('Y-m-d H:i:s',$report['date_begin']) ?> - <?php echo date('Y-m-d H:i:s',$report['date_end']) ?></td>
+            <td><?php echo date('Y-m-d H:i:s',$report['date_begin']) ?> - <?php echo date('Y-m-d H:i:s', $report['date_end']) ?></td>
             <th><?php EchoTranslation("Extra contact") ?>:</th>
             <td><?php echo $report['extra_contact_info'] ?></td>
           </tr>
@@ -312,7 +330,7 @@ div.dmarc {overflow-x:auto}
 <?php
 		foreach( $report['records'] as $record ) {
 			//print_r($record);
-			$rows = '            <tr id="dm'.$id.'-d" class="hidden">
+			$rows = '            <tr id="dm' . $id . '-d" class="hidden">
               <td colspan="6">
                 <div class="hidden">
                   <table>
@@ -337,14 +355,14 @@ div.dmarc {overflow-x:auto}
 				if($row['spf_result']=='pass' && $row['result']['spf']['result']=='pass')$spf += $row['count'];
 				if($row['disposition']=='none')$dmarc += $row['count'];
 				$rows .= '                      <tr>
-                        <td>'.$row['ip'].'</td>
-                        <td>'.$row['count'].'</td>
-                        <td>'.Translate(ucfirst($row['disposition'])).'</td>
-                        <td>'.Translate(ucfirst($row['dkim_result'])).'</td>
-                        <td>'.Translate(ucfirst($row['spf_result'])).'</td>
-                        <td>'.$row['identifiers'].'</td>
-                        <td class="'.($row['result']['dkim']['result']==$row['dkim_result']?'aligned':'unaligned').'">'.$row['result']['dkim']['domain'].' ('.Translate(ucfirst($row['result']['dkim']['result'])).')</td>
-                        <td class="'.($row['result']['spf']['result']==$row['spf_result']?'aligned':'unaligned').'">'.$row['result']['spf']['domain'].' ('.Translate(ucfirst($row['result']['spf']['result'])).')</td>
+                        <td>' . $row['ip'] . '</td>
+                        <td>' . $row['count'] . '</td>
+                        <td>' . Translate(ucfirst($row['disposition'])) . '</td>
+                        <td>' . Translate(ucfirst($row['dkim_result'])) . '</td>
+                        <td>' . Translate(ucfirst($row['spf_result'])) . '</td>
+                        <td>' . $row['identifiers'] . '</td>
+                        <td class="' . ($row['result']['dkim']['result']==$row['dkim_result']?'aligned':'unaligned') . '">' . $row['result']['dkim']['domain'] . ' (' . Translate(ucfirst($row['result']['dkim']['result'])) . ')</td>
+                        <td class="' . ($row['result']['spf']['result']==$row['spf_result']?'aligned':'unaligned') . '">' . $row['result']['spf']['domain'] . ' (' . Translate(ucfirst($row['result']['spf']['result'])) . ')</td>
                       </tr>';
 			}
 			$rows .= '                    </tbody>
@@ -354,13 +372,13 @@ div.dmarc {overflow-x:auto}
             </tr>';
 
 			echo '            <tr>
-              <td><a href="#" class="toggle" id="dm'.$id.'">+</a></td>
-              <td>'.$record['ip'].'</td>
-              <td>'.$record['count'].'</td>
-              <td>'.round(($dmarc / $record['count'] * 100),2).'%</td>
-              <td>'.round(($dkim / $record['count'] * 100),2).'%</td>
-              <td>'.round(($spf / $record['count'] * 100),2).'%</td>
-            </tr>'.$rows;
+              <td><a href="#" class="toggle" id="dm' . $id . '">+</a></td>
+              <td>' . $record['ip'] . '</td>
+              <td>' . $record['count'] . '</td>
+              <td>' . round(($dmarc / $record['count'] * 100),2) . '%</td>
+              <td>' . round(($dkim / $record['count'] * 100),2) . '%</td>
+              <td>' . round(($spf / $record['count'] * 100),2) . '%</td>
+            </tr>' . $rows;
 			$id++;
 		}
 		echo '          </tbody>

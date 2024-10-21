@@ -126,10 +126,12 @@ if ($AccountId > 0) {
 		echo '          <div style="margin:-14px 0 18px 0; width:100%; height:13px; background:#f2f2f2; border-radius:2px;"><div style="width:' . $Width . '%; max-width:100%; height:100%; background:' . $Color . '; border-radius:2px;"></div></div>';
 	}
 
-	$date = DateTime::createFromFormat('m/d/Y h:i:s A', $AccountLastLogonTime);
-	$date_time = $date->format('d.m.Y H:i:s');
+	// Convert string to Unix time
+	$unixTime = strtotime($AccountLastLogonTime);
+	// Pass the new date format as a string and the original date in Unix time
+	$AccountLastLogonTime = date("d.m.Y H:i:s", $unixTime);
 
-	PrintPropertyRow("Last logon time", $date_time);
+	PrintPropertyRow("Last logon time", $AccountLastLogonTime);
 }
 ?>
           <p><?php EchoTranslation("Administration level") ?></p>
