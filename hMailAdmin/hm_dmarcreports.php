@@ -226,37 +226,23 @@ function parse($files) {
 	return $out;
 }
 ?>
-<script>
-$(document).ready(function(){
-	if($('a.toggle').length){
-		$('a.toggle').on('click', function() {
-			var id = $(this).attr('id');
-			var sign = $(this).text();
-			if(sign == '+'){
-				$('#' + id + '-d').show().find('div.hidden').slideDown(150);
-				$(this).text('-');
-			} else {
-				$('#' + id + '-d').find('div.hidden').slideUp(150,function(){$('#' + id + '-d').hide()});
-				$(this).text('+');
-			}
-			return false;
-		})
-	}
-});
-</script>
 <style>
-td.aligned {background-color:#9f9; padding-left:5px;}
-td.unaligned {background-color:#f99; padding-left:5px;}
-table.dmarc tbody tr:nth-child(3n) {background:#f9fafa;}
-table.dmarc tbody tr:nth-child(2n) {background:#eaeaea;}
-table.dmarc tbody tr:hover {background:#f2f2f2;}
-.dmarc table {margin:15px 0;}
-div.dmarc {overflow-x:auto;}
+.dmarc-report {margin:8px; padding:16px 16px 0; background:#fff; border-radius:2px; border:1px solid #ccc;}
+.dmarc-report > svg {position:absolute; left:-14px; top:-6px; width:14px; height:14px; color:#646a6f; vertical-align:-4px;}
+.dmarc-report a > svg {vertical-align:-2px; margin-right:4px; color:#1784c7;}
+.dmarc-report h4 {margin-bottom:8px;}
+.dmarc-report p {margin:6px 0;}
+.dmarc-report th {width:15%;}
+.dmarc-report td.aligned {background:#c8fd87;}
+.dmarc-report td.unaligned {background:#f69195;}
+table .hidden:hover {background:none;}
+.dmarc-report table table th, .dmarc-report table table td {text-indent:10px;}
 }
 </style>
     <div class="box large">
       <h2><?php EchoTranslation("DMARC reports") ?> <span>(<?php echo $reports_count ?>)</span></h2>
 <?php
+	$message = '';
 	if (!empty($new_report_count)) {
 		if (is_int($new_report_count)) {
 			$message = str_replace('#', $new_report_count, Translate('# new reports added.'));
@@ -267,86 +253,117 @@ div.dmarc {overflow-x:auto;}
 		if (empty($reports))
 			$message = 'No reports.';
 	}
+
+	if ($message) {
 ?>
-      <p class="warning" style="margin-top:18px;"><?php echo Translate($message); ?></p>
+      <p class="warning bottom" style="margin-top:18px;"><?php echo Translate($message); ?></p>
 <?php
+	}
+
 	$id = 0;
-	foreach( $reports as $report ) {
-		echo '<h3><a href="#">' . $report['domain'] . ' &#8211; ' . $report['org'] . ' &#8211; ' . date('Y-m-d', $report['date_begin']) . '</a></h3>';
+
+	if ($reports) {
 ?>
-      <div class="hidden dmarc">
-        <div class="buttons"><a class="button" href="#" onclick="return Confirm('<?php EchoTranslation("Confirm delete") ?> <b><?php EchoTranslation("DMARC report") ?></b>','<?php EchoTranslation("Yes") ?>','<?php EchoTranslation("No") ?>','?page=background_dmarcreports&dfn=<?php echo $report['filename'] ?>&csrftoken=<?php echo $csrftoken ?>');"><?php EchoTranslation("Delete DMARC report") ?></a></div>
-        <h4 style="margin-top:18px;"><?php EchoTranslation("DMARC Report Details") ?></h4>
-        <table>
+      <table class="tablesort">
+        <thead>
           <tr>
-            <th><?php EchoTranslation("Provider") ?>:</th>
-            <td><?php echo $report['org'] ?></td>
-            <th><?php EchoTranslation("Report ID") ?>:</th>
-            <td><?php echo $report['id'] ?></td>
+            <th data-sort="string">Name</th>
+            <th style="width:25%;" data-sort="int">Report ID</th>
+            <th style="width:25%;" data-sort="int">Date</th>
+            <th style="width:5%;" class="no-sort">&nbsp;</th>
           </tr>
+        </thead>
+        <tbody>
+<?php
+		foreach( $reports as $report ) {
+			$report_id = $report['id'];
+			$report_name = $report['domain'] . ' &ndash; ' . $report['org'];
+			$report_unixtime = $report['date_begin'];
+			$report_date = date('d.m.Y H:i:s', $report_unixtime);
+?>
           <tr>
-            <th><?php EchoTranslation("Coverage") ?>:</th>
-            <td><?php echo date('Y-m-d H:i:s',$report['date_begin']) ?> - <?php echo date('Y-m-d H:i:s', $report['date_end']) ?></td>
-            <th><?php EchoTranslation("Extra contact") ?>:</th>
-            <td><?php echo $report['extra_contact_info'] ?></td>
+            <td>
+              <a href="#"><span>[+]</span> <?php echo $report_name; ?></a>
+            </td>
+            <td><?php echo $report_id; ?></td>
+            <td data-sort-value="<?php echo $report_unixtime; ?>"><?php echo $report_date; ?></td>
+            <td><a href="#" onclick="return Confirm('<?php EchoTranslation("Confirm delete"); ?> <b><?php echo $report_name; ?></b>:','<?php EchoTranslation("Yes") ?>','<?php EchoTranslation("No") ?>','?page=background_dmarcreports&dfn=<?php echo $report['filename'] ?>&csrftoken=<?php echo $csrftoken ?>');" class="delete" title="Remove">Remove</a></td>
           </tr>
-          <tr>
-            <th><?php EchoTranslation("Email contact") ?>:</th>
-            <td><?php echo $report['email'] ?></td>
-            <th><?php EchoTranslation("Errors") ?>:</th>
-            <td><?php echo $report['errors'] ?></td>
-          </tr>
-        </table>
-        <h4><?php EchoTranslation("Policy Details") ?></h4>
-        <table>
-          <tr>
-            <th><?php EchoTranslation("Policy") ?>:</th>
-            <td><?php EchoTranslation(ucfirst($report['p'])) ?></td>
-            <th><?php EchoTranslation("DKIM alignment") ?>:</th>
-            <td><?php EchoTranslation(($report['adkim']=='s'?'Strict':'Relaxed')) ?></td>
-            <th rowspan="2"><?php EchoTranslation("Percentage") ?>:</th>
-            <td rowspan="2"><?php echo $report['pct'] ?></td>
-          </tr>
-          <tr>
-            <th><?php EchoTranslation("Sub-domain Policy") ?>:</th>
-            <td><?php EchoTranslation(ucfirst($report['sp'])) ?></td>
-            <th><?php EchoTranslation("SPF alignment") ?>:</th>
-            <td><?php EchoTranslation(($report['aspf']=='s'?'Strict':'Relaxed')) ?></td>
-          </tr>
-        </table>
-        <h4><?php EchoTranslation("Identified Sources") ?></h4>
-        <table class="dmarc">
-          <thead>
-            <tr>
-              <th style="width:25px;"></th>
-              <th><?php EchoTranslation("Server") ?></th>
-              <th style="width:10%"><?php EchoTranslation("Count") ?></th>
-              <th style="width:21%"><?php EchoTranslation("DMARC Compliance") ?></th>
-              <th style="width:21%">DKIM</th>
-              <th style="width:21%">SPF</th>
-            </tr>
-          </thead>
-          <tbody>
+          <tr class="hidden"><td colspan="4"></td></tr>
+          <tr class="hidden">
+            <td colspan="4">
+
+<div class="dmarc-report">
+  <h4><?php EchoTranslation("DMARC Report Details") ?></h4>
+  <table class="no-sort">
+    <tr>
+      <th><?php EchoTranslation("Provider") ?></th>
+      <td><?php echo $report['org'] ?></td>
+      <th><?php EchoTranslation("Report ID") ?></th>
+      <td><?php echo $report['id'] ?></td>
+    </tr>
+    <tr>
+      <th><?php EchoTranslation("Coverage") ?></th>
+      <td><?php echo date('Y-m-d H:i:s',$report['date_begin']) ?> - <?php echo date('Y-m-d H:i:s', $report['date_end']) ?></td>
+      <th><?php EchoTranslation("Extra contact") ?></th>
+      <td><?php echo $report['extra_contact_info'] ?></td>
+    </tr>
+    <tr>
+      <th><?php EchoTranslation("Email contact") ?></th>
+      <td><?php echo $report['email'] ?></td>
+      <th><?php EchoTranslation("Errors") ?></th>
+      <td><?php echo $report['errors'] ?>&nbsp;</td>
+    </tr>
+  </table>
+  <h4><?php EchoTranslation("Policy Details") ?></h4>
+  <table class="no-sort">
+    <tr>
+      <th><?php EchoTranslation("Policy") ?></span></th>
+      <td><?php EchoTranslation(ucfirst($report['p'])) ?></td>
+      <th><?php EchoTranslation("DKIM alignment") ?></th>
+      <td><?php EchoTranslation(($report['adkim']=='s'?'Strict':'Relaxed')) ?></td>
+      <th><?php EchoTranslation("Percentage") ?></th>
+      <td><?php echo $report['pct'] ?></td>
+    </tr>
+    <tr>
+      <th><?php EchoTranslation("Sub-domain Policy") ?></th>
+      <td><?php EchoTranslation(ucfirst($report['sp'])) ?></td>
+      <th><?php EchoTranslation("SPF alignment") ?></th>
+      <td colspan="3"><?php EchoTranslation(($report['aspf']=='s'?'Strict':'Relaxed')) ?></td>
+    </tr>
+  </table>
+  <h4><?php EchoTranslation("Identified Sources") ?></h4>
+  <table class="no-sort">
+    <thead>
+      <tr>
+        <th style="width:45%"><?php EchoTranslation("Server") ?></th>
+        <th style="width:10%"><?php EchoTranslation("Count") ?></th>
+        <th style="width:15%">DMARC</th>
+        <th style="width:15%">DKIM</th>
+        <th style="width:15%">SPF</th>
+      </tr>
+    </thead>
+    <tbody>
 <?php
 		foreach( $report['records'] as $record ) {
 			//print_r($record);
-			$rows = '            <tr id="dm' . $id . '-d" class="hidden">
-              <td colspan="6">
-                <div class="hidden">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th style="width:13%">IP</th>
-                        <th style="width:7%">' . Translate("Count") . '</th>
-                        <th style="width:10%">' . Translate("Disposition") . '</th>
-                        <th style="width:5%">DKIM</th>
-                        <th style="width:5%">SPF</th>
-                        <th>' . Translate("From") . '</th>
-                        <th style="width:21%">' . Translate("DKIM domain (result)") . '</th>
-                        <th style="width:21%">' . Translate("SPF domain (result)") . '</th>
-                      </tr>
-                    </thead>
-                    <tbody>';
+			$rows = '      <tr id="dm' . $id . '-d" class="hidden">
+        <td colspan="5" style="padding-left:16px;">
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:13%">IP</th>
+                  <th style="width:7%">' . Translate("Count") . '</th>
+                  <th style="width:10%">' . Translate("Disposition") . '</th>
+                  <th style="width:5%">DKIM</th>
+                  <th style="width:5%">SPF</th>
+                  <th>' . Translate("From") . '</th>
+                  <th style="width:20%">' . Translate("DKIM domain (result)") . '</th>
+                  <th style="width:20%">' . Translate("SPF domain (result)") . '</th>
+                </tr>
+              </thead>
+              <tbody>';
 			$dmarc = 0;
 			$dkim = 0;
 			$spf = 0;
@@ -354,36 +371,65 @@ div.dmarc {overflow-x:auto;}
 				if($row['dkim_result']=='pass' && $row['result']['dkim']['result']=='pass')$dkim += $row['count'];
 				if($row['spf_result']=='pass' && $row['result']['spf']['result']=='pass')$spf += $row['count'];
 				if($row['disposition']=='none')$dmarc += $row['count'];
-				$rows .= '                      <tr>
-                        <td>' . $row['ip'] . '</td>
-                        <td>' . $row['count'] . '</td>
-                        <td>' . Translate(ucfirst($row['disposition'])) . '</td>
-                        <td>' . Translate(ucfirst($row['dkim_result'])) . '</td>
-                        <td>' . Translate(ucfirst($row['spf_result'])) . '</td>
-                        <td>' . $row['identifiers'] . '</td>
-                        <td class="' . ($row['result']['dkim']['result']==$row['dkim_result']?'aligned':'unaligned') . '">' . $row['result']['dkim']['domain'] . ' (' . Translate(ucfirst($row['result']['dkim']['result'])) . ')</td>
-                        <td class="' . ($row['result']['spf']['result']==$row['spf_result']?'aligned':'unaligned') . '">' . $row['result']['spf']['domain'] . ' (' . Translate(ucfirst($row['result']['spf']['result'])) . ')</td>
-                      </tr>';
+				$rows .= '                <tr>
+                  <td>' . $row['ip'] . '</td>
+                  <td>' . $row['count'] . '</td>
+                  <td>' . Translate(ucfirst($row['disposition'])) . '</td>
+                  <td>' . Translate(ucfirst($row['dkim_result'])) . '</td>
+                  <td>' . Translate(ucfirst($row['spf_result'])) . '</td>
+                  <td>' . $row['identifiers'] . '</td>
+                  <td class="' . ($row['result']['dkim']['result']==$row['dkim_result']?'aligned':'unaligned') . '">' . $row['result']['dkim']['domain'] . ' (' . Translate(ucfirst($row['result']['dkim']['result'])) . ')</td>
+                  <td class="' . ($row['result']['spf']['result']==$row['spf_result']?'aligned':'unaligned') . '">' . $row['result']['spf']['domain'] . ' (' . Translate(ucfirst($row['result']['spf']['result'])) . ')</td>
+                </tr>';
 			}
-			$rows .= '                    </tbody>
-                  </table>
-                </div>
-              </td>
-            </tr>';
+			$rows .= '              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>';
 
-			echo '            <tr>
-              <td><a href="#" class="toggle" id="dm' . $id . '">+</a></td>
-              <td>' . $record['ip'] . '</td>
-              <td>' . $record['count'] . '</td>
-              <td>' . round(($dmarc / $record['count'] * 100),2) . '%</td>
-              <td>' . round(($dkim / $record['count'] * 100),2) . '%</td>
-              <td>' . round(($spf / $record['count'] * 100),2) . '%</td>
-            </tr>' . $rows;
+			echo '      <tr>
+        <td><a href="#" class="toggle"><span>[+]</span> ' . $record['ip'] . '</a></td>
+        <td>' . $record['count'] . '</td>
+        <td>' . round(($dmarc / $record['count'] * 100),2) . '%</td>
+        <td>' . round(($dkim / $record['count'] * 100),2) . '%</td>
+        <td>' . round(($spf / $record['count'] * 100),2) . '%</td>
+      </tr>
+      <tr class="hidden"><td colspan="5"></td></tr>' . $rows;
 			$id++;
 		}
-		echo '          </tbody>
-        </table>
-      </div>';
+?>
+    <tbody>
+  </table>
+</div>
+            </td>
+          </tr>
+<?php
+		}
+?>
+        </tbody>
+      </table>
+<?php
 	}
 ?>
     </div>
+<script>
+$(document).ready(function(){
+	// Show-hide for DMARC reports
+	if ($('td a').length) {
+		$('td a').on('click', function() {
+			var t = $(this),
+				button = t.find('span');
+
+			if (button.text()==='[+]') {
+				button.text('[-]');
+			} else {
+				button.text('[+]');
+			}
+
+			t.parent().parent().next().next().toggle();
+			return false;
+		});
+	}
+});
+</script>

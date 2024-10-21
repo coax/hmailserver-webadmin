@@ -8,29 +8,37 @@ require_once("./initialize.php");
 if (hmailGetAdminLevel() != 2)
 	hmailHackingAttemp();
 
+/*
+    IP Blacklist Check Script - This is a simple PHP script to lookup for
+    blacklisted IP against multiple DNSBLs at once.
+    Source: https://gist.github.com/tbreuss/74da96ff5f976ce770e6628badbd7dfc
+*/
 function dnsbllookup($ip) {
-	// Add your preferred list of DNSBL's
 	$dnsbl_lookup = [
+		'b.barracudacentral.org',
+		'bl.spamcop.net',
 		'dnsbl-1.uceprotect.net',
 		'dnsbl-2.uceprotect.net',
 		'dnsbl-3.uceprotect.net',
 		'dnsbl.dronebl.org',
-		'dnsbl.sorbs.net',
-		'zen.spamhaus.org',
-		'bl.spamcop.net',
-		'list.dsbl.org',
-		'sbl.spamhaus.org',
-		'xbl.spamhaus.org'
+		'zen.spamhaus.org'
 	];
+
 	$listed = '';
+
 	if ($ip) {
 		$reverse_ip = implode('.', array_reverse(explode('.', $ip)));
 		foreach ($dnsbl_lookup as $host) {
-			if (checkdnsrr($reverse_ip . '.' . $host . '.', 'A')) $listed .= $reverse_ip . '.' . $host . '<br>';
+			if (checkdnsrr($reverse_ip . '.' . $host . '.', 'A')) {
+				$listed .= $reverse_ip . '.' . $host . '<br>';
+			}
 		}
 	}
-	if (empty($listed)) echo '<font class="green">' . Translate('Not listed') . '</font>';
-	else echo '<font class="red">' . Translate('Listed') . ':</font><br>' . $listed;
+	if (empty($listed)) {
+		echo '<font class="green">' . Translate('Not listed') . '</font>';
+	} else {
+		echo '<font class="red">' . Translate('Listed') . ':</font><br>' . $listed;
+	}
 }
 
 echo '<p>';

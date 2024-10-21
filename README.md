@@ -10,12 +10,13 @@ Features
 - modern look and feel
 - responsive layout for desktop and mobile browsers
 - dashboard graphs refresh with live data
-- ability to view source of queued messages
+- ability to view source or delete queued messages
 - confirmation dialogs in modal
-- form validation
+- form validations
 - table sorting
 - log parser
 - blacklist check
+- prevent too many login attempts
 - based on original PHPWebAdmin
 - works with latest hMailServer (stable) version
 - continuous development
@@ -26,30 +27,48 @@ Don't worry, hMailAdmin will stay free - but I do need your support in order to 
 
 [![PayPal donate button](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/MatijaMatecic/10EUR)
 
-How to use
+Installation
 -----
-If you HAVE PHPWebAdmin installed:
+If you already **HAVE** PHPWebAdmin installed:
 
-1\. Extract "hMailAdmin" folder in the same root as "PHPWebAdmin" folder (which you can delete) and make changes to config-dist.php accordingly, then rename to config.php
+1\. Extract "/hMailAdmin/" folder in the same root as "/PHPWebAdmin/" (which you can delete), make changes to config-dist.php accordingly and rename it to config.php
 
-2\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
+2\. Access web admin interface from browser (eg. https://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
 
-If you DON'T HAVE PHPWebAdmin installed:
+OR
 
-1\. Extract "hMailAdmin" folder in the root of any of your websites (or create new website for it) and make changes to config-dist.php accordingly, then rename to config.php
+If you **DON'T HAVE** PHPWebAdmin installed:
 
-2\. On IIS enable php_com_dotnet.dll in PHP
+1\. Extract "/hMailAdmin/" folder in the root of any of your websites (or create new website for it), make changes to config-dist.php accordingly and rename it to config.php
 
-3\. In php.ini set register_globals=off and display_errors=off
+2\. Modify php.ini (or simply use [PHP Manager for IIS](https://github.com/phpmanager/phpmanager)) with:
+```
+register_globals = off
+display_errors = off
+
+[PHP_COM_DOTNET]
+extension = php_com_dotnet.dll
+```
 
 4\. On IIS give the service account access to the hMailServer COM library: https://www.hmailserver.com/documentation/latest/?page=howto_dcom_permissions
 
-5\. Access web admin interface from browser (eg. http://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
+5\. Access web admin interface from browser (eg. https://www.yourdomain.com/hmailadmin/) and sign in with hMailServer credentials
 
 Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_phpwebadmin
 
 Changelog
 -----
+Version 1.8 (2024-10-22)
+- [fix] date formatting on different locales
+- [tweak] added Translate() into PrintPropertyRow function
+- [new] Check for and prevent too many failed login attempts
+- [new] added TLS reports from @kimboslice99
+- [fix] Check syntax and Reload scripts didn't work
+- [tweak] hides DMARC and/or TLS reports from navigation if not enabled in config.php
+- [tweak] redesigned DMARC reports
+- [new] automatically creates "logs" folder and subfolders
+- [fix] CSS ::after fix
+
 Version 1.7 (2024-10-18)
 - [tweak] UI refresh (better navigation on desktop/tablet/mobile, new login, new icons)
 - [new] notices with warnings
@@ -60,7 +79,7 @@ Version 1.7 (2024-10-18)
 
 Version 1.6 (2024-10-15)
 - [new] added breadcrumbs to several pages (Alias, External accounts, Rules, IMAP folders)
-- [tweak] merged some pull requests
+- [tweak] merged some pull requests from @RvdHout
 - [fix] new IP to Country API (shows flags in IP Ranges)
 - [fix] part of navigation on mobile UI wasn't clickable
 
