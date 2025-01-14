@@ -7,7 +7,7 @@ if (hmailGetAdminLevel() != 2)
 
 if (empty($hmail_config['tlsreport_enable'])) exit('<div class="box large"><h2>' . Translate("TLS reports") . '</h2><p class="warning" style="margin-top:18px;">' . Translate("TLS reports are not enabled in config.php") . '</p></div>') . PHP_EOL;
 
-$folder = './logs/tls';
+$folder = './logs/tls/';
 
 function get_reports($folder) {
 	global $hmail_config;
@@ -113,7 +113,7 @@ function save_json_attachment($inbox, $email_number, $part, $index, $folder) {
 
 
 /* Search directory for reports. */
-$new_report_count = get_reports();
+$new_report_count = get_reports($folder);
 $files = glob($folder . '*.json');
 $reports_count = count($files);
 if (!empty($files)) $reports = parse($files);
@@ -183,6 +183,7 @@ div.tls {overflow-x:auto}
 	<div class="box large">
 	  <h2><?php EchoTranslation("TLS reports") ?> <span>(<?php echo $reports_count ?>)</span></h2>
 <?php
+    $message = '';
 	if (!empty($new_report_count)) {
 		if (is_int($new_report_count)) {
 			$message = str_replace('#', $new_report_count, Translate('# new reports added.'));
@@ -193,9 +194,11 @@ div.tls {overflow-x:auto}
 		if (empty($reports))
 			$message = 'No reports.';
 	}
+	if ($message) {
 ?>
       <p class="warning" style="margin-top:18px;"><?php echo Translate($message); ?></p>
 <?php
+	}
 	$id = 0;
 	foreach( $reports as $report ) {
 		echo '<h3><a href="#">'.$report['domain'].' &#8211; '.$report['org'].' &#8211; '.date('Y-m-d', strtotime($report['date-range']['date-begin'])).'</a></h3>';

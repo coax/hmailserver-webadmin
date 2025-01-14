@@ -5,7 +5,8 @@ header('Content-Type: text/html; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 header('Content-Security-Policy: default-src \'none\'; script-src \'self\' \'unsafe-inline\'; connect-src \'self\'; img-src \'self\'; style-src \'self\' \'unsafe-inline\'; font-src \'self\' \'unsafe-inline\';');
-header('X-XSS-Protection: 1; mode=block');
+// https://github.com/OWASP/CheatSheetSeries/issues/376
+header('X-XSS-Protection: 0');
 
 if (!file_exists("config.php")) {
 	echo "Please rename config-dist.php to config.php. The file is found in the hMailAdmin root folder.";
