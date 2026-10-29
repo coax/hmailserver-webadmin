@@ -58,7 +58,7 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
-Version 1.8 (2026-10-29)
+Version 1.9 (2026-10-29)
 - Requires hMailServer 5.7
 - [new] added password hashing
 - [new] added "Abort on Spam flagged" in vacation message, forwarding and rules forwarding and reply
