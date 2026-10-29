@@ -76,7 +76,7 @@ PrintCheckboxRow("AllAddresses", "Deliver to all addresses", $AllAddresses);
           <div class="hidden">
 <?php
 PrintPropertyEditRow("routenumberoftries", "Number of retries", $routenumberoftries, 4, "number", "small");
-PrintPropertyEditRow("routemminutesbetweentry", "Minutes between every retry", $routemminutesbetweentry, 4, "number", "small");
+PrintPropertyEditRow("routemminutesbetweentry", "Minutes between retries", $routemminutesbetweentry, 4, "number", "small");
 PrintCheckboxRow("routerequiresauth", "Server requires authentication", $routerequiresauth);
 PrintPropertyEditRow("routeauthusername", "User name", $routeauthusername, 255, null, "medium");
 PrintPropertyEditRow("routeauthpassword", "Password", "", 255, null, "medium");

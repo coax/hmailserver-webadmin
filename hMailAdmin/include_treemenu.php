@@ -154,6 +154,7 @@ if ((hmailGetAdminLevel() == ADMIN_SERVER) && ($page != 'hm_domains')) {
                 <li><a href="?page=securityranges"><?php EchoTranslation("IP Ranges") ?><span class="count"><?php echo $TotalIpRanges ?></span></a></li>
                 <li><a href="?page=incomingrelays"><?php EchoTranslation("Incoming relays") ?><span class="count"><?php echo $TotalRelays ?></span></a></li>
                 <li><a href="?page=mirror"><?php EchoTranslation("Mirror") ?></a></li>
+				<li><a href="?page=passwordhashing"><?php EchoTranslation("Password hashing") ?></a></li>
                 <li><a href="?page=performance"><?php EchoTranslation("Performance") ?></a></li>
                 <li><a href="?page=servermessages"><?php EchoTranslation("Server messages") ?></a></li>
                 <li><a href="?page=ssltls"><?php EchoTranslation("SSL/TLS") ?></a></li>

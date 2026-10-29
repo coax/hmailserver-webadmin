@@ -44,6 +44,10 @@ if($action == "save") {
 	$obSettings->AddDeliveredToHeader = hmailGetVar("AddDeliveredToHeader",0);
 	$obSettings->MaxNumberOfMXHosts = hmailGetVar("MaxNumberOfMXHosts", 15);
 
+	// Sender Rewriting Scheme
+	//$obSettings->SRSEnabled = hmailGetVar("SRSEnabled",0);
+	//$obSettings->SRSMaxAgeDays = hmailGetVar("SRSMaxAgeDays", 21);
+
 	// Advanced
 	$obSettings->SMTPConnectionSecurity = hmailGetVar("SMTPConnectionSecurity", 0) ? CONNECTION_SECURITY_STARTTLSOPTIONAL : CONNECTION_SECURITY_NONE;
 }
@@ -84,6 +88,9 @@ $DisconnectInvalidClientsChecked = hmailCheckedIf1($DisconnectInvalidClients);
 
 $MaxNumberOfMXHosts = $obSettings->MaxNumberOfMXHosts;
 
+//$SRSEnabled = $obSettings->SRSEnabled;
+//$SRSMaxAgeDays = $obSettings->SRSMaxAgeDays;
+
 $SMTPConnectionSecurity = $obSettings->SMTPConnectionSecurity == CONNECTION_SECURITY_STARTTLSOPTIONAL;
 ?>
     <div class="box medium">
@@ -106,7 +113,7 @@ PrintPropertyEditRow("smtpnooftries", "Number of retries", $smtpnooftries, 4, "n
 PrintPropertyEditRow("smtpminutesbetweentry", "Minutes between every retry", $smtpminutesbetweentry, 4, "number", "small");
 PrintPropertyEditRow("HostName", "Local host name", $HostName);
  ?>
-        <h3><?php EchoTranslation("SMTP relayer")?></a></h3>
+        <h3><?php EchoTranslation("SMTP Relayer")?></a></h3>
 <?php
 PrintPropertyEditRow("smtprelayer", "Remote host name", $smtprelayer);
 PrintPropertyEditRow("smtprelayerport", "Remote TCP/IP port", $smtprelayerport, 11, "number", "small");
@@ -145,6 +152,8 @@ PrintCheckboxRow("SMTPConnectionSecurity", "Use STARTTLS if available", $SMTPCon
 PrintCheckboxRow("AddDeliveredToHeader", "Add Delivered-To header", $AddDeliveredToHeader);
 PrintPropertyEditRow("smtprulelooplimit", "Rule Loop Limit", $smtprulelooplimit, 3, "number", "small");
 PrintPropertyEditRow("MaxNumberOfMXHosts", "Maximum number of recipient hosts", $MaxNumberOfMXHosts, 11, "number", "small");
+//PrintCheckboxRow("SRSEnabled", "Rewrite sender when forwarding to other servers", $SRSEnabled);
+//PrintPropertyEditRow("SRSMaxAgeDays", "Number of days addresses are valid", $SRSMaxAgeDays, 3, "number", "small");
 ?>
         </div>
 <?php

@@ -34,9 +34,11 @@ $VacationSubject = "";
 $VacationMessage = "";
 $VacationMessageExpires = 0;
 $VacationMessageExpiresDate = "";
+$VacationMessageAbortSpamFlagged = 0;
 $ForwardEnabled = 0;
 $ForwardAddress = "";
 $ForwardKeepOriginal = 0;
+$ForwardAbortSpamFlagged = 0;
 $AdEnabled = 0;
 $AdDomain = "";
 $AdUsername = "";
@@ -61,9 +63,11 @@ if ($Action == "edit") {
 	$VacationMessageExpires = $obAccount->VacationMessageExpires;
 	$VacationMessageExpiresDate = makeIsoDate($obAccount->VacationMessageExpiresDate);
 	$VacationMessageExpiresDate = substr($VacationMessageExpiresDate, 0, 10);
+	$VacationMessageAbortSpamFlagged = $obAccount->VacationMessageAbortSpamFlagged;
 	$ForwardEnabled = $obAccount->ForwardEnabled;
 	$ForwardAddress = $obAccount->ForwardAddress;
 	$ForwardKeepOriginal = $obAccount->ForwardKeepOriginal;
+	$ForwardAbortSpamFlagged = $obAccount->ForwardAbortSpamFlagged;
 	$AdEnabled = $obAccount->IsAD;
 	$AdDomain = $obAccount->ADDomain;
 	$AdUsername = $obAccount->ADUsername;
@@ -174,6 +178,9 @@ PrintCheckboxRow("vacationmessageexpires", "Automatically expire", $VacationMess
 ?>
             <p><?php EchoTranslation("Expiration date") ?> (YYYY-MM-DD)</p>
             <input type="text" name="vacationmessageexpiresdate" value="<?php echo $VacationMessageExpiresDate ?>" maxlength="10" data-toggle="datepicker" class="medium">
+<?php
+PrintCheckboxRow("vacationmessageabortspamflagged", "Abort on messages marked as spam", $VacationMessageAbortSpamFlagged);
+?>
           </div>
           <h3><a href="#"><?php EchoTranslation("Forwarding") ?></a></h3>
           <div class="hidden">
@@ -181,6 +188,7 @@ PrintCheckboxRow("vacationmessageexpires", "Automatically expire", $VacationMess
 PrintCheckboxRow("forwardenabled", "Enabled", $ForwardEnabled);
 PrintPropertyEditRow("forwardaddress", "Address", $ForwardAddress, 255, null, "email");
 PrintCheckboxRow("forwardkeeporiginal", "Keep original message", $ForwardKeepOriginal);
+PrintCheckboxRow("forwardabortspamflagged", "Abort on messages marked as spam", $ForwardAbortSpamFlagged);
 ?>
           </div>
           <h3><a href="#"><?php EchoTranslation("Signature") ?></a></h3>

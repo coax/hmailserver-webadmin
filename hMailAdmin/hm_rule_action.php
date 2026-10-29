@@ -30,6 +30,7 @@ if ($action == "edit") {
 	$HeaderName = $ruleAction->HeaderName;
 	$Value = $ruleAction->Value;
 	$Type = $ruleAction->Type;
+  $AbortSpamFlagged = $ruleAction->AbortSpamFlagged;
 } else {
 	$To = "";
 	$IMAPFolder = "";
@@ -41,6 +42,7 @@ if ($action == "edit") {
 	$HeaderName = "";
 	$Value = "";
 	$Type = 0;
+  $AbortSpamFlagged = 0;
 }
 ?>
     <div class="box medium">
@@ -115,6 +117,10 @@ echo '          <option' . $disabled . ' value=' . eRASendUsingRoute . $eRASendU
         <div id="panel-<?php echo eRAForwardEmail?>" style="display:none;">
           <p><?php EchoTranslation("To")?></p>
           <input type="text" name="To" maxlength="255" value="<?php echo PreprocessOutput($To)?>">
+          <p>
+            <input type="checkbox" name="forwardabortspamflagged" value="1" id="forwardabortspamflagged" <?php if ($AbortSpamFlagged == 1) echo "checked"?>>
+            <label for="forwardabortspamflagged"><?php EchoTranslation("Abort on messages marked as spam")?></label>
+          </p>
         </div>
         <div id="panel-<?php echo eRAReply?>" style="display:none;">
           <p><?php EchoTranslation("From (Name)")?><br/></p>
@@ -125,6 +131,10 @@ echo '          <option' . $disabled . ' value=' . eRASendUsingRoute . $eRASendU
           <input type="text" name="Subject" maxlength="255" value="<?php echo PreprocessOutput($Subject)?>">
           <p><?php EchoTranslation("Body")?></p>
           <textarea name="Body" cols="30" rows="5"><?php echo PreprocessOutput($Body)?></textarea>
+          <p>
+            <input type="checkbox" name="replyabortspamflagged" value="1" id="replyabortspamflagged" <?php if ($AbortSpamFlagged == 1) echo "checked"?>>
+            <label for="replyabortspamflagged"><?php EchoTranslation("Abort on messages marked as spam")?></label>
+          </p>
         </div>
         <div id="panel-<?php echo eRAMoveToImapFolder?>" style="display:none;">
           <p><?php EchoTranslation("IMAP folder")?></p>

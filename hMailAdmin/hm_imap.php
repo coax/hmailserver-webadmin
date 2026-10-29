@@ -16,12 +16,11 @@ if($action == "save") {
 	$obSettings->IMAPQuotaEnabled = hmailGetVar("IMAPQuotaEnabled",0);
 	$obSettings->IMAPIdleEnabled = hmailGetVar("IMAPIdleEnabled",0);
 	$obSettings->IMAPACLEnabled = hmailGetVar("IMAPACLEnabled",0);
-	if (preg_match("(5\.[789].\d+)", $obBaseApp->Version)) {
-		$obSettings->IMAPSASLPlainEnabled = hmailGetVar("IMAPSASLPlainEnabled",0);
-		$obSettings->IMAPSASLInitialResponseEnabled = hmailGetVar("IMAPSASLInitialResponseEnabled",0);
-		$obSettings->IMAPMasterUser = hmailGetVar("IMAPMasterUser","");
-	}
+	$obSettings->IMAPSASLPlainEnabled = hmailGetVar("IMAPSASLPlainEnabled",0);
+	$obSettings->IMAPSASLInitialResponseEnabled = hmailGetVar("IMAPSASLInitialResponseEnabled",0);
+	$obSettings->IMAPMasterUser = hmailGetVar("IMAPMasterUser","");
 	$obSettings->IMAPHierarchyDelimiter = hmailGetVar("IMAPHierarchyDelimiter","");
+	$obSettings->CreateDefaultSpecialUseFoldersEnabled = hmailGetVar("CreateDefaultSpecialUseFoldersEnabled",0);
 }
 
 $welcomeimap = $obSettings->WelcomeIMAP;
@@ -30,12 +29,11 @@ $IMAPSortEnabled = $obSettings->IMAPSortEnabled;
 $IMAPQuotaEnabled = $obSettings->IMAPQuotaEnabled;
 $IMAPIdleEnabled = $obSettings->IMAPIdleEnabled;
 $IMAPACLEnabled = $obSettings->IMAPACLEnabled;
-if (preg_match("(5\.[789].\d+)", $obBaseApp->Version)) {
-	$IMAPSASLPlainEnabled = $obSettings->IMAPSASLPlainEnabled;
-	$IMAPSASLInitialResponseEnabled = $obSettings->IMAPSASLInitialResponseEnabled;
-	$IMAPMasterUser = $obSettings->IMAPMasterUser;
-}
+$IMAPSASLPlainEnabled = $obSettings->IMAPSASLPlainEnabled;
+$IMAPSASLInitialResponseEnabled = $obSettings->IMAPSASLInitialResponseEnabled;
+$IMAPMasterUser = $obSettings->IMAPMasterUser;
 $IMAPHierarchyDelimiter = $obSettings->IMAPHierarchyDelimiter;
+$CreateDefaultSpecialUseFoldersEnabled = $obSettings->CreateDefaultSpecialUseFoldersEnabled;
 ?>
     <div class="box medium">
       <h2><?php EchoTranslation("IMAP") ?></h2>
@@ -55,11 +53,10 @@ PrintCheckboxRow("IMAPSortEnabled", "IMAP Sort", $IMAPSortEnabled);
 PrintCheckboxRow("IMAPQuotaEnabled", "IMAP Quota", $IMAPQuotaEnabled);
 PrintCheckboxRow("IMAPIdleEnabled", "IMAP Idle", $IMAPIdleEnabled);
 PrintCheckboxRow("IMAPACLEnabled", "IMAP ACL", $IMAPACLEnabled);
-if (preg_match("(5\.[789].\d+)", $obBaseApp->Version)) {
-	PrintCheckboxRow("IMAPSASLPlainEnabled", "SASL Plain", $IMAPSASLPlainEnabled);
-	PrintCheckboxRow("IMAPSASLInitialResponseEnabled", "SASL Initial Client Response", $IMAPSASLInitialResponseEnabled);
-	PrintPropertyEditRow("IMAPMasterUser", "IMAP Master user", $IMAPMasterUser);
-}
+PrintCheckboxRow("IMAPSASLPlainEnabled", "SASL Plain", $IMAPSASLPlainEnabled);
+PrintCheckboxRow("IMAPSASLInitialResponseEnabled", "SASL Initial Client Response", $IMAPSASLInitialResponseEnabled);
+PrintPropertyEditRow("IMAPMasterUser", "IMAP Master user", $IMAPMasterUser);
+PrintCheckboxRow("CreateDefaultSpecialUseFoldersEnabled", "Create default special-use folders (Sent, Drafts, Trash, Junk) for new accounts", $CreateDefaultSpecialUseFoldersEnabled);
 ?>
           <h3><?php EchoTranslation("Other")?></a></h3>
           <p><?php EchoTranslation("Hierarchy delimiter")?></p>

@@ -289,7 +289,6 @@ table .hidden:hover {background:none;}
             <td data-sort-value="<?php echo $report_unixtime; ?>"><?php echo $report_date; ?></td>
             <td><a href="#" onclick="return Confirm('<?php EchoTranslation("Confirm delete"); ?> <b><?php echo $report_name; ?></b>:','<?php EchoTranslation("Yes") ?>','<?php EchoTranslation("No") ?>','?page=background_dmarcreports&dfn=<?php echo $report['filename'] ?>&csrftoken=<?php echo $csrftoken ?>');" class="delete" title="Remove">Remove</a></td>
           </tr>
-          <tr class="hidden"><td colspan="4"></td></tr>
           <tr class="hidden">
             <td colspan="4">
 
@@ -395,7 +394,7 @@ table .hidden:hover {background:none;}
         <td>' . round(($dkim / $record['count'] * 100),2) . '%</td>
         <td>' . round(($spf / $record['count'] * 100),2) . '%</td>
       </tr>
-      <tr class="hidden"><td colspan="5"></td></tr>' . $rows;
+      ' . $rows;
 			$id++;
 		}
 ?>
@@ -427,7 +426,7 @@ $(document).ready(function(){
 				button.text('[+]');
 			}
 
-			t.parent().parent().next().next().toggle();
+			t.parent().parent().next().toggle();
 			return false;
 		});
 	}

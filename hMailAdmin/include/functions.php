@@ -266,7 +266,7 @@ function get_csrf_session_token() {
 
 function validate_csrf_token_supplied() {
 	if (!defined('CSRF_ENABLED') || CSRF_ENABLED !== true)  {
-		// CSRF validaton has been disabled.
+		// CSRF validation has been disabled.
 		return;
 	}
 

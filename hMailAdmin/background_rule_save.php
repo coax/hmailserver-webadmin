@@ -114,13 +114,22 @@ if ($savetype == "criteria") {
 	$actionObj->Body = hmailGetVar("Body", "");
 	$actionObj->HeaderName = hmailGetVar("HeaderName", "");
 
+	$replyabortspamflagged = hmailGetVar("replyabortspamflagged", "0");
+	$forwardabortspamflagged = hmailGetVar("forwardabortspamflagged", "0");
+
 	switch ($type) {
 		case eRASetHeaderValue:
-		$actionObj->Value = hmailGetVar("Value", "");
-		break;
+			$actionObj->Value = hmailGetVar("Value", "");
+			break;
 		case eRABindToAddress:
-		$actionObj->Value = hmailGetVar("BindToAddress", "");
-		break;
+			$actionObj->Value = hmailGetVar("BindToAddress", "");
+			break;
+		case eRAForwardEmail:
+			$actionObj->AbortSpamFlagged = $forwardabortspamflagged == 1;
+			break;
+		case eRAReply:
+			$actionObj->AbortSpamFlagged = $replyabortspamflagged == 1;
+			break;
 	}
 
 	$actionObj->Type = $type;
@@ -140,7 +149,7 @@ if ($savetype == "criteria") {
 
 	$ruleid = $rule->ID;
 
-	// can't re-use rule_link since the rule id might be new (if add)
+	// can't reuse rule_link since the rule id might be new (if add)
 	header("Location: index.php?page=rule&action=edit&domainid=$domainid&accountid=$accountid&ruleid=$ruleid");
 
 	die;

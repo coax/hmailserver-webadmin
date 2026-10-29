@@ -58,6 +58,15 @@ Common issues: https://www.hmailserver.com/documentation/latest/?page=ts_setup_p
 
 Changelog
 -----
+Version 1.8 (2026-10-29)
+- Requires hMailServer 5.7
+- [new] added password hashing
+- [new] added "Abort on Spam flagged" in vacation message, forwarding and rules forwarding and reply
+- [new] added "MIME Recipient Headers" in fetch from external account
+- [new] new antispam checks
+- [fix] some text changes and typos
+- [fix] TLS reports was not working
+
 Version 1.8 (2024-10-21)
 - [fix] date formatting on different locales
 - [tweak] added Translate() into PrintPropertyRow function

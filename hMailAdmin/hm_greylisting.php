@@ -45,7 +45,7 @@ PrintPropertyEditRow("greylistinginitialdelete", "Days before removing unused re
 PrintPropertyEditRow("greylistingfinaldelete", "Days before removing used records", $greylistingfinaldelete, 11, "", "small");
 
 PrintCheckboxRow("BypassGreylistingOnSPFSuccess", "Bypass Greylisting on SPF Pass", $BypassGreylistingOnSPFSuccess);
-PrintCheckboxRow("BypassGreylistingOnMailFromMX", "Bypass Greylisting when message arrives from A or MX record.", $BypassGreylistingOnMailFromMX);
+PrintCheckboxRow("BypassGreylistingOnMailFromMX", "Bypass Greylisting when a message arrives from an A or MX record.", $BypassGreylistingOnMailFromMX);
 
 PrintSaveButton();
 ?>

@@ -28,8 +28,8 @@ if($action == "save") {
 	$antiSpamSettings->UseMXChecksScore = hmailGetVar("usemxchecksscore",0);
 	$antiSpamSettings->CheckHostInHelo = hmailGetVar("checkhostinhelo", 0);
 	$antiSpamSettings->CheckHostInHeloScore = hmailGetVar("checkhostinheloscore", 0);
-	//$antiSpamSettings->CheckPTR = hmailGetVar("checkptr", 0);
-	//$antiSpamSettings->CheckPTRScore = hmailGetVar("checkptrscore", 0);
+	$antiSpamSettings->CheckPTR = hmailGetVar("checkptr", 0);
+	$antiSpamSettings->CheckPTRScore = hmailGetVar("checkptrscore", 0);
 
 	$antiSpamSettings->AddHeaderSpam = hmailGetVar("AddHeaderSpam", 0);
 	$antiSpamSettings->AddHeaderReason = hmailGetVar("AddHeaderReason", 0);
@@ -39,6 +39,11 @@ if($action == "save") {
 
 	$antiSpamSettings->DKIMVerificationEnabled = hmailGetVar("DKIMVerificationEnabled", 0);
 	$antiSpamSettings->DKIMVerificationFailureScore = hmailGetVar("DKIMVerificationFailureScore", 0);
+
+	$antiSpamSettings->DMARCEnabled = hmailGetVar("DMARCEnabled", 0);
+	$antiSpamSettings->DMARCFailureScore = hmailGetVar("DMARCFailureScore", 0);
+	$antiSpamSettings->DMARCHonorPolicy = hmailGetVar("DMARCHonorPolicy", 0);
+	$antiSpamSettings->AddAuthenticationResultsHeader = hmailGetVar("AddAuthenticationResultsHeader", 0);
 }
 
 $SpamMarkThreshold = $antiSpamSettings->SpamMarkThreshold;
@@ -57,11 +62,16 @@ $usemxchecks = $antiSpamSettings->UseMXChecks;
 $usemxchecksscore = $antiSpamSettings->UseMXChecksScore;
 $checkhostinhelo = $antiSpamSettings->CheckHostInHelo;
 $checkhostinheloscore = $antiSpamSettings->CheckHostInHeloScore;
-//$checkptr = $antiSpamSettings->CheckPTR;
-//$checkptrscore = $antiSpamSettings->CheckPTRScore;
+$checkptr = $antiSpamSettings->CheckPTR;
+$checkptrscore = $antiSpamSettings->CheckPTRScore;
 
 $DKIMVerificationEnabled = $antiSpamSettings->DKIMVerificationEnabled;
 $DKIMVerificationFailureScore = $antiSpamSettings->DKIMVerificationFailureScore;
+
+$DMARCEnabled = $antiSpamSettings->DMARCEnabled;
+$DMARCFailureScore = $antiSpamSettings->DMARCFailureScore;
+$DMARCHonorPolicy = $antiSpamSettings->DMARCHonorPolicy;
+$AddAuthenticationResultsHeader = $antiSpamSettings->AddAuthenticationResultsHeader;
 
 $AddHeaderSpam = $antiSpamSettings->AddHeaderSpam;
 $AddHeaderReason = $antiSpamSettings->AddHeaderReason;
@@ -88,6 +98,7 @@ PrintPropertyEditRow("PrependSubjectText", "", $PrependSubjectText);
 
 PrintPropertyEditRow("SpamDeleteThreshold", "Spam delete threshold", $SpamDeleteThreshold, 6, "number", "small");
 PrintPropertyEditRow("MaximumMessageSize", "Maximum message size to scan (KB)", $MaximumMessageSize, 11, "number", "small");
+PrintCheckboxRow("AddAuthenticationResultsHeader", "Add Authentication-Results header", $AddAuthenticationResultsHeader);
 ?>
         <h3><a href="#"><?php EchoTranslation("Spam tests")?></a></h3>
         <div class="hidden">
@@ -96,12 +107,15 @@ PrintCheckboxRow("usespf", "Use SPF", $usespf);
 PrintPropertyEditRow("usespfscore", "Score", $usespfscore, 4, "number", "small");
 PrintCheckboxRow("checkhostinhelo", "Check host in the HELO command", $checkhostinhelo);
 PrintPropertyEditRow("checkhostinheloscore", "Score", $checkhostinheloscore, 4, "number", "small");
-PrintCheckboxRow("usemxchecks", "Check that sender has DNS-MX records", $usemxchecks);
+PrintCheckboxRow("usemxchecks", "Check that the sender has DNS-MX records", $usemxchecks);
 PrintPropertyEditRow("usemxchecksscore", "Score", $usemxchecksscore, 4, "number", "small");
-//PrintCheckboxRow("checkptr", "Check rDNS/PTR", $checkptr);
-//PrintPropertyEditRow("checkptrscore", "Score", $checkptrscore, 4, "number", "small");
+PrintCheckboxRow("checkptr", "Check rDNS/PTR", $checkptr);
+PrintPropertyEditRow("checkptrscore", "Score", $checkptrscore, 4, "number", "small");
 PrintCheckboxRow("DKIMVerificationEnabled", "Verify DKIM-Signature header", $DKIMVerificationEnabled);
 PrintPropertyEditRow("DKIMVerificationFailureScore", "Score", $DKIMVerificationFailureScore, 4, "number", "small");
+PrintCheckboxRow("DMARCEnabled", "Use DMARC", $DMARCEnabled);
+PrintPropertyEditRow("DMARCFailureScore", "Score", $DMARCFailureScore, 4, "number", "small");
+PrintCheckboxRow("DMARCHonorPolicy", "Honor the policy published by the sender domain", $DMARCHonorPolicy, false, true);
 ?>
         </div>
         <h3><a href="#">SpamAssassin</a></h3>

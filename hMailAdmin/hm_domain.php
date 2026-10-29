@@ -33,7 +33,7 @@ $MaxNumberOfAccountsEnabled = 0;
 $MaxNumberOfAliasesEnabled = 0;
 $MaxNumberOfDistributionListsEnabled = 0;
 $DKIMSignEnabled = 0;
-//$DKIMSignAliasesEnabled = 0;
+$DKIMSignAliasesEnabled = 0;
 $DKIMPrivateKeyFile = "";
 $DKIMSelector = "";
 $DKIMHeaderCanonicalizationMethod = 2;
@@ -66,7 +66,7 @@ if ($action == "edit") {
 	$MaxNumberOfAliasesEnabled = $obDomain->MaxNumberOfAliasesEnabled;
 	$MaxNumberOfDistributionListsEnabled = $obDomain->MaxNumberOfDistributionListsEnabled;
 	$DKIMSignEnabled = $obDomain->DKIMSignEnabled;
-	//$DKIMSignAliasesEnabled = $obDomain->DomainAliases->Count > 0 ? $obDomain->DKIMSignAliasesEnabled : 0;
+	$DKIMSignAliasesEnabled = $obDomain->DomainAliases->Count > 0 ? $obDomain->DKIMSignAliasesEnabled : 0;
 	$DKIMPrivateKeyFile = $obDomain->DKIMPrivateKeyFile;
 	$DKIMSelector = $obDomain->DKIMSelector;
 	$DKIMHeaderCanonicalizationMethod = $obDomain->DKIMHeaderCanonicalizationMethod;
@@ -165,7 +165,7 @@ PrintCheckboxRow("SignatureEnabled", "Enabled", $SignatureEnabled);
 ?>
             <p style="margin-left:18px;">
               <select name="SignatureMethod">
-                <option value="1" <?php if ($SignatureMethod == "1") echo "selected";?> ><?php EchoTranslation("Use signature if none has been specified in sender's account") ?></option>
+                <option value="1" <?php if ($SignatureMethod == "1") echo "selected";?> ><?php EchoTranslation("Use signature if none has been specified in the sender's account") ?></option>
                 <option value="2" <?php if ($SignatureMethod == "2") echo "selected";?> ><?php EchoTranslation("Overwrite account signature") ?></option>
                 <option value="3" <?php if ($SignatureMethod == "3") echo "selected";?> ><?php EchoTranslation("Append to account signature") ?></option>
               </select>
@@ -213,7 +213,7 @@ if ($admin_rights) {
           <div class="hidden">
 <?php
 PrintCheckboxRow("DKIMSignEnabled", Translate("Enabled"), $DKIMSignEnabled);
-//PrintCheckboxRow("DKIMSignAliasesEnabled", Translate("Sign aliases"), $DKIMSignAliasesEnabled, $obDomain->DomainAliases->Count == 0);
+PrintCheckboxRow("DKIMSignAliasesEnabled", Translate("Sign Aliases"), $DKIMSignAliasesEnabled, $obDomain->DomainAliases->Count == 0);
 PrintPropertyEditRow("DKIMPrivateKeyFile", Translate("Private key file"), $DKIMPrivateKeyFile, 255);
 PrintPropertyEditRow("DKIMSelector", Translate("Selector"), $DKIMSelector, 255);
 ?>
